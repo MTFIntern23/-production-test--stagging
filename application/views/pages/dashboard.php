@@ -50,7 +50,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->app_in ?>
                                                                         </span>
@@ -108,7 +109,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->approved ?>
                                                                         </span>
@@ -170,7 +172,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->purchase_order ?>
                                                                         </span>
@@ -232,7 +235,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->lending ?>
                                                                         </span>
@@ -294,7 +298,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->totalepd ?>
                                                                         </span>%/</b><span
@@ -356,7 +361,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->totaloverdue ?>
                                                                         </span>%/</b><span
@@ -418,7 +424,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-dark text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->totalnpl ?>
                                                                         </span>%/</b><span
@@ -480,7 +487,8 @@
                                                         style="margin-top: -10px !important;">
                                                         <div class="col-9">
                                                             <p class="text-light text-start">
-                                                                <span class=" text-light" style="font-size: 18px;"><b>Rp
+                                                                <span class=" text-light value-db-badge"
+                                                                    style="font-size: 18px;"><b>Rp
                                                                         <span id="number-animate-norm">
                                                                             <?= $performa_lending_today[0]->totalcwo ?>
                                                                         </span>%/</b><span
@@ -723,116 +731,51 @@
     //chart dashboard
     var options_dashboard = {
         series: [{
-            name: 'Income',
-            type: 'column',
-            data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
-        }, {
-            name: 'Cashflow',
-            type: 'column',
-            data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
+            name: 'Net Profit',
+            data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
         }, {
             name: 'Revenue',
-            type: 'line',
-            data: [20, 29, 37, 36, 44, 45, 50, 58]
+            data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+        }, {
+            name: 'Free Cash Flow',
+            data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
         }],
         chart: {
-            height: 350,
-            type: 'line',
-            stacked: false
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
         },
         dataLabels: {
             enabled: false
         },
         stroke: {
-            width: [1, 1, 4]
-        },
-        title: {
-            text: 'Lending Statistics',
-            align: 'left',
+            show: true,
+            width: 2,
+            colors: ['transparent']
         },
         xaxis: {
-            categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+            categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
         },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Income (thousand crores)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-            {
-                seriesName: 'Income',
-                opposite: true,
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#00E396'
-                },
-                labels: {
-                    style: {
-                        colors: '#00E396',
-                    }
-                },
-                title: {
-                    text: "Operating Cashflow (thousand crores)",
-                    style: {
-                        color: '#00E396',
-                    }
-                },
-            },
-            {
-                seriesName: 'Revenue',
-                opposite: true,
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#FEB019'
-                },
-                labels: {
-                    style: {
-                        colors: '#FEB019',
-                    },
-                },
-                title: {
-                    text: "Revenue (thousand crores)",
-                    style: {
-                        color: '#FEB019',
-                    }
-                }
-            },
-        ],
+        yaxis: {
+            title: {
+                text: '$ (thousands)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
         tooltip: {
-            fixed: {
-                enabled: true,
-                position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
-                offsetY: 30,
-                offsetX: 60
-            },
-        },
-        legend: {
-            horizontalAlign: 'left',
-            offsetX: 40
+            y: {
+                formatter: function (val) {
+                    return "$ " + val + " thousands"
+                }
+            }
         }
     };
 
@@ -936,6 +879,10 @@
             scrollX: true,
             "lengthMenu": [5, 25, 50, 75, 100],
         });
+        var search = document.querySelectorAll('input[type=search]');
+        search.forEach((src, idx) => {
+            src.classList.add('search-responsive');
+        })
     });
 </script>
 <!-- / Content -->

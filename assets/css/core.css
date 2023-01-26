@@ -15055,9 +15055,31 @@ button.list-group-item-gray.active {
   transform: scaleY(-1) !important;
 }
 
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+  .text-db-badge,
+  .value-db-badge {
+    font-size: 14px !important;
+  }
+
+  .text-tanggal-db {
+    font-size: 9px;
+    margin-right: -3px !important;
+  }
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .first_chart_pd {
     margin-left: -16px;
+  }
+
+  .text-db-badge,
+  .value-db-badge {
+    font-size: 14px !important;
+  }
+
+  .search-responsive {
+    width: 80% !important;
   }
 }
 
@@ -15127,7 +15149,7 @@ button.list-group-item-gray.active {
 
   .first_chart_pd div,
   .second_chart_pd div {
-    margin-left: 15px !important;
+    margin-left: 15px;
   }
 
   .third_chart_pd {
