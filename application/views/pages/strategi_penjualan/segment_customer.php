@@ -497,14 +497,14 @@
             breakpoint: 991,
             options: {
                 chart: {
-                    width: 230
+                    width: 180
                 },
                 legend: {
                     position: 'bottom'
                 }
             }
         }, {
-            breakpoint: 576,
+            breakpoint: 480,
             options: {
                 chart: {
                     width: 170
@@ -540,14 +540,14 @@
             breakpoint: 991,
             options: {
                 chart: {
-                    width: 230
+                    width: 180
                 },
                 legend: {
                     position: 'bottom'
                 }
             }
         }, {
-            breakpoint: 576,
+            breakpoint: 480,
             options: {
                 chart: {
                     width: 170
