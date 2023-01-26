@@ -15089,7 +15089,7 @@ button.list-group-item-gray.active {
   }
 
   .first_chart_pd {
-    margin-left: -16px;
+    margin-left: -22px !important;
   }
 
   .third_chart_pd {
