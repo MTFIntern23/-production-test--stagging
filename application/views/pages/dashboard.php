@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row  justify-content-center">
-                        <div class="col-lg-4 col-xl-4 col-md-6 col-xs-12 col-sm-12">
+                        <div class="col-lg-4 col-xl-4 col-md-12 col-xs-12 col-sm-12">
                             <div class="row">
                                 <div class="col-12">
                                     <p class="text-dark pt-3 fs-4 text-start">
@@ -16,499 +16,520 @@
                                             <?= htmlentities($current_cabang->nama);?>
                                         </b>
                                     </p>
-                                    <div class="card text-white <?php
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->app_in;
                                             $yesterday = $performa_lending_today[1]->app_in;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom" data-aos-delay="10">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-log-in'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 20px;">
-                                                                App In
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom" data-aos-delay="10">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-log-in'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->app_in ?>
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 20px;">
+                                                                        App In
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->app_in ?>
+                                                                                </span>
+                                                                                M/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">40</span>
+                                                                                aplikasi</span>
                                                                         </span>
-                                                                        M/</b><span style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">40</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?= getPercentage($today,$yesterday);
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?= getPercentage($today,$yesterday);
                                                                 ?> <span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card text-white <?php
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->approved;
                                             $yesterday = $performa_lending_today[1]->approved;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom" data-aos-delay="100">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-check-square'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 18px;">
-                                                                Approved
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom" data-aos-delay="100">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-check-square'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->approved ?>
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 18px;">
+                                                                        Approved
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->approved ?>
+                                                                                </span>
+                                                                                M/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">10</span>
+                                                                                aplikasi</span>
                                                                         </span>
-                                                                        M/</b><span style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">10</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->approved;
                                                                     $yesteday = $performa_lending_today[1]->approved;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <div class="card text-white <?php
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->purchase_order;
                                             $yesterday = $performa_lending_today[1]->purchase_order;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom" data-aos-delay="200">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-purchase-tag-alt'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 12px;">
-                                                                Purchase Order
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom" data-aos-delay="200">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-purchase-tag-alt'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->purchase_order ?>
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 12px;">
+                                                                        Purchase Order
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->purchase_order ?>
+                                                                                </span>
+                                                                                M/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">25</span>
+                                                                                aplikasi</span>
                                                                         </span>
-                                                                        M/</b><span style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">25</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->purchase_order;
                                                                     $yesteday = $performa_lending_today[1]->purchase_order;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="card text-white <?php
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->lending;
                                             $yesterday = $performa_lending_today[1]->lending;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom" data-aos-delay="300">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-money-withdraw'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 20px;">
-                                                                Lending
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom" data-aos-delay="300">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-money-withdraw'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->lending ?>
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 20px;">
+                                                                        Lending
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->lending ?>
+                                                                                </span>
+                                                                                M/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">25</span>
+                                                                                aplikasi</span>
                                                                         </span>
-                                                                        M/</b><span style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">25</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->lending;
                                                                     $yesteday = $performa_lending_today[1]->lending;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
-
                                     </div>
-                                    <div class="card text-white <?php
+                                    <div class="row">
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->totalepd;
                                             $yesterday = $performa_lending_today[1]->totalepd;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom" data-aos-delay="400">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-calendar-exclamation'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 18px;">
-                                                                Total EPD
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom" data-aos-delay="400">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-calendar-exclamation'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->totalepd ?>
-                                                                        </span>%/</b><span
-                                                                        style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">10</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 18px;">
+                                                                        Total EPD
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->totalepd ?>
+                                                                                </span>%/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">10</span>
+                                                                                aplikasi</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->totalepd;
                                                                     $yesteday = $performa_lending_today[1]->totalepd;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="card text-white <?php
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->totaloverdue;
                                             $yesterday = $performa_lending_today[1]->totaloverdue;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom" data-aos-delay="500">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-calendar-exclamation'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 13px;">
-                                                                Total Overdue
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom" data-aos-delay="500">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-calendar-exclamation'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->totaloverdue ?>
-                                                                        </span>%/</b><span
-                                                                        style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">10</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 13px;">
+                                                                        Total Overdue
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->totaloverdue ?>
+                                                                                </span>%/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">10</span>
+                                                                                aplikasi</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->totaloverdue;
                                                                     $yesteday = $performa_lending_today[1]->totaloverdue;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="card text-white <?php
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->totalnpl;
                                             $yesterday = $performa_lending_today[1]->totalnpl;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-calendar-exclamation'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 18px;">
-                                                                Total NPL
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-calendar-exclamation'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-dark text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->totalnpl ?>
-                                                                        </span>%/</b><span
-                                                                        style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">10</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 18px;">
+                                                                        Total NPL
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-dark text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->totalnpl ?>
+                                                                                </span>%/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">10</span>
+                                                                                aplikasi</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->totalnpl;
                                                                     $yesteday = $performa_lending_today[1]->totalnpl;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="card text-white <?php
+                                        <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
+                                            <div class="card text-white <?php
                                             $today = $performa_lending_today[0]->totalcwo;
                                             $yesterday = $performa_lending_today[1]->totalcwo;
                                             $pct = getPercentage($today,$yesterday);
                                             echo ($pct<0)?'bg-danger':'bg-success';
                                     ?> mb-2" style="height: 100px;" data-aos="fade-up"
-                                        data-aos-anchor-placement="top-bottom">
-                                        <div class="card-body col-12">
-                                            <div class="row justify-content-center align-items-center">
-                                                <div class="col-2 text-start" style="margin-top: -16px;">
-                                                    <i class='bx bx-calendar-exclamation'
-                                                        style="font-size: 51px; margin-left: -15px;"></i>
-                                                </div>
-                                                <div class="col-10 text-start" style="margin-top: -10px;">
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-bottom: -10px !important;">
-                                                        <div class="col-5">
-                                                            <p class="text-light text-start text-db-badge"
-                                                                style="font-size: 16px;">
-                                                                Total CWO
-                                                            </p>
+                                                data-aos-anchor-placement="top-bottom">
+                                                <div class="card-body col-12">
+                                                    <div class="row justify-content-center align-items-center">
+                                                        <div class="col-2 text-start" style="margin-top: -16px;">
+                                                            <i class='bx bx-calendar-exclamation'
+                                                                style="font-size: 51px; margin-left: -15px;"></i>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <p class="text-light text-end fw-bold text-tanggal-db"
-                                                                style="margin-right: 4px;">
-                                                                MTD
-                                                                <?= Date('j F Y') ?>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row justify-content-center align-items-center text-center"
-                                                        style="margin-top: -10px !important;">
-                                                        <div class="col-9">
-                                                            <p class="text-light text-start">
-                                                                <span class=" text-light value-db-badge"
-                                                                    style="font-size: 18px;"><b>Rp
-                                                                        <span id="number-animate-norm">
-                                                                            <?= $performa_lending_today[0]->totalcwo ?>
-                                                                        </span>%/</b><span
-                                                                        style="font-size: 10px;"><span
-                                                                            id="number-animate-norm">10</span>
-                                                                        aplikasi</span>
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div
-                                                            class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
-                                                            <p id="number-animate"
-                                                                class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
-                                                                style="font-size: 15px; margin-left: -38px;">
-                                                                <?php 
+                                                        <div class="col-10 text-start" style="margin-top: -10px;">
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-bottom: -10px !important;">
+                                                                <div class="col-5">
+                                                                    <p class="text-light text-start text-db-badge"
+                                                                        style="font-size: 16px;">
+                                                                        Total CWO
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <p class="text-light text-end fw-bold text-tanggal-db"
+                                                                        style="margin-right: 4px;">
+                                                                        MTD
+                                                                        <?= Date('j F Y') ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row justify-content-center align-items-center text-center"
+                                                                style="margin-top: -10px !important;">
+                                                                <div class="col-9">
+                                                                    <p class="text-light text-start">
+                                                                        <span class=" text-light value-db-badge"
+                                                                            style="font-size: 18px;"><b>Rp
+                                                                                <span id="number-animate-norm">
+                                                                                    <?= $performa_lending_today[0]->totalcwo ?>
+                                                                                </span>%/</b><span
+                                                                                style="font-size: 10px;"><span
+                                                                                    id="number-animate-norm">10</span>
+                                                                                aplikasi</span>
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                                <div
+                                                                    class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
+                                                                    <p id="number-animate"
+                                                                        class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                        style="font-size: 15px; margin-left: -38px;">
+                                                                        <?php 
                                                                     $today = $performa_lending_today[0]->totalcwo;
                                                                     $yesteday = $performa_lending_today[1]->totalcwo;
                                                                     echo getPercentage($today,$yesteday);
                                                                 ?><span>%</span>
-                                                            </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -518,7 +539,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8 col-xl-8 col-md-6 col-xs-12 col-sm-12">
+                        <div class="col-lg-8 col-xl-8 col-md-12 col-xs-12 col-sm-12">
                             <div class="row">
                                 <div class="col-12">
                                     <p class="text-dark pt-3 fs-4 text-start">
