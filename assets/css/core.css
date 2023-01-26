@@ -15055,6 +15055,19 @@ button.list-group-item-gray.active {
   transform: scaleY(-1) !important;
 }
 
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+
+  .text-db-badge,
+  .value-db-badge {
+    font-size: 14px !important;
+  }
+
+  .text-tanggal-db {
+    font-size: 9px;
+    margin-right: -3px !important;
+  }
+}
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
   .text-db-badge,
