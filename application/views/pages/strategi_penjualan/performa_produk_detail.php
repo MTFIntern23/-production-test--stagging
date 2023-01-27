@@ -237,7 +237,7 @@
 <!-- ==================== -->
 <script defer>
     const to_performa_produk = () => {
-        window.location.href = "<?= site_url('produk')?>"
+        window.location.href = "<?= site_url('performa_produk')?>"
     }
 </script>
 <!-- ==================== -->

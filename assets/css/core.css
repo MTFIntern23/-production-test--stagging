@@ -15192,6 +15192,22 @@ button.list-group-item-gray.active {
   }
 }
 
+@media only screen and (min-width: 1301px) and (max-width: 1400px) {
+  .height-lepi-small {
+    height: 120px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px) {
+  .height-lepi-small {
+    height: 120px !important;
+  }
+
+  .height-lepi-small-1366 {
+    height: 120px !important;
+  }
+}
+
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .col-sub-filter {
     margin: 15px 0 15px 0;

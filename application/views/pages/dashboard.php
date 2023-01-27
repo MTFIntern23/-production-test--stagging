@@ -147,7 +147,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
-                                                <div class="card text-white <?php
+                                                <div class="card text-white height-lepi-small <?php
                                                 $today = $performa_lending_today[0]->purchase_order;
                                                 $yesterday = $performa_lending_today[1]->purchase_order;
                                                 $pct = getPercentage($today,$yesterday);
@@ -345,7 +345,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
-                                                <div class="card text-white <?php
+                                                <div class="card text-white height-lepi-small <?php
                                                 $today = $performa_lending_today[0]->totaloverdue;
                                                 $yesterday = $performa_lending_today[1]->totaloverdue;
                                                 $pct = getPercentage($today,$yesterday);
@@ -473,7 +473,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-xl-12 col-lg-12 col-md-3 col-sm-12 col-xs-12">
-                                                <div class="card text-white <?php
+                                                <div class="card text-white height-lepi-small-1366  <?php
                                                 $today = $performa_lending_today[0]->totalcwo;
                                                 $yesterday = $performa_lending_today[1]->totalcwo;
                                                 $pct = getPercentage($today,$yesterday);
