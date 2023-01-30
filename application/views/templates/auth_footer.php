@@ -141,9 +141,9 @@
         }
     }
     //console-warning
-    var _0x44a1 = ["log", "color: black; font-size: 18px;", "color: red; font-size: 24px;",
+    var _0x44a1 = ["log", "color: #546FE6; font-size: 18px;", "color: red; font-size: 24px;",
         "%cBy doing anthing in this console, you risk giving attackers access to your account or computer",
-        "%cWARNING", "color: red; font-size: 75px; text-shadow: 2px 2px #000;"
+        "%cWARNING", "color: red; font-size: 75px; text-shadow: 2px 2px #546FE6;"
     ];
     ! function (o, e) {
         ! function (e) {

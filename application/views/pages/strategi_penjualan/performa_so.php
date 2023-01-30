@@ -1,6 +1,7 @@
 <!-- Content -->
 <script>
     sessionStorage.setItem("is_mtd", true);
+    sessionStorage.setItem('is_jbrand',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -40,7 +41,7 @@
                     </div>
                 </div>
 
-                <div id="chart_mtd">
+                <div id="chart_mtd" class="d-none">
                     <div class="row">
                         <div class="col">
                             <div class="ms-3 me-4 mb-4">

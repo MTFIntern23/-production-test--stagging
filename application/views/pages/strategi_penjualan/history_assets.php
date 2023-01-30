@@ -1,6 +1,7 @@
 <!-- Content -->
 <script>
     sessionStorage.setItem("is_mtd", true);
+    // sessionStorage.setItem('is_jbrand',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -26,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="tipe-kendaraan-field">
+                <div id="tipe-kendaraan-field" class="d-none">
                     <div class="row mt-4 mb-4 ms-2 me-2">
                         <div class="col">
                             <div class="d-grid gap-2 d-md-block">
@@ -426,7 +427,32 @@
     const btn_history_jbrand = document.querySelector('#btn-history-jbrand')
     const history_field = document.querySelector('#tipe-kendaraan-field')
     const jbrand_field = document.querySelector('#jenis-brand-field')
-    const show_history = function () {
+    //btn session
+    if ((sessionStorage.getItem("is_jbrand") == 'true')) {
+            if (btn_history_jbrand.classList.contains('btn-history-null')) {
+                btn_history_jbrand.classList.remove('btn-history-null');
+            }
+            if (!btn_history_jbrand.classList.contains('bg-chart-active-2')) {
+                btn_history_jbrand.classList.add('bg-chart-active-2');
+            }
+            btn_history.classList.remove('bg-chart-active-2');
+            btn_history.classList.add('btn-history-null');
+    }
+    //chart field session
+    if (sessionStorage.getItem("is_jbrand") == 'true') {
+            jbrand_field.classList.remove('d-none');
+            if (!history_field.classList.contains('d-none')) {
+                history_field.classList.add('d-none');
+            }
+    } else {
+            history_field.classList.remove('d-none');
+            if (!jbrand_field.classList.contains('d-none')) {
+                jbrand_field.classList.add('d-none');
+            }
+    }
+    //show btn
+    function show_history() {
+        sessionStorage.setItem('is_jbrand',false);
         history_field.classList.remove('d-none');
         if (!jbrand_field.classList.contains('d-none')) {
             jbrand_field.classList.add('d-none');
@@ -442,7 +468,8 @@
         }
         show_mtd_chart()
     }
-    const show_jbrand = function () {
+    function show_jbrand() {
+        sessionStorage.setItem('is_jbrand',true)
         jbrand_field.classList.remove('d-none');
         if (!history_field.classList.contains('d-none')) {
             history_field.classList.add('d-none');

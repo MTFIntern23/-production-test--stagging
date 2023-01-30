@@ -1,6 +1,7 @@
 <!-- Content -->
 <script>
     sessionStorage.setItem("is_mtd", true);
+    sessionStorage.setItem('is_jbrand',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <div id="adm-content" class="row">
