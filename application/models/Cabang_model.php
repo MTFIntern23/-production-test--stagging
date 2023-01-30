@@ -8,7 +8,7 @@ class Cabang_model extends CI_Model
     private $_table_dl = "tb_dealer";
     private $_table_cbg = "tb_cabang";
     private $_table_pic = "tb_pic";
-    private $_table_spv = "tb_supervisor";
+    private $_table_spv = "tb_spv";
     const SESSION_KEY = 'user_id';
 
     public function current_cabang()
