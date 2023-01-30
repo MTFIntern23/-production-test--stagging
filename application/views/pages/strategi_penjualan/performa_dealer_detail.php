@@ -1,7 +1,7 @@
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
-        Perfoma Dealer Detail</h5>
+    <span class="text-muted fw-light">Strategi Dealer /</span> Performa Dealer Detail</h5>
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
@@ -16,7 +16,7 @@
                 </div>
                 <h5 class="card-header text-dark fs-4 text-start" style="margin-bottom: -30px;">
                     Performa Dealer<b>
-                        <?= $current_cabang->nama;?>
+                        <?= $current_cabang->nama_cabang;?>
                     </b><br>
                     <p style="font-size: 38px;margin-top:10px;"><b>PT Cipta Karya Indonesia</b></p>
                 </h5>

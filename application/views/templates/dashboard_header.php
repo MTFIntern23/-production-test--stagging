@@ -120,49 +120,49 @@
                         <ul class="menu-sub stay-open">
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_lending_cabang')echo 'active'; ?>">
-                                <a href="<?= site_url('lending')?> " class="menu-link">
+                                <a href="<?= site_url('lending')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="Lending Cabang">Lending Cabang</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_profit_cabang')echo 'active'; ?>">
-                                <a href="<?= site_url('profit')?>" class="menu-link">
+                                <a href="<?= site_url('profit')?>"  onclick="sessionStorage.setItem('is_mtd', true)"class="menu-link">
                                     <div data-i18n="Profit Cabang">Profit Cabang</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_performa_so')echo 'active'; ?>">
-                                <a href="<?= site_url('performa_so')?>" class="menu-link">
+                                <a href="<?= site_url('performa_so')?>"  onclick="sessionStorage.setItem('is_mtd', true)"class="menu-link">
                                     <div data-i18n="Performa SO">Performa SO</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_performa_dealer')echo 'active'; ?>">
-                                <a href="<?= site_url('performa_dealer')?>" class="menu-link">
+                                <a href="<?= site_url('performa_dealer')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="Performa Dealer">Performa Dealer</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_performa_produk')echo 'active'; ?>">
-                                <a href="<?= site_url('performa_produk')?>" class="menu-link">
+                                <a href="<?= site_url('performa_produk')?>"  onclick="sessionStorage.setItem('is_mtd', true)"class="menu-link">
                                     <div data-i18n="Performa Produk">Performa Product</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_history')echo 'active'; ?>">
-                                <a href="<?= site_url('history_assets')?>" class="menu-link">
+                                <a href="<?= site_url('history_assets')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="History Assets">History Assets</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_segment_customer')echo 'active'; ?>">
-                                <a href="<?= site_url('segment_customer')?>" class="menu-link">
+                                <a href="<?= site_url('segment_customer')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="Segment Customer">Customer Segment</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_customer_retention')echo 'active'; ?>">
-                                <a href="./app/dashboard/data-skripsi.html" class="menu-link">
+                                <a href="<?= site_url('customer_retention')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="Customer Retention">Customer Retention</div>
                                 </a>
                             </li>
@@ -177,7 +177,7 @@
                         <ul class="menu-sub">
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_epd_monitoring')echo 'active'; ?>">
-                                <a href="./app/dashboard/admin/data/departments.html" class="menu-link">
+                                <a href="<?= site_url('epd_monitoring')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="EPD Monitoring">EPD Monitoring</div>
                                 </a>
                             </li>
@@ -265,7 +265,7 @@
                                                     class='bx bx-chevron-down'></i>
                                             </p>
                                             <p style="font-size: 11px;">Branch Manager
-                                                <?= htmlentities($current_cabang->nama);?>
+                                                <?= htmlentities($current_cabang->nama_cabang);?>
                                             </p>
                                         </div>
                                     </div>
@@ -288,7 +288,7 @@
                                                     <small class="text-muted" style="color: #6A7B8E !important;">Branch
                                                         Manager</small> <br>
                                                     <small class="text-muted" style="color: #6A7B8E !important;">
-                                                        <?= htmlentities($current_cabang->nama);?>
+                                                        <?= htmlentities($current_cabang->nama_cabang);?>
                                                     </small>
                                                 </div>
                                             </div>

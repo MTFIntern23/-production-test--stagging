@@ -1,6 +1,6 @@
 <!-- Content -->
 <script>
-    sessionStorage.setItem("is_mtd", true);
+    // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -12,7 +12,7 @@
                 <div style="border-bottom: 3px solid #202657;">
                     <h5 class="card-header text-dark fs-4 text-start">
                         Customer Segment <b>
-                            <?= $current_cabang->nama;?>
+                            <?= $current_cabang->nama_cabang;?>
                         </b>
                     </h5>
                     <div class="row ms-2 me-2">
@@ -73,14 +73,14 @@
                             <div class="d-grid gap-2 d-md-block">
                                 <h5 class="text-dark fs-5 text-start">
                                     <b>Top 5</b> Jenis Pendidikan Cabang
-                                    <?= $current_cabang->nama;?>
+                                    <?= $current_cabang->nama_cabang;?>
                                 </h5>
                             </div>
                         </div>
                     </div>
                     <div id="chart_mtd">
                         <div class="row mb-4">
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd ">
                                 <div class="ms-3 me-4 ">
                                     <div id="pendidikan_mtd_chart"></div>
                                 </div>
@@ -276,7 +276,7 @@
                             <div class="d-grid gap-2 d-md-block">
                                 <h5 class="text-dark fs-5 text-start">
                                     <b>Top 5</b> Jenis Brand Kendaraan Cabang
-                                    <?= $current_cabang->nama;?>
+                                    <?= $current_cabang->nama_cabang;?>
                                 </h5>
                             </div>
                         </div>

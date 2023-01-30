@@ -1,6 +1,6 @@
 <!-- Content -->
 <script>
-        (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
+        // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     // sessionStorage.setItem('is_jbrand',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -12,7 +12,7 @@
                 <div style="border-bottom: 3px solid #202657;">
                     <h5 class="card-header text-dark fs-4 text-start">
                         History Assets <b>
-                            <?= $current_cabang->nama;?>
+                            <?= $current_cabang->nama_cabang;?>
                         </b>
                     </h5>
                     <div class="row ms-2 me-2">
@@ -73,7 +73,7 @@
                             <div class="d-grid gap-2 d-md-block">
                                 <h5 class="text-dark fs-5 text-start">
                                     <b>Top 5</b> Tipe Kendaraan Cabang
-                                    <?= $current_cabang->nama;?>
+                                    <?= $current_cabang->nama_cabang;?>
                                 </h5>
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                             <div class="d-grid gap-2 d-md-block">
                                 <h5 class="text-dark fs-5 text-start">
                                     <b>Top 5</b> Jenis Brand Kendaraan Cabang
-                                    <?= $current_cabang->nama;?>
+                                    <?= $current_cabang->nama_cabang;?>
                                 </h5>
                             </div>
                         </div>

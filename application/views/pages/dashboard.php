@@ -14,7 +14,7 @@
                                 <div class="col-12">
                                     <p class="text-dark pt-3 fs-4 text-start">
                                         Keadaan Branch <b>
-                                            <?= htmlentities($current_cabang->nama);?>
+                                            <?= htmlentities($current_cabang->nama_cabang);?>
                                         </b>
                                     </p>
                                     <div id="except-tab">

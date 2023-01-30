@@ -1,17 +1,17 @@
 <!-- Content -->
 <script>
-        (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
+    // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
-        Perfoma Product</h5>
+        Performa Product</h5>
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
                 <h5 class="card-header text-dark fs-4 text-start">
                     Performa Group Product<b>
-                        <?= $current_cabang->nama;?>
+                        <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
                 <div class="row mb-4 ms-2 me-2">
@@ -59,7 +59,7 @@
                         <div class="d-grid gap-2 d-md-block">
                             <h5 class="text-dark fs-5 text-start">
                                 <b>Top 5</b> Group Product
-                                <?= $current_cabang->nama;?>
+                                <?= $current_cabang->nama_cabang;?>
                             </h5>
                         </div>
                     </div>
