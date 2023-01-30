@@ -53,6 +53,7 @@ $route['default_controller'] = 'auth';
 $route['login'] = 'auth/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+//strategi_penjualan
 $route['lending'] = 'strategi_penjualan/lending';
 $route['performa_so'] = 'strategi_penjualan/performa_so';
 $route['performa_so_detail'] = 'strategi_penjualan/performa_so_detail';
@@ -65,3 +66,6 @@ $route['history_assets_detail'] = 'strategi_penjualan/history_assets_detail';
 $route['history_assets_jbrand_detail'] = 'strategi_penjualan/history_assets_jbrand_detail';
 $route['segment_customer'] = 'strategi_penjualan/segment_customer';
 $route['profit'] = 'strategi_penjualan/profit';
+$route['customer_retention'] = 'strategi_penjualan/customer_retention';
+//strategi_collection
+$route['epd_monitoring'] = 'strategi_collection/epd_monitoring';
