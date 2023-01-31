@@ -51,7 +51,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $route['default_controller'] = 'auth';
 $route['login'] = 'auth/login';
-$route['404_override'] = '';
+$route['404_override'] = 'pages_404';
 $route['translate_uri_dashes'] = FALSE;
 //strategi_penjualan
 $route['lending'] = 'strategi_penjualan/lending';
@@ -69,3 +69,10 @@ $route['profit'] = 'strategi_penjualan/profit';
 $route['customer_retention'] = 'strategi_penjualan/customer_retention';
 //strategi_collection
 $route['epd_monitoring'] = 'strategi_collection/epd_monitoring';
+$route['tod_monitoring'] = 'strategi_collection/tod_monitoring';
+$route['tod_monitoring_detail'] = 'strategi_collection/tod_monitoring_detail';
+$route['npl_monitoring'] = 'strategi_collection/npl_monitoring';
+$route['cwo_monitoring'] = 'strategi_collection/cwo_monitoring';
+$route['performa_armo'] = 'strategi_collection/performa_armo';
+$route['performa_armo_detail'] = 'strategi_collection/performa_armo_detail';
+

@@ -126,6 +126,10 @@
             window.location.href = '<?= base_url('history_assets_detail')?>'
         } else if (page == 'jbrand') {
             window.location.href = '<?= base_url('history_assets_jbrand_detail')?>'
+        } else if (page == 'tod') {
+            window.location.href = '<?= base_url('tod_monitoring_detail')?>'
+        } else if (page == 'armo') {
+            window.location.href = '<?= base_url('performa_armo_detail')?>'
         }
     }
     const to_detail_ytd = function (page) {
@@ -140,6 +144,10 @@
             window.location.href = '<?= base_url('history_assets_detail')?>'
         } else if (page == 'jbrand') {
             window.location.href = '<?= base_url('history_assets_jbrand_detail')?>'
+        }else if (page == 'tod') {
+            window.location.href = '<?= base_url('tod_monitoring_detail')?>'
+        }else if (page == 'armo') {
+            window.location.href = '<?= base_url('performa_armo_detail')?>'
         }
     }
     //btn session

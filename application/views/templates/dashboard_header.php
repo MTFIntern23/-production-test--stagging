@@ -183,25 +183,25 @@
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_tod_monitoring')echo 'active'; ?>">
-                                <a href="./app/dashboard/admin/data/lecturers.html" class="menu-link">
+                                <a href="<?= site_url('tod_monitoring')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="TOD Monitoring">TOD Monitoring</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_npl_monitoring')echo 'active'; ?>">
-                                <a href="./app/dashboard/admin/data/students.html" class="menu-link">
+                                <a href="<?= site_url('npl_monitoring')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="NPL Monitoring">NPL Monitoring</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_cwo_monitoring')echo 'active'; ?>">
-                                <a href="./app/dashboard/admin/data/students.html" class="menu-link">
+                                <a href="<?= site_url('cwo_monitoring')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="CWO Monitoring">CWO Monitoring</div>
                                 </a>
                             </li>
                             <li
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_performa_armo')echo 'active'; ?>">
-                                <a href="./app/dashboard/admin/data/students.html" class="menu-link">
+                                <a href="<?= site_url('performa_armo')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="Performa Armo">Performa Armo</div>
                                 </a>
                             </li>
@@ -294,7 +294,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
@@ -306,7 +306,7 @@
                                                     class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
                                             </span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>

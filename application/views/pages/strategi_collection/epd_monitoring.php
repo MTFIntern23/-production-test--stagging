@@ -1,6 +1,7 @@
 <!-- Content -->
 <script>
-    sessionStorage.setItem("is_mtd", true);
+    // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
+    sessionStorage.setItem('is_jbrand', false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Collection /</span>
@@ -192,7 +193,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="card ms-4 me-4 mb-5  " style="background: #eae9e9;width: 80%;">
                             <div class="card-body">
-                                <table id="epd_monitoring_2_mtd_table"
+                                <table id="epd_monitoring_2_ytd_table"
                                     class="table table-striped table-hover display nowrap" style="width:100%">
                                     <thead>
                                         <tr>

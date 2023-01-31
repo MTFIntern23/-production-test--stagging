@@ -38,37 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4 ms-2 me-2">
-                        <div class="col">
-                            <div class="d-grid gap-2 d-md-block">
-                                <div class="row justify-content-sm-start">
-                                    <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
-                                        style="margin-right: -15px;">
-                                        <select class="form-select " aria-label="Filter">
-                                            <option selected disabled>Pilih Filter</option>
-                                            <option value="all">All</option>
-                                            <option value="group_product">Group Product</option>
-                                            <option value="jenis_asset">Jenis Asset</option>
-                                        </select>
-                                    </div>
-                                    <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
-                                        style="margin-right: -15px;">
-                                        <select class="form-select " aria-label="Sub-filter">
-                                            <option selected disabled>Pilih Sub-Filter</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                                class='bx bx-search me-1'></i>Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row  ms-2 me-2 mt-3">
+                    <!-- <div class="row  ms-2 me-2 mt-3">
                         <div class="col">
                             <div class="d-grid gap-2 d-md-block">
                                 <h5 class="text-dark fs-5 text-start">
@@ -77,7 +47,7 @@
                                 </h5>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div id="chart_mtd">
                         <div class="row mb-4">
                             <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd ">
@@ -108,7 +78,6 @@
                                         <th>Lending MTD Jan 23</th>
                                         <th>Unit MTD Des 22</th>
                                         <th>Unit MTD Jan 23</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -119,12 +88,6 @@
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button id="to_detail_mtd" onclick="to_detail_mtd('history')" type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -133,12 +96,6 @@
                                         <td>Rp 2,000,000,000</td>
                                         <td>205</td>
                                         <td>205</td>
-                                        <td>
-                                            <button id="to_detail_mtd" onclick="to_detail_mtd('history')" type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -147,12 +104,6 @@
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button id="to_detail_mtd" onclick="to_detail_mtd('history')" type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -161,68 +112,61 @@
                     </div>
 
                     <div id="chart_ytd" class="d-none">
-                        <div class="row">
-                            <div class="col">
-                                <div class="ms-3 me-4 mb-4">
+                    <div class="row mb-4">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd ">
+                                <div class="ms-3 me-4 ">
                                     <div id="pendidikan_ytd_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 second_chart_pd">
+                                <div class="ms-3 me-4 ">
+                                    <div id="pendidikan_ytd_chart_2"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 ">
+                                <div class="ms-3 me-4 third_chart_pd">
+                                    <div id="pendidikan_ytd_chart_3"></div>
                                 </div>
                             </div>
                         </div>
                         <!-- datatables -->
                         <div class="ms-4 me-4 mb-4">
-                            <table id="pendidikan_ytd_table" class="table table-striped table-hover display nowrap"
+                        <table id="pendidikan_ytd_table" class="table table-striped table-hover display nowrap"
                                 style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Tipe Kendaraan</th>
-                                        <th>Lending YTD 2022</th>
-                                        <th>Lending YTD 2023</th>
-                                        <th>Unit YTD 2022</th>
-                                        <th>Unit YTD 2023</th>
-                                        <th>Action</th>
+                                        <th>Pendidikan</th>
+                                        <th>Lending MTD Des 22</th>
+                                        <th>Lending MTD Jan 23</th>
+                                        <th>Unit MTD Des 22</th>
+                                        <th>Unit MTD Jan 23</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mitsubishi YTD</td>
+                                        <td>S1 YTD</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('history')"
-                                                class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Agung Auto</td>
+                                        <td>D3</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('history')"
-                                                class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>PT Cipta Karya</td>
+                                        <td>SMA</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td> <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('history')"
-                                                class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -241,51 +185,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4 ms-2 me-2">
-                        <div class="col">
-                            <div class="d-grid gap-2 d-md-block">
-                                <div class="row justify-content-sm-start">
-                                    <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
-                                        style="margin-right: -15px;">
-                                        <select class="form-select " aria-label="Filter">
-                                            <option selected disabled>Pilih Filter</option>
-                                            <option value="all">All</option>
-                                            <option value="group_product">Group Product</option>
-                                            <option value="jenis_asset">Jenis Asset</option>
-                                        </select>
-                                    </div>
-                                    <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
-                                        style="margin-right: -15px;">
-                                        <select class="form-select " aria-label="Sub-filter">
-                                            <option selected disabled>Pilih Sub-Filter</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                                class='bx bx-search me-1'></i>Search</button>
-                                    </div>
+                    <div id="chart_mtd">
+                    <div class="row mb-4">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd ">
+                                <div class="ms-3 me-4 ">
+                                    <div id="kecamatan_mtd_chart"></div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row  ms-2 me-2 mt-3">
-                        <div class="col">
-                            <div class="d-grid gap-2 d-md-block">
-                                <h5 class="text-dark fs-5 text-start">
-                                    <b>Top 5</b> Jenis Brand Kendaraan Cabang
-                                    <?= $current_cabang->nama_cabang;?>
-                                </h5>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 second_chart_pd">
+                                <div class="ms-3 me-4 ">
+                                    <div id="kecamatan_mtd_chart_2"></div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div id="chart_mtd">
-                        <div class="row">
-                            <div class="col">
-                                <div class="ms-3 me-4 mb-4">
-                                    <div id="kecamatan_mtd_chart"></div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 ">
+                                <div class="ms-3 me-4 third_chart_pd">
+                                    <div id="kecamatan_mtd_chart_3"></div>
                                 </div>
                             </div>
                         </div>
@@ -294,14 +208,13 @@
                             <table id="kecamatan_mtd_table" class="table table-striped table-hover display nowrap"
                                 style="width:100%">
                                 <thead>
-                                    <tr>
+                                <tr>
                                         <th>No</th>
-                                        <th>Tipe Kendaraan</th>
+                                        <th>Kecamatan</th>
                                         <th>Lending MTD Des 22</th>
                                         <th>Lending MTD Jan 23</th>
                                         <th>Unit MTD Des 22</th>
                                         <th>Unit MTD Jan 23</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -312,12 +225,6 @@
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button id="to_detail_mtd" onclick="to_detail_mtd('jbrand')" type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
@@ -326,12 +233,6 @@
                                         <td>Rp 2,000,000,000</td>
                                         <td>205</td>
                                         <td>205</td>
-                                        <td>
-                                            <button id="to_detail_mtd" onclick="to_detail_mtd('jbrand')" type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -340,12 +241,6 @@
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button id="to_detail_mtd" onclick="to_detail_mtd('jbrand')" type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -354,68 +249,61 @@
                     </div>
 
                     <div id="chart_ytd" class="d-none">
-                        <div class="row">
-                            <div class="col">
-                                <div class="ms-3 me-4 mb-4">
+                    <div class="row mb-4">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd ">
+                                <div class="ms-3 me-4 ">
                                     <div id="kecamatan_ytd_chart"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-6 second_chart_pd">
+                                <div class="ms-3 me-4 ">
+                                    <div id="kecamatan_ytd_chart_2"></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 ">
+                                <div class="ms-3 me-4 third_chart_pd">
+                                    <div id="kecamatan_ytd_chart_3"></div>
                                 </div>
                             </div>
                         </div>
                         <!-- datatables -->
                         <div class="ms-4 me-4 mb-4">
-                            <table id="kecamatan_ytd_table" class="table table-striped table-hover display nowrap"
+                        <table id="kecamatan_ytd_table" class="table table-striped table-hover display nowrap"
                                 style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Tipe Kendaraan</th>
-                                        <th>Lending YTD 2022</th>
-                                        <th>Lending YTD 2023</th>
-                                        <th>Unit YTD 2022</th>
-                                        <th>Unit YTD 2023</th>
-                                        <th>Action</th>
+                                        <th>Kecamatan</th>
+                                        <th>Lending MTD 2022</th>
+                                        <th>Lending MTD 2023</th>
+                                        <th>Unit MTD 2022</th>
+                                        <th>Unit MTD 2023</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mitsubishi YTD</td>
+                                        <td>Tanah Abang</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('jbrand')"
-                                                class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Agung Auto</td>
+                                        <td>Pasar Senen</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td>
-                                            <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('jbrand')"
-                                                class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>PT Cipta Karya</td>
+                                        <td>Harmoni</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>Rp 2,000,000,000</td>
                                         <td>200</td>
                                         <td>200</td>
-                                        <td> <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('jbrand')"
-                                                class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -486,7 +374,6 @@
         chart:
         {
             height: 330,
-            width: 300,
             type: 'pie',
         },
         legend:
@@ -529,7 +416,6 @@
         chart:
         {
             height: 330,
-            width: 300,
             type: 'pie',
         },
         legend:
@@ -647,18 +533,98 @@
 
     // chart history_assets ytd
     var options_pendidikan_ytd = {
+        title: {
+            text: 'YTD <?php echo Date("F Y");?>',
+            align: 'center'
+        },
+        series: [44, 55, 13, 43],
+        chart: {
+            height: 330,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        responsive: [{
+            breakpoint: 991,
+            options: {
+                chart: {
+                    width: 180
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }, {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 170
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+    var chart_pendidikan_ytd = new ApexCharts(document.querySelector("#pendidikan_ytd_chart"),
+        options_pendidikan_ytd);
+    chart_pendidikan_ytd.render();
+
+    var options_pendidikan_ytd_2 = {
+        title: {
+            text: 'YTD <?php  $oneMonthAgo = new \DateTime("1 month ago");echo $oneMonthAgo->format("F Y");?>',
+            align: 'center'
+        },
+        series: [44, 55, 13, 43],
+        chart: {
+            height: 330,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        responsive: [{
+            breakpoint: 991,
+            options: {
+                chart: {
+                    width: 180
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }, {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 170
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+    var chart_pendidikan_ytd_2 = new ApexCharts(document.querySelector("#pendidikan_ytd_chart_2"),
+        options_pendidikan_ytd_2);
+    chart_pendidikan_ytd_2.render();
+
+    var options_pendidikan_ytd_3 = {
         series: [{
-            name: "History Assets YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-        },
-        {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-        }
+                name: "Pendidikan YTD",
+                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            },
+            {
+                name: "Page Views",
+                data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+            },
+            {
+                name: 'Total Visits',
+                data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            }
         ],
         chart: {
             height: 350,
@@ -680,7 +646,7 @@
             align: 'left'
         },
         legend: {
-            tooltipHoverFormatter: function (val, opts) {
+            tooltipHoverFormatter: function(val, opts) {
                 return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
             }
         },
@@ -697,35 +663,36 @@
         },
         tooltip: {
             y: [{
-                title: {
-                    formatter: function (val) {
-                        return val + " (mins)"
+                    title: {
+                        formatter: function(val) {
+                            return val + " (mins)"
+                        }
+                    }
+                },
+                {
+                    title: {
+                        formatter: function(val) {
+                            return val + " per session"
+                        }
+                    }
+                },
+                {
+                    title: {
+                        formatter: function(val) {
+                            return val;
+                        }
                     }
                 }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val + " per session"
-                    }
-                }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val;
-                    }
-                }
-            }
             ]
         },
         grid: {
             borderColor: '#f1f1f1',
-        }
+        },
+
     };
-    var chart_pendidikan_ytd = new ApexCharts(document.querySelector("#pendidikan_ytd_chart"),
-        options_pendidikan_ytd);
-    chart_pendidikan_ytd.render();
+    var chart_pendidikan_ytd_3 = new ApexCharts(document.querySelector("#pendidikan_ytd_chart_3"),
+        options_pendidikan_ytd_3);
+    chart_pendidikan_ytd_3.render();
 
     // chart history_assets jbrand_ mtd
     var options_kecamatan_mtd = {
@@ -810,19 +777,99 @@
     chart_kecamatan_mtd.render();
 
     // chart history_assets ytd
-    var options_kecamatan_ytd = {
+    var options_kecamatan_mtd = {
+        title: {
+            text: 'MTD <?php echo Date("F Y");?>',
+            align: 'center'
+        },
+        series: [44, 55, 13, 43],
+        chart: {
+            height: 330,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        responsive: [{
+            breakpoint: 991,
+            options: {
+                chart: {
+                    width: 180
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }, {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 170
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+    var chart_kecamatan_mtd = new ApexCharts(document.querySelector("#kecamatan_mtd_chart"),
+        options_kecamatan_mtd);
+    chart_kecamatan_mtd.render();
+
+    var options_kecamatan_mtd_2 = {
+        title: {
+            text: 'MTD <?php  $oneMonthAgo = new \DateTime("1 month ago");echo $oneMonthAgo->format("F Y");?>',
+            align: 'center'
+        },
+        series: [44, 55, 13, 43],
+        chart: {
+            height: 330,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        responsive: [{
+            breakpoint: 991,
+            options: {
+                chart: {
+                    width: 180
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }, {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 170
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+    var chart_kecamatan_mtd_2 = new ApexCharts(document.querySelector("#kecamatan_mtd_chart_2"),
+        options_kecamatan_mtd_2);
+    chart_kecamatan_mtd_2.render();
+
+    var options_kecamatan_mtd_3 = {
         series: [{
-            name: "History Assets Jbrand YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-        },
-        {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-        }
+                name: "Kecamatan MTD",
+                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            },
+            {
+                name: "Page Views",
+                data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+            },
+            {
+                name: 'Total Visits',
+                data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            }
         ],
         chart: {
             height: 350,
@@ -844,7 +891,7 @@
             align: 'left'
         },
         legend: {
-            tooltipHoverFormatter: function (val, opts) {
+            tooltipHoverFormatter: function(val, opts) {
                 return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
             }
         },
@@ -861,35 +908,199 @@
         },
         tooltip: {
             y: [{
-                title: {
-                    formatter: function (val) {
-                        return val + " (mins)"
+                    title: {
+                        formatter: function(val) {
+                            return val + " (mins)"
+                        }
+                    }
+                },
+                {
+                    title: {
+                        formatter: function(val) {
+                            return val + " per session"
+                        }
+                    }
+                },
+                {
+                    title: {
+                        formatter: function(val) {
+                            return val;
+                        }
                     }
                 }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val + " per session"
-                    }
-                }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val;
-                    }
-                }
-            }
             ]
         },
         grid: {
             borderColor: '#f1f1f1',
-        }
+        },
+
+    };
+    var chart_kecamatan_mtd_3 = new ApexCharts(document.querySelector("#kecamatan_mtd_chart_3"),
+        options_kecamatan_mtd_3);
+    chart_kecamatan_mtd_3.render();
+
+    // chart kecamatan ytd
+    var options_kecamatan_ytd = {
+        title: {
+            text: 'YTD <?php echo Date("F Y");?>',
+            align: 'center'
+        },
+        series: [44, 55, 13, 43],
+        chart: {
+            height: 330,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        responsive: [{
+            breakpoint: 991,
+            options: {
+                chart: {
+                    width: 180
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }, {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 170
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
     };
     var chart_kecamatan_ytd = new ApexCharts(document.querySelector("#kecamatan_ytd_chart"),
         options_kecamatan_ytd);
     chart_kecamatan_ytd.render();
+
+    var options_kecamatan_ytd_2 = {
+        title: {
+            text: 'YTD <?php $oneMonthAgo = new \DateTime("1 month ago"); echo $oneMonthAgo->format("F Y");?>',
+            align: 'center'
+        },
+        series: [44, 55, 13, 43],
+        chart: {
+            height: 330,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        responsive: [{
+            breakpoint: 991,
+            options: {
+                chart: {
+                    width: 180
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }, {
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 170
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+    var chart_kecamatan_ytd_2 = new ApexCharts(document.querySelector("#kecamatan_ytd_chart_2"),
+        options_kecamatan_ytd_2);
+    chart_kecamatan_ytd_2.render();
+
+    var options_kecamatan_ytd_3 = {
+        series: [{
+                name: "kecamatan YTD",
+                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            },
+            {
+                name: "Page Views",
+                data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
+            },
+            {
+                name: 'Total Visits',
+                data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            }
+        ],
+        chart: {
+            height: 350,
+            type: 'line',
+            zoom: {
+                enabled: false
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            width: [5, 7, 5],
+            curve: 'straight',
+            dashArray: [0, 8, 5]
+        },
+        title: {
+            text: 'Page Statistics',
+            align: 'left'
+        },
+        legend: {
+            tooltipHoverFormatter: function(val, opts) {
+                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+            }
+        },
+        markers: {
+            size: 0,
+            hover: {
+                sizeOffset: 6
+            }
+        },
+        xaxis: {
+            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
+                '10 Jan', '11 Jan', '12 Jan'
+            ],
+        },
+        tooltip: {
+            y: [{
+                    title: {
+                        formatter: function(val) {
+                            return val + " (mins)"
+                        }
+                    }
+                },
+                {
+                    title: {
+                        formatter: function(val) {
+                            return val + " per session"
+                        }
+                    }
+                },
+                {
+                    title: {
+                        formatter: function(val) {
+                            return val;
+                        }
+                    }
+                }
+            ]
+        },
+        grid: {
+            borderColor: '#f1f1f1',
+        },
+
+    };
+    var chart_kecamatan_ytd_3 = new ApexCharts(document.querySelector("#kecamatan_ytd_chart_3"),
+        options_kecamatan_ytd_3);
+    chart_kecamatan_ytd_3.render();
 </script>
 <!-- ==================== -->
 <!-- ==================== -->

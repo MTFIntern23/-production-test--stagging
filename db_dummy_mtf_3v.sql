@@ -10091,13 +10091,16 @@ CREATE TABLE `tb_cabang` (
   `nama_cabang` varchar(255) DEFAULT NULL,
   `lokasi` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_cabang`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_cabang` */
 
 insert  into `tb_cabang`(`id_cabang`,`nama_cabang`,`lokasi`) values 
 (1,'Fatmawati','Jakarta Selatan'),
-(2,'Imam Bonjol','Jakarta Pusat');
+(2,'Imam Bonjol','Jakarta Pusat'),
+(3,'Thamrin','Jakarta Pusat'),
+(4,'Tanah Abang','Jakarta Pusat'),
+(5,'Cibinong','Bogor');
 
 /*Table structure for table `tb_customer` */
 
@@ -22576,19 +22579,26 @@ CREATE TABLE `tb_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `id_cabang` int(11) NOT NULL,
-  `jenis_kelamin` int(11) NOT NULL,
+  `id_cabang` int(10) NOT NULL,
+  `jenis_kelamin` varchar(255) NOT NULL,
   `fullname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `last_login` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_cabang` (`id_cabang`),
-  CONSTRAINT `user_cabang` FOREIGN KEY (`id_cabang`) REFERENCES `tb_cabang` (`id_cabang`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+  KEY `user_manager_cabang` (`id_cabang`),
+  CONSTRAINT `user_manager_cabang` FOREIGN KEY (`id_cabang`) REFERENCES `tb_cabang` (`id_cabang`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `tb_user` */
 
-insert  into `tb_user`(`id`,`username`,`password`,`id_cabang`,`jenis_kelamin`,`fullname`) values 
-(1,'johan','$2y$10$go9nuPqZ4FCIXJ7dpvgpU.N27NPBQWtTyES6N2.CodQ1F.2g5IphC',1,0,'Johanes Salim'),
-(2,'helen','$2y$10$.Rdtj8HfdsmVHoZgMD7sF.xYLbndXbAcsiJ3HKiSAX/CYPXKVNpAO',2,1,'Helen Wuri');
+insert  into `tb_user`(`id`,`username`,`password`,`id_cabang`,`jenis_kelamin`,`fullname`,`email`,`created_at`,`last_login`) values 
+(1,'Johan','$2y$10$3EXGj29b3meTcLg.SUvXR.1tfFBPYVh217.GVKaTHaZQzB3vEtPHq',1,'0','Johanes Salim','johannes@gmail.com','2023-01-19 16:44:02','2023-01-31 06:57:52'),
+(2,'Teuku','$2y$10$JZb1g.Az95kE9tKWmt.I7.jsOgsObmPuoYpNo4WSioVcvWHS2/LPG',2,'0','Teuku Rangga','','2023-01-19 16:44:02',NULL),
+(3,'Bella','$2y$10$p9juz3wOave.b2kCh4kDEuHdtp1D8t5zSPNBvu2esOJh6L3ZAAarm',3,'1','Bella Hadid','','2023-01-19 16:44:02',NULL),
+(4,'Fatah','$2y$10$kj7XmiZJeax4DCLiH4jRCelzT4s9k0uvaR4GiVrXwNZ8dpRK9F1Uy',4,'0','Fatah Morgan','','2023-01-19 16:44:02',NULL),
+(5,'Helen','$2y$10$PXgmzAaa5XQwwgG.ECvoueqflqTPosTLQQUVke.BbwIIpX0TgcQZS',5,'1','Helen Wuri','','2023-01-19 16:44:02',NULL),
+(6,'Diyuyut','$2y$10$O/OymT71yfIWJEFScv9lc.PT3vAvHIq8dlrk0snZ2vFUskOfCKEeu',3,'1','Diyuyut Jaktim','','2023-01-19 16:44:02','2023-01-23 16:44:36');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

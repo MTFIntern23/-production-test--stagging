@@ -1,9 +1,7 @@
 /**
  * Main
  */
-
 'use strict';
-
 let menu, animate;
 let mybutton = document.querySelector('.btn-buy-now');
 (function () {

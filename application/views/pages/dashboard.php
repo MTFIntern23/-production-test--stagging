@@ -1125,10 +1125,10 @@
                                                         <?= htmlentities($row->peringkat);?>
                                                     </td>
                                                     <td>
-                                                        <?= htmlentities($row->nama_spv);?>
+                                                        <?= htmlentities($row->nama_so);?>
                                                     </td>
                                                     <td>
-                                                        <?= htmlentities($row->nama_so);?>
+                                                        <?= htmlentities($row->nama_spv);?>
                                                     </td>
                                                     <td>
                                                         <?= htmlentities($row->pencapaian);?>
