@@ -20,7 +20,10 @@ class Dashboard extends CI_Controller
             'current_cabang'=>$this->cabang_model->current_cabang(),
             'performa_so'=>$this->cabang_model->performa_so(),
             'performa_dealer'=>$this->cabang_model->performa_dealer(),
-            'performa_lending_today'=>$this->cabang_model->performa_lending_db_today(),
+            'performa_lending_today'=>$this->cabang_model->performa_lending('today'),
+            'performa_month'=>$this->cabang_model->performa_lending('curr_month'),
+            'performa_year'=>$this->cabang_model->performa_lending('curr_year'),
+            'performa_last_year'=>$this->cabang_model->performa_lending('last_year'),
             'identifier'=>'is_home',
             'submenu_identity'=>'',
         ];

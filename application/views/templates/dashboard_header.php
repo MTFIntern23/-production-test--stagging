@@ -74,6 +74,43 @@
                 }
             }
         };
+        function nFormatter(num, digits = 1) {
+            const lookup = [
+                {value: 1, symbol: " "},
+                {value: 1e3, symbol: " k"},
+                {value: 1e6, symbol: " JT"},
+                {value: 1e9, symbol: " M"},
+                {value: 1e12, symbol: " T"},
+                {value: 1e15, symbol: " B"},
+                {value: 1e18, symbol: " P"}
+            ];
+            const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+            var item = lookup.slice().reverse().find(function (item) {
+                return num >= item.value;
+            });
+            return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+        }
+        function bFormatter(num) {
+            return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000000000).toFixed(3)): Math.sign(num)*Math.abs(num)
+        }
+        var months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember']
+        function month_name(num){
+            months.forEach((value,idx)=>{
+                if(parseInt(num)-1 == idx){
+                    num = value;
+                }
+            })
+            return num;
+        }
+        var initialize_;
+        function sum_to_prev(num){
+            if(initialize_==null){
+                initialize_ = 0;
+            }
+            initialize_ += parseInt(num);
+            num = initialize_;
+            return num;
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"
         integrity="sha512-K5BohS7O5E+S/W8Vjx4TIfTZfxe9qFoRXlOXEAWJD7MmOXhvsSl2hJihqc0O8tlIfcjrIkQXiBjixV8jgon9Uw=="
@@ -99,9 +136,6 @@
                     </a>
                 </div>
                 <div class="menu-inner-shadow"></div>
-                <!-- ####################### -->
-                <!-- role admin -->
-                <!-- ####################### -->
                 <ul id="adm-aside" class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item <?php if (htmlentities($identifier)=='is_home')echo 'active open'; ?>">
@@ -208,7 +242,7 @@
                         </ul>
                     </li>
                     <li class="menu-item <?php if(htmlentities($identifier)=='is_sla_cabang')echo 'active open'; ?>">
-                        <a href="#" class="menu-link">
+                        <a href="<?= site_url('coming_soon')?>" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-recycle"></i>
                             <div data-i18n="Management Account">SLA Cabang</div>
                         </a>
@@ -217,7 +251,6 @@
                 </ul>
             </aside>
             <!-- / Menu -->
-
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
@@ -252,7 +285,7 @@
                                     <div class="row">
                                         <div class="col pt-lg-3 pt-md-3">
                                             <div class="avatar avatar-online ">
-                                                <img src="<?= base_url('assets'); ?>/img/avatars/1.png"
+                                                <img src="<?= base_url('assets'); ?>/img/avatars/<?= (htmlentities($current_user->jenis_kelamin) == 0)?'usr_man.png':'usr_woman.png';?>"
                                                     class="w-px-40 h-auto rounded-circle" alt="logo-user"
                                                     loading="lazy" />
                                             </div>
@@ -276,7 +309,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="<?= base_url('assets'); ?>/img/avatars/1.png"
+                                                        <img src="<?= base_url('assets'); ?>/img/avatars/<?= (htmlentities($current_user->jenis_kelamin) == 0)?'usr_man.png':'usr_woman.png';?>"
                                                             class="w-px-40 h-auto rounded-circle" alt="logo-user"
                                                             loading="lazy" />
                                                     </div>
@@ -294,19 +327,6 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <!-- <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="./app/dashboard/settings/edit-profile.html">
-                                            <span class="d-flex align-items-center align-middle">
-                                                <i class="flex-shrink-0 bx bx-user me-2"></i>
-                                                <span class="flex-grow-1 align-middle">My Profile</span>
-                                                <span
-                                                    class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                            </span>
-                                        </a>
-                                    </li> -->
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
@@ -322,7 +342,6 @@
                         </ul>
                     </div>
                 </nav>
-
                 <!-- / Navbar -->
                 <!-- Content wrapper -->
                 <div class="content-wrapper">

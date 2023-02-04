@@ -65,10 +65,11 @@
     });
     function animateValue(obj, start, end, duration, isNorm) {
         let startTimestamp = null;
+        let end_str = end.toString().split('.');
         const step = (timestamp) => {
             if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            (isNorm == true) ? obj.innerHTML = Math.floor(progress * (end - start) + start) : obj.innerHTML = Number((progress * (end - start) + start)).toFixed(1) + '%';
+            const progress = Math.min(((timestamp - startTimestamp) / duration), 1);
+            (end_str[0].length >= 3)?(isNorm == true) ? obj.innerHTML = Math.floor(progress * (end - start) + start) : obj.innerHTML = Number((progress * (end - start) + start)).toFixed(1) + '%':(isNorm == true) ? obj.innerHTML = parseFloat(progress * (end - start) + start).toFixed(1) : obj.innerHTML = Number((progress * (end - start) + start)).toFixed(1) + '%';
             if (progress < 1) {
                 window.requestAnimationFrame(step);
             }
@@ -78,10 +79,10 @@
     const percentage_anim = document.querySelectorAll('#number-animate');
     const norm_anim = document.querySelectorAll('#number-animate-norm');
     percentage_anim.forEach((number, idx) => {
-        animateValue(number, 0, parseFloat(number.innerHTML), 1500, false);
+        animateValue(number, 0.00, parseFloat(number.innerHTML), 1500, false);
     });
     norm_anim.forEach((number, idx) => {
-        animateValue(number, 0, parseFloat(number.innerHTML), 1500, true);
+        animateValue(number, 0.00, parseFloat(number.innerHTML), 1500, true);
     });
 
     //console-warning
@@ -214,6 +215,17 @@
                 btn_ytd[idx].classList.add('bg-chart-active');
             }
         })
+    }
+    //select input dropdown
+    let filter = document.querySelector("#filter");
+    let areaSubFilter = document.querySelectorAll('#sub-filter');
+    let callSubFilter = function(callSubFilter) {
+        let str = "";
+        let idx = "";
+        callSubFilter.forEach(element => {
+            str += `<option value= "sub${idx}">${element}</option>`;
+        });
+        return str;
     }
 </script>
 </body>

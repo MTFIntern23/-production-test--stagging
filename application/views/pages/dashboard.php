@@ -1,7 +1,7 @@
 <!-- Content -->
 <script>
     sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_jbrand',false);
+    sessionStorage.setItem('is_jbrand', false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <div id="adm-content" class="row">
@@ -24,7 +24,7 @@
                                                 $today = $performa_lending_today[0]->app_in;
                                                 $yesterday = $performa_lending_today[1]->app_in;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="10">
                                                     <div class="card-body col-12">
@@ -56,12 +56,13 @@
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
                                                                                 style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                    <span class ="get_val" id="number-animate-norm">
                                                                                         <?= $performa_lending_today[0]->app_in ?>
                                                                                     </span>
-                                                                                    M/</b><span
+                                                                                    <span class="abbrv"></span>
+                                                                                    /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">40</span>
+                                                                                        >40</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -69,7 +70,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?= getPercentage($today,$yesterday);
                                                                     ?> <span>%</span>
@@ -86,7 +87,7 @@
                                                 $today = $performa_lending_today[0]->approved;
                                                 $yesterday = $performa_lending_today[1]->approved;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -118,12 +119,13 @@
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
                                                                                 style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                    <span class ="get_val" id="number-animate-norm">
                                                                                         <?= $performa_lending_today[0]->approved ?>
                                                                                     </span>
-                                                                                    M/</b><span
+                                                                                    <span class="abbrv"></span>
+                                                                                    /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">10</span>
+                                                                                        >10</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -131,7 +133,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->approved;
@@ -152,7 +154,7 @@
                                                 $today = $performa_lending_today[0]->purchase_order;
                                                 $yesterday = $performa_lending_today[1]->purchase_order;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="200">
                                                     <div class="card-body col-12">
@@ -184,12 +186,13 @@
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
                                                                                 style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                    <span class ="get_val" id="number-animate-norm">
                                                                                         <?= $performa_lending_today[0]->purchase_order ?>
                                                                                     </span>
-                                                                                    M/</b><span
+                                                                                    <span class="abbrv"></span>
+                                                                                    /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">25</span>
+                                                                                        >25</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -197,7 +200,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->purchase_order;
@@ -218,7 +221,7 @@
                                                 $today = $performa_lending_today[0]->lending;
                                                 $yesterday = $performa_lending_today[1]->lending;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="300">
                                                     <div class="card-body col-12">
@@ -250,12 +253,13 @@
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
                                                                                 style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                    <span class ="get_val" id="number-animate-norm">
                                                                                         <?= $performa_lending_today[0]->lending ?>
                                                                                     </span>
-                                                                                    M/</b><span
+                                                                                    <span class="abbrv"></span>
+                                                                                    /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">25</span>
+                                                                                        >25</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -263,7 +267,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->lending;
@@ -286,7 +290,7 @@
                                                 $today = $performa_lending_today[0]->totalepd;
                                                 $yesterday = $performa_lending_today[1]->totalepd;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="400">
                                                     <div class="card-body col-12">
@@ -317,12 +321,12 @@
                                                                     <div class="col-9">
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
-                                                                                style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                style="font-size: 18px;"><b>
+                                                                                    <span  id="number-animate">
                                                                                         <?= $performa_lending_today[0]->totalepd ?>
-                                                                                    </span>%/</b><span
+                                                                                    </span> /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">10</span>
+                                                                                        >10</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -330,7 +334,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totalepd;
@@ -350,13 +354,13 @@
                                                 $today = $performa_lending_today[0]->totaloverdue;
                                                 $yesterday = $performa_lending_today[1]->totaloverdue;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="500">
                                                     <div class="card-body col-12">
                                                         <div class="row justify-content-center align-items-center">
                                                             <div class="col-2 text-start" style="margin-top: -16px;">
-                                                                <i class='bx bx-calendar-exclamation'
+                                                                <i class='bx bx-timer'
                                                                     style="font-size: 51px; margin-left: -15px;"></i>
                                                             </div>
                                                             <div class="col-10 text-start" style="margin-top: -10px;">
@@ -381,12 +385,12 @@
                                                                     <div class="col-9">
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
-                                                                                style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                style="font-size: 18px;"><b>
+                                                                                    <span  id="number-animate">
                                                                                         <?= $performa_lending_today[0]->totaloverdue ?>
-                                                                                    </span>%/</b><span
+                                                                                    </span> /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">10</span>
+                                                                                        >10</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -394,7 +398,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totaloverdue;
@@ -414,13 +418,13 @@
                                                 $today = $performa_lending_today[0]->totalnpl;
                                                 $yesterday = $performa_lending_today[1]->totalnpl;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom">
                                                     <div class="card-body col-12">
                                                         <div class="row justify-content-center align-items-center">
                                                             <div class="col-2 text-start" style="margin-top: -16px;">
-                                                                <i class='bx bx-calendar-exclamation'
+                                                                <i class='bx bx-credit-card'
                                                                     style="font-size: 51px; margin-left: -15px;"></i>
                                                             </div>
                                                             <div class="col-10 text-start" style="margin-top: -10px;">
@@ -445,12 +449,12 @@
                                                                     <div class="col-9">
                                                                         <p class="text-dark text-start">
                                                                             <span class=" text-light value-db-badge"
-                                                                                style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                style="font-size: 18px;"><b>
+                                                                                    <span  id="number-animate">
                                                                                         <?= $performa_lending_today[0]->totalnpl ?>
-                                                                                    </span>%/</b><span
+                                                                                    </span> /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">10</span>
+                                                                                        >10</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -458,7 +462,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totalnpl;
@@ -478,13 +482,13 @@
                                                 $today = $performa_lending_today[0]->totalcwo;
                                                 $yesterday = $performa_lending_today[1]->totalcwo;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> mb-2" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom">
                                                     <div class="card-body col-12">
                                                         <div class="row justify-content-center align-items-center">
                                                             <div class="col-2 text-start" style="margin-top: -16px;">
-                                                                <i class='bx bx-calendar-exclamation'
+                                                                <i class='bx bx-dollar-circle'
                                                                     style="font-size: 51px; margin-left: -15px;"></i>
                                                             </div>
                                                             <div class="col-10 text-start" style="margin-top: -10px;">
@@ -509,12 +513,12 @@
                                                                     <div class="col-9">
                                                                         <p class="text-light text-start">
                                                                             <span class=" text-light value-db-badge"
-                                                                                style="font-size: 18px;"><b>Rp
-                                                                                    <span id="number-animate-norm">
+                                                                                style="font-size: 18px;"><b>
+                                                                                    <span  id="number-animate">
                                                                                         <?= $performa_lending_today[0]->totalcwo ?>
-                                                                                    </span>%/</b><span
+                                                                                    </span> /</b><span
                                                                                     style="font-size: 10px;"><span
-                                                                                        id="number-animate-norm">10</span>
+                                                                                        >10</span>
                                                                                     aplikasi</span>
                                                                             </span>
                                                                         </p>
@@ -522,7 +526,7 @@
                                                                     <div
                                                                         class="col-3 <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 15px; margin-left: -38px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totalcwo;
@@ -546,7 +550,7 @@
                                                 $today = $performa_lending_today[0]->app_in;
                                                 $yesterday = $performa_lending_today[1]->app_in;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?> " style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -576,12 +580,13 @@
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
                                                                             style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                                class ="get_val" id="number-animate-norm">
                                                                                 <?= $performa_lending_today[0]->app_in ?>
                                                                             </span>
-                                                                            M/</b><br> <span
+                                                                            <span class="abbrv"></span>
+                                                                            /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">40</span>
+                                                                                    >40</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -589,7 +594,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?= getPercentage($today,$yesterday);
                                                                     ?> <span>%</span>
@@ -606,7 +611,7 @@
                                                 $today = $performa_lending_today[0]->approved;
                                                 $yesterday = $performa_lending_today[1]->approved;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -636,12 +641,13 @@
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
                                                                             style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                                class ="get_val" id="number-animate-norm">
                                                                                 <?= $performa_lending_today[0]->approved ?>
                                                                             </span>
-                                                                            M/</b><br> <span
+                                                                            <span class="abbrv"></span>
+                                                                            /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">10</span>
+                                                                                    >10</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -649,7 +655,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->approved;
@@ -669,7 +675,7 @@
                                                 $today = $performa_lending_today[0]->purchase_order;
                                                 $yesterday = $performa_lending_today[1]->purchase_order;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -699,12 +705,13 @@
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
                                                                             style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                                class ="get_val" id="number-animate-norm">
                                                                                 <?= $performa_lending_today[0]->purchase_order ?>
                                                                             </span>
-                                                                            M/</b><br> <span
+                                                                            <span class="abbrv"></span>
+                                                                            /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">25</span>
+                                                                                    >25</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -712,7 +719,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->purchase_order;
@@ -732,7 +739,7 @@
                                                 $today = $performa_lending_today[0]->lending;
                                                 $yesterday = $performa_lending_today[1]->lending;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -762,12 +769,13 @@
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
                                                                             style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                                class ="get_val" id="number-animate-norm">
                                                                                 <?= $performa_lending_today[0]->lending ?>
                                                                             </span>
-                                                                            M/</b><br> <span
+                                                                            <span class="abbrv"></span>
+                                                                            /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">25</span>
+                                                                                    >25</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -775,7 +783,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->lending;
@@ -797,7 +805,7 @@
                                                 $today = $performa_lending_today[0]->totalepd;
                                                 $yesterday = $performa_lending_today[1]->totalepd;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -826,13 +834,12 @@
                                                                     <div
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
-                                                                            style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                            style="font-size: 9px;"><span
+                                                                            id="number-animate">
                                                                                 <?= $performa_lending_today[0]->totalepd ?>
-                                                                            </span>
-                                                                            M/</b><br> <span
+                                                                            </span> /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">10</span>
+                                                                                    >10</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -840,7 +847,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totalepd;
@@ -860,7 +867,7 @@
                                                 $today = $performa_lending_today[0]->totaloverdue;
                                                 $yesterday = $performa_lending_today[1]->totaloverdue;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -889,13 +896,12 @@
                                                                     <div
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
-                                                                            style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                            style="font-size: 9px;"><span
+                                                                            id="number-animate">
                                                                                 <?= $performa_lending_today[0]->totaloverdue ?>
-                                                                            </span>
-                                                                            M/</b><br> <span
+                                                                            </span> /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">10</span>
+                                                                                    >10</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -903,7 +909,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totaloverdue;
@@ -923,7 +929,7 @@
                                                 $today = $performa_lending_today[0]->totalnpl;
                                                 $yesterday = $performa_lending_today[1]->totalnpl;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -953,13 +959,14 @@
                                                                     <div
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
-                                                                            style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                            style="font-size: 9px;"><span
+                                                                            id="number-animate">
                                                                                 <?= $performa_lending_today[0]->totalnpl ?>
                                                                             </span>
-                                                                            M/</b><br> <span
+                                                                          
+                                                                             /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">10</span>
+                                                                                    >10</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -967,7 +974,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totalnpl;
@@ -987,7 +994,7 @@
                                                 $today = $performa_lending_today[0]->totalcwo;
                                                 $yesterday = $performa_lending_today[1]->totalcwo;
                                                 $pct = getPercentage($today,$yesterday);
-                                                echo ($pct<0)?'bg-danger':'bg-success';
+                                                echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');
                                         ?>" style="height: 100px;" data-aos="fade-up"
                                                     data-aos-anchor-placement="top-bottom" data-aos-delay="100">
                                                     <div class="card-body col-12">
@@ -1017,13 +1024,14 @@
                                                                     <div
                                                                         class="col-xl-8 col-lg-8 col-md-6 col-sm-8 col-xs-8 text-start">
                                                                         <p class="text-ip-mini-1 fw-bold"
-                                                                            style="font-size: 9px;">Rp <span
-                                                                                id="number-animate-norm">
+                                                                            style="font-size: 9px;"><span
+                                                                            id="number-animate">
                                                                                 <?= $performa_lending_today[0]->totalcwo ?>
                                                                             </span>
-                                                                            M/</b><br> <span
+                                                                         
+                                                                             /</b><br> <span
                                                                                 style="font-size: 7px;"><span
-                                                                                    id="number-animate-norm">10</span>
+                                                                                    >10</span>
                                                                                 aplikasi</span>
                                                                         </p>
                                                                     </div>
@@ -1031,7 +1039,7 @@
                                                                     <div
                                                                         class="col-xl-4 col-lg-4 col-md-6 col-sm-4 col-xs-4 text-end <?php echo ($pct<0)?'bg-tredingdown':'bg-tredingup';?>">
                                                                         <p id="number-animate"
-                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct<0)?'bg-danger':'bg-success';?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
+                                                                            class="text-dark fw-bold text-end text-ip-mini-2 badge <?php echo ($pct==0)?'bg-warning':(($pct<0)?'bg-danger':'bg-success');?> bx bx-<?php echo ($pct<0)?'trending-down':'trending-up';?> "
                                                                             style="font-size: 10px;">
                                                                             <?php 
                                                                         $today = $performa_lending_today[0]->totalcwo;
@@ -1220,6 +1228,14 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    let num_abv = document.querySelectorAll('.get_val');
+    let abbreviation_fields = document.querySelectorAll('.abbrv');
+    num_abv.forEach((val,idx)=>{
+        var numb = nFormatter(val.innerHTML);
+        var arr_numb = numb.split(/(\s+)/);
+        val.innerHTML = parseFloat(arr_numb[0]);
+        abbreviation_fields[idx].innerHTML = arr_numb[2]
+    })
     const btn_show_lending = document.querySelector('#show_lending_btn')
     const btn_show_profit = document.querySelector('#show_profit_btn')
     const lending_field = document.querySelector('#row-db-lending')
@@ -1261,55 +1277,112 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        $items_mtd = array();
+        $aktual_mtd = array();
+        $target_mtd = array();
+        $komitmen_mtd = array();
+        foreach($performa_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
+            $aktual_mtd[] = htmlentities($row -> aktual);
+            $target_mtd[] = htmlentities($row -> target);
+            $komitmen_mtd[] = htmlentities($row -> komitment);
+        }
+    ?>
+    //mtd grovv
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var aktual_mtd = <?php echo json_encode($aktual_mtd) ?>;
+    var komitmen_mtd = <?php echo json_encode($komitmen_mtd) ?>;
+    var target_mtd = <?php echo json_encode($target_mtd) ?>;
     //chart dashboard
+    initialize_=0;
     var options_dashboard = {
         series: [{
-            name: 'Net Profit',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+            name: 'Akumulasi Aktual',
+            type: 'column',
+            data: (aktual_mtd.map(sum_to_prev)).map(bFormatter)
         }, {
-            name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+            name: 'Target',
+            type: 'line',
+            data: target_mtd.map(bFormatter)
         }, {
-            name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+            name: 'Komitmen',
+            type: 'line',
+            data: komitmen_mtd.map(bFormatter)
         }],
         chart: {
-            type: 'bar',
-            height: 350
+            height: 350,
+            type: 'line',
         },
         plotOptions: {
             bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        },
-        yaxis: {
-            title: {
-                text: '$ (thousands)'
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
             }
         },
-        fill: {
-            opacity: 1
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            // enabledOnSeries: [1,2]
         },
+        stroke: {
+            width: [1, 4, 4]
+        },
+        xaxis: {
+            categories: fields_mtd,
+            tooltip: {
+                enabled: false
+            }
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "M (Milyar)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        ],
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " M (Milyar)"
                 }
             }
-        }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
     };
 
     var chart = new ApexCharts(document.querySelector("#dashboard_chart"), options_dashboard);

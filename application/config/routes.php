@@ -52,6 +52,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['login'] = 'auth/login';
 $route['404_override'] = 'pages_404';
+$route['coming_soon'] = 'pages_comingsoon';
 $route['translate_uri_dashes'] = FALSE;
 //strategi_penjualan
 $route['lending'] = 'strategi_penjualan/lending';

@@ -6,6 +6,8 @@
             $data = [
                 'title' => '404 Error',
             ];
-            $this->load->view('templates/pages_404', $data);
+            $this->load->view('templates/basic_header',$data);
+            $this->load->view('pages/pages_404');
+            $this->load->view('templates/basic_footer');
         }
     }

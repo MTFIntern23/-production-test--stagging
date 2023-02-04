@@ -39,20 +39,25 @@
                             <div class="row justify-content-sm-start">
                                 <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
                                     style="margin-right: -15px;">
-                                    <select class="form-select " aria-label="Filter">
+                                    <select class="form-select" id='filter'
+                                        onchange="setSubFilter(this.options[this.selectedIndex].value)">
                                         <option selected disabled>Pilih Filter</option>
                                         <option value="all">All</option>
-                                        <option value="group_product">Group Product</option>
-                                        <option value="jenis_asset">Jenis Asset</option>
+                                        <option value="group_product">Group
+                                            Product</option>
+                                        <option value="jenis_asset">Jenis Asset
+                                        </option>
+                                        <option value="so">SO</option>
+                                        <option value="jenis_customer">Jenis
+                                            Customer</option>
+                                        <option value="dealer">Dealer</option>
+                                        <option value="armo">ARMO</option>
                                     </select>
                                 </div>
                                 <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
                                     style="margin-right: -15px;">
-                                    <select class="form-select " aria-label="Sub-filter">
-                                        <option selected disabled>Pilih Sub-Filter</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="form-select" id="sub-filter" disabled>
+                                        <option value="">Pilih Sub-Filter</option>
                                     </select>
                                 </div>
                                 <div class="col">
@@ -239,6 +244,32 @@
 <script defer>
     const to_history_assets = () => {
         window.location.href = "<?= site_url('history_assets')?>"
+    }
+    let setSubFilter = function(dataFilter) {
+        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "dealer", "armo"]
+        let subFilters = {
+            'sub0': ["Pilih Sub-Filter"],
+            'sub1': ["test1", "test2"],
+            'sub2': ["Motor", "Mobil"],
+            'sub3': ["Ricky", "Hilda"],
+            'sub4': ["New", "Old"],
+            'sub5': ["Tunas Toyota", "Mugen Honda"],
+            'sub6': ["Pique", "CR", "Messi"],
+        }
+        if (dataFilter == "all") {
+            areaSubFilter.forEach((subs)=>{
+                subs.innerHTML = callSubFilter(subFilters.sub0);
+                subs.setAttribute("disabled", 'true');
+            })
+        }
+        filters.forEach((filter, idx) => {
+            if (dataFilter == filter) {
+                areaSubFilter.forEach((subs)=>{
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
+                    subs.removeAttribute("disabled");
+                })
+            }
+        })
     }
 </script>
 <!-- ==================== -->

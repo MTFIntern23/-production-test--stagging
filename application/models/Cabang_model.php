@@ -20,7 +20,6 @@ class Cabang_model extends CI_Model
         $query = $this->db->get_where($this->_table_cbg , ['id_cabang' => $cabangUser]);
         return $query->row();
     }
-    
     public function performa_so()
     {
         if (!$this->session->has_userdata(self::SESSION_KEY)) {
@@ -38,7 +37,50 @@ class Cabang_model extends CI_Model
         // return $query->row();
         return $query->result();
     }
-
+    public function performa_lending($params){
+        if (!$this->session->has_userdata(self::SESSION_KEY)) {
+            return null;
+        }
+        $cabangUser = $this->auth_model->current_user()->id_cabang;
+        if($params == 'curr_year'|| $params == 'last_year'){
+            $this->db->select('YEAR(`periode`) AS year,
+            MONTH(`periode`) AS month,
+            COUNT(*) AS total_Rows,
+            (`komitment`) AS ytd_komitment,
+            (`target`) AS ytd_target,
+            SUM(`aktual`) AS ytd_aktual,
+            (SUM(`aktual`)/SUM(`target`))*100 AS ytd_achv,
+            ABS(SUM(`aktual`)-SUM(`target`)) AS ytd_gap,
+            SUM(`app_in`) AS ytd_appin,
+            SUM(`approved`) AS ytd_approved,
+            SUM(`purchase_order`) AS ytd_po,
+            SUM(`golive`) AS ytd_golive,
+            SUM(`aktual`)+SUM(`purchase_order`) AS ytd_actpo,
+            SUM(`aktual`)+SUM(`purchase_order`)+SUM(`approved`) AS ytd_actpoapp');
+        }else{
+            $this->db->select('*');
+        }
+        $this->db->from($this->_table_pfm_ld);
+        $this->db->join($this->_table_cbg,$this->_table_cbg.'.id_cabang='.$this->_table_pfm_ld.'.id_cabang');
+        if($params == 'curr_year'){
+            //get all days (1st month to curr month) of current year
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-01-01") AND NOW())');
+            $this->db->group_by('YEAR(`periode`), MONTH(`periode`)');
+        }else if($params == 'last_year'){
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (YEAR(periode) = YEAR(curdate() - interval 1 year))');
+            $this->db->group_by('YEAR(`periode`), MONTH(`periode`)');
+        }else if($params == 'curr_month'){
+            //get all days (1st day to curr day) of current month
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW())');
+        }else if($params == 'today'){
+            $this->db->where('DATE(periode) <= CURDATE() AND DATE(periode) >= CURDATE() - INTERVAL 1 DAY AND '.$this->_table_cbg.'.id_cabang = '.$cabangUser);
+            $this->db->order_by("periode", "desc");
+        }else{
+            return false;
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function performa_dealer(){
         if (!$this->session->has_userdata(self::SESSION_KEY)) {
             return null;
@@ -51,20 +93,6 @@ class Cabang_model extends CI_Model
         $this->db->join($this->_table_pic,$this->_table_pic.'.id_pic='.$this->_table_pfm_dl.'.id_pic');
         $this->db->where($this->_table_cbg.'.id_cabang',$cabangUser);
         $this->db->limit(10);
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function performa_lending_db_today(){
-        if (!$this->session->has_userdata(self::SESSION_KEY)) {
-            return null;
-        }
-        $cabangUser = $this->auth_model->current_user()->id_cabang;
-        $this->db->select('*');
-        $this->db->from($this->_table_pfm_ld);
-        $this->db->join($this->_table_cbg,$this->_table_cbg.'.id_cabang='.$this->_table_pfm_ld.'.id_cabang');
-        $this->db->where('DATE(periode) <= CURDATE() AND DATE(periode) >= CURDATE() - INTERVAL 1 DAY AND '.$this->_table_cbg.'.id_cabang = '.$cabangUser);
-        // $this->db->where($this->_table_cbg.'.id_cabang',$cabangUser);
         $query = $this->db->get();
         return $query->result();
     }

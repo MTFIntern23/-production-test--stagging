@@ -41,17 +41,17 @@
         const fields = [username,password]
         const form_is_null = function (sum = 2,field = fields){
             let eyes = document.querySelector('#eyes')
-            if(sum==2){
+            if(sum!=1){
                 field.forEach((data,idx)=>{
                     data.classList.add('border-err');
                 })
                 error_msg.forEach((err,idx)=>{
                     err.classList.remove('d-none')
-                    err.innerHTML = msg[idx];
+                    if(sum==2){err.innerHTML = msg[idx]}else{err.innerHTML = 'Pastikan diisi dengan benar!';}
                 })
                 eyes.classList.remove('eye-hide');
                 eyes.classList.add('eye-hide-err');
-                notyf.error('Pastikan username dan password diisi !');
+                if(sum==2){notyf.error('Pastikan username dan password diisi !')}else{notyf.error('Pastikan username dan password benar !');}
             }else{
                 field.classList.add('border-err');
                 if(field == username){
@@ -94,7 +94,7 @@
                     }else if(result.value == 4){
                         form_is_null();
                     }else{
-                        notyf.error('Pastikan username dan password benar !');
+                        form_is_null(0);
                     }
                     $('input[name=csrf_mtf_log]').val(result.token);
                 }
