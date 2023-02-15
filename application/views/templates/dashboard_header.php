@@ -111,6 +111,15 @@
             num = initialize_;
             return num;
         }
+        function get_max_interval(arr){
+            let max = 0
+            arr.forEach((val,idx)=>{
+                if(val>=max){
+                    max = val
+                }
+            })
+            return max*2;
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"
         integrity="sha512-K5BohS7O5E+S/W8Vjx4TIfTZfxe9qFoRXlOXEAWJD7MmOXhvsSl2hJihqc0O8tlIfcjrIkQXiBjixV8jgon9Uw=="
@@ -156,12 +165,6 @@
                                 class="menu-item <?php if(htmlentities($submenu_identity)=='is_lending_cabang')echo 'active'; ?>">
                                 <a href="<?= site_url('lending')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
                                     <div data-i18n="Lending Cabang">Lending Cabang</div>
-                                </a>
-                            </li>
-                            <li
-                                class="menu-item <?php if(htmlentities($submenu_identity)=='is_profit_cabang')echo 'active'; ?>">
-                                <a href="<?= site_url('profit')?>"  onclick="sessionStorage.setItem('is_mtd', true)"class="menu-link">
-                                    <div data-i18n="Profit Cabang">Profit Cabang</div>
                                 </a>
                             </li>
                             <li
@@ -241,12 +244,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="menu-item <?php if(htmlentities($identifier)=='is_profit_cabang')echo 'active open'; ?>">
+                        <a href="<?= site_url('profit')?>" onclick="sessionStorage.setItem('is_mtd', true)" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-dollar-circle"></i>
+                            <div data-i18n="Management Profit">Profitabilitas Cabang</div>
+                        </a>
+                    </li>
                     <li class="menu-item <?php if(htmlentities($identifier)=='is_sla_cabang')echo 'active open'; ?>">
                         <a href="<?= site_url('coming_soon')?>" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-recycle"></i>
                             <div data-i18n="Management Account">SLA Cabang</div>
                         </a>
-
                     </li>
                 </ul>
             </aside>

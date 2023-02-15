@@ -19,7 +19,7 @@
                     Performa ARMO<b>
                         <?= $current_cabang->nama_cabang;?>
                     </b> <br>
-                    <p style="font-size: 38px;margin-top:10px;"><b>Ricky Rivaldo</b></p>
+                    <p style="font-size: 38px;margin-top:10px;"><b><?= $performa_detail_month[0]->nama_armo;?></b></p>
                 </h5>
                 <!-- button -->
                 <div class="row mb-4 ms-2 me-2">
@@ -51,88 +51,60 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Lending Amount</th>
+                                    <th>Lending Amount (M)</th>
                                     <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Nama SO</th>
-                                    <th>OD</th>
-                                    <th>OSP</th>
+                                    <th>OD (M)</th>
+                                    <th>OSP (M)</th>
                                     <th>Angsuran</th>
                                     <th>Angsuran ke</th>
                                     <th>Tenor</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                    <td>MTD</td>
-                                </tr>
+                            <?php 
+                                    $no=1; 
+                                    foreach ($performa_detail_month as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->lending_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_so);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->od);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->osp);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->instalment_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->instalment_number);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->tenor);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -157,88 +129,60 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Lending Amount</th>
+                                    <th>Lending Amount (M)</th>
                                     <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Nama SO</th>
-                                    <th>OD</th>
-                                    <th>OSP</th>
+                                    <th>OD (M)</th>
+                                    <th>OSP (M)</th>
                                     <th>Angsuran</th>
                                     <th>Angsuran ke</th>
                                     <th>Tenor</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                    <td>57</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                    <td>YTD</td>
-                                </tr>
+                            <?php 
+                                    $no=1; 
+                                    foreach ($performa_detail_year as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->lending_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_so);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->od);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->osp);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->instalment_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->instalment_number);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->tenor);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -258,6 +202,10 @@
     const to_performa_armo = () => {
         window.location.href = "<?= site_url('performa_armo')?>"
     }
+    let num_abv = document.querySelectorAll('.get_val');
+    num_abv.forEach((val) => {
+        val.innerHTML = bFormatter(parseFloat(val.innerHTML));
+    })
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -265,75 +213,126 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $lending_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $lending_ytd = array();
+        $lending_last_ytd = array();
+        foreach($graph_performa_detail_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> tgl_golive)) -> format('d M');
+            $lending_mtd[] = htmlentities($row -> mtd_lending_amt);
+        }
+        foreach($graph_performa_detail_year as $row) {
+            $items_ytd[] = htmlentities($row -> month);
+            $lending_ytd[] = htmlentities($row -> mtd_lending_amt);
+        }
+        foreach($graph_performa_detail_last_year as $row) {
+            $lending_last_ytd[] = htmlentities($row -> mtd_lending_amt);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
+    var lending_last_ytd = <?php echo json_encode($lending_last_ytd) ?>;
+    var used_lending_last_ytd = lending_last_ytd.slice(0, fields_ytd.length)
     // performa so detail mtd
     var options_performa_armo_detail_mtd = {
         series: [{
-            name: 'TEAM A',
-            type: 'column',
-            data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
-        }, {
-            name: 'TEAM B',
-            type: 'area',
-            data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-        }, {
-            name: 'TEAM C',
-            type: 'line',
-            data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
+            name: 'Total Lending',
+            data: lending_mtd.map(bFormatter)
         }],
         chart: {
+            type: 'bar',
             height: 350,
-            type: 'line',
-            stacked: false,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
+            }
         },
-        stroke: {
-            width: [0, 2, 5],
-            curve: 'smooth'
-        },
+        // forceNiceScale: true,
         plotOptions: {
             bar: {
-                columnWidth: '50%'
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
             }
         },
-
-        fill: {
-            opacity: [0.85, 0.25, 1],
-            gradient: {
-                inverseColors: false,
-                shade: 'light',
-                type: "vertical",
-                opacityFrom: 0.85,
-                opacityTo: 0.55,
-                stops: [0, 100, 100, 100]
-            }
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
         },
-        labels: ['01/01/2003', '02/01/2003', '03/01/2003', '04/01/2003', '05/01/2003', '06/01/2003', '07/01/2003',
-            '08/01/2003', '09/01/2003', '10/01/2003', '11/01/2003'
-        ],
-        markers: {
-            size: 0
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
         },
         xaxis: {
-            type: 'datetime'
-        },
-        yaxis: {
-            title: {
-                text: 'Points',
+            categories: fields_mtd,
+            labels: {
+                style: {
+                    colors: '#000000',
+                }
             },
-            min: 0
         },
-        tooltip: {
-            shared: true,
-            intersect: false,
-            y: {
-                formatter: function (y) {
-                    if (typeof y !== "undefined") {
-                        return y.toFixed(0) + " points";
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
                     }
-                    return y;
-
+                },
+                title: {
+                    text: "M (Milyar)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
                 }
             }
-        }
+        ],
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            x: {
+                formatter: function (val) {
+                    return val + " (Golive)"
+                }
+            },
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    enabled: false,
+                },
+            }
+        }],
     };
     var chart_performa_armo_detail_mtd = new ApexCharts(document.querySelector("#performa_armo_detail_mtd_chart"),
         options_performa_armo_detail_mtd);
@@ -342,81 +341,87 @@
     // chart performa_armo_detail ytd
     var options_performa_armo_detail_ytd = {
         series: [{
-            name: "Session Duration",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-        },
-        {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-        }
-        ],
+            name: 'Total Lending ' + (new Date().getFullYear() - 1),
+            type: 'column',
+            data: used_lending_last_ytd.map(bFormatter)
+        }, {
+            name: 'Total Lending ' + (new Date().getFullYear()),
+            type: 'column',
+            data: lending_ytd.map(bFormatter)
+        }],
         chart: {
             height: 350,
             type: 'line',
-            zoom: {
-                enabled: false
-            },
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            // enabledOnSeries: [1,2]
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
-        },
-        title: {
-            text: 'Page Statistics',
-            align: 'left'
-        },
-        legend: {
-            tooltipHoverFormatter: function (val, opts) {
-                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-            }
-        },
-        markers: {
-            size: 0,
-            hover: {
-                sizeOffset: 6
-            }
+            width: [1, 1]
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: fields_ytd.map(month_name),
+            tooltip: {
+                enabled: false
+            }
         },
-        tooltip: {
-            y: [
-                {
-                    title: {
-                        formatter: function (val) {
-                            return val + " (mins)"
-                        }
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
                     }
                 },
-                {
-                    title: {
-                        formatter: function (val) {
-                            return val + " per session"
-                        }
+                title: {
+                    text: "Pencapaian (Unit)",
+                    style: {
+                        color: '#008FFB',
                     }
                 },
-                {
-                    title: {
-                        formatter: function (val) {
-                            return val;
-                        }
-                    }
+                tooltip: {
+                    enabled: true
                 }
-            ]
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
         },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
     };
     var chart_performa_armo_detail_ytd = new ApexCharts(document.querySelector("#performa_armo_detail_ytd_chart"),
         options_performa_armo_detail_ytd);
@@ -431,11 +436,11 @@
     $(document).ready(function () {
         $('#performa_armo_detail_mtd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
         $('#performa_armo_detail_ytd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
     });
 </script>

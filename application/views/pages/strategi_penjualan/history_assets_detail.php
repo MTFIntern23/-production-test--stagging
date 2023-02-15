@@ -18,7 +18,7 @@
                     History Assets <b>
                         <?= $current_cabang->nama_cabang;?>
                     </b><br>
-                    <p style="font-size: 38px;margin-top:10px;"><b>Type Passenger</b></p>
+                    <p style="font-size: 38px;margin-top:10px;"><b><?= $history_assets_month[0]->tipe;?></b></p>
                 </h5>
                 <!-- button -->
                 <div class="row mt-4 mb-4 ms-2 me-2">
@@ -44,13 +44,11 @@
                                         <option value="all">All</option>
                                         <option value="group_product">Group
                                             Product</option>
-                                        <option value="jenis_asset">Jenis Asset
-                                        </option>
                                         <option value="so">SO</option>
                                         <option value="jenis_customer">Jenis
                                             Customer</option>
+                                        <option value="jenis_pekerjaan">Jenis Pekerjaan</option>
                                         <option value="dealer">Dealer</option>
-                                        <option value="armo">ARMO</option>
                                     </select>
                                 </div>
                                 <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
@@ -85,64 +83,44 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Lending Amount</th>
-                                    <th>Tangga Aplikasi Masuk</th>
+                                    <th>Lending Amount (M)</th>
+                                    <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Jenis Kendaraan</th>
                                     <th>Nama SO</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1 MTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($history_assets_month as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->lending_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->jenis);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_so);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -167,64 +145,44 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Lending Amount</th>
-                                    <th>Tangga Aplikasi Masuk</th>
+                                    <th>Lending Amount (M)</th>
+                                    <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Jenis Kendaraan</th>
                                     <th>Nama SO</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1 YTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Buroq</td>
-                                    <td>Ricky Rivaldo</td>
-                                </tr>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($history_assets_year as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->lending_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->jenis);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_so);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -244,26 +202,35 @@
     const to_history_assets = () => {
         window.location.href = "<?= site_url('history_assets')?>"
     }
+    let num_abv = document.querySelectorAll('.get_val');
+    num_abv.forEach((val) => {
+        val.innerHTML = bFormatter(parseFloat(val.innerHTML));
+    })
     let setSubFilter = function(dataFilter) {
-        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "dealer", "armo"]
+        let filters = ["group_product", "so", "jenis_customer", "jenis_pekerjaan", "dealer"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': ["test1", "test2"],
-            'sub2': ["Motor", "Mobil"],
-            'sub3': ["Ricky", "Hilda"],
-            'sub4': ["New", "Old"],
-            'sub5': ["Tunas Toyota", "Mugen Honda"],
-            'sub6': ["Pique", "CR", "Messi"],
+            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
+                "Reguler Fleet"
+            ],
+            'sub2': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
+                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
+            ],
+            'sub3': ["NONRO", "RO"],
+            'sub4': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"],
+            'sub5': ["PT Cipta Karya", "Tunas", "Agung Auto", "PT Ida", "PT Sukacita", "Benny Automotives",
+                "Kelapa Hijau", "PT Prakarsa", "Taskia Auto"
+            ]
         }
         if (dataFilter == "all") {
-            areaSubFilter.forEach((subs)=>{
+            areaSubFilter.forEach((subs) => {
                 subs.innerHTML = callSubFilter(subFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
-                areaSubFilter.forEach((subs)=>{
+                areaSubFilter.forEach((subs) => {
                     subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
@@ -277,83 +244,126 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $lending_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $lending_ytd = array();
+        $lending_last_ytd = array();
+        foreach($graph_history_assets_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> tgl_golive)) -> format('d M');
+            $lending_mtd[] = htmlentities($row -> mtd_lending);
+        }
+        foreach($graph_history_assets_year as $row) {
+            $items_ytd[] = htmlentities($row -> month);
+            $lending_ytd[] = htmlentities($row -> mtd_lending);
+        }
+        foreach($graph_history_assets_last_year as $row) {
+            $lending_last_ytd[] = htmlentities($row -> mtd_lending);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
+    var lending_last_ytd = <?php echo json_encode($lending_last_ytd) ?>;
+    var used_lending_last_ytd = lending_last_ytd.slice(0, fields_ytd.length)
     // history_assets_ detail mtd
     var options_history_assets_mtd = {
         series: [{
-            name: "History Assets MTD Detaill",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-        },
-        {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-        }
-        ],
+            name: 'Total Lending',
+            data: lending_mtd.map(bFormatter)
+        }],
         chart: {
+            type: 'bar',
             height: 350,
-            type: 'line',
-            zoom: {
-                enabled: false
+            toolbar: {
+                show: true
             },
+            zoom: {
+                enabled: true
+            }
+        },
+        // forceNiceScale: true,
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
-        },
-        title: {
-            text: 'Page Statistics',
-            align: 'left'
-        },
-        legend: {
-            tooltipHoverFormatter: function (val, opts) {
-                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-            }
-        },
-        markers: {
-            size: 0,
-            hover: {
-                sizeOffset: 6
-            }
+            show: true,
+            width: 2,
+            colors: ['transparent']
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: fields_mtd,
+            labels: {
+                style: {
+                    colors: '#000000',
+                }
+            },
         },
-        tooltip: {
-            y: [{
-                title: {
-                    formatter: function (val) {
-                        return val + " (mins)"
-                    }
-                }
-            },
+        yaxis: [
             {
-                title: {
-                    formatter: function (val) {
-                        return val + " per session"
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
                     }
-                }
-            },
-            {
+                },
                 title: {
-                    formatter: function (val) {
-                        return val;
+                    text: "M (Milyar)",
+                    style: {
+                        color: '#008FFB',
                     }
+                },
+                tooltip: {
+                    enabled: true
                 }
             }
-            ]
+        ],
+        fill: {
+            opacity: 1
         },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
+        tooltip: {
+            x: {
+                formatter: function (val) {
+                    return val + " (Golive)"
+                }
+            },
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    enabled: false,
+                },
+            }
+        }],
     };
     var chart_history_assets_mtd = new ApexCharts(document.querySelector("#history_assets_mtd_chart"),
         options_history_assets_mtd);
@@ -362,80 +372,87 @@
     // chart history_assets_detail ytd
     var options_history_assets_ytd = {
         series: [{
-            name: "History Assets YTD Detail",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-        },
-        {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-        }
-        ],
+            name: 'Total Lending ' + (new Date().getFullYear() - 1),
+            type: 'column',
+            data: used_lending_last_ytd.map(bFormatter)
+        }, {
+            name: 'Total Lending ' + (new Date().getFullYear()),
+            type: 'column',
+            data: lending_ytd.map(bFormatter)
+        }],
         chart: {
             height: 350,
             type: 'line',
-            zoom: {
-                enabled: false
-            },
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            // enabledOnSeries: [1,2]
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
-        },
-        title: {
-            text: 'Page Statistics',
-            align: 'left'
-        },
-        legend: {
-            tooltipHoverFormatter: function (val, opts) {
-                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-            }
-        },
-        markers: {
-            size: 0,
-            hover: {
-                sizeOffset: 6
-            }
+            width: [1, 1]
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: fields_ytd.map(month_name),
+            tooltip: {
+                enabled: false
+            }
         },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "Pencapaian (Unit)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
         tooltip: {
-            y: [{
-                title: {
-                    formatter: function (val) {
-                        return val + " (mins)"
-                    }
-                }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val + " per session"
-                    }
-                }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val;
-                    }
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
                 }
             }
-            ]
         },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
     };
     var chart_history_assets_ytd = new ApexCharts(document.querySelector("#history_assets_ytd_chart"),
         options_history_assets_ytd);
@@ -450,11 +467,11 @@
     $(document).ready(function () {
         $('#history_assets_mtd').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
         $('#history_assets_ytd').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
     });
 </script>

@@ -14,9 +14,14 @@
         public function index()
         {
             $data = [
-                'title' => 'EPD Monitoring | MyBranch by CPM',
+                'title' => 'TOD Monitoring | MyBranch by CPM',
                 'current_user'=>$this->auth_model->current_user(),
                 'current_cabang'=>$this->cabang_model->current_cabang(),
+                'current_month_tod'=>$this->cabang_model->tod_monitoring(null,'curr_month',false),
+                'last_month_tod'=>$this->cabang_model->tod_monitoring(null,'last_month',false),
+                'current_year_tod'=>$this->cabang_model->tod_monitoring(null,'curr_year',false),
+                'last_year_tod'=>$this->cabang_model->tod_monitoring(null,'last_year',false),
+                'count_bucket_od'=>$this->cabang_model->get_bucketod(null,'curr_month'),
                 'identifier'=>'is_strategi_collection',
                 'submenu_identity'=>'is_tod_monitoring',
             ];

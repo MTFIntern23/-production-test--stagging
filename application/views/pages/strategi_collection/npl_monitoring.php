@@ -14,32 +14,11 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
-                <div class="row mb-4 ms-2 me-2">
-                    <div class="col">
-                        <div class="d-grid gap-2 d-md-block">
-                            <button id="btn-chart-mtd" class="badge btn bg-chart-active" onclick="show_mtd_chart()"
-                                type="button"><i class='bx bxs-color me-1'></i>Lending MTD</button>
-                            <button id="btn-chart-ytd" class="badge btn btn-secondary" onclick="show_ytd_chart()"
-                                type="button"><i class='bx bxs-color me-1'></i>Lending YTD</button>
-                        </div>
-                    </div>
-                </div>
-
                 <div id="chart_mtd" class="d-none">
                     <div class="row">
                         <div class="col">
                             <div class="ms-3 me-4 mb-4">
                                 <div id="npl_monitoring_mtd_chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="chart_ytd" class="d-none">
-                    <div class="row">
-                        <div class="col">
-                            <div class="ms-3 me-4 mb-4">
-                                <div id="npl_monitoring_ytd_chart"></div>
                             </div>
                         </div>
                     </div>
@@ -62,105 +41,76 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $persentasi_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $persentasi_ytd = array();
+        $persentasi_last_ytd = array();
+        foreach($performa_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
+            $persentasi_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($performa_year as $row) {
+            $items_ytd[] = htmlentities($row -> month);
+            $persentasi_ytd[] = htmlentities($row -> ytd_persentasi);
+        }
+        foreach($performa_last_year as $row) {
+            $persentasi_last_ytd[] = htmlentities($row -> ytd_persentasi);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var persentasi_mtd = <?php echo json_encode($persentasi_mtd) ?>;
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var persentasi_ytd = <?php echo json_encode($persentasi_ytd) ?>;
+    var persentasi_last_ytd = <?php echo json_encode($persentasi_last_ytd) ?>;
+    var used_persentasi_last_ytd = persentasi_last_ytd.slice(0, fields_ytd.length)
     // chart npl_monitoring mtd
     var options_npl_monitoring_mtd = {
-        series: [{
-            name: 'TEAM A',
-            type: 'column',
-            data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30]
-        }, {
-            name: 'TEAM B',
-            type: 'area',
-            data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43]
-        }, {
-            name: 'TEAM C',
-            type: 'line',
-            data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39]
+        colors: [function({ value, seriesIndex, w }) {
+            if(value < 1){
+                return '#26E7A6'
+            }else if(value == 1){
+                return '#FEB830'
+            }else if(value >1){
+                return '#FF5870'
+            }
+            
         }],
-        chart: {
-            height: 500,
-            type: 'line',
-            stacked: false,
-        },
-        stroke: {
-            width: [0, 2, 5],
-            curve: 'smooth'
-        },
-        plotOptions: {
-            bar: {
-                columnWidth: '50%'
-            }
-        },
-
-        fill: {
-            opacity: [0.85, 0.25, 1],
-            gradient: {
-                inverseColors: false,
-                shade: 'light',
-                type: "vertical",
-                opacityFrom: 0.85,
-                opacityTo: 0.55,
-                stops: [0, 100, 100, 100]
-            }
-        },
-        labels: ['01/01/2003', '02/01/2003', '03/01/2003', '04/01/2003', '05/01/2003', '06/01/2003', '07/01/2003',
-            '08/01/2003', '09/01/2003', '10/01/2003', '11/01/2003'
-        ],
-        markers: {
-            size: 0
-        },
-        xaxis: {
-            type: 'datetime'
-        },
-        yaxis: {
-            title: {
-                text: 'Points',
-            },
-            min: 0
-        },
-        tooltip: {
-            shared: true,
-            intersect: false,
-            y: {
-                formatter: function (y) {
-                    if (typeof y !== "undefined") {
-                        return y.toFixed(0) + " points";
-                    }
-                    return y;
-
-                }
-            }
-        }
-    };
-    var chart_npl_monitoring_mtd = new ApexCharts(document.querySelector("#npl_monitoring_mtd_chart"),
-        options_npl_monitoring_mtd);
-    chart_npl_monitoring_mtd.render();
-
-    // chart npl_monitoring ytd
-    var options_npl_monitoring_ytd = {
         series: [{
-            name: 'Net Profit',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 56, 61, 58]
-        }, {
-            name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 87, 105, 91]
-        }, {
-            name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 35, 41, 36]
+            name: 'Persentase',
+            type: 'column',
+            data: persentasi_mtd
         }],
         chart: {
             type: 'bar',
-            height: 500
+            height: 450,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
+            }
         },
+        // forceNiceScale: true,
         plotOptions: {
             bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " %";
+            },
+            
         },
         stroke: {
             show: true,
@@ -168,27 +118,61 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'],
+            categories: fields_mtd,
+            labels: {
+                style: {
+                    colors: '#000000',
+                }
+            },
         },
-        yaxis: {
-            title: {
-                text: '$ (thousands)'
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "% (Persen)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
             }
-        },
+        ],
         fill: {
             opacity: 1
         },
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " % (Persen)"
                 }
             }
-        }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    enabled: false,
+                },
+            }
+        }],
     };
-    var chart_npl_monitoring_ytd = new ApexCharts(document.querySelector("#npl_monitoring_ytd_chart"),
-        options_npl_monitoring_ytd);
-    chart_npl_monitoring_ytd.render();
+    var chart_npl_monitoring_mtd = new ApexCharts(document.querySelector("#npl_monitoring_mtd_chart"),
+        options_npl_monitoring_mtd);
+    chart_npl_monitoring_mtd.render();
+
 </script>
 <!-- ==================== -->
 <!-- ==================== -->

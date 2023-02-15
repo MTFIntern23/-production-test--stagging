@@ -1,27 +1,28 @@
 <!-- Content -->
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
-    <span class="text-muted fw-light">Performa Product /</span> Performa Product Detail</h5>
+    <span class="text-muted fw-light">Performa Profit /</span> Performa Profit Detail</h5>
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="row pt-3 ms-2 me-2">
                     <div class="col ">
                         <div class="d-md-block">
-                            <button class="badge btn btn-warning" type="button" onclick="to_performa_produk()"><i
+                            <button class="badge btn btn-warning" type="button" onclick="to_performa_profit()"><i
                                     class='bx bxs-left-arrow-alt me-1'></i>Kembali
                                 &nbsp;</button>
                         </div>
                     </div>
                 </div>
-                <h5 class="card-header text-dark fs-4 text-start" style="margin-bottom: -30px;">
-                    Performa Group Product<b>
+                <h5 class="card-header text-dark fs-4 text-start">
+                    Performa Profit<b>
                         <?= $current_cabang->nama_cabang;?>
-                    </b><br>
-                    <p style="font-size: 38px;margin-top:10px;"><b><?= $performa_product_month[0]->gp;?></b></p>
+                    </b> <br>
+                    <p style="font-size: 38px;margin-top:10px;"><b><?= $current_month_detail_profit[0]->komponen_profit;?></b></p>
+
                 </h5>
                 <!-- button -->
-                <div class="row mt-4 mb-4 ms-2 me-2">
+                <div class="row mb-4 ms-2 me-2">
                     <div class="col">
                         <div class="d-grid gap-2 d-md-block">
                             <button id="btn-chart-mtd" class="badge btn bg-chart-active" onclick="show_mtd_chart()"
@@ -32,76 +33,35 @@
                     </div>
                 </div>
                 <!-- / button -->
-                <div class="row mb-4 ms-2 me-2">
-                    <div class="col">
-                        <div class="d-grid gap-2 d-md-block">
-                            <div class="row justify-content-sm-start">
-                                <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
-                                    style="margin-right: -15px;">
-                                    <select class="form-select" id='filter'
-                                        onchange="setSubFilter(this.options[this.selectedIndex].value)">
-                                        <option selected disabled>Pilih Filter</option>
-                                        <option value="all">All</option>
-                                        <option value="jenis_asset">Jenis Asset
-                                        </option>
-                                        <option value="so">SO</option>
-                                        <option value="jenis_customer">Jenis
-                                            Customer</option>
-                                        <option value="jenis_pekerjaan">Jenis Pekerjaan</option>
-                                        <option value="dealer">Dealer</option>
-                                    </select>
-                                </div>
-                                <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
-                                    style="margin-right: -15px;">
-                                    <select class="form-select" id="sub-filter" disabled>
-                                        <option value="">Pilih Sub-Filter</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                            class='bx bx-search me-1'></i>Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- chart mtd -->
                 <div id="chart_mtd" class="d-none">
-                    <div class="row mb-4">
-                        <div
-                            class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
-                            <div class="ms-3 me-4 d-flex justify-content-center mt-3">
-                                <div id="performa_produk_detail_mtd_chart_2"></div>
-                            </div>
-                        </div>
-                        <div
-                            class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
-                            <div class="ms-3 me-4">
-                                <div id="performa_produk_detail_mtd_chart"></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="ms-3 me-4 mb-4">
+                                <div id="performa_profit_detail_mtd_chart"></div>
                             </div>
                         </div>
                     </div>
                     <!-- datatables -->
                     <div class="ms-4 me-4 mb-4">
-                        <table id="performa_produk_detail_mtd" class="table table-striped table-hover display nowrap"
+                        <table id="performa_profit_detail_mtd_table" class="table table-striped table-hover display nowrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Nama Produk</th>
                                     <th>Lending Amount (M)</th>
                                     <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Jenis Kendaraan</th>
-                                    <th>Nama SO</th>
+                                    <th>Sumber Dealer</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <!-- <?php 
                                     $no=1; 
-                                    foreach ($performa_product_month as $row) { ?>
+                                    foreach ($performa_detail_month as $row) { ?>
                                     <tr>
                                         <td>
                                             <?= $no++;?>
@@ -111,9 +71,6 @@
                                         </td>
                                         <td>
                                             <?= htmlentities($row->nama_cust);?>
-                                        </td>
-                                        <td>
-                                            <?= htmlentities($row->produk);?>
                                         </td>
                                         <td class="get_val">
                                             <?= htmlentities($row->lending_amt);?>
@@ -128,10 +85,10 @@
                                             <?= htmlentities($row->jenis);?>
                                         </td>
                                         <td>
-                                            <?= htmlentities($row->nama_so);?>
+                                            <?= htmlentities($row->nama_dealer);?>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php } ?> -->
                             </tbody>
                         </table>
                     </div>
@@ -140,41 +97,33 @@
                 <!-- / chart mtd -->
                 <!-- chart ytd -->
                 <div id="chart_ytd" class="d-none">
-                    <div class="row mb-4">
-                        <div
-                            class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
-                            <div class="ms-3 me-4 d-flex justify-content-center mt-3">
-                                <div id="performa_produk_detail_ytd_chart_2"></div>
-                            </div>
-                        </div>
-                        <div
-                            class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
-                            <div class="ms-3 me-4">
-                                <div id="performa_produk_detail_ytd_chart"></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="ms-3 me-4 mb-4">
+                                <div id="performa_profit_detail_ytd_chart"></div>
                             </div>
                         </div>
                     </div>
                     <!-- datatables -->
                     <div class="ms-4 me-4 mb-4">
-                        <table id="performa_produk_detail_ytd" class="table table-striped table-hover display nowrap"
+                        <table id="performa_profit_detail_ytd_table" class="table table-striped table-hover display nowrap"
                             style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Nama Produk</th>
                                     <th>Lending Amount (M)</th>
                                     <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Jenis Kendaraan</th>
-                                    <th>Nama SO</th>
+                                    <th>Sumber Dealer</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <!-- <?php 
                                     $no=1; 
-                                    foreach ($performa_product_year as $row) { ?>
+                                    foreach ($performa_detail_year as $row) { ?>
                                     <tr>
                                         <td>
                                             <?= $no++;?>
@@ -184,9 +133,6 @@
                                         </td>
                                         <td>
                                             <?= htmlentities($row->nama_cust);?>
-                                        </td>
-                                        <td>
-                                            <?= htmlentities($row->produk);?>
                                         </td>
                                         <td class="get_val">
                                             <?= htmlentities($row->lending_amt);?>
@@ -201,10 +147,10 @@
                                             <?= htmlentities($row->jenis);?>
                                         </td>
                                         <td>
-                                            <?= htmlentities($row->nama_so);?>
+                                            <?= htmlentities($row->nama_dealer);?>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php } ?> -->
                             </tbody>
                         </table>
                     </div>
@@ -221,42 +167,13 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    const to_performa_produk = () => {
-        window.location.href = "<?= site_url('performa_produk')?>"
+    const to_performa_profit = () => {
+        window.location.href = "<?= site_url('profit')?>"
     }
     let num_abv = document.querySelectorAll('.get_val');
     num_abv.forEach((val) => {
         val.innerHTML = bFormatter(parseFloat(val.innerHTML));
     })
-    let setSubFilter = function(dataFilter) {
-        let filters = ["jenis_asset", "so", "jenis_customer", "jenis_pekerjaan", "dealer"]
-        let subFilters = {
-            'sub0': ["Pilih Sub-Filter"],
-            'sub1': ["New", "Second"],
-            'sub2': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
-                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
-            ],
-            'sub3': ["NONRO", "RO"],
-            'sub4': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"],
-            'sub5': ["PT Cipta Karya", "Tunas", "Agung Auto", "PT Ida", "PT Sukacita", "Benny Automotives",
-                "Kelapa Hijau", "PT Prakarsa", "Taskia Auto"
-            ]
-        }
-        if (dataFilter == "all") {
-            areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0);
-                subs.setAttribute("disabled", 'true');
-            })
-        }
-        filters.forEach((filter, idx) => {
-            if (dataFilter == filter) {
-                areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
-                    subs.removeAttribute("disabled");
-                })
-            }
-        })
-    }
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -268,69 +185,32 @@
         //mtd init
         $items_mtd = array();
         $lending_mtd = array();
-        $produk_mtd = array();
-        $counting_produk_mtd = array();
         //ytd init
         $items_ytd = array();
         $lending_ytd = array();
         $lending_last_ytd = array();
-        $produk_ytd = array();
-        $counting_produk_ytd = array();
-        foreach($graph_performa_product_month as $row) {
+        foreach($graph_performa_detail_month as $row) {
             $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> tgl_golive)) -> format('d M');
-            $lending_mtd[] = htmlentities($row -> mtd_lending);
+            $lending_mtd[] = htmlentities($row -> mtd_lending_amt);
         }
-        foreach($graph_performa_product_year as $row) {
+        foreach($graph_performa_detail_year as $row) {
             $items_ytd[] = htmlentities($row -> month);
-            $lending_ytd[] = htmlentities($row -> mtd_lending);
+            $lending_ytd[] = htmlentities($row -> mtd_lending_amt);
         }
-        foreach($graph_performa_product_last_year as $row) {
-            $lending_last_ytd[] = htmlentities($row -> mtd_lending);
-        }
-        foreach($count_produk_mtd as $row) {
-            $produk_mtd[] = htmlentities($row -> produk);
-            $counting_produk_mtd[] = htmlentities($row -> jml_produk);
-        }
-        foreach($count_produk_ytd as $row) {
-            $produk_ytd[] = htmlentities($row -> produk);
-            $counting_produk_ytd[] = htmlentities($row -> jml_produk);
+        foreach($graph_performa_detail_last_year as $row) {
+            $lending_last_ytd[] = htmlentities($row -> mtd_lending_amt);
         }
     ?>
     //mtd
     var fields_mtd = <?php echo json_encode($items_mtd) ?>;
     var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
-    var produk_mtd = <?php echo json_encode($produk_mtd) ?>;
-    var counting_produk_mtd = <?php echo json_encode($counting_produk_mtd) ?>;
     //ytd
     var fields_ytd = <?php echo json_encode($items_ytd) ?>;
     var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
     var lending_last_ytd = <?php echo json_encode($lending_last_ytd) ?>;
     var used_lending_last_ytd = lending_last_ytd.slice(0, fields_ytd.length)
-    var produk_ytd = <?php echo json_encode($produk_ytd) ?>;
-    var counting_produk_ytd = <?php echo json_encode($counting_produk_ytd) ?>;
-    // chart produk_detail mtd
-    var options_performa_produk_detail_mtd_2 = {
-        title: {
-            text: 'Produk Terlaku <?php echo Date("F Y");?>',
-            align: 'center'
-        },
-        series: counting_produk_mtd.map(e=>parseInt(e)),
-        chart:
-        {
-            height: 350,
-            type: 'pie',
-        },
-        legend:
-        {
-            position: 'bottom'
-        },
-        labels: produk_mtd,
-    };
-    var chart_performa_produk_detail_mtd_2 = new ApexCharts(document.querySelector("#performa_produk_detail_mtd_chart_2"),
-        options_performa_produk_detail_mtd_2);
-    chart_performa_produk_detail_mtd_2.render();
-    // performa produk detail mtd
-    var options_performa_produk_detail_mtd = {
+    // performa profit detail mtd
+    var options_performa_profit_detail_mtd = {
         series: [{
             name: 'Total Lending',
             data: lending_mtd.map(bFormatter)
@@ -422,33 +302,12 @@
             }
         }],
     };
-    var chart_performa_produk_detail_mtd = new ApexCharts(document.querySelector("#performa_produk_detail_mtd_chart"),
-        options_performa_produk_detail_mtd);
-    chart_performa_produk_detail_mtd.render();
+    var chart_performa_profit_detail_mtd = new ApexCharts(document.querySelector("#performa_profit_detail_mtd_chart"),
+        options_performa_profit_detail_mtd);
+    chart_performa_profit_detail_mtd.render();
 
-    // chart produk_detail ytd
-    var options_performa_produk_detail_ytd_2 = {
-        title: {
-            text: 'Produk Terlaku <?php echo Date("Y");?>',
-            align: 'center'
-        },
-        series: counting_produk_ytd.map(e=>parseInt(e)),
-        chart:
-        {
-            height: 350,
-            type: 'pie',
-        },
-        legend:
-        {
-            position: 'bottom'
-        },
-        labels: produk_ytd,
-    };
-    var chart_performa_produk_detail_ytd_2 = new ApexCharts(document.querySelector("#performa_produk_detail_ytd_chart_2"),
-        options_performa_produk_detail_ytd_2);
-    chart_performa_produk_detail_ytd_2.render();
-    // chart performa_produk_detail ytd
-    var options_performa_produk_detail_ytd = {
+    // chart performa_profit_detail ytd
+    var options_performa_profit_detail_ytd = {
         series: [{
             name: 'Total Lending ' + (new Date().getFullYear() - 1),
             type: 'column',
@@ -532,9 +391,9 @@
             }
         }],
     };
-    var chart_performa_produk_detail_ytd = new ApexCharts(document.querySelector("#performa_produk_detail_ytd_chart"),
-        options_performa_produk_detail_ytd);
-    chart_performa_produk_detail_ytd.render();
+    var chart_performa_profit_detail_ytd = new ApexCharts(document.querySelector("#performa_profit_detail_ytd_chart"),
+        options_performa_profit_detail_ytd);
+    chart_performa_profit_detail_ytd.render();
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -543,11 +402,11 @@
 <!-- ==================== -->
 <script defer>
     $(document).ready(function () {
-        $('#performa_produk_detail_mtd').DataTable({
+        $('#performa_profit_detail_mtd_table').DataTable({
             scrollX: true,
             "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
-        $('#performa_produk_detail_ytd').DataTable({
+        $('#performa_profit_detail_ytd_table').DataTable({
             scrollX: true,
             "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });

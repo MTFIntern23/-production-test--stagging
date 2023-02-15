@@ -2,6 +2,7 @@
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand', false);
+    sessionStorage.setItem('is_kecamatan', false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -284,6 +285,7 @@
                 enabled: true
             }
         },
+        // forceNiceScale: true,
         plotOptions: {
             bar: {
                 borderRadius: 5,
@@ -316,6 +318,9 @@
                 axisTicks: {
                     show: true,
                 },
+                forceNiceScale: true,
+                min: 0,
+                max: bFormatter(get_max_interval(aktual_mtd)),
                 axisBorder: {
                     show: true,
                     color: '#008FFB'
@@ -551,13 +556,13 @@
     $(document).ready(function () {
         $('#lending_table').DataTable({
             scrollX: true,
-            "lengthMenu": [[10, 15, 31], [10, 15, 'Show All']],
+            "lengthMenu": [[10, 15, 31], [10, 15, 'All']],
         });
         $('#lending_ytd_table').DataTable({
             scrollX: true,
             "lengthMenu": [
                 [10, 31, 61, 92, 122, 153, 183, 214, 244, 275, 305, 336, 366],
-                [10, 31, 61, 92, 122, 153, 183, 214, 244, 275, 305, 336, 'Show All'],
+                [10, 31, 61, 92, 122, 153, 183, 214, 244, 275, 305, 336, 'All'],
             ],
 
         });

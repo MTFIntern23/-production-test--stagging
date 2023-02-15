@@ -14,30 +14,11 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
-                <div class="row mb-4 ms-2 me-2">
-                    <div class="col">
-                        <div class="d-grid gap-2 d-md-block">
-                            <button id="btn-chart-mtd" class="badge btn bg-chart-active" onclick="show_mtd_chart()"
-                                type="button"><i class='bx bxs-color me-1'></i>Lending MTD</button>
-                            <button id="btn-chart-ytd" class="badge btn btn-secondary" onclick="show_ytd_chart()"
-                                type="button"><i class='bx bxs-color me-1'></i>Lending YTD</button>
-                        </div>
-                    </div>
-                </div>
                 <div id="chart_mtd" class="d-none">
                     <div class="row">
                         <div class="col">
                             <div class="ms-3 me-4 mb-4">
                                 <div id="cwo_monitoring_mtd_chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="chart_ytd" class="d-none">
-                    <div class="row">
-                        <div class="col">
-                            <div class="ms-3 me-4 mb-4">
-                                <div id="cwo_monitoring_ytd_chart"></div>
                             </div>
                         </div>
                     </div>
@@ -60,76 +41,75 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $persentasi_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $persentasi_ytd = array();
+        $persentasi_last_ytd = array();
+        foreach($performa_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
+            $persentasi_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($performa_year as $row) {
+            $items_ytd[] = htmlentities($row -> month);
+            $persentasi_ytd[] = htmlentities($row -> ytd_persentasi);
+        }
+        foreach($performa_last_year as $row) {
+            $persentasi_last_ytd[] = htmlentities($row -> ytd_persentasi);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var persentasi_mtd = <?php echo json_encode($persentasi_mtd) ?>;
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var persentasi_ytd = <?php echo json_encode($persentasi_ytd) ?>;
+    var persentasi_last_ytd = <?php echo json_encode($persentasi_last_ytd) ?>;
+    var used_persentasi_last_ytd = persentasi_last_ytd.slice(0, fields_ytd.length)
     // chart cwo_monitoring mtd
     var options_cwo_monitoring_mtd = {
-        series: [{
-            name: 'Website Blog',
-            type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-        }, {
-            name: 'Social Media',
-            type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
-        }],
-        chart: {
-            height: 500,
-            type: 'line',
-        },
-        stroke: {
-            width: [0, 4]
-        },
-        title: {
-            text: 'Traffic Sources'
-        },
-        dataLabels: {
-            enabled: true,
-            enabledOnSeries: [1]
-        },
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-        xaxis: {
-            type: 'datetime'
-        },
-        yaxis: [{
-            title: {
-                text: 'Website Blog',
-            },
-
-        }, {
-            opposite: true,
-            title: {
-                text: 'Social Media'
+        colors: [function({ value, seriesIndex, w }) {
+            if(value < 20){
+                return '#26E7A6'
+            }else if(value == 20){
+                return '#FEB830'
+            }else if(value >20){
+                return '#FF5870'
             }
-        }]
-    };
-    var chart_cwo_monitoring_mtd = new ApexCharts(document.querySelector("#cwo_monitoring_mtd_chart"),
-        options_cwo_monitoring_mtd);
-    chart_cwo_monitoring_mtd.render();
-
-    // chart cwo_monitoring ytd
-    var options_cwo_monitoring_ytd = {
+            
+        }],
         series: [{
-            name: 'Net Profit',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 56, 61, 58]
-        }, {
-            name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 87, 105, 91]
-        }, {
-            name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 35, 41, 36]
+            name: 'Persentase',
+            type: 'column',
+            data: persentasi_mtd
         }],
         chart: {
             type: 'bar',
-            height: 500
+            height: 450,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
+            }
         },
+        // forceNiceScale: true,
         plotOptions: {
             bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " %";
+            },
         },
         stroke: {
             show: true,
@@ -137,27 +117,60 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'],
+            categories: fields_mtd,
+            labels: {
+                style: {
+                    colors: '#000000',
+                }
+            },
         },
-        yaxis: {
-            title: {
-                text: '$ (thousands)'
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "% (Persen)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
             }
-        },
+        ],
         fill: {
             opacity: 1
         },
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " % (Persen)"
                 }
             }
-        }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    enabled: false,
+                },
+            }
+        }],
     };
-    var chart_cwo_monitoring_ytd = new ApexCharts(document.querySelector("#cwo_monitoring_ytd_chart"),
-        options_cwo_monitoring_ytd);
-    chart_cwo_monitoring_ytd.render();
+    var chart_cwo_monitoring_mtd = new ApexCharts(document.querySelector("#cwo_monitoring_mtd_chart"),
+        options_cwo_monitoring_mtd);
+    chart_cwo_monitoring_mtd.render();
 </script>
 <!-- ==================== -->
 <!-- ==================== -->

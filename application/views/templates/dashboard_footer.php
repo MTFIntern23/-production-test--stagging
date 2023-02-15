@@ -115,7 +115,7 @@
     const btn_detail_mtd = document.querySelectorAll('#to_detail_mtd')
     const btn_detail_ytd = document.querySelectorAll('#to_detail_ytd')
     //so detail
-    const to_detail_mtd = function (page) {
+    const to_detail_mtd = function (page,id=null) {
         sessionStorage.setItem("is_mtd", true);
         if (page == 'so') {
             window.location.href = '<?= base_url('performa_so_detail')?>'

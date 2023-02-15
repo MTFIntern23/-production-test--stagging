@@ -17,6 +17,10 @@
                 'title' => 'Performa SO | MyBranch by CPM',
                 'current_user'=>$this->auth_model->current_user(),
                 'current_cabang'=>$this->cabang_model->current_cabang(),
+                'performa_month'=>$this->cabang_model->performa_so('','curr_month',false),
+                'performa_last_month'=>$this->cabang_model->performa_so('','last_month',false),
+                'performa_year'=>$this->cabang_model->performa_so('','curr_year',false),
+                'performa_last_year'=>$this->cabang_model->performa_so('','last_year',false),
                 'identifier'=>'is_strategi_penjualan',
                 'submenu_identity'=>'is_performa_so',
             ];

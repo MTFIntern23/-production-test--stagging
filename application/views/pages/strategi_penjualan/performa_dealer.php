@@ -2,6 +2,7 @@
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand',false);
+    sessionStorage.setItem('is_kecamatan',false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -41,8 +42,7 @@
                                         <option value="so">SO</option>
                                         <option value="jenis_customer">Jenis
                                             Customer</option>
-                                        <option value="dealer">Dealer</option>
-                                        <option value="armo">ARMO</option>
+                                        <option value="jenis_pekerjaan">Jenis Pekerjaan</option>
                                     </select>
                                 </div>
                                 <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
@@ -85,56 +85,46 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Dealer</th>
-                                    <th>Lending MTD Des 22</th>
-                                    <th>Lending MTD Jan 23</th>
-                                    <th>Unit MTD Des 22</th>
-                                    <th>Unit MTD Jan 23</th>
+                                    <th>Lending MTD <span class="show_prev_month"></span> (M)</th>
+                                    <th>Lending MTD <span class="show_month"></span> (M)</th>
+                                    <th>Unit MTD <span class="show_prev_month"></span> (Unit)</th>
+                                    <th>Unit MTD <span class="show_month"></span> (Unit)</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Tunas</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>200</td>
-                                    <td>200</td>
-                                    <td>
-                                        <button id="to_detail_mtd" onclick="to_detail_mtd('dealer')" type="button"
-                                            class="btn_session badge btn btn-primary me-2"><i
-                                                class='bx bx-detail me-1'></i>
-                                            Detail</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Agung Auto</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>205</td>
-                                    <td>205</td>
-                                    <td>
-                                        <button id="to_detail_mtd" onclick="to_detail_mtd('dealer')" type="button"
-                                            class="btn_session badge btn btn-primary me-2"><i
-                                                class='bx bx-detail me-1'></i>
-                                            Detail</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>PT Cipta Karya</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>200</td>
-                                    <td>200</td>
-                                    <td>
-                                        <button id="to_detail_mtd" onclick="to_detail_mtd('dealer')" type="button"
-                                            class="btn_session badge btn btn-primary me-2"><i
-                                                class='bx bx-detail me-1'></i>
-                                            Detail</button>
-                                    </td>
-                                </tr>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($current_month_dealer as $key=>$row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_dealer);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($last_month_dealer[$key]->mtd_amt);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->mtd_amt);?>
+                                        </td>
+                                        <td >
+                                        <?= htmlentities($last_month_dealer[$key]->mtd_unit);?>
+                                        </td>
+                                        <td >
+                                            <?= htmlentities($row->mtd_unit);?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo base_url();?>performa_dealer_detail/<?php echo $this->security_idx->encrypt_url($row->id_dealer);?>"
+                                                onclick="sessionStorage.setItem('is_mtd', true);">
+                                                <button id="to_detail_mtd" type="button"
+                                                    class="btn_session badge btn btn-primary me-2"><i
+                                                        class='bx bx-detail me-1'></i>
+                                                    Detail</button></a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -157,54 +147,44 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Dealer</th>
-                                    <th>Lending YTD 2022</th>
-                                    <th>Lending YTD 2023</th>
-                                    <th>Unit YTD 2022</th>
-                                    <th>Unit YTD 2023</th>
+                                    <th>Lending YTD <span class="show_prev_year"></span> </th>
+                                    <th>Lending YTD <span class="show_year"></span> </th>
+                                    <th>Unit YTD <span class="show_prev_year"></span> </th>
+                                    <th>Unit YTD <span class="show_year"></span> </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Tunas YTD</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>200</td>
-                                    <td>200</td>
-                                    <td>
-                                        <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('dealer')"
-                                            class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                            Detail</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Agung Auto</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>200</td>
-                                    <td>200</td>
-                                    <td>
-                                        <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('dealer')"
-                                            class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                            Detail</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>PT Cipta Karya</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>Rp 2,000,000,000</td>
-                                    <td>200</td>
-                                    <td>200</td>
-                                    <td> <button type="button" id="to_detail_ytd" onclick="to_detail_ytd('dealer')"
-                                            class="btn_session badge btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#modalEdit"><i class='bx bx-detail me-1'></i>
-                                            Detail</button></td>
-                                </tr>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($current_year_dealer as $key=>$row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_dealer);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($last_year_dealer[$key]->mtd_amt);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->mtd_amt);?>
+                                        </td>
+                                        <td >
+                                        <?= htmlentities($last_year_dealer[$key]->mtd_unit);?>
+                                        </td>
+                                        <td >
+                                            <?= htmlentities($row->mtd_unit);?>
+                                        </td>
+                                        <td> <a href="<?php echo base_url();?>performa_dealer_detail/<?php echo $this->security_idx->encrypt_url($row->id_dealer);?>"
+                                            onclick="sessionStorage.setItem('is_mtd', false);">
+                                            <button id="to_detail_ytd" type="button"
+                                                class="btn_session badge btn btn-primary me-2"><i
+                                                    class='bx bx-detail me-1'></i>
+                                                Detail</button></a></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -220,26 +200,49 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    let num_abv = document.querySelectorAll('.get_val');
+    let months_field = document.querySelectorAll('.show_month');
+    let months_prev_field = document.querySelectorAll('.show_prev_month');
+    let years_field = document.querySelectorAll('.show_year');
+    let years_prev_field = document.querySelectorAll('.show_prev_year');
+    num_abv.forEach((val) => {
+        val.innerHTML = bFormatter(parseFloat(val.innerHTML));
+    })
+    months_field.forEach((field,idx)=>{
+        field.innerHTML=month_name(new Date().getMonth()+1) + ' '+ (new Date().getFullYear());
+        if(new Date().getMonth()==0){
+            months_prev_field[idx].innerHTML=month_name(12) + ' '+ (new Date().getFullYear()-1);
+        }else{
+            months_prev_field[idx].innerHTML=month_name(new Date().getMonth()) + ' '+ (new Date().getFullYear());
+        }
+    })
+    years_field.forEach((field,idx)=>{
+        field.innerHTML=new Date().getFullYear();
+        years_prev_field[idx].innerHTML=new Date().getFullYear()-1;
+    })
     let setSubFilter = function(dataFilter) {
-        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "dealer", "armo"]
+        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "jenis_pekerjaan"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': ["test1", "test2"],
-            'sub2': ["Motor", "Mobil"],
-            'sub3': ["Ricky", "Hilda"],
-            'sub4': ["New", "Old"],
-            'sub5': ["Tunas Toyota", "Mugen Honda"],
-            'sub6': ["Pique", "CR", "Messi"],
+            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
+                "Reguler Fleet"
+            ],
+            'sub2': ["New", "Second"],
+            'sub3': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
+                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
+            ],
+            'sub4': ["NONRO", "RO"],
+            'sub5': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"]
         }
         if (dataFilter == "all") {
-            areaSubFilter.forEach((subs)=>{
+            areaSubFilter.forEach((subs) => {
                 subs.innerHTML = callSubFilter(subFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
-                areaSubFilter.forEach((subs)=>{
+                areaSubFilter.forEach((subs) => {
                     subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
@@ -253,46 +256,120 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $lending_mtd = array();
+        $lending_prev_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $lending_ytd = array();
+        $lending_prev_ytd = array();
+        foreach($current_month_dealer as $key=>$row) {
+            $items_mtd[] = htmlentities($row -> nama_dealer);
+            $lending_mtd[] = htmlentities($row -> mtd_amt);
+            $lending_prev_mtd[] = htmlentities($last_month_dealer[$key]->mtd_amt);
+        }
+        foreach($current_year_dealer as $key=>$row) {
+            $items_ytd[] = htmlentities($row -> nama_dealer);
+            $lending_ytd[] = htmlentities($row -> mtd_amt);
+            $lending_prev_ytd[] = htmlentities($last_year_dealer[$key]->mtd_amt);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
+    var lending_prev_mtd = <?php echo json_encode($lending_prev_mtd) ?>;
+    var keys_mtd = Array.from(lending_mtd.keys()).sort((a, b) => lending_mtd[b] - lending_mtd[a])
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
+    var lending_prev_ytd = <?php echo json_encode($lending_prev_ytd) ?>;
+    var keys_ytd = Array.from(lending_ytd.keys()).sort((a, b) => lending_ytd[b] - lending_ytd[a])
     // chart performa_dealer mtd
     var options_performa_dealer_mtd = {
         series: [{
-            name: 'Dealer MTD',
+            name: 'Lending ' + months_prev_field[0].innerHTML,
             type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            data: keys_mtd.map(i => lending_prev_mtd.map(bFormatter)[i]).slice(0,5)
         }, {
-            name: 'Social Media',
-            type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            name: 'Lending ' + months_field[0].innerHTML,
+            type: 'column',
+            data: keys_mtd.map(i => lending_mtd.map(bFormatter)[i]).slice(0,5)
         }],
         chart: {
             height: 350,
             type: 'line',
         },
-        stroke: {
-            width: [0, 4]
-        },
-        title: {
-            text: 'Traffic Sources'
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
         },
         dataLabels: {
             enabled: true,
-            enabledOnSeries: [1]
-        },
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-        xaxis: {
-            type: 'datetime'
-        },
-        yaxis: [{
-            title: {
-                text: 'Website Blog',
+            formatter: function (val) {
+                return val + " M";
             },
-
-        }, {
-            opposite: true,
-            title: {
-                text: 'Social Media'
+            // enabledOnSeries: [1,2]
+        },
+        stroke: {
+            width: [1, 1]
+        },
+        xaxis: {
+            categories:  keys_mtd.map(i => fields_mtd[i]).slice(0,5),
+            tooltip: {
+                enabled: false
             }
-        }]
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "Milyar (M)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
     };
 
     var chart_performa_dealer_mtd = new ApexCharts(document.querySelector("#performa_dealer_mtd_chart"),
@@ -302,80 +379,87 @@
     // chart performa_dealer ytd
     var options_performa_dealer_ytd = {
         series: [{
-            name: "Dealer YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-        },
-        {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-        }
-        ],
+            name: 'Lending ' + years_prev_field[0].innerHTML,
+            type: 'column',
+            data: keys_ytd.map(i => lending_prev_ytd.map(bFormatter)[i]).slice(0,5)
+        }, {
+            name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+            type: 'column',
+            data: keys_ytd.map(i => lending_ytd.map(bFormatter)[i]).slice(0,5)
+        }],
         chart: {
             height: 350,
             type: 'line',
-            zoom: {
-                enabled: false
-            },
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            // enabledOnSeries: [1,2]
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
-        },
-        title: {
-            text: 'Page Statistics',
-            align: 'left'
-        },
-        legend: {
-            tooltipHoverFormatter: function (val, opts) {
-                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-            }
-        },
-        markers: {
-            size: 0,
-            hover: {
-                sizeOffset: 6
-            }
+            width: [1, 1]
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: keys_ytd.map(i => fields_ytd[i]).slice(0,5),
+            tooltip: {
+                enabled: false
+            }
         },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "Milyar (M)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
         tooltip: {
-            y: [{
-                title: {
-                    formatter: function (val) {
-                        return val + " (mins)"
-                    }
-                }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val + " per session"
-                    }
-                }
-            },
-            {
-                title: {
-                    formatter: function (val) {
-                        return val;
-                    }
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
                 }
             }
-            ]
         },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
     };
     var chart_performa_dealer_ytd = new ApexCharts(document.querySelector("#performa_dealer_ytd_chart"),
         options_performa_dealer_ytd);
@@ -390,11 +474,11 @@
     $(document).ready(function () {
         $('#performa_dealer_ytd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });
         $('#performa_dealer_mtd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });
     });
 </script>

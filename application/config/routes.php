@@ -57,23 +57,24 @@ $route['translate_uri_dashes'] = FALSE;
 //strategi_penjualan
 $route['lending'] = 'strategi_penjualan/lending';
 $route['performa_so'] = 'strategi_penjualan/performa_so';
-$route['performa_so_detail'] = 'strategi_penjualan/performa_so_detail';
+$route['performa_so_detail/(:any)'] = 'strategi_penjualan/performa_so_detail';
+// $route['performa_so_detail/(:num)'] = 'performa_so_detail/index/$1';
 $route['performa_dealer'] = 'strategi_penjualan/performa_dealer';
-$route['performa_dealer_detail'] = 'strategi_penjualan/performa_dealer_detail';
+$route['performa_dealer_detail/(:any)'] = 'strategi_penjualan/performa_dealer_detail';
 $route['performa_produk'] = 'strategi_penjualan/performa_produk';
-$route['performa_produk_detail'] = 'strategi_penjualan/performa_produk_detail';
+$route['performa_produk_detail/(:any)'] = 'strategi_penjualan/performa_produk_detail';
 $route['history_assets'] = 'strategi_penjualan/history_assets';
-$route['history_assets_detail'] = 'strategi_penjualan/history_assets_detail';
-$route['history_assets_jbrand_detail'] = 'strategi_penjualan/history_assets_jbrand_detail';
+$route['history_assets_detail/(:any)'] = 'strategi_penjualan/history_assets_detail';
+$route['history_assets_jbrand_detail/(:any)'] = 'strategi_penjualan/history_assets_jbrand_detail';
 $route['segment_customer'] = 'strategi_penjualan/segment_customer';
 $route['profit'] = 'strategi_penjualan/profit';
 $route['customer_retention'] = 'strategi_penjualan/customer_retention';
 //strategi_collection
 $route['epd_monitoring'] = 'strategi_collection/epd_monitoring';
 $route['tod_monitoring'] = 'strategi_collection/tod_monitoring';
-$route['tod_monitoring_detail'] = 'strategi_collection/tod_monitoring_detail';
+$route['tod_monitoring_detail/(:any)'] = 'strategi_collection/tod_monitoring_detail';
 $route['npl_monitoring'] = 'strategi_collection/npl_monitoring';
 $route['cwo_monitoring'] = 'strategi_collection/cwo_monitoring';
 $route['performa_armo'] = 'strategi_collection/performa_armo';
-$route['performa_armo_detail'] = 'strategi_collection/performa_armo_detail';
+$route['performa_armo_detail/(:any)'] = 'strategi_collection/performa_armo_detail';
 

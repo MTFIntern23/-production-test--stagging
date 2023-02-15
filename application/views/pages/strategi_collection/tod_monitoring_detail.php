@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <h5 class="card-header text-dark fs-4 text-start" style="margin-bottom: -30px;">
-                    OD 1-30<b>
+                    OD <span class="get_od_status"><?= $performa_detail_month[0]->bucket_od;?></span><b>
                         <?= $current_cabang->nama_cabang;?>
                     </b><br>
                     <p style="font-size: 38px;margin-top:10px;"></p>
@@ -50,8 +50,9 @@
                                         <option value="so">SO</option>
                                         <option value="jenis_customer">Jenis
                                             Customer</option>
+                                        <option value="jenis_pekerjaan">Jenis Pekerjaan</option>
                                         <option value="dealer">Dealer</option>
-                                        <option value="armo">ARMO</option>
+                                        <option value="armo">Armo</option>
                                     </select>
                                 </div>
                                 <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
@@ -70,9 +71,16 @@
                 </div>
                 <!-- chart mtd -->
                 <div id="chart_mtd" class="d-none">
-                    <div class="row">
-                        <div class="col">
-                            <div class="ms-3 me-4 mb-4">
+                    <div class="row mb-4">
+                        <div
+                            class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
+                            <div class="ms-3 me-4 d-flex justify-content-center mt-3">
+                                <div id="tod_monitoring_detail_mtd_chart_2"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
+                            <div class="ms-3 me-4">
                                 <div id="tod_monitoring_detail_mtd_chart"></div>
                             </div>
                         </div>
@@ -86,94 +94,64 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Lending Amount</th>
-                                    <th>Tangga Aplikasi Masuk</th>
+                                    <th>Lending Amount (M)</th>
+                                    <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Nama SO</th>
                                     <th>Nama ARMO</th>
-                                    <th>OD</th>
-                                    <th>OSP</th>
+                                    <th>OD (M)</th>
+                                    <th>OSP (M)</th>
                                     <th>Angsuran</th>
-                                    <th>Angsuran Ke</th>
+                                    <th>Angsuran ke</th>
                                     <th>Tenor</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1 MTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 MTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 MTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 MTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 MTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
+                            <?php 
+                                    $no=1; 
+                                    foreach ($performa_detail_month as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->lending_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_so);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_armo);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->od);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->osp);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->instalment_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->instalment_number);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->tenor);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -182,9 +160,16 @@
                 <!-- / chart mtd -->
                 <!-- chart ytd -->
                 <div id="chart_ytd" class="d-none">
-                    <div class="row">
-                        <div class="col">
-                            <div class="ms-3 me-4 mb-4">
+                    <div class="row mb-4">
+                        <div
+                            class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
+                            <div class="ms-3 me-4 d-flex justify-content-center mt-3">
+                                <div id="tod_monitoring_detail_ytd_chart_2"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
+                            <div class="ms-3 me-4">
                                 <div id="tod_monitoring_detail_ytd_chart"></div>
                             </div>
                         </div>
@@ -198,94 +183,64 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
-                                    <th>Lending Amount</th>
-                                    <th>Tangga Aplikasi Masuk</th>
+                                    <th>Lending Amount (M)</th>
+                                    <th>Tanggal Aplikasi Masuk</th>
                                     <th>Tanggal Golive</th>
                                     <th>Nama SO</th>
                                     <th>Nama ARMO</th>
-                                    <th>OD</th>
-                                    <th>OSP</th>
+                                    <th>OD (M)</th>
+                                    <th>OSP (M)</th>
                                     <th>Angsuran</th>
-                                    <th>Angsuran Ke</th>
+                                    <th>Angsuran ke</th>
                                     <th>Tenor</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1 YTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 YTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 YTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 YTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
-                                <tr>
-                                    <td>1 YTD</td>
-                                    <td>Januari 2022</td>
-                                    <td>Ichitan</td>
-                                    <td>Rp 3,000,000</td>
-                                    <td>20 Januari 2023</td>
-                                    <td>22 Januari 2023</td>
-                                    <td>Ricky Rivaldo</td>
-                                    <td>ARMO</td>
-                                    <td>OD</td>
-                                    <td>OSP</td>
-                                    <td>3</td>
-                                    <td>8</td>
-                                    <td>Buroq</td>
-                                </tr>
+                            <?php 
+                                    $no=1; 
+                                    foreach ($performa_detail_year as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->lending_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_so);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_armo);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->od);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->osp);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->instalment_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->instalment_number);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->tenor);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -306,26 +261,40 @@
         window.location.href =
             "<?= site_url('tod_monitoring')?>"
     }
+    let num_abv = document.querySelectorAll('.get_val');
+    num_abv.forEach((val) => {
+        val.innerHTML = bFormatter(parseFloat(val.innerHTML));
+    })
+    var used_status_tod = ['Current','1-30','31-60','61-90','91-120','121-150','151-180']
+    var status_title = document.querySelector('.get_od_status')
+    status_title.innerHTML = used_status_tod[parseInt(status_title.innerHTML)]
     let setSubFilter = function(dataFilter) {
-        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "dealer", "armo"]
+        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "jenis_pekerjaan", "dealer", "armo"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': ["test1", "test2"],
-            'sub2': ["Motor", "Mobil"],
-            'sub3': ["Ricky", "Hilda"],
-            'sub4': ["New", "Old"],
-            'sub5': ["Tunas Toyota", "Mugen Honda"],
-            'sub6': ["Pique", "CR", "Messi"],
+            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
+                "Reguler Fleet"
+            ],
+            'sub2': ["New", "Second"],
+            'sub3': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
+                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
+            ],
+            'sub4': ["NONRO", "RO"],
+            'sub5': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"],
+            'sub6': ["PT Cipta Karya", "Tunas", "Agung Auto", "PT Ida", "PT Sukacita", "Benny Automotives",
+                "Kelapa Hijau", "PT Prakarsa", "Taskia Auto"
+            ],
+            'sub7': ["Hamid", "Mamat", "Toren", "Ciles", "Meng", "Oreo"]
         }
         if (dataFilter == "all") {
-            areaSubFilter.forEach((subs)=>{
+            areaSubFilter.forEach((subs) => {
                 subs.innerHTML = callSubFilter(subFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
-                areaSubFilter.forEach((subs)=>{
+                areaSubFilter.forEach((subs) => {
                     subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
@@ -339,83 +308,149 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $lending_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $lending_ytd = array();
+        $lending_last_ytd = array();
+        foreach($graph_performa_detail_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> tgl_golive)) -> format('d M');
+            $lending_mtd[] = htmlentities($row -> mtd_osp);
+        }
+        foreach($graph_performa_detail_year as $row) {
+            $items_ytd[] = htmlentities($row -> month);
+            $lending_ytd[] = htmlentities($row -> mtd_osp);
+        }
+        foreach($graph_performa_detail_last_year as $row) {
+            $lending_last_ytd[] = htmlentities($row -> mtd_osp);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
+    var lending_last_ytd = <?php echo json_encode($lending_last_ytd) ?>;
+    var used_lending_last_ytd = lending_last_ytd.slice(0, fields_ytd.length)
+
     // performa dealer detail mtd
     var options_tod_monitoring_detail_mtd = {
-        series: [{
-                name: "Dealer MTD Detaill",
-                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-            },
-            {
-                name: "Page Views",
-                data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-            },
-            {
-                name: 'Total Visits',
-                data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-            }
-        ],
+        title: {
+            text: 'OD <?php echo Date("F Y");?>',
+            align: 'center'
+        },
+        series: [1,2,3,4],
         chart: {
             height: 350,
-            type: 'line',
-            zoom: {
-                enabled: false
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
-        },
-        title: {
-            text: 'Page Statistics',
-            align: 'left'
+            type: 'pie',
         },
         legend: {
-            tooltipHoverFormatter: function(val, opts) {
-                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+            position: 'bottom'
+        },
+        labels: [1,2,3,4],
+    };
+    var chart_tod_monitoring_detail_mtd = new ApexCharts(document.querySelector("#tod_monitoring_detail_mtd_chart_2"),
+        options_tod_monitoring_detail_mtd);
+    chart_tod_monitoring_detail_mtd.render();
+
+    var options_tod_monitoring_detail_mtd = {
+        series: [{
+            name: 'Total OSP',
+            data: lending_mtd.map(bFormatter)
+        }],
+        chart: {
+            type: 'bar',
+            height: 350,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
             }
         },
-        markers: {
-            size: 0,
-            hover: {
-                sizeOffset: 6
+        // forceNiceScale: true,
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
             }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            style: {
+                fontSize: '8px',
+            },
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: fields_mtd,
+            labels: {
+                style: {
+                    colors: '#000000',
+                }
+            },
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "M (Milyar)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            }
+        ],
+        fill: {
+            opacity: 1
         },
         tooltip: {
-            y: [{
-                    title: {
-                        formatter: function(val) {
-                            return val + " (mins)"
-                        }
-                    }
-                },
-                {
-                    title: {
-                        formatter: function(val) {
-                            return val + " per session"
-                        }
-                    }
-                },
-                {
-                    title: {
-                        formatter: function(val) {
-                            return val;
-                        }
-                    }
+            x: {
+                formatter: function (val) {
+                    return val + " (Golive)"
                 }
-            ]
+            },
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
         },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    enabled: false,
+                },
+            }
+        }],
     };
     var chart_tod_monitoring_detail_mtd = new ApexCharts(document.querySelector("#tod_monitoring_detail_mtd_chart"),
         options_tod_monitoring_detail_mtd);
@@ -423,81 +458,107 @@
 
     // chart tod_monitoring_detail ytd
     var options_tod_monitoring_detail_ytd = {
+        title: {
+            text: 'OD <?php echo Date("F Y");?>',
+            align: 'center'
+        },
+        series: [1,2,3,4],
+        chart: {
+            height: 350,
+            type: 'pie',
+        },
+        legend: {
+            position: 'bottom'
+        },
+        labels: [1,2,3,4],
+    };
+    var chart_tod_monitoring_detail_ytd = new ApexCharts(document.querySelector("#tod_monitoring_detail_ytd_chart_2"),
+        options_tod_monitoring_detail_ytd);
+    chart_tod_monitoring_detail_ytd.render();
+
+    var options_tod_monitoring_detail_ytd = {
         series: [{
-                name: "Dealer YTD Detail",
-                data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
-            },
-            {
-                name: "Page Views",
-                data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-            },
-            {
-                name: 'Total Visits',
-                data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
-            }
-        ],
+            name: 'Total OSP ' + (new Date().getFullYear() - 1),
+            type: 'column',
+            data: used_lending_last_ytd.map(bFormatter)
+        }, {
+            name: 'Total OSP ' + (new Date().getFullYear()),
+            type: 'column',
+            data: lending_ytd.map(bFormatter)
+        }],
         chart: {
             height: 350,
             type: 'line',
-            zoom: {
-                enabled: false
-            },
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            // enabledOnSeries: [1,2]
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
-        },
-        title: {
-            text: 'Page Statistics',
-            align: 'left'
-        },
-        legend: {
-            tooltipHoverFormatter: function(val, opts) {
-                return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
-            }
-        },
-        markers: {
-            size: 0,
-            hover: {
-                sizeOffset: 6
-            }
+            width: [1, 1]
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: fields_ytd.map(month_name),
+            tooltip: {
+                enabled: false
+            }
         },
-        tooltip: {
-            y: [{
-                    title: {
-                        formatter: function(val) {
-                            return val + " (mins)"
-                        }
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
                     }
                 },
-                {
-                    title: {
-                        formatter: function(val) {
-                            return val + " per session"
-                        }
+                title: {
+                    text: "Pencapaian (Unit)",
+                    style: {
+                        color: '#008FFB',
                     }
                 },
-                {
-                    title: {
-                        formatter: function(val) {
-                            return val;
-                        }
-                    }
+                tooltip: {
+                    enabled: true
                 }
-            ]
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
         },
-        grid: {
-            borderColor: '#f1f1f1',
-        }
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
     };
     var chart_tod_monitoring_detail_ytd = new ApexCharts(document.querySelector("#tod_monitoring_detail_ytd_chart"),
         options_tod_monitoring_detail_ytd);
@@ -512,11 +573,11 @@
     $(document).ready(function() {
         $('#tod_monitoring_detail_mtd').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
         $('#tod_monitoring_detail_ytd').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
     });
 </script>

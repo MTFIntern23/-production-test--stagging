@@ -23,6 +23,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-4 ms-2 me-2">
+                    <div class="col">
+                        <div class="d-grid gap-2 d-md-block">
+                            <div class="row justify-content-sm-start">
+                                <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
+                                    style="margin-right: -15px;">
+                                    <select class="form-select" id='filter'
+                                        onchange="setSubFilter(this.options[this.selectedIndex].value)">
+                                        <option selected disabled>Pilih Filter</option>
+                                        <option value="all">All</option>
+                                        <option value="group_product">Group
+                                            Product</option>
+                                        <option value="jenis_asset">Jenis Assets</option>
+                                        <option value="so">SO</option>
+                                        <option value="jenis_pekerjaan">Jenis Pekerjaan</option>
+                                        <option value="dealer">Dealer</option>
+                                    </select>
+                                </div>
+                                <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
+                                    style="margin-right: -15px;">
+                                    <select class="form-select" id="sub-filter" disabled>
+                                        <option value="">Pilih Sub-Filter</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-warning btn-search" onclick="" type="button"><i
+                                            class='bx bx-search me-1'></i>Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="chart_mtd" class="d-none">
                     <div class="row mb-4">
                         <div
@@ -47,8 +79,9 @@
                                     <th>No</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
+                                    <th>Status</th>
                                     <th>Total RO</th>
-                                    <th>Total Lending Amount</th>
+                                    <th>Total Lending Amount (M)</th>
                                     <th>Total Jumlah Unit</th>
                                     <th>Tanggal Aplikasi Masuk Terakhir</th>
                                     <th>Tanggal Golive Terakhir</th>
@@ -56,61 +89,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Habibie</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>02/01/2023</td>
-                                    <td>05/01/2023</td>
-                                    <td>Tunas Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2</td>
-                                    <td>Ainun</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>02/01/2023</td>
-                                    <td>05/01/2023</td>
-                                    <td>Tunas Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>German</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>05/01/2023</td>
-                                    <td>07/01/2023</td>
-                                    <td>Mugen Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>Gatot</td>
-                                    <td>18M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>08/01/2023</td>
-                                    <td>09/01/2023</td>
-                                    <td>Tunas Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>Kaca</td>
-                                    <td>14M</td>
-                                    <td>12M</td>
-                                    <td>387</td>
-                                    <td>10/01/2023</td>
-                                    <td>15/01/2023</td>
-                                    <td>Mugen Honda</td>
-                                </tr>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($cust_retention_month as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_status_ro_mtd">
+                                            <?= htmlentities($row->status_ro);?>
+                                        </td>
+                                        <td >
+                                            <?= htmlentities($row->total_ro);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->mtd_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->mtd_unit);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_dealer);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -140,8 +154,9 @@
                                     <th>No YTD</th>
                                     <th>No Aplikasi</th>
                                     <th>Nama Debitur</th>
+                                    <th>Status</th>
                                     <th>Total RO</th>
-                                    <th>Total Lending Amount</th>
+                                    <th>Total Lending Amount (M)</th>
                                     <th>Total Jumlah Unit</th>
                                     <th>Tanggal Aplikasi Masuk Terakhir</th>
                                     <th>Tanggal Golive Terakhir</th>
@@ -149,61 +164,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>Habibie</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>02/01/2023</td>
-                                    <td>05/01/2023</td>
-                                    <td>Tunas Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>2</td>
-                                    <td>Ainun</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>02/01/2023</td>
-                                    <td>05/01/2023</td>
-                                    <td>Tunas Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>German</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>05/01/2023</td>
-                                    <td>07/01/2023</td>
-                                    <td>Mugen Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>Gatot</td>
-                                    <td>18M</td>
-                                    <td>10M</td>
-                                    <td>387</td>
-                                    <td>08/01/2023</td>
-                                    <td>09/01/2023</td>
-                                    <td>Tunas Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>Kaca</td>
-                                    <td>14M</td>
-                                    <td>12M</td>
-                                    <td>387</td>
-                                    <td>10/01/2023</td>
-                                    <td>15/01/2023</td>
-                                    <td>Mugen Honda</td>
-                                </tr>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($cust_retention_year as $row) { ?>
+                                    <tr>
+                                        <td>
+                                            <?= $no++;?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->no_aplikasi);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_cust);?>
+                                        </td>
+                                        <td class="get_status_ro_ytd">
+                                            <?= htmlentities($row->status_ro);?>
+                                        </td>
+                                        <td >
+                                            <?= htmlentities($row->total_ro);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->mtd_amt);?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->mtd_unit);?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_appin))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= DateTime::createFromFormat('Y-m-d h:i:s', htmlentities($row->tgl_golive))->format('d M Y');?>
+                                        </td>
+                                        <td>
+                                            <?= htmlentities($row->nama_dealer);?>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -219,7 +215,67 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    //here
+    let num_abv = document.querySelectorAll('.get_val');
+    let status_ro_mtd = document.querySelectorAll('.get_status_ro_mtd');
+    let status_ro_ytd = document.querySelectorAll('.get_status_ro_ytd');
+    <?php
+        $status_ro_mtd = array();
+        $status_ro_ytd = array();
+        foreach($cust_retention_month as $row) {
+            $status_ro_mtd[] = htmlentities($row -> status_ro);
+        }
+        foreach($cust_retention_year as $row) {
+            $status_ro_ytd[] = htmlentities($row -> status_ro);
+        }
+    ?>
+    function name_status(val){
+        val=='1'?val = "RO":val = "NON"
+        return val
+    }
+    let ro_mtd = <?php echo json_encode($status_ro_mtd) ?>;
+    let ro_ytd = <?php echo json_encode($status_ro_ytd) ?>;
+    let used_ro_mtd=ro_mtd.map(name_status);
+    let used_ro_ytd=ro_ytd.map(name_status);
+    status_ro_mtd.forEach((val,idx)=>{
+        val.innerHTML = used_ro_mtd[idx]
+    })
+    status_ro_ytd.forEach((val,idx)=>{
+        val.innerHTML = used_ro_ytd[idx]
+    })
+    num_abv.forEach((val) => {
+        val.innerHTML = bFormatter(parseFloat(val.innerHTML));
+    })
+    let setSubFilter = function(dataFilter) {
+        let filters = ["group_product", "jenis_asset", "so", "jenis_pekerjaan", "dealer"]
+        let subFilters = {
+            'sub0': ["Pilih Sub-Filter"],
+            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
+                "Reguler Fleet"
+            ],
+            'sub2': ["New", "Second"],
+            'sub3': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
+                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
+            ],
+            'sub4': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"],
+            'sub5': ["PT Cipta Karya", "Tunas", "Agung Auto", "PT Ida", "PT Sukacita", "Benny Automotives",
+                "Kelapa Hijau", "PT Prakarsa", "Taskia Auto"
+            ]
+        }
+        if (dataFilter == "all") {
+            areaSubFilter.forEach((subs) => {
+                subs.innerHTML = callSubFilter(subFilters.sub0);
+                subs.setAttribute("disabled", 'true');
+            })
+        }
+        filters.forEach((filter, idx) => {
+            if (dataFilter == filter) {
+                areaSubFilter.forEach((subs) => {
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
+                    subs.removeAttribute("disabled");
+                })
+            }
+        })
+    }
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -227,13 +283,75 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+        //mtd init
+        $items_mtd = array();
+        $lending_mtd = array();
+        $lending_mtd_0 = array();
+        $count_ro_mtd = array();
+        //ytd init
+        $items_ytd = array();
+        $lending_ytd = array();
+        $lending_ytd_0 = array();
+        $lending_last_ytd = array();
+        $lending_last_ytd_0 = array();
+        $count_ro_ytd = array();
+        foreach($graph_cust_retention_month as $row) {
+            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> tgl_golive)) -> format('d M');
+            $lending_mtd[] = htmlentities($row -> mtd_amt);
+        }
+        foreach($graph_cust_retention_month_0 as $row) {
+            $lending_mtd_0[] = htmlentities($row -> mtd_amt);
+        }
+        foreach($graph_cust_retention_year as $row) {
+            $items_ytd[] = htmlentities($row -> month);
+            $lending_ytd[] = htmlentities($row -> mtd_amt);
+        }
+        foreach($graph_cust_retention_year_0 as $row) {
+            $lending_ytd_0[] = htmlentities($row -> mtd_amt);
+        }
+        foreach($graph_cust_retention_last_year as $row) {
+            $lending_last_ytd[] = htmlentities($row -> mtd_amt);
+        }
+        foreach($graph_cust_retention_last_year_0 as $row) {
+            $lending_last_ytd_0[] = htmlentities($row -> mtd_amt);
+        }
+        foreach($get_ro_mtd as $row) {
+            $count_ro_mtd[] = htmlentities($row -> status_ro);
+        }
+        foreach($get_ro_ytd as $row) {
+            $count_ro_ytd[] = htmlentities($row -> status_ro);
+        }
+    ?>
+    //mtd
+    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
+    var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
+    var lending_mtd_0 = <?php echo json_encode($lending_mtd_0) ?>;
+    var count_ro_mtd =<?php echo json_encode($count_ro_mtd) ?>;
+    //ytd
+    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
+    var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
+    var lending_ytd_0 = <?php echo json_encode($lending_ytd_0) ?>;
+    var lending_last_ytd = <?php echo json_encode($lending_last_ytd) ?>;
+    var lending_last_ytd_0 = <?php echo json_encode($lending_last_ytd_0) ?>;
+    var used_lending_last_ytd = lending_last_ytd.slice(0, fields_ytd.length)
+    var used_lending_last_ytd_0 = lending_last_ytd_0.slice(0, fields_ytd.length)
+    var count_ro_ytd =<?php echo json_encode($count_ro_ytd) ?>;
+    var mtd_ro = [0,0]
+    var ytd_ro = [0,0]
+    count_ro_mtd.forEach((val)=>{
+        val=='1'?mtd_ro[0]++:mtd_ro[1]++
+    })
+    count_ro_ytd.forEach((val)=>{
+        val=='1'?ytd_ro[0]++:ytd_ro[1]++
+    })
     // chart customer_retention mtd
     var options_customer_retention_mtd = {
         title: {
-            text: 'MTD <?php echo Date("F Y");?>',
+            text: 'Status <?php echo Date("F Y");?>',
             align: 'center'
         },
-        series: [44, 55, 13, 43],
+        series: mtd_ro,
         chart:
         {
             height: 350,
@@ -243,7 +361,7 @@
         {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Total RO', 'Total non-RO'],
     };
     var chart_customer_retention_mtd = new ApexCharts(document.querySelector("#customer_retention_mtd_chart"),
         options_customer_retention_mtd);
@@ -252,43 +370,107 @@
     // chart customer_retention mtd
     var options_customer_retention_mtd_2 = {
         series: [{
-            name: 'Website Blog',
+            name: 'Total Lending RO',
             type: 'column',
-            data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            data: lending_mtd.map(bFormatter)
         }, {
-            name: 'Social Media',
-            type: 'line',
-            data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+            name: 'Total Lending non-RO',
+            type: 'column',
+            data: lending_mtd_0.map(bFormatter)
         }],
         chart: {
+            type: 'bar',
             height: 350,
-            type: 'line',
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
+            }
         },
-        stroke: {
-            width: [0, 4]
-        },
-        title: {
-            text: 'Traffic Sources'
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
         },
         dataLabels: {
             enabled: true,
-            enabledOnSeries: [1]
-        },
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-        xaxis: {
-            type: 'datetime'
-        },
-        yaxis: [{
-            title: {
-                text: 'Website Blog',
+            formatter: function (val) {
+                return val + " M";
             },
-
-        }, {
-            opposite: true,
-            title: {
-                text: 'Social Media'
+            style: {
+                fontSize: '8px',
+            },
+            // enabledOnSeries: [1,2]
+        },
+        stroke: {
+            width: [1, 1]
+        },
+        xaxis: {
+            categories: fields_mtd,
+            labels: {
+                style: {
+                    colors: '#000000',
+                }
+            },
+        },
+        yaxis: [
+            {
+                forceNiceScale: true,
+                min: 0,
+                max: bFormatter(get_max_interval(lending_mtd)),
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "Pencapaian (Unit)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            x: {
+                formatter: function (val) {
+                    return val + " (Golive)"
+                }
+            },
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
             }
-        }]
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    enabled: false,
+                },
+            }
+        }],
     };
     var chart_customer_retention_mtd_2 = new ApexCharts(document.querySelector("#customer_retention_mtd_chart_2"),
         options_customer_retention_mtd_2);
@@ -297,21 +479,20 @@
     // chart customer_retention ytd
     var options_customer_retention_ytd = {
         title: {
-            text: 'YTD <?php echo Date("F Y");?>',
+            text: 'Status <?php echo Date("Y");?>',
             align: 'center'
         },
-        series: [44, 55, 13, 43],
+        series: ytd_ro,
         chart:
         {
             height: 350,
-            // width: 400,
             type: 'pie',
         },
         legend:
         {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Total RO', 'Total non-RO'],
     };
     var chart_customer_retention_ytd = new ApexCharts(document.querySelector("#customer_retention_ytd_chart"),
         options_customer_retention_ytd);
@@ -320,52 +501,92 @@
     // chart customer_retention ytd
     var options_customer_retention_ytd_2 = {
         series: [{
-            name: 'YTD <?php echo Date("F Y");?>',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+            name: 'Total Lending RO ' + new Date().getFullYear() + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+            type: 'column',
+            data: lending_ytd.map(bFormatter)
+        },
+        {
+            name: 'Total Lending RO ' + (new Date().getFullYear() - 1),
+            type: 'line',
+            data: used_lending_last_ytd.map(bFormatter)
+        },
+        {
+            name: 'Total Lending non-RO ' + new Date().getFullYear() + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+            type: 'column',
+            data: lending_ytd_0.map(bFormatter)
         }, {
-            name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        }, {
-            name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+            name: 'Total Lending non-RO ' + (new Date().getFullYear() - 1),
+            type: 'line',
+            data: used_lending_last_ytd_0.map(bFormatter)
         }],
         chart: {
-            type: 'bar',
-            height: 350
+            height: 350,
+            type: 'line',
         },
         plotOptions: {
             bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        xaxis: {
-            categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        },
-        yaxis: {
-            title: {
-                text: '$ (thousands)'
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
             }
         },
-        fill: {
-            opacity: 1
+        dataLabels: {
+            enabled: true,
         },
+        stroke: {
+            width: [1, 4, 1, 4],
+            // width: [1,1,4],
+        },
+        xaxis: {
+            categories: fields_ytd.map(month_name),
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "(Unit)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " (Unit)"
                 }
             }
-        }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
+
     };
     var chart_customer_retention_ytd_2 = new ApexCharts(document.querySelector("#customer_retention_ytd_chart_2"),
         options_customer_retention_ytd_2);
@@ -380,11 +601,11 @@
     $(document).ready(function () {
         $('#customer_retention_ytd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
         $('#customer_retention_mtd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });
     });
 </script>

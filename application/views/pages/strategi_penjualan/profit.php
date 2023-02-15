@@ -1,7 +1,8 @@
 <!-- Content -->
 <script>
-       // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_jbrand',false);
+    // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
+    sessionStorage.setItem('is_jbrand', false);
+    sessionStorage.setItem('is_kecamatan', false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -21,14 +22,30 @@
                                 type="button"><i class='bx bxs-color me-1'></i>Lending MTD</button>
                             <button id="btn-chart-ytd" class="badge btn btn-secondary" onclick="show_ytd_chart()"
                                 type="button"><i class='bx bxs-color me-1'></i>Lending YTD</button>
+                            <!-- onclick="show_komponen_chart()" -->
                         </div>
                     </div>
                 </div>
                 <div id="chart_mtd">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-lg-3">
                             <div class="ms-2 me-4 mb-4">
-                                <div id="profit_mtd_chart"></div>
+                                <div id="profit_mtd_chart_nii"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ms-2 me-4 mb-4">
+                                <div id="profit_mtd_chart_feebased"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ms-2 me-4 mb-4">
+                                <div id="profit_mtd_chart_coc"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ms-2 me-4 mb-4">
+                                <div id="profit_mtd_chart_overheadexp"></div>
                             </div>
                         </div>
                     </div>
@@ -40,55 +57,37 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Komponen Profit</th>
-                                    <th>Profit MTD ...-...</th>
-                                    <th>Est Profit MTD ...-...</th>
-                                    <th>Est Profit V2 MTD ...-...</th>
-                                    <th>Simulasi Profit V2 MTD ...-...</th>
+                                    <th>Profit <span class="show_prev_month"></span> (M)</th>
+                                    <th>Profit <span class="show_month"></span> (M)</th>
+                                    <!-- <th>Est Profit V2 <span class="show_month"></span> (M)</th>
+                                    <th>Simulasi Profit V2 <span class="show_month"></span> (M)</th> -->
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($current_month_profit as $key=>$row) { ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
+                                    <td>
+                                        <?= $no++;?>
+                                    </td>
+                                    <td>
+                                        <?= htmlentities($row->komponen_profit);?>
+                                    </td>
+                                    <td class="get_val">
+                                        <?= htmlentities($last_month_profit[$key]->profit);?>
+                                    </td>
+                                    <td class="get_val">
+                                        <?= htmlentities($row->profit);?>
+                                    </td>
+                                    <!-- <td class="get_val">
+                                            <?= htmlentities($row->profit_v2);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->sim_profit);?>
+                                        </td> -->
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
-                                <tr>
-
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
-                                <tr>
-
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -96,9 +95,24 @@
                 <!-- /datatables -->
                 <div id="chart_ytd" class="d-none">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-lg-3">
                             <div class="ms-2 me-4 mb-4">
-                                <div id="profit_ytd_chart"></div>
+                                <div id="profit_ytd_chart_nii"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ms-2 me-4 mb-4">
+                                <div id="profit_ytd_chart_feebased"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ms-2 me-4 mb-4">
+                                <div id="profit_ytd_chart_coc"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="ms-2 me-4 mb-4">
+                                <div id="profit_ytd_chart_overheadexp"></div>
                             </div>
                         </div>
                     </div>
@@ -110,53 +124,38 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Komponen Profit</th>
-                                    <th>Profit MTD ...-...</th>
-                                    <th>Est Profit MTD ...-...</th>
-                                    <th>Est Profit V2 MTD ...-...</th>
-                                    <th>Simulasi Profit V2 MTD ...-...</th>
+                                    <th>Profit YTD <span class="show_prev_year"> </span></th>
+                                    <th>Profit YTD <span class="show_year"> </span></th>
+                                    <!-- <th>Est Profit V2 YTD <span class="show_year"> </span></th>
+                                    <th>Simulasi Profit V2 YTD <span class="show_year"> </span></th> -->
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php 
+                                    $no=1; 
+                                    foreach ($current_year_profit as $key=>$row) { ?>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
+                                    <td>
+                                        <?= $no++;?>
+                                    </td>
+                                    <td>
+                                        <?= htmlentities($row->komponen_profit);?>
+                                    </td>
+                                    <td class="get_val">
+                                        <?php 
+                                        echo htmlentities($last_year_profit[$key]->profit);?>
+                                    </td>
+                                    <td class="get_val">
+                                        <?= htmlentities($row->profit);?>
+                                    </td>
+                                    <!-- <td class="get_val">
+                                            <?= htmlentities($row->profit_v2);?>
+                                        </td>
+                                        <td class="get_val">
+                                            <?= htmlentities($row->sim_profit);?>
+                                        </td> -->
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Januari 2022</td>
-                                    <td>20M</td>
-                                    <td>19M</td>
-                                    <td>10M</td>
-                                    <td>65.6%</td>
-                                </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -172,7 +171,33 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    //here
+    //get date bug
+    var now_month = month_name(new Date().getMonth() + 1) + ' ' + (new Date().getFullYear());
+    var prev_month;
+    var now_year = month_name(new Date().getMonth()+1) + ' ' + (new Date().getFullYear())
+    var prev_year = month_name(new Date().getMonth()+1) + ' ' + (new Date().getFullYear()-1)
+    if (new Date().getMonth() == 0) {
+        prev_month = month_name((12)) + ' ' + (new Date().getFullYear() - 1);
+    } else {
+        prev_month = month_name(new Date().getMonth()) + ' ' + (new Date().getFullYear());
+    }
+    //config global
+    let num_abv = document.querySelectorAll('.get_val');
+    let months_field = document.querySelectorAll('.show_month');
+    let months_prev_field = document.querySelector('.show_prev_month');
+    let years_field = document.querySelectorAll('.show_year');
+    let years_prev_field = document.querySelector('.show_prev_year');
+    num_abv.forEach((val) => {
+        val.innerHTML = bFormatter(parseFloat(val.innerHTML));
+    })
+    months_field.forEach((field, idx) => {
+        field.innerHTML = now_month
+    })
+    months_prev_field.innerHTML = prev_month
+    years_field.forEach((fieldz, idx) => {
+        fieldz.innerHTML = month_name(new Date().getMonth()+1)+' '+(new Date().getFullYear())
+    })
+    years_prev_field.innerHTML = month_name(new Date().getMonth()+1)+' '+(new Date().getFullYear() - 1)
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -180,17 +205,102 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
+    <?php
+    //mtd init
+    $nii_profit_mtd = array();
+    $feebased_profit_mtd = array();
+    $coc_profit_mtd = array();
+    $exp_profit_mtd = array();
+    $nii_profit_prev_mtd = array();
+    $feebased_profit_prev_mtd = array();
+    $coc_profit_prev_mtd = array();
+    $exp_profit_prev_mtd = array();
+    //ytd init
+    $nii_profit_ytd = array();
+    $feebased_profit_ytd = array();
+    $coc_profit_ytd = array();
+    $exp_profit_ytd = array();
+    $nii_profit_prev_ytd = array();
+    $feebased_profit_prev_ytd = array();
+    $coc_profit_prev_ytd = array();
+    $exp_profit_prev_ytd = array();
+    foreach($nii_current_month_profit as $key=> $row) {
+        $nii_profit_mtd[] = htmlentities($row -> profit);
+        $nii_profit_prev_mtd[] = htmlentities($nii_last_month_profit[$key] -> profit);
+    }
+    foreach($feebased_current_month_profit as $key=> $row) {
+        $feebased_profit_mtd[] = htmlentities($row -> profit);
+        $feebased_profit_prev_mtd[] = htmlentities($feebased_last_month_profit[$key] -> profit);
+    }
+    foreach($coc_current_month_profit as $key=> $row) {
+        $coc_profit_mtd[] = htmlentities($row -> profit);
+        $coc_profit_prev_mtd[] = htmlentities($coc_last_month_profit[$key] -> profit);
+    }
+    foreach($exp_current_month_profit as $key=> $row) {
+        $exp_profit_mtd[] = htmlentities($row -> profit);
+        $exp_profit_prev_mtd[] = htmlentities($exp_last_month_profit[$key] -> profit);
+    }
+    foreach($nii_current_year_profit as $key=> $row) {
+        $nii_profit_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($nii_last_year_profit as $key=> $row) {
+        $nii_profit_prev_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($feebased_current_year_profit as $key=> $row) {
+        $feebased_profit_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($feebased_last_year_profit as $key=> $row) {
+        $feebased_profit_prev_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($coc_current_year_profit as $key=> $row) {
+        $coc_profit_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($coc_last_year_profit as $key=> $row) {
+        $coc_profit_prev_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($exp_current_year_profit as $key=> $row) {
+        $exp_profit_ytd[] = htmlentities($row -> profit);
+    }
+    foreach($exp_last_year_profit as $key=> $row) {
+        $exp_profit_prev_ytd[] = htmlentities($row -> profit);
+    }
+    ?>
+    //mtd
+    var nii_profit_mtd = <?php echo json_encode($nii_profit_mtd) ?>;
+    var feebased_profit_mtd = <?php echo json_encode($feebased_profit_mtd) ?>;
+    var coc_profit_mtd = <?php echo json_encode($coc_profit_mtd) ?>;
+    var exp_profit_mtd = <?php echo json_encode($exp_profit_mtd) ?>;
+    var nii_profit_prev_mtd = <?php echo json_encode($nii_profit_prev_mtd) ?>;
+    var feebased_profit_prev_mtd = <?php echo json_encode($feebased_profit_prev_mtd) ?>;
+    var coc_profit_prev_mtd = <?php echo json_encode($coc_profit_prev_mtd) ?>;
+    var exp_profit_prev_mtd = <?php echo json_encode($exp_profit_prev_mtd) ?>;
+    //ytd
+    var nii_profit_ytd = <?php echo json_encode($nii_profit_ytd) ?>;
+    var feebased_profit_ytd = <?php echo json_encode($feebased_profit_ytd) ?>;
+    var coc_profit_ytd = <?php echo json_encode($coc_profit_ytd) ?>;
+    var exp_profit_ytd = <?php echo json_encode($exp_profit_ytd) ?>;
+    var nii_profit_prev_ytd = <?php echo json_encode($nii_profit_prev_ytd) ?>;
+    var feebased_profit_prev_ytd = <?php echo json_encode($feebased_profit_prev_ytd) ?>;
+    var coc_profit_prev_ytd = <?php echo json_encode($coc_profit_prev_ytd) ?>;
+    var exp_profit_prev_ytd = <?php echo json_encode($exp_profit_prev_ytd) ?>;
     // chart profit mtd
-    var options_profit_mtd = {
+    var options_profit_mtd_nii = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value <nii_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+        }],
+        title:{
+            text:"NII",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
         series: [{
-            name: 'Net Profit',
-            data: [44, 55, 57, 56, 61, 58, 63]
-        }, {
-            name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91]
-        }, {
-            name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52]
+            name: 'Profit',
+            type: 'column',
+            data: [nii_profit_prev_mtd.map(bFormatter)[0],nii_profit_mtd.map(bFormatter)[0]]
         }],
         chart: {
             type: 'bar',
@@ -198,13 +308,18 @@
         },
         plotOptions: {
             bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
         },
         stroke: {
             show: true,
@@ -212,11 +327,11 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            categories: [prev_month,now_month],
         },
         yaxis: {
             title: {
-                text: '$ (thousands)'
+                text: 'M (Milyar)'
             }
         },
         fill: {
@@ -225,25 +340,226 @@
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " M (Milyar)"
                 }
             }
         }
     };
-    var chart_profit_mtd = new ApexCharts(document.querySelector("#profit_mtd_chart"), options_profit_mtd);
-    chart_profit_mtd.render();
+    var chart_profit_mtd_nii = new ApexCharts(document.querySelector("#profit_mtd_chart_nii"), options_profit_mtd_nii);
+    chart_profit_mtd_nii.render();
+
+    var options_profit_mtd_feebased = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value <feebased_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+        }],
+        title:{
+            text:"Feebased",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
+        series: [{
+            name: 'Profit',
+            type: 'column',
+            data: [feebased_profit_prev_mtd.map(bFormatter)[0],feebased_profit_mtd.map(bFormatter)[0]]
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: [prev_month,now_month],
+        },
+        yaxis: {
+            title: {
+                text: 'M (Milyar)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        }
+    };
+    var chart_profit_mtd_feebased = new ApexCharts(document.querySelector("#profit_mtd_chart_feebased"),
+        options_profit_mtd_feebased);
+    chart_profit_mtd_feebased.render();
+
+    var options_profit_mtd_coc = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value <coc_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+        }],
+        title:{
+            text:"COC",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
+        series: [{
+            name: 'Profit',
+            type: 'column',
+            data: [coc_profit_prev_mtd.map(bFormatter)[0],coc_profit_mtd.map(bFormatter)[0]]
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: [prev_month,now_month],
+        },
+        yaxis: {
+            title: {
+                text: 'M (Milyar)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        }
+    };
+    var chart_profit_mtd_coc = new ApexCharts(document.querySelector("#profit_mtd_chart_coc"), options_profit_mtd_coc);
+    chart_profit_mtd_coc.render();
+
+    var options_profit_mtd_overheadexp = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value <exp_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+        }],
+        title:{
+            text:"EXP",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
+        series: [{
+            name: 'Profit',
+            type: 'column',
+            data: [exp_profit_prev_mtd.map(bFormatter)[0],exp_profit_mtd.map(bFormatter)[0]]
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: [prev_month,now_month],
+        },
+        yaxis: {
+            title: {
+                text: 'M (Milyar)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        }
+    };
+    var chart_profit_mtd_overheadexp = new ApexCharts(document.querySelector("#profit_mtd_chart_overheadexp"),
+        options_profit_mtd_overheadexp);
+    chart_profit_mtd_overheadexp.render();
 
     // chart profit ytd
-    var options_profit_ytd = {
+    var options_profit_ytd_nii = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value == nii_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
+        }],
+        title:{
+            text:"NII",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
         series: [{
-            name: 'Net Profit',
-            data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 56, 61, 58]
-        }, {
-            name: 'Revenue',
-            data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 87, 105, 91]
-        }, {
-            name: 'Free Cash Flow',
-            data: [35, 41, 36, 26, 45, 48, 52, 53, 41, 35, 41, 36]
+            name: 'Profit',
+            type: 'column',
+            data: [nii_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],nii_profit_ytd.map(bFormatter)[new Date().getMonth()]]
         }],
         chart: {
             type: 'bar',
@@ -251,13 +567,18 @@
         },
         plotOptions: {
             bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
         },
         dataLabels: {
-            enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
         },
         stroke: {
             show: true,
@@ -265,11 +586,11 @@
             colors: ['transparent']
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des'],
+            categories: [prev_year,now_year],
         },
         yaxis: {
             title: {
-                text: '$ (thousands)'
+                text: 'M (Milyar)'
             }
         },
         fill: {
@@ -278,13 +599,207 @@
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return "$ " + val + " thousands"
+                    return val + " M (Milyar)"
                 }
             }
         }
     };
-    var chart_profit_ytd = new ApexCharts(document.querySelector("#profit_ytd_chart"), options_profit_ytd);
-    chart_profit_ytd.render();
+    var chart_profit_ytd_nii = new ApexCharts(document.querySelector("#profit_ytd_chart_nii"), options_profit_ytd_nii);
+    chart_profit_ytd_nii.render();
+
+    var options_profit_ytd_feebased = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value == feebased_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
+        }],
+        title:{
+            text:"Feebased",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
+        series: [{
+            name: 'Profit',
+            type: 'column',
+            data: [feebased_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],feebased_profit_ytd.map(bFormatter)[new Date().getMonth()]]
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: [prev_year,now_year],
+        },
+        yaxis: {
+            title: {
+                text: 'M (Milyar)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        }
+    };
+    var chart_profit_ytd_feebased = new ApexCharts(document.querySelector("#profit_ytd_chart_feebased"),
+        options_profit_ytd_feebased);
+    chart_profit_ytd_feebased.render();
+
+    var options_profit_ytd_coc = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value == coc_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
+        }],
+        title:{
+            text:"coc",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
+        series: [{
+            name: 'Profit',
+            type: 'column',
+            data: [coc_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],coc_profit_ytd.map(bFormatter)[new Date().getMonth()]]
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: [prev_year,now_year],
+        },
+        yaxis: {
+            title: {
+                text: 'M (Milyar)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        }
+    };
+    var chart_profit_ytd_coc = new ApexCharts(document.querySelector("#profit_ytd_chart_coc"), options_profit_ytd_coc);
+    chart_profit_ytd_coc.render();
+
+    var options_profit_ytd_overheadexp = {
+        colors: [function({ value, seriesIndex, w }) {
+            return (value == exp_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
+        }],
+        title:{
+            text:"exp",
+            offsetX: 20,
+            offsetY: 0,
+            style: {
+                fontSize:  '14px',
+                fontWeight:  'bold',
+                },
+        },
+        series: [{
+            name: 'Profit',
+            type: 'column',
+            data: [exp_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],exp_profit_ytd.map(bFormatter)[new Date().getMonth()]]
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " M";
+            },
+            enabledOnsSeries: [1,2]
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: [prev_year,now_year],
+        },
+        yaxis: {
+            title: {
+                text: 'M (Milyar)'
+            }
+        },
+        fill: {
+            opacity: 1
+        },
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " M (Milyar)"
+                }
+            }
+        }
+    };
+    var chart_profit_ytd_overheadexp = new ApexCharts(document.querySelector("#profit_ytd_chart_overheadexp"),
+        options_profit_ytd_overheadexp);
+    chart_profit_ytd_overheadexp.render();
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -295,11 +810,11 @@
     $(document).ready(function () {
         $('#profit_mtd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, 'All']]
         });
         $('#profit_ytd_table').DataTable({
             scrollX: true,
-            "lengthMenu": [5, 25, 50, 75, 100],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, 'All']]
         });
     });
 </script>
