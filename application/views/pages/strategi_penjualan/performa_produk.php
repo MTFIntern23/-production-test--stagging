@@ -115,7 +115,7 @@
                                             <?= htmlentities($row->mtd_unit);?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url();?>performa_produk_detail/<?php echo $this->security_idx->encrypt_url($row->id_gp);?>"
+                                            <a href="<?php echo base_url();?>performa_produk_detail/<?php echo $this->Security_idx->encrypt_url($row->id_gp);?>"
                                                 onclick="sessionStorage.setItem('is_mtd', true);">
                                                 <button id="to_detail_mtd" type="button"
                                                     class="btn_session badge btn btn-primary me-2"><i
@@ -177,7 +177,7 @@
                                             <?= htmlentities($row->mtd_unit);?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url();?>performa_produk_detail/<?php echo $this->security_idx->encrypt_url($row->id_gp);?>"
+                                            <a href="<?php echo base_url();?>performa_produk_detail/<?php echo $this->Security_idx->encrypt_url($row->id_gp);?>"
                                                 onclick="sessionStorage.setItem('is_mtd', false);">
                                                 <button id="to_detail_mtd" type="button"
                                                     class="btn_session badge btn btn-primary me-2"><i
