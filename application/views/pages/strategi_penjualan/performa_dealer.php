@@ -1,4 +1,5 @@
 <!-- Content -->
+<?php $CI =& get_instance(); ?>
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand',false);
@@ -116,7 +117,7 @@
                                             <?= htmlentities($row->mtd_unit);?>
                                         </td>
                                         <td>
-                                            <a href="<?php echo base_url();?>performa_dealer_detail/<?php echo $this->Security_idx->encrypt_url($row->id_dealer);?>"
+                                            <a href="<?php echo base_url();?>performa_dealer_detail/<?php echo $CI->security_idx->encrypt_url($row->id_dealer);?>"
                                                 onclick="sessionStorage.setItem('is_mtd', true);">
                                                 <button id="to_detail_mtd" type="button"
                                                     class="btn_session badge btn btn-primary me-2"><i
@@ -177,7 +178,7 @@
                                         <td >
                                             <?= htmlentities($row->mtd_unit);?>
                                         </td>
-                                        <td> <a href="<?php echo base_url();?>performa_dealer_detail/<?php echo $this->Security_idx->encrypt_url($row->id_dealer);?>"
+                                        <td> <a href="<?php echo base_url();?>performa_dealer_detail/<?php echo $CI->security_idx->encrypt_url($row->id_dealer);?>"
                                             onclick="sessionStorage.setItem('is_mtd', false);">
                                             <button id="to_detail_ytd" type="button"
                                                 class="btn_session badge btn btn-primary me-2"><i

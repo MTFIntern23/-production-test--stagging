@@ -7,7 +7,6 @@
             $this->load->model('auth_model');
             $this->load->model('cabang_model');
             $this->load->helper('url');
-            $this->load->library('Security_idx');
             if (!$this->auth_model->current_user()) {
                 redirect('auth');
             }
