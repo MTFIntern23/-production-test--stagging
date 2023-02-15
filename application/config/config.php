@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://mtf33.tedxundip.org/';
+$config['base_url'] = 'https://mtf33.tedxundip.org/epd_monitoring';
 
 /*
 |--------------------------------------------------------------------------
@@ -444,7 +444,7 @@ $config['standardize_newlines'] = false;
 |          for backwards compatibility purposes!
 |
 */
-$config['global_xss_filtering'] = false;
+$config['global_xss_filtering'] = true;
 
 /*
 |--------------------------------------------------------------------------

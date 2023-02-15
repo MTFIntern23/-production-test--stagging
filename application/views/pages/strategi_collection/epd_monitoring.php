@@ -17,13 +17,13 @@
                 <div id="chart_mtd" class="d-none">
                     <div class="row mb-4">
                         <div
-                            class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
-                            <div class="ms-3 me-4 d-flex justify-content-center mt-3">
+                            class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
+                            <div class="ms-3 pt-4  d-flex justify-content-center mt-3">
                                 <div id="epd_monitoring_mtd_chart"></div>
                             </div>
                         </div>
                         <div
-                            class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
+                            class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
                             <div class="ms-3 me-4">
                                 <div id="epd_monitoring_mtd_chart_2"></div>
                             </div>
@@ -181,6 +181,8 @@
         $items_mtd = array();
         $persentasi_0_mtd = array();
         $persentasi_1_mtd = array();
+        $persentasi_0_last_mtd = array();
+        $persentasi_1_last_mtd = array();
         $count_epd_mtd = array();
         foreach($graph_monitoring_0_month as $row) {
             $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
@@ -188,6 +190,12 @@
         }
         foreach($graph_monitoring_1_month as $row) {
             $persentasi_1_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($graph_monitoring_0_last_month as $row) {
+            $persentasi_0_last_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($graph_monitoring_1_last_month as $row) {
+            $persentasi_1_last_mtd[] = htmlentities($row -> persentasi);
         }
         foreach($graph_monitoring_detail_month as $row) {
             $count_epd_mtd[] = htmlentities($row -> account);
@@ -197,6 +205,10 @@
     var fields_mtd = <?php echo json_encode($items_mtd) ?>;
     var persentasi_0_mtd = <?php echo json_encode($persentasi_0_mtd) ?>;
     var persentasi_1_mtd = <?php echo json_encode($persentasi_1_mtd) ?>;
+    var persentasi_0_last_mtd = <?php echo json_encode($persentasi_0_last_mtd) ?>;
+    var persentasi_1_last_mtd = <?php echo json_encode($persentasi_1_last_mtd) ?>;
+    var val_0_last = persentasi_0_last_mtd[persentasi_0_last_mtd.length-1]
+    var val_1_last = persentasi_1_last_mtd[persentasi_1_last_mtd.length-1]
     var count_epd_mtd = <?php echo json_encode($count_epd_mtd) ?>;
     // chart epd_monitoring mtd
     var options_epd_monitoring_mtd = {
@@ -223,17 +235,26 @@
 
     // chart epd_monitoring mtd
     var options_epd_monitoring_mtd_2 = {
+        colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
         series: [{
-            name: 'EPD 8-30 (' + month_name((new Date().getMonth())) +')',
-            type: 'line',
+            name: 'EPD 8-30 (' + month_name((new Date().getMonth()+1)) +')',
+            type: 'column',
             data: persentasi_0_mtd
         },{
-            name: 'EPD >30 (' + month_name((new Date().getMonth())) +')',
+            name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
+            type: 'line',
+            data: persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)
+        },{
+            name: 'EPD >30 (' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
             data: persentasi_1_mtd
+        },{
+            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
+            type: 'line',
+            data: persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)
         }],
         chart: {
-            height: 350,
+            height: 410,
             type: 'line',
         },
         plotOptions: {
@@ -249,10 +270,10 @@
             formatter: function (val) {
                 return val + " %";
             },
-            enabledOnSeries: [0]
+            enabledOnSeries: [1,3]
         },
         stroke: {
-            width: [4,1]
+            width: [1,4,1,4]
         },
         xaxis: {
             categories: fields_mtd,

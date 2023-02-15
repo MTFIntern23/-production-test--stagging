@@ -24,6 +24,8 @@
                 'graph_monitoring_detail_last_year'=>$this->cabang_model->epd_monitoring('last_year',true),
                 'graph_monitoring_0_month'=>$this->cabang_model->epd_monitoring('curr_month_0',true),
                 'graph_monitoring_1_month'=>$this->cabang_model->epd_monitoring('curr_month_1',true),
+                'graph_monitoring_0_last_month'=>$this->cabang_model->epd_monitoring('last_month_0',true),
+                'graph_monitoring_1_last_month'=>$this->cabang_model->epd_monitoring('last_month_1',true),
                 'identifier'=>'is_strategi_collection',
                 'submenu_identity'=>'is_epd_monitoring',
             ];

@@ -27,6 +27,11 @@ class Dashboard extends CI_Controller
             'performa_last_year'=>$this->cabang_model->performa_lending('last_year'),
             'current_month_profit'=>$this->cabang_model->profit_cabang('','curr_month'),
             'last_month_profit'=>$this->cabang_model->profit_cabang('','last_month'),
+            //epd
+            'graph_monitoring_0_month'=>$this->cabang_model->epd_monitoring('curr_month_0',true),
+            'graph_monitoring_1_month'=>$this->cabang_model->epd_monitoring('curr_month_1',true),
+            'graph_monitoring_0_last_month'=>$this->cabang_model->epd_monitoring('last_month_0',true),
+            'graph_monitoring_1_last_month'=>$this->cabang_model->epd_monitoring('last_month_1',true),
             //tod
             'current_month_tod'=>$this->cabang_model->tod_monitoring(null,'curr_month',false),
             'last_month_tod'=>$this->cabang_model->tod_monitoring(null,'last_month',false),

@@ -1363,6 +1363,25 @@
         $items_mtd_profit = array();
         $profit_mtd = array();
         $profit_prev_mtd = array();
+        //epd
+        $epd_items_mtd = array();
+        $persentasi_0_mtd = array();
+        $persentasi_1_mtd = array();
+        $persentasi_0_last_mtd = array();
+        $persentasi_1_last_mtd = array();
+        foreach($graph_monitoring_0_month as $row) {
+            $epd_items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
+            $persentasi_0_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($graph_monitoring_1_month as $row) {
+            $persentasi_1_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($graph_monitoring_0_last_month as $row) {
+            $persentasi_0_last_mtd[] = htmlentities($row -> persentasi);
+        }
+        foreach($graph_monitoring_1_last_month as $row) {
+            $persentasi_1_last_mtd[] = htmlentities($row -> persentasi);
+        }
         //tod
         $tod_items_mtd = array();
         $tod_pencapaian_mtd = array();
@@ -1416,6 +1435,14 @@
     var target_mtd = <?php echo json_encode($target_mtd) ?>;
     var profit_mtd = <?php echo json_encode($profit_mtd) ?>;
     var profit_prev_mtd = <?php echo json_encode($profit_prev_mtd) ?>;
+    //epd
+    var epd_fields_mtd = <?php echo json_encode($epd_items_mtd) ?>;
+    var persentasi_0_mtd = <?php echo json_encode($persentasi_0_mtd) ?>;
+    var persentasi_1_mtd = <?php echo json_encode($persentasi_1_mtd) ?>;
+    var persentasi_0_last_mtd = <?php echo json_encode($persentasi_0_last_mtd) ?>;
+    var persentasi_1_last_mtd = <?php echo json_encode($persentasi_1_last_mtd) ?>;
+    var val_0_last = persentasi_0_last_mtd[persentasi_0_last_mtd.length-1]
+    var val_1_last = persentasi_1_last_mtd[persentasi_1_last_mtd.length-1]
     //tod
     var tod_fields_mtd = <?php echo json_encode($tod_items_mtd) ?>;
     var tod_pencapaian_mtd = <?php echo json_encode($tod_pencapaian_mtd) ?>;
@@ -1538,53 +1565,97 @@
 
     //chart epd dashboard
     var options_dashboard_epd = {
-          series: [{
-          name: 'Net EPD',
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-        }, {
-          name: 'Revenue',
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-        }, {
-          name: 'Free Cash Flow',
-          data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+        colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
+        series: [{
+            name: 'EPD 8-30 (' + month_name((new Date().getMonth()+1)) +')',
+            type: 'column',
+            data: persentasi_0_mtd
+        },{
+            name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
+            type: 'line',
+            data: persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)
+        },{
+            name: 'EPD >30 (' + month_name((new Date().getMonth()+1)) +')',
+            type: 'column',
+            data: persentasi_1_mtd
+        },{
+            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
+            type: 'line',
+            data: persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)
         }],
-          chart: {
-          type: 'bar',
-          height: 350
+        chart: {
+            height: 350,
+            type: 'line',
         },
         plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-          },
+            bar: {
+                borderRadius: 2,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
         },
         dataLabels: {
-          enabled: false
+            enabled: true,
+            formatter: function (val) {
+                return val + " %";
+            },
+            enabledOnSeries: [1,3]
         },
         stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
+            width: [1,4,1,4]
         },
         xaxis: {
-          categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        },
-        yaxis: {
-          title: {
-            text: '$ (thousands)'
-          }
-        },
-        fill: {
-          opacity: 1
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return "$ " + val + " thousands"
+            categories: epd_fields_mtd,
+            tooltip: {
+                enabled: false
             }
-          }
-        }
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "OSP ALL (M)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " % (Persen)"
+                }
+            }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
         };
 
         var chart_db_epd = new ApexCharts(document.querySelector("#dashboard_epd_monitoring_chart"), options_dashboard_epd);

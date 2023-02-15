@@ -42,6 +42,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if($params == 'curr_year_val'||$params == 'last_year_val'){
             $this->db->select('YEAR(periode) AS year,MONTH(periode)as month,id_pfm_profit,'.$this->_table_cbg.'.id_cabang,'.$this->_table_kp.'.`id_komponen`,komponen_profit,SUM(profit) AS profit,SUM(profit_v2) profit_v2,SUM(sim_profit) sim_profit');
         }else{
@@ -87,6 +88,7 @@ class Cabang_model extends CI_Model
             $this->db->group_by('komponen_profit');
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function performa_so($id,$params,$is_graph)
@@ -95,6 +97,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(isset($id)&&$id!=''){
             if($is_graph==true){
                 if($params=='curr_year'||$params=='last_year'){
@@ -161,6 +164,7 @@ class Cabang_model extends CI_Model
             }
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         // return $query->row();
         return $query->result();
     }
@@ -169,6 +173,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if($params == 'curr_year'|| $params == 'last_year'){
             $this->db->select('YEAR(`periode`) AS year,
             MONTH(`periode`) AS month,
@@ -206,6 +211,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function performa_dealer($id,$params,$is_graph){
@@ -213,6 +219,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(!isset($params)&&!isset($id)){
             $this->db->select($this->_table_pfm_dl.'.id_pfm_dealer,'.$this->_table_pfm_dl.'.id_dealer,'.$this->_table_pfm_dl.'.id_cabang,'.$this->_table_pfm_dl.'.id_pic,'.$this->_table_cbg.'.nama_cabang AS nama_cabang,'.$this->_table_cbg.'.lokasi AS lokasi_cabang,'.$this->_table_dl.'.nama_dealer,'.$this->_table_pic.'.nama_pic AS nama_pic, SUM('.$this->_table_pfm_dl.'.pencapaian) as pencapaian,'.$this->_table_pfm_dl.'.target,'.$this->_table_pfm_dl.'.periode,('.$this->_table_pfm_dl.'.pencapaian - '.$this->_table_pfm_dl.'.target) AS diff, ROW_NUMBER() OVER(ORDER BY diff DESC) AS peringkat');
             $this->db->from($this->_table_pfm_dl);
@@ -290,6 +297,7 @@ class Cabang_model extends CI_Model
             }
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function performa_product($id,$params,$is_graph){
@@ -297,6 +305,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(!isset($id)&&isset($params)){
             $this->db->select(''.$this->_table_gp.'.id_gp,'.$this->_table_gp.'.gp,SUM(lending_amt) as mtd_amt,COUNT(*) as mtd_unit');
             $this->db->from(''.$this->_table_agreement.'');
@@ -360,6 +369,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function history_assets($id,$params,$type,$is_graph){
@@ -367,6 +377,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(!isset($id)&&isset($params)){
             if($type=='tipe'){
                 $this->db->select(''.$this->_table_tp.'.id_tipe,'.$this->_table_tp.'.tipe,SUM(lending_amt) as mtd_amt,COUNT(*) as mtd_unit');
@@ -472,6 +483,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function cust_retention($params,$is_graph,$is_ro){
@@ -479,6 +491,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if($is_graph==true){
             if($params=='curr_year'||$params=='last_year'){
                 $this->db->select('YEAR(tgl_golive) AS year,MONTH(tgl_golive) AS month,SUM(lending_amt) AS mtd_amt');
@@ -544,6 +557,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function epd_monitoring($params,$is_graph){
@@ -551,8 +565,9 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if($is_graph==true){
-            if($params=='curr_month_0' || $params == 'curr_month_1'){
+            if($params=='curr_month_0' || $params == 'curr_month_1' || $params=='last_month_0' || $params == 'last_month_1'){
                 $this->db->select('epd,target,account,persentasi,periode');
             }else{
                 $this->db->select('YEAR(`periode`),MONTH(`periode`),epd,SUM(target) AS target,SUM(account) AS account,SUM(persentasi) AS persentasi,periode');
@@ -577,16 +592,20 @@ class Cabang_model extends CI_Model
                 $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) ');
             }
         }else if($params=='curr_month_0'){
-                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND epd ="0"');
-            }else if($params == 'curr_month_1'){
-                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND epd ="1"');
-            }else if($params == 'last_month'){
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND epd ="0"');
+        }else if($params == 'curr_month_1'){
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND epd ="1"');
+        }else if($params == 'last_month'){
             if($is_graph==true){
                 $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) ');
                 $this->db->group_by('epd');
             }else{
                 $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) ');
             }
+        }else if($params=='last_month_0'){
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) AND epd ="0"');
+        }else if($params == 'last_month_1'){
+            $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) AND epd ="1"');
         }else if($params == 'curr_year'){
             if($is_graph==true){
                 $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-01-01") AND NOW()) ');
@@ -605,6 +624,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function tod_monitoring($id,$params,$is_graph){
@@ -612,6 +632,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(!isset($id)&&isset($params)){
             $this->db->select('bucket_od,SUM(osp_all)AS osp_all,SUM(osp_restru)AS osp_restru,SUM(osp_normal)AS osp_normal,SUM(ratio_all)/COUNT(ratio_all) AS ratio_all,SUM(ratio_restru)/COUNT(ratio_restru)AS ratio_restru,SUM(ratio_normal)/COUNT(ratio_normal) AS ratio_normal');
             $this->db->from(''.$this->_table_tod.'');
@@ -668,6 +689,7 @@ class Cabang_model extends CI_Model
         }
 
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function npl_monitoring($params){
@@ -675,6 +697,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if($params == 'curr_year'||$params == 'last_year'){
             $this->db->select('YEAR(periode) as year, MONTH(periode) as month,'.$this->_table_npl.'.`id_npl`,'.$this->_table_cbg.'.`id_cabang`,SUM('.$this->_table_npl.'.persentasi) as ytd_persentasi,'.$this->_table_npl.'.`periode`');
             //SUM('.$this->_table_npl.'.persentasi)/COUNT('.$this->_table_npl.'.persentasi) as ytd_persentasi
@@ -699,10 +722,15 @@ class Cabang_model extends CI_Model
         }
         $query = $this->db->get();
         // return $query->row();
+        $this->db->cache_off();
         return $query->result();
     }
     public function cwo_monitoring($params){
-        $cabangUser = '1';
+        if (!$this->session->has_userdata(self::SESSION_KEY)) {
+            return null;
+        }
+        $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if($params == 'curr_year'||$params == 'last_year'){
             $this->db->select('YEAR(periode) as year, MONTH(periode) as month,'.$this->_table_cwo.'.`id_cwo`,'.$this->_table_cbg.'.`id_cabang`,SUM('.$this->_table_cwo.'.persentasi) as ytd_persentasi,'.$this->_table_cwo.'.`periode`');
             //SUM('.$this->_table_cwo.'.persentasi)/COUNT('.$this->_table_cwo.'.persentasi) as ytd_persentasi
@@ -727,6 +755,7 @@ class Cabang_model extends CI_Model
         }
         $query = $this->db->get();
         // return $query->row();
+        $this->db->cache_off();
         return $query->result();
     }
     public function performa_armo($id,$params,$is_graph)
@@ -735,6 +764,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(isset($id)&&$id!=''){
             if($is_graph==true){
                 if($params=='curr_year'||$params=='last_year'){
@@ -772,7 +802,7 @@ class Cabang_model extends CI_Model
             }
         }else{
             if($params == 'curr_year'||$params == 'last_year'||$params == 'curr_month'||$params == 'last_month'){
-                $this->db->select('YEAR(`periode`),MONTH(periode),'.$this->_table_pfm_armo.'.`id_armo`,'.$this->_table_armo.'.`nama_armo`,nama_spv,SUM(pencapaian) as pencapaian,SUM(target)as target,(SUM(pencapaian)/SUM(target))*100 AS persentasi');
+                $this->db->select('YEAR(`periode`),MONTH(periode),'.$this->_table_pfm_armo.'.`id_armo`,'.$this->_table_armo.'.`nama_armo`,nama_spv,SUM(pencapaian) as pencapaian,target,(SUM(pencapaian)/target)*100 AS persentasi');
             }else{
                 return null;
             }
@@ -798,6 +828,7 @@ class Cabang_model extends CI_Model
         }
         $query = $this->db->get();
         // return $query->row();
+        $this->db->cache_off();
         return $query->result();
     }
     public function get_brand($id,$params){
@@ -805,6 +836,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         $this->db->select(''.$this->_table_dl.'.id_dealer,'.$this->_table_dl.'.nama_dealer,'.$this->_table_cbg.'.`nama_cabang`,COUNT('.$this->_table_jns.'.`jenis`) total_jenis,'.$this->_table_bd.'.`brand`');
         $this->db->from(''.$this->_table_dl.'');
         $this->db->join($this->_table_cbg,$this->_table_cbg.'.id_cabang='.$this->_table_dl.'.id_cabang');
@@ -820,6 +852,7 @@ class Cabang_model extends CI_Model
         }
         $this->db->group_by('brand');
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function get_ro($params){
@@ -827,6 +860,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         $this->db->select(''.$this->_table_cst.'.id_customer,'.$this->_table_cst.'.nama_cust,MAX(status_ro) as status_ro');
         $this->db->from(''.$this->_table_agreement.'');
         $this->db->join($this->_table_cst,$this->_table_cst.'.id_customer='.$this->_table_agreement.'.id_customer');
@@ -841,6 +875,7 @@ class Cabang_model extends CI_Model
         }
         $this->db->group_by(''.$this->_table_cst.'.id_customer');
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function get_product($id,$params){
@@ -848,6 +883,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         $this->db->select('gp,produk,COUNT(produk)AS jml_produk');
         $this->db->from(''.$this->_table_agreement.'');
         $this->db->join($this->_table_prod,$this->_table_prod.'.id_produk='.$this->_table_agreement.'.id_produk');
@@ -862,6 +898,7 @@ class Cabang_model extends CI_Model
         }
         $this->db->group_by('produk');
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
     public function get_bucketod($id,$params){
@@ -869,6 +906,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $cabangUser = $this->auth_model->current_user()->id_cabang;
+        $this->db->cache_on();
         if(!isset($id)&&isset($params)){
             $this->db->select('bucket_od,COUNT(bucket_od) as jml_bucket');
             $this->db->from(''.$this->_table_tod.'');
@@ -891,6 +929,7 @@ class Cabang_model extends CI_Model
             return null;
         }
         $query = $this->db->get();
+        $this->db->cache_off();
         return $query->result();
     }
 }

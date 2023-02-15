@@ -1,7 +1,7 @@
 <?php
 if (!defined("BASEPATH")) exit("No direct script access allowed");
 
-class security_idx
+class Security_idx
 {
     function encrypt_url($string)
     {

@@ -3,7 +3,7 @@
     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
         <div class="row">
             <div class="col-12">
-                <img class="logo" src="./assets/img/footer.png" alt="footer-img" width="280" height="40">
+                <img class="logo" src="./assets/img/footer.png" alt="footer-img" width="280" height="40" loading="lazy">
             </div>
             <div class="col-12">
                 <p class="text-light mt-3 ms-1 mb-2 mb-md-0 fw-lighter" style="font-size: 12px;">
