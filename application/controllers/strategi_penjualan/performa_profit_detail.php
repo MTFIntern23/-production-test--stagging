@@ -22,8 +22,8 @@
                 'current_cabang'=>$this->cabang_model->current_cabang(),
                 'current_month_detail_profit'=>$this->cabang_model->profit_cabang($id,'curr_month'),
                 'last_month_detail_profit'=>$this->cabang_model->profit_cabang($id,'last_month'),
-                'current_year_detail_profit'=>$this->cabang_model->profit_cabang($id,'curr_year'),
-                'last_year_detail_profit'=>$this->cabang_model->profit_cabang($id,'last_year'),
+                'current_year_detail_profit'=>$this->cabang_model->profit_cabang($id,'curr_year_val'),
+                'last_year_detail_profit'=>$this->cabang_model->profit_cabang($id,'last_year_val'),
                 'identifier'=>'is_profit_cabang',
                 'submenu_identity'=>'',
             ];

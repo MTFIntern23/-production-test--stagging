@@ -1132,11 +1132,11 @@
                                     <div id="row-db-epd-monitoring" class="row mb-4 me-md-4 d-none">
                                         <div class="col-12 ms-1  mb-4">
                                             <div class="row">
-                                                <div class="col">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                     <div id="dashboard_epd_monitoring_chart"></div>
                                                     
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                                     <div id="dashboard_epd_monitoring_chart_2"></div>
 
                                                 </div>
@@ -1577,13 +1577,13 @@
     var options_dashboard_epd = {
         colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
         series: [{
-            name: 'EPD 8-30 (' + month_name((new Date().getMonth()+1)) +')',
+            name: 'EPD 8-30 (' + new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
             data: [persentasi_0_mtd[fields_mtd.length-1]]
         },{
             name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
             type: 'column',
-            data: [persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)]
+            data: [persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,epd_fields_mtd.length)]
         }],
         chart: {
             height: 350,
@@ -1628,7 +1628,7 @@
                     }
                 },
                 title: {
-                    text: "OSP ALL (M)",
+                    text: "EPD (%)",
                     style: {
                         color: '#008FFB',
                     }
@@ -1665,13 +1665,13 @@
     var options_dashboard_epd_2 = {
         colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
         series: [{
-            name: 'EPD >30 (' + month_name((new Date().getMonth()+1)) +')',
+            name: 'EPD >30 ('+ new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
             data: [persentasi_1_mtd[fields_mtd.length-1]]
         },{
             name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
             type: 'column',
-            data: [persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)]
+            data: [persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,epd_fields_mtd.length)]
         }],
         chart: {
             height: 350,
@@ -1716,7 +1716,7 @@
                     }
                 },
                 title: {
-                    text: "OSP ALL (M)",
+                    text: "EPD (%)",
                     style: {
                         color: '#008FFB',
                     }
@@ -1754,11 +1754,11 @@
     //chart tod dashboard
     var options_dashboard_tod = {
         series: [{
-            name: 'OSP All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
+            name: 'RATIO All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
             type: 'column',
             data: tod_pencapaian_last_mtd.map(bFormatter)
         },{
-            name: 'OSP All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
+            name: 'RATIO All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
             type: 'column',
             data: tod_pencapaian_mtd.map(bFormatter)
         }],
@@ -1777,7 +1777,7 @@
         dataLabels: {
             enabled: true,
             formatter: function (val) {
-                return val + " M";
+                return val + " %";
             },
             // enabledOnSeries: [1,2]
         },
@@ -1805,7 +1805,7 @@
                     }
                 },
                 title: {
-                    text: "OSP ALL (M)",
+                    text: "RATIO ALL (%)",
                     style: {
                         color: '#008FFB',
                     }
@@ -1818,7 +1818,7 @@
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return val + " M (Milyar)"
+                    return val + " % (Persen)"
                 }
             }
         },

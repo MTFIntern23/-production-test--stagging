@@ -134,6 +134,7 @@
                                     <th>Komponen Profit</th>
                                     <th>Profit YTD <span class="show_prev_year"> </span></th>
                                     <th>Profit YTD <span class="show_year"> </span></th>
+                                    <th>Action</th>
                                     <!-- <th>Est Profit V2 YTD <span class="show_year"> </span></th>
                                     <th>Simulasi Profit V2 YTD <span class="show_year"> </span></th> -->
                                 </tr>
@@ -156,6 +157,11 @@
                                     <td class="get_val">
                                         <?= htmlentities($row->profit);?>
                                     </td>
+                                    <td><button onclick="window.location.href='<?= site_url('performa_profit_detail/'.$CI->security_idx->encrypt_url($row->id_komponen))?>';sessionStorage.setItem('is_mtd', true);"
+                                                type="button"
+                                                class="btn_session badge btn btn-primary me-2"><i
+                                                    class='bx bx-detail me-1'></i>
+                                                Detail</button></td>
                                     <!-- <td class="get_val">
                                             <?= htmlentities($row->profit_v2);?>
                                         </td>

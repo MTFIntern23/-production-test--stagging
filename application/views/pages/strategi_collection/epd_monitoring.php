@@ -15,6 +15,42 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
+                <div class="row mb-4 ms-2 me-2">
+                    <div class="col">
+                        <div class="d-grid gap-2 d-md-block">
+                            <div class="row justify-content-sm-start">
+                                <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
+                                    style="margin-right: -15px;">
+                                    <select class="form-select" id='filter'
+                                        onchange="setSubFilter(this.options[this.selectedIndex].value)">
+                                        <option selected disabled>Pilih Filter</option>
+                                        <option value="all">All</option>
+                                        <option value="group_product">Group
+                                            Product</option>
+                                        <option value="jenis_asset">Jenis Asset
+                                        </option>
+                                        <option value="so">SO</option>
+                                        <option value="jenis_customer">Jenis
+                                            Customer</option>
+                                        <option value="jenis_pekerjaan">Jenis Pekerjaan</option>
+                                        <option value="dealer">Dealer</option>
+                                        <option value="armo">Armo</option>
+                                    </select>
+                                </div>
+                                <div class="select-sub-filter col-xl-3 col-lg-3 col-md-5 col-sm-12 col-sub-filter"
+                                    style="margin-right: -15px;">
+                                    <select class="form-select" id="sub-filter" disabled>
+                                        <option value="">Pilih Sub-Filter</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-warning btn-search" onclick="" type="button"><i
+                                            class='bx bx-search me-1'></i>Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="chart_mtd" class="d-none">
                     <div class="row mb-4">
                         <div
@@ -26,7 +62,14 @@
                         <div
                             class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
                             <div class="ms-3 me-4">
-                                <div id="epd_monitoring_mtd_chart_2"></div>
+                                <div class="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <div id="epd_monitoring_mtd_chart_2"></div> 
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                            <div id="epd_monitoring_mtd_chart_3"></div>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -170,6 +213,39 @@
     epd_field.forEach((field,idx)=>{
         field.innerHTML = epd_status[idx]
     })
+    let setSubFilter = function(dataFilter) {
+        let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "jenis_pekerjaan", "dealer", "armo"]
+        let subFilters = {
+            'sub0': ["Pilih Sub-Filter"],
+            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
+                "Reguler Fleet"
+            ],
+            'sub2': ["New", "Second"],
+            'sub3': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
+                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
+            ],
+            'sub4': ["NONRO", "RO"],
+            'sub5': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"],
+            'sub6': ["PT Cipta Karya", "Tunas", "Agung Auto", "PT Ida", "PT Sukacita", "Benny Automotives",
+                "Kelapa Hijau", "PT Prakarsa", "Taskia Auto"
+            ],
+            'sub7': ["Hamid", "Mamat", "Toren", "Ciles", "Meng", "Oreo"]
+        }
+        if (dataFilter == "all") {
+            areaSubFilter.forEach((subs) => {
+                subs.innerHTML = callSubFilter(subFilters.sub0);
+                subs.setAttribute("disabled", 'true');
+            })
+        }
+        filters.forEach((filter, idx) => {
+            if (dataFilter == filter) {
+                areaSubFilter.forEach((subs) => {
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
+                    subs.removeAttribute("disabled");
+                })
+            }
+        })
+    }
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -236,33 +312,25 @@
 
     // chart epd_monitoring mtd
     var options_epd_monitoring_mtd_2 = {
-        colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
+        colors:['#26A0FC','#1ADF8D'],
         series: [{
-            name: 'EPD 8-30 (' + month_name((new Date().getMonth()+1)) +')',
+            name: 'EPD 8-30 (' + new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
-            data: persentasi_0_mtd
+            data: [persentasi_0_mtd[fields_mtd.length-1]]
         },{
             name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
-            type: 'line',
-            data: persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)
-        },{
-            name: 'EPD >30 (' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
-            data: persentasi_1_mtd
-        },{
-            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
-            type: 'line',
-            data: persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)
+            data: [persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)]
         }],
         chart: {
-            height: 410,
-            type: 'line',
+            height: 350,
+            type: 'bar',
         },
         plotOptions: {
             bar: {
                 borderRadius: 2,
                 dataLabels: {
-                    position: 'bottom',
+                    position: 'top',
                 },
             }
         },
@@ -271,13 +339,13 @@
             formatter: function (val) {
                 return val + " %";
             },
-            enabledOnSeries: [1,3]
+            enabledOnSeries: [0,1]
         },
         stroke: {
-            width: [1,4,1,4]
+            width: [1,1]
         },
         xaxis: {
-            categories: fields_mtd,
+            categories: [fields_mtd[fields_mtd.length-1]],
             tooltip: {
                 enabled: false
             }
@@ -297,7 +365,7 @@
                     }
                 },
                 title: {
-                    text: "OSP ALL (M)",
+                    text: "EPD (%)",
                     style: {
                         color: '#008FFB',
                     }
@@ -331,6 +399,95 @@
     var chart_epd_monitoring_mtd_2 = new ApexCharts(document.querySelector("#epd_monitoring_mtd_chart_2"),
         options_epd_monitoring_mtd_2);
     chart_epd_monitoring_mtd_2.render();
+
+    var options_epd_monitoring_mtd_3 = {
+        colors:['#775DD0','#FF4862'],
+        series: [{
+            name: 'EPD >30 ('+ new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
+            type: 'column',
+            data: [persentasi_1_mtd[fields_mtd.length-1]]
+        },{
+            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
+            type: 'column',
+            data: [persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)]
+        }],
+        chart: {
+            height: 350,
+            type: 'bar',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 2,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " %";
+            },
+            enabledOnSeries: [0,1]
+        },
+        stroke: {
+            width: [1,1]
+        },
+        xaxis: {
+            categories: [fields_mtd[fields_mtd.length-1]],
+            tooltip: {
+                enabled: false
+            }
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#775DD0'
+                },
+                labels: {
+                    style: {
+                        colors: '#775DD0',
+                    }
+                },
+                title: {
+                    text: "EPD (%)",
+                    style: {
+                        color: '#775DD0',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " % (Persen)"
+                }
+            }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
+    };
+    var chart_epd_monitoring_mtd_3 = new ApexCharts(document.querySelector("#epd_monitoring_mtd_chart_3"),
+        options_epd_monitoring_mtd_3);
+    chart_epd_monitoring_mtd_3.render();
 </script>
 <!-- ==================== -->
 <!-- ==================== -->

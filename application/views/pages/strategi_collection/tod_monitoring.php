@@ -16,7 +16,20 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
-                <div id="chart_mtd" class="d-none">
+                <div class="row mb-4 ms-2 me-2">
+                    <div class="col">
+                        <div class="d-grid gap-2 d-md-block">
+                            <!--  onclick="show_mtd_chart()" -->
+                            <!--  onclick="show_ytd_chart()" -->
+                            <button id="btn-chart-mtd" class="badge btn bg-chart-active" onclick="show_mtd_chart()"
+                                type="button"><i class='bx bxs-color me-1'></i>TOD PerBucket</button>
+                            <button id="btn-chart-ytd" class="badge btn btn-secondary" onclick="show_ytd_chart()"
+                                type="button"><i class='bx bxs-color me-1'></i>TOD Akumulasi</button>
+                            <!-- onclick="show_komponen_chart()" -->
+                        </div>
+                    </div>
+                </div>
+                
                     <div class="row mb-4">
                         <div
                             class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 order-xl-0 order-lg-0 order-md-0 order-1 ">
@@ -24,12 +37,18 @@
                                 <div id="tod_monitoring_mtd_chart"></div>
                             </div>
                         </div>
-                        <div
-                            class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0">
-                            <div class="ms-3 me-4">
-                                <div id="tod_monitoring_mtd_chart_2"></div>
+                            <div id="chart_mtd"
+                                class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0 d-none">
+                                <div class="ms-3 me-4">
+                                    <div id="tod_monitoring_mtd_chart_2"></div>
+                                </div>
                             </div>
-                        </div>
+                            <div id="chart_ytd" 
+                                class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 order-xl-1 order-lg-1 order-md-1 order-0 d-none">
+                                <div class="ms-3 me-4">
+                                    <div id="tod_monitoring_mtd_chart_akumulasi"></div>
+                                </div>
+                            </div>
                     </div>
                     <!-- datatables -->
                     <div class="ms-4 me-4 mb-4">
@@ -88,7 +107,8 @@
                         </table>
                     </div>
                     <!-- /datatables -->
-                </div>
+                
+                
             </div>
         </div>
     </div>
@@ -143,6 +163,8 @@
     var fields_mtd = <?php echo json_encode($items_mtd) ?>;
     var pencapaian_mtd = <?php echo json_encode($pencapaian_mtd) ?>;
     var pencapaian_last_mtd = <?php echo json_encode($pencapaian_last_mtd) ?>;
+    var sum_mtd = (pencapaian_mtd.map(e=>parseInt(e))).reduce((partialSum, a) => partialSum + a, 0);
+    var sum_last_mtd = (pencapaian_last_mtd.map(e=>parseInt(e))).reduce((partialSum, a) => partialSum + a, 0);
     // chart tod_monitoring mtd
     var options_tod_monitoring_mtd = {
         title: {
@@ -166,11 +188,11 @@
     // chart epd_monitoring mtd
     var options_tod_monitoring_mtd_2 = {
         series: [{
-            name: 'OSP All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
+            name: 'RATIO All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
             type: 'column',
             data: pencapaian_last_mtd.map(bFormatter)
         },{
-            name: 'OSP All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
+            name: 'RATIO All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
             type: 'column',
             data: pencapaian_mtd.map(bFormatter)
         }],
@@ -189,7 +211,7 @@
         dataLabels: {
             enabled: true,
             formatter: function (val) {
-                return val + " M";
+                return val + " %";
             },
             // enabledOnSeries: [1,2]
         },
@@ -217,7 +239,7 @@
                     }
                 },
                 title: {
-                    text: "OSP ALL (M)",
+                    text: "RATIO ALL (%)",
                     style: {
                         color: '#008FFB',
                     }
@@ -230,7 +252,7 @@
         tooltip: {
             y: {
                 formatter: function (val) {
-                    return val + " M (Milyar)"
+                    return val + " % (Persen)"
                 }
             }
         },
@@ -251,6 +273,95 @@
     var chart_tod_monitoring_mtd_2 = new ApexCharts(document.querySelector("#tod_monitoring_mtd_chart_2"),
         options_tod_monitoring_mtd_2);
     chart_tod_monitoring_mtd_2.render();
+
+    // chart epd_monitoring mtd akumulasi
+    var options_tod_monitoring_mtd_akumulasi = {
+        series: [{
+            name: 'AKUMULASI RATIO All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
+            type: 'column',
+            data: [bFormatter(sum_last_mtd)]
+        },{
+            name: 'AKUMULASI RATIO All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
+            type: 'column',
+            data: [bFormatter(sum_mtd)]
+        }],
+        chart: {
+            height: 350,
+            type: 'line',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 5,
+                dataLabels: {
+                    position: 'bottom',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " %";
+            },
+            // enabledOnSeries: [1,2]
+        },
+        stroke: {
+            width: [1, 4]
+        },
+        xaxis: {
+            categories: ['Akumulasi All Bucket'],
+            tooltip: {
+                enabled: false
+            }
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "AKUMULASI RATIO ALL (%)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " % (Persen)"
+                }
+            }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
+    };
+    var chart_tod_monitoring_mtd_akumulasi = new ApexCharts(document.querySelector("#tod_monitoring_mtd_chart_akumulasi"),
+        options_tod_monitoring_mtd_akumulasi);
+    chart_tod_monitoring_mtd_akumulasi.render();
 
 </script>
 <!-- ==================== -->

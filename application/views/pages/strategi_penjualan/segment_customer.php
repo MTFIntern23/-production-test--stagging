@@ -100,27 +100,35 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mitsubishi</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>SMA</td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Agung Auto</td>
+                                        <td>D3</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>205</td>
-                                        <td>205</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>PT Cipta Karya</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>S1</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>S2</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -161,29 +169,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>S1 YTD</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>SMA</td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>D3</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>SMA</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>S1</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>S2</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -235,29 +251,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Mitsubishi</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Fatmawati</td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Agung Auto</td>
+                                        <td>Ciracas</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>205</td>
-                                        <td>205</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>PT Cipta Karya</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Cibubur</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Cibinong</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -298,29 +322,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Tanah Abang</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Fatmawati</td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Pasar Senen</td>
+                                        <td>Ciracas</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Harmoni</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Cibubur</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Cibinong</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -406,29 +438,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Buruh</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Guru</td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
                                         <td>Dosen</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>205</td>
-                                        <td>205</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
+                                        <td>Wiraswasta</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
                                         <td>Manager</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -469,29 +509,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Manager</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Guru</td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Teller</td>
+                                        <td>Dosen</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
                                         <td>Wiraswasta</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Manager</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -536,7 +584,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>gaji</th>
+                                        <th>Gaji</th>
                                         <th>Lending MTD Des 22</th>
                                         <th>Lending MTD Jan 23</th>
                                         <th>Unit MTD Des 22</th>
@@ -544,29 +592,46 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Buruh</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>
+                                            < 4 Juta </td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Dosen</td>
+                                        <td>4-10 Juta</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>205</td>
-                                        <td>205</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Manager</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>10-15 Juta</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>15-25 Juta</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>> 25 Juta</td>
+                                        <td>Rp 7,000,000,000</td>
+                                        <td>Rp 10,000,000,000</td>
+                                        <td>32</td>
+                                        <td>45</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -599,7 +664,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>gaji</th>
+                                        <th>Gaji</th>
                                         <th>Lending MTD 2022</th>
                                         <th>Lending MTD 2023</th>
                                         <th>Unit MTD 2022</th>
@@ -607,29 +672,46 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Manager</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>
+                                            < 4 Juta </td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Teller</td>
+                                        <td>4-10 Juta</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Wiraswasta</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>10-15 Juta</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>15-25 Juta</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>> 25 Juta</td>
+                                        <td>Rp 7,000,000,000</td>
+                                        <td>Rp 10,000,000,000</td>
+                                        <td>32</td>
+                                        <td>45</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -682,29 +764,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Buruh</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>
+                                            20-25 Tahun </td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Dosen</td>
+                                        <td>26-30 Tahun</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>205</td>
-                                        <td>205</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Manager</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>31-40 Tahun</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>41-45 Tahun</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -745,29 +836,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                <tr>
                                         <td>1</td>
-                                        <td>Manager</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>
+                                            20-25 Tahun </td>
+                                        <td>Rp 3,000,000,000</td>
+                                        <td>Rp 1,000,000,000</td>
+                                        <td>34</td>
+                                        <td>12</td>
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Teller</td>
+                                        <td>26-30 Tahun</td>
                                         <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>8</td>
+                                        <td>14</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Wiraswasta</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>Rp 2,000,000,000</td>
-                                        <td>200</td>
-                                        <td>200</td>
+                                        <td>31-40 Tahun</td>
+                                        <td>Rp 4,000,000,000</td>
+                                        <td>Rp 6,000,000,000</td>
+                                        <td>12</td>
+                                        <td>21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>41-45 Tahun</td>
+                                        <td>Rp 5,000,000,000</td>
+                                        <td>Rp 8,000,000,000</td>
+                                        <td>14</td>
+                                        <td>23</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -874,7 +974,7 @@
         {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['SMA', 'D3', 'S1', 'S2'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -916,7 +1016,7 @@
         {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['SMA', 'D3', 'S1', 'S2'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -945,16 +1045,14 @@
 
     var options_pendidikan_mtd_3 = {
         series: [{
-            name: "History Assets MTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -968,12 +1066,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Jenis Pendidikan',
             align: 'left'
         },
         legend: {
@@ -988,9 +1084,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['SMA', 'D3', 'S1', 'S2'],
         },
         tooltip: {
             y: [{
@@ -1039,7 +1133,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['SMA', 'D3', 'S1', 'S2'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1079,7 +1173,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['SMA', 'D3', 'S1', 'S2'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1108,16 +1202,14 @@
 
     var options_pendidikan_ytd_3 = {
         series: [{
-            name: "Pendidikan YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -1131,12 +1223,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Jenis Pendidikan',
             align: 'left'
         },
         legend: {
@@ -1151,9 +1241,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['SMA', 'D3', 'S1', 'S2'],
         },
         tooltip: {
             y: [{
@@ -1202,7 +1290,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1242,7 +1330,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1271,16 +1359,14 @@
 
     var options_kecamatan_mtd_3 = {
         series: [{
-            name: "Kecamatan MTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -1294,12 +1380,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Kecamatan',
             align: 'left'
         },
         legend: {
@@ -1314,9 +1398,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         },
         tooltip: {
             y: [{
@@ -1365,7 +1447,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1405,7 +1487,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1434,16 +1516,14 @@
 
     var options_kecamatan_ytd_3 = {
         series: [{
-            name: "kecamatan YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -1457,12 +1537,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Kecamatan',
             align: 'left'
         },
         legend: {
@@ -1477,9 +1555,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         },
         tooltip: {
             y: [{
@@ -1528,7 +1604,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1568,7 +1644,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1597,16 +1673,14 @@
 
     var options_pekerjaan_mtd_3 = {
         series: [{
-            name: "pekerjaan MTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -1620,12 +1694,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Jenis Pekerjaan',
             align: 'left'
         },
         legend: {
@@ -1640,9 +1712,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['Fatmawati', 'Ciracas', 'Cibubur', 'Cibinong'],
         },
         tooltip: {
             y: [{
@@ -1692,7 +1762,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Guru', 'Wiraswasta', 'Manager', 'Dosen'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1732,7 +1802,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['Guru', 'Wiraswasta', 'Manager', 'Dosen'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1761,16 +1831,14 @@
 
     var options_pekerjaan_ytd_3 = {
         series: [{
-            name: "pekerjaan YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -1784,12 +1852,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Jenis Pekerjaan',
             align: 'left'
         },
         legend: {
@@ -1804,9 +1870,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['Guru', 'Wiraswasta', 'Manager', 'Dosen'],
         },
         tooltip: {
             y: [{
@@ -1847,7 +1911,7 @@
             text: 'MTD <?php echo Date("F Y");?>',
             align: 'center'
         },
-        series: [44, 55, 13, 43],
+        series: [44, 55, 13, 43, 54],
         chart: {
             height: 330,
             type: 'pie',
@@ -1855,7 +1919,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['< 4 Juta', '4-10 Juta', '10-15 Juta', '15-25 Juta','> 25 Juta'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1887,7 +1951,7 @@
             text: 'MTD <?php  $oneMonthAgo = new \DateTime("1 month ago");echo $oneMonthAgo->format("F Y");?>',
             align: 'center'
         },
-        series: [44, 55, 13, 43],
+        series: [44, 55, 13, 43, 54],
         chart: {
             height: 330,
             type: 'pie',
@@ -1895,7 +1959,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['< 4 Juta', '4-10 Juta', '10-15 Juta', '15-25 Juta','> 25 Juta'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -1924,16 +1988,14 @@
 
     var options_gaji_mtd_3 = {
         series: [{
-            name: "gaji MTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24, 54]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42, 45]
         }
         ],
         chart: {
@@ -1947,12 +2009,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Gaji',
             align: 'left'
         },
         legend: {
@@ -1967,9 +2027,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['< 4 Juta', '4-10 Juta', '10-15 Juta', '15-25 Juta','> 25 Juta'],
         },
         tooltip: {
             y: [{
@@ -2011,7 +2069,7 @@
             text: 'YTD <?php echo Date("F Y");?>',
             align: 'center'
         },
-        series: [44, 55, 13, 43],
+        series: [44, 55, 13, 43, 54],
         chart: {
             height: 330,
             type: 'pie',
@@ -2019,7 +2077,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['< 4 Juta', '4-10 Juta', '10-15 Juta', '15-25 Juta','> 25 Juta'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -2051,7 +2109,7 @@
             text: 'YTD <?php $oneMonthAgo = new \DateTime("1 month ago"); echo $oneMonthAgo->format("F Y");?>',
             align: 'center'
         },
-        series: [44, 55, 13, 43],
+        series: [44, 55, 13, 43, 54],
         chart: {
             height: 330,
             type: 'pie',
@@ -2059,7 +2117,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['< 4 Juta', '4-10 Juta', '10-15 Juta', '15-25 Juta','> 25 Juta'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -2088,16 +2146,14 @@
 
     var options_gaji_ytd_3 = {
         series: [{
-            name: "gaji YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24, 45]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42, 54]
         }
         ],
         chart: {
@@ -2111,12 +2167,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Gaji',
             align: 'left'
         },
         legend: {
@@ -2131,9 +2185,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['< 4 Juta', '4-10 Juta', '10-15 Juta', '15-25 Juta','> 25 Juta'],
         },
         tooltip: {
             y: [{
@@ -2182,7 +2234,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['20-25 Tahun', '26-30 Tahun', '31-40 Tahun', '41-45 Tahun'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -2222,7 +2274,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['20-25 Tahun', '26-30 Tahun', '31-40 Tahun', '41-45 Tahun'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -2251,16 +2303,14 @@
 
     var options_umur_mtd_3 = {
         series: [{
-            name: "umur MTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -2274,12 +2324,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Umur',
             align: 'left'
         },
         legend: {
@@ -2294,9 +2342,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['20-25 Tahun', '26-30 Tahun', '31-40 Tahun', '41-45 Tahun'],
         },
         tooltip: {
             y: [{
@@ -2325,7 +2371,6 @@
         grid: {
             borderColor: '#f1f1f1',
         },
-
     };
     var chart_umur_mtd_3 = new ApexCharts(document.querySelector("#umur_mtd_chart_3"),
         options_umur_mtd_3);
@@ -2346,7 +2391,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['20-25 Tahun', '26-30 Tahun', '31-40 Tahun', '41-45 Tahun'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -2386,7 +2431,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D'],
+        labels: ['20-25 Tahun', '26-30 Tahun', '31-40 Tahun', '41-45 Tahun'],
         responsive: [{
             breakpoint: 991,
             options: {
@@ -2415,16 +2460,14 @@
 
     var options_umur_ytd_3 = {
         series: [{
-            name: "umur YTD",
-            data: [45, 52, 38, 24, 33, 26, 21, 20, 6, 8, 15, 10]
+            name: "Lending Jan 2023",
+            type:'column',
+            data: [45, 52, 38, 24]
         },
         {
-            name: "Page Views",
-            data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51, 32, 35]
-        },
-        {
-            name: 'Total Visits',
-            data: [87, 57, 74, 99, 75, 38, 62, 47, 82, 56, 45, 47]
+            name: "Lending Feb 2023",
+            type:'column',
+            data: [35, 41, 62, 42]
         }
         ],
         chart: {
@@ -2438,12 +2481,10 @@
             enabled: false
         },
         stroke: {
-            width: [5, 7, 5],
-            curve: 'straight',
-            dashArray: [0, 8, 5]
+            width: [1,1]
         },
         title: {
-            text: 'Page Statistics',
+            text: 'Lending Umur',
             align: 'left'
         },
         legend: {
@@ -2458,9 +2499,7 @@
             }
         },
         xaxis: {
-            categories: ['01 Jan', '02 Jan', '03 Jan', '04 Jan', '05 Jan', '06 Jan', '07 Jan', '08 Jan', '09 Jan',
-                '10 Jan', '11 Jan', '12 Jan'
-            ],
+            categories: ['20-25 Tahun', '26-30 Tahun', '31-40 Tahun', '41-45 Tahun'],
         },
         tooltip: {
             y: [{

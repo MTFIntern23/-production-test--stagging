@@ -801,27 +801,40 @@ class Cabang_model extends CI_Model
                 return null;
             }
         }else{
-            if($params == 'curr_year'||$params == 'last_year'||$params == 'curr_month'||$params == 'last_month'){
-                $this->db->select('YEAR(`periode`),MONTH(periode),'.$this->_table_pfm_armo.'.`id_armo`,'.$this->_table_armo.'.`nama_armo`,nama_spv,SUM(pencapaian) as pencapaian,target,(SUM(pencapaian)/target)*100 AS persentasi');
+            if($params == 'curr_year'||$params == 'last_year'||$params == 'curr_month'||$params == 'last_month'||$params == 'curr_month_inside'||$params == 'curr_month_outside'||$params == 'last_month_outside'||$params == 'last_month_inside'){
+                $this->db->select('YEAR(`periode`),MONTH(periode),'.$this->_table_pfm_armo.'.`id_armo`,'.$this->_table_armo.'.`nama_armo`,'.$this->_table_armo.'.`id_cabang`,nama_spv,COUNT(tgl_golive) as pencapaian,'.$this->_table_pfm_armo.'.target AS target,(COUNT(tgl_golive)/target)*100 AS persentasi');
             }else{
                 return null;
             }
-            $this->db->from($this->_table_pfm_armo);
-            $this->db->join($this->_table_armo,$this->_table_armo.'.id_armo='.$this->_table_pfm_armo.'.id_armo');
-            $this->db->join($this->_table_cbg,$this->_table_cbg.'.id_cabang='.$this->_table_armo.'.id_cabang');
-            $this->db->join($this->_table_spv,$this->_table_spv.'.id_spv='.$this->_table_pfm_armo.'.id_spv');
+            $this->db->from($this->_table_agreement);
+            $this->db->join($this->_table_armo,$this->_table_armo.'.id_armo='.$this->_table_agreement.'.id_armo');
+            $this->db->join($this->_table_pfm_armo,$this->_table_pfm_armo.'.id_armo='.$this->_table_agreement.'.id_armo');
+            $this->db->join($this->_table_cbg,$this->_table_cbg.'.id_cabang='.$this->_table_agreement.'.id_cabang');
+            $this->db->join($this->_table_spv,$this->_table_spv.'.id_spv='.$this->_table_armo.'.id_spv');
             if($params == 'curr_year'){
-                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%01-01") AND NOW())');
-                $this->db->group_by('YEAR(`periode`),`id_armo`');
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN  DATE_FORMAT(NOW() ,"%Y-%01-01") AND NOW()) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive`');
+                $this->db->group_by('YEAR(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
             }else if($params == 'last_year'){
-                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (YEAR(periode) = YEAR(curdate() - interval 1 year))');
-                $this->db->group_by('YEAR(`periode`),`id_armo`');
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (YEAR(tgl_golive) = YEAR(curdate() - interval 1 year)) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive`');
+                $this->db->group_by('YEAR(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
             }else if($params == 'curr_month'){
-                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW())');
-                $this->db->group_by('YEAR(`periode`),MONTH(`periode`),`id_armo`');
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive`');
+                $this->db->group_by('YEAR(`tgl_golive`),MONTH(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
+            }else if($params == 'curr_month_inside'){
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive` AND '.$this->_table_armo.'.id_cabang = '.$this->_table_cbg.'.`id_cabang`');
+                $this->db->group_by('YEAR(`tgl_golive`),MONTH(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
+            }else if($params == 'curr_month_outside'){
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN  DATE_FORMAT(NOW() ,"%Y-%m-01") AND NOW()) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive` AND '.$this->_table_armo.'.id_cabang != '.$this->_table_cbg.'.`id_cabang`');
+                $this->db->group_by('YEAR(`tgl_golive`),MONTH(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
             }else if($params == 'last_month'){
-                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (periode BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59"))');
-                $this->db->group_by('YEAR(`periode`),MONTH(`periode`),`id_armo`');
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive`');
+                $this->db->group_by('YEAR(`tgl_golive`),MONTH(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
+            }else if($params == 'last_month_inside'){
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive` AND '.$this->_table_armo.'.id_cabang = '.$this->_table_cbg.'.`id_cabang`');
+                $this->db->group_by('YEAR(`tgl_golive`),MONTH(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
+            }else if($params == 'last_month_outside'){
+                $this->db->where($this->_table_cbg.'.id_cabang = '.$cabangUser.' AND (tgl_golive BETWEEN DATE_FORMAT(NOW() - INTERVAL 1 MONTH, "%Y-%m-01 00:00:00") AND DATE_FORMAT(LAST_DAY(NOW() - INTERVAL 1 MONTH), "%Y-%m-%d 23:59:59")) AND '.$this->_table_pfm_armo.'.periode = '.$this->_table_agreement.'.`tgl_golive` AND '.$this->_table_armo.'.id_cabang != '.$this->_table_cbg.'.`id_cabang`');
+                $this->db->group_by('YEAR(`tgl_golive`),MONTH(`tgl_golive`),'.$this->_table_armo.'.`id_armo`');
             }else{
                 return null;
             }
