@@ -25,7 +25,7 @@
     <!-- Favicons -->
     <link href="<?= base_url('assets'); ?>/img/logo-icon-mtf.png" rel="icon">
     <link href="<?= base_url('assets'); ?>/img/logo-icon-mtf.png" rel="apple-touch-icon">
-    <!-- Custom fonts for this template-->
+    <!-- Custom fonts for this page-->
     <link href="<?= base_url('assets'); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -48,6 +48,8 @@
     <script src="<?= base_url('assets'); ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script>
         var timerStart = Date.now();
+        sessionStorage.setItem('is_aov',false);
+        localStorage.removeItem('endTime')
     </script>
 </head>
 

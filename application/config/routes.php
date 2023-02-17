@@ -68,6 +68,7 @@ $route['history_assets_detail/(:any)'] = 'strategi_penjualan/history_assets_deta
 $route['history_assets_jbrand_detail/(:any)'] = 'strategi_penjualan/history_assets_jbrand_detail';
 $route['segment_customer'] = 'strategi_penjualan/segment_customer';
 $route['profit'] = 'strategi_penjualan/profit';
+$route['performa_profit_detail/(:any)'] = 'strategi_penjualan/performa_profit_detail';
 $route['customer_retention'] = 'strategi_penjualan/customer_retention';
 //strategi_collection
 $route['epd_monitoring'] = 'strategi_collection/epd_monitoring';

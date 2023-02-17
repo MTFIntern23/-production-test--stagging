@@ -3,6 +3,8 @@
 <script>
         // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_kecamatan',false);
+    sessionStorage.setItem('is_aov',true);
+    sessionStorage.setItem('is_aov',true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -128,14 +130,11 @@
                                             <td >
                                                 <?= htmlentities($row->mtd_unit);?>
                                             </td>
-                                            <td>
-                                                <a href="<?php echo base_url();?>history_assets_detail/<?php echo $CI->security_idx->encrypt_url($row->id_tipe);?>"
-                                                    onclick="sessionStorage.setItem('is_mtd', true);">
-                                                    <button id="to_detail_mtd" type="button"
-                                                        class="btn_session badge btn btn-primary me-2"><i
-                                                            class='bx bx-detail me-1'></i>
-                                                        Detail</button></a>
-                                            </td>
+                                            <td><button onclick="window.location.href='<?= site_url('history_assets_detail/'.$CI->security_idx->encrypt_url($row->id_tipe))?>';sessionStorage.setItem('is_mtd', true);"
+                                                type="button"
+                                                class="btn_session badge btn btn-primary me-2"><i
+                                                    class='bx bx-detail me-1'></i>
+                                                Detail</button></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
@@ -190,14 +189,11 @@
                                             <td >
                                                 <?= htmlentities($row->mtd_unit);?>
                                             </td>
-                                            <td>
-                                                <a href="<?php echo base_url();?>history_assets_detail/<?php echo $CI->security_idx->encrypt_url($row->id_tipe);?>"
-                                                    onclick="sessionStorage.setItem('is_mtd', false);">
-                                                    <button id="to_detail_mtd" type="button"
-                                                        class="btn_session badge btn btn-primary me-2"><i
-                                                            class='bx bx-detail me-1'></i>
-                                                        Detail</button></a>
-                                            </td>
+                                            <td><button onclick="window.location.href='<?= site_url('history_assets_detail/'.$CI->security_idx->encrypt_url($row->id_tipe))?>';sessionStorage.setItem('is_mtd', false);"
+                                                type="button"
+                                                class="btn_session badge btn btn-primary me-2"><i
+                                                    class='bx bx-detail me-1'></i>
+                                                Detail</button></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

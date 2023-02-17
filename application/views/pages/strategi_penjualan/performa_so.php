@@ -4,6 +4,7 @@
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand', false);
     sessionStorage.setItem('is_kecamatan', false);
+    sessionStorage.setItem('is_aov',true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -23,6 +24,25 @@
                                 type="button"><i class='bx bxs-color me-1'></i>Lending MTD</button>
                             <button id="btn-chart-ytd" class="badge btn btn-secondary" onclick="show_ytd_chart()"
                                 type="button"><i class='bx bxs-color me-1'></i>Lending YTD</button>
+                        </div>
+                    </div>
+                    <div class="col mt-2 mt-xl-0 mt-lg-0 mt-md-0">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <div class="btn-group">
+                                <button type="button" class="badge btn btn-info dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class='bx bxs-calendar me-1'></i>Performa <span class="month-so-selected">Februari</span>
+                                </button>
+                                <ul class="dropdown-menu month-so">
+                                    <?php
+                                        $months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+                                    ?>
+                                    <?php 
+                                        for($idx = 0; $idx < date("m"); $idx++) { ?>
+                                            <li><a class="dropdown-item" href="#"> <?= $months[$idx] ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,12 +132,11 @@
                                         <?= htmlentities($row->mtd_persentasi);?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo base_url();?>performa_so_detail/<?php echo $CI->security_idx->encrypt_url($row->id_so);?>"
-                                            onclick="sessionStorage.setItem('is_mtd', true);">
-                                            <button id="to_detail_mtd" type="button"
+                                                <button onclick="window.location.href='<?= site_url('performa_so_detail/'.$CI->security_idx->encrypt_url($row->id_so))?>';sessionStorage.setItem('is_mtd', true);"
+                                                type="button"
                                                 class="btn_session badge btn btn-primary me-2"><i
                                                     class='bx bx-detail me-1'></i>
-                                                Detail</button></a>
+                                                Detail</button>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -177,12 +196,11 @@
                                     <td>
                                         <?= htmlentities($row->ytd_persentasi);?>
                                     </td>
-                                    <td> <a href="<?php echo base_url();?>performa_so_detail/<?php echo $CI->security_idx->encrypt_url($row->id_so);?>"
-                                            onclick="sessionStorage.setItem('is_mtd', false);">
-                                            <button id="to_detail_ytd" type="button"
+                                    <td><button onclick="window.location.href='<?= site_url('performa_so_detail/'.$CI->security_idx->encrypt_url($row->id_so))?>';sessionStorage.setItem('is_mtd', false);"
+                                                type="button"
                                                 class="btn_session badge btn btn-primary me-2"><i
                                                     class='bx bx-detail me-1'></i>
-                                                Detail</button></a></td>
+                                                Detail</button></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>

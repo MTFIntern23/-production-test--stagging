@@ -15,14 +15,15 @@
         public function index()
         {
             $id_profit = urldecode($this->uri->segment(2));
+            $id = $this->security_idx->decrypt_url($id_profit);
             $data = [
                 'title' => 'Performa Profit Detail | MyBranch by CPM',
                 'current_user'=>$this->auth_model->current_user(),
                 'current_cabang'=>$this->cabang_model->current_cabang(),
-                'current_month_detail_profit'=>$this->cabang_model->profit_cabang($id_profit,'curr_month'),
-                'last_month_detail_profit'=>$this->cabang_model->profit_cabang($id_profit,'last_month'),
-                'current_year_detail_profit'=>$this->cabang_model->profit_cabang($id_profit,'curr_year'),
-                'last_year_detail_profit'=>$this->cabang_model->profit_cabang($id_profit,'last_year'),
+                'current_month_detail_profit'=>$this->cabang_model->profit_cabang($id,'curr_month'),
+                'last_month_detail_profit'=>$this->cabang_model->profit_cabang($id,'last_month'),
+                'current_year_detail_profit'=>$this->cabang_model->profit_cabang($id,'curr_year'),
+                'last_year_detail_profit'=>$this->cabang_model->profit_cabang($id,'last_year'),
                 'identifier'=>'is_profit_cabang',
                 'submenu_identity'=>'',
             ];

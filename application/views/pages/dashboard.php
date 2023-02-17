@@ -2,6 +2,7 @@
 <script>
     sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand', false);
+    sessionStorage.setItem('is_aov',true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <div id="adm-content" class="row">
@@ -1110,9 +1111,9 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a href="<?= site_url('lending')?>"><button
+                                                <button onclick="window.location.href='<?= site_url('lending')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1130,13 +1131,22 @@
                                     </div> -->
                                     <div id="row-db-epd-monitoring" class="row mb-4 me-md-4 d-none">
                                         <div class="col-12 ms-1  mb-4">
-                                            <div id="dashboard_epd_monitoring_chart"></div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div id="dashboard_epd_monitoring_chart"></div>
+                                                    
+                                                </div>
+                                                <div class="col">
+                                                    <div id="dashboard_epd_monitoring_chart_2"></div>
+
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a href="<?= site_url('epd_monitoring')?>"> <button
+                                                <button onclick="window.location.href='<?= site_url('epd_monitoring')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1146,9 +1156,9 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a href="<?= site_url('tod_monitoring')?>"> <button
+                                                <button onclick="window.location.href='<?= site_url('tod_monitoring')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1158,9 +1168,9 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a href="<?= site_url('npl_monitoring')?>"> <button
+                                                 <button onclick="window.location.href='<?= site_url('npl_monitoring')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1170,9 +1180,9 @@
                                         </div>
                                         <div class="col-12">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                                <a href="<?= site_url('cwo_monitoring')?>"> <button
+                                                 <button onclick="window.location.href='<?= site_url('cwo_monitoring')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1223,9 +1233,9 @@
                                     <div class="row mb-4">
                                         <div class="col">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                                                <a href="<?=site_url('performa_so')?>"> <button
+                                            <button onclick="window.location.href='<?= site_url('performa_so')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1278,9 +1288,9 @@
                                     <div class="row mb-4">
                                         <div class="col">
                                             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                                                <a href="<?=site_url('performa_dealer')?>"> <button
+                                            <button onclick="window.location.href='<?= site_url('performa_dealer')?>'"
                                                         class="badge btn btn-primary ms-1" type="button"><i
-                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button></a>
+                                                            class='bx bx-right-arrow-alt me-1'></i>See more</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1569,29 +1579,21 @@
         series: [{
             name: 'EPD 8-30 (' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
-            data: persentasi_0_mtd
+            data: [persentasi_0_mtd[fields_mtd.length-1]]
         },{
             name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
-            type: 'line',
-            data: persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)
-        },{
-            name: 'EPD >30 (' + month_name((new Date().getMonth()+1)) +')',
             type: 'column',
-            data: persentasi_1_mtd
-        },{
-            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
-            type: 'line',
-            data: persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)
+            data: [persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,fields_mtd.length)]
         }],
         chart: {
             height: 350,
-            type: 'line',
+            type: 'bar',
         },
         plotOptions: {
             bar: {
                 borderRadius: 2,
                 dataLabels: {
-                    position: 'bottom',
+                    position: 'top',
                 },
             }
         },
@@ -1600,13 +1602,13 @@
             formatter: function (val) {
                 return val + " %";
             },
-            enabledOnSeries: [1,3]
+            enabledOnSeries: [0,1]
         },
         stroke: {
-            width: [1,4,1,4]
+            width: [1,1]
         },
         xaxis: {
-            categories: epd_fields_mtd,
+            categories: [epd_fields_mtd[fields_mtd.length-1]],
             tooltip: {
                 enabled: false
             }
@@ -1660,6 +1662,94 @@
 
         var chart_db_epd = new ApexCharts(document.querySelector("#dashboard_epd_monitoring_chart"), options_dashboard_epd);
         chart_db_epd.render();
+    var options_dashboard_epd_2 = {
+        colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
+        series: [{
+            name: 'EPD >30 (' + month_name((new Date().getMonth()+1)) +')',
+            type: 'column',
+            data: [persentasi_1_mtd[fields_mtd.length-1]]
+        },{
+            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
+            type: 'column',
+            data: [persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,fields_mtd.length)]
+        }],
+        chart: {
+            height: 350,
+            type: 'bar',
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 2,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + " %";
+            },
+            enabledOnSeries: [0,1]
+        },
+        stroke: {
+            width: [1,1]
+        },
+        xaxis: {
+            categories: [epd_fields_mtd[fields_mtd.length-1]],
+            tooltip: {
+                enabled: false
+            }
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true,
+                },
+                axisBorder: {
+                    show: true,
+                    color: '#008FFB'
+                },
+                labels: {
+                    style: {
+                        colors: '#008FFB',
+                    }
+                },
+                title: {
+                    text: "OSP ALL (M)",
+                    style: {
+                        color: '#008FFB',
+                    }
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+        ],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return val + " % (Persen)"
+                }
+            }
+        },
+        legend: {
+            horizontalAlign: 'center',
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                dataLabels: {
+                    formatter: function (val) {
+                        return val;
+                    },
+                },
+            }
+        }],
+        };
+
+        var chart_db_epd_2 = new ApexCharts(document.querySelector("#dashboard_epd_monitoring_chart_2"), options_dashboard_epd_2);
+        chart_db_epd_2.render();
 
     //chart tod dashboard
     var options_dashboard_tod = {

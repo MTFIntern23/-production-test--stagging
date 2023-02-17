@@ -22,19 +22,19 @@
                         placeholder="Masukkan Username" value="<?= set_value('username') ?>">
                     <small class="notyf-err text-danger pl-3 d-none"></small>
                 </div>
-                <div class="form-group password-container wow fadeInUp" data-wow-delay="0.6s">
+                <div class="form-group password-container wow fadeInUp mb-4" data-wow-delay="0.6s">
                     <div class="mb-2">Password</div>
                     <input type="password" class="form-control form-control-user" id="password" name="password"
-                        placeholder="Password">
+                        placeholder="Password" autocomplete="off">
                     <i class="bx bx-low-vision eye-hide" onclick="toggle()" id="eyes"></i>
                     <small class="notyf-err text-danger pl-3 d-none"></small>
                 </div>
-                <div class="form-group wow fadeInUp" data-wow-delay="0.9s">
+                <!-- <div class="form-group" style="visibility: hidden;" >
                     <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck" name="remember_me">
                         <label class="custom-control-label" for="customCheck">Stay logged in</label>
                     </div>
-                </div>
+                </div> -->
                 <button type="button" onclick="authLogin()" class="btn btn-primary btn-user btn-block wow fadeInUp"
                     id="btn-auth" data-wow-delay="1.1s">
                     Login

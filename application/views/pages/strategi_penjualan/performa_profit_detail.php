@@ -1,7 +1,10 @@
 <!-- Content -->
+<script>
+    sessionStorage.setItem('is_aov',true);
+</script>
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
-    <span class="text-muted fw-light">Performa Profit /</span> Performa Profit Detail</h5>
+    <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light"><span class="bx bx-home-circle"></span> /</span>
+    <span class="text-muted fw-light">Profitabilitas Cabang /</span> Komponen Profit Detail</h5>
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
@@ -15,7 +18,7 @@
                     </div>
                 </div>
                 <h5 class="card-header text-dark fs-4 text-start">
-                    Performa Profit<b>
+                    Komponen Profit<b>
                         <?= $current_cabang->nama_cabang;?>
                     </b> <br>
                     <p style="font-size: 38px;margin-top:10px;"><b><?= $current_month_detail_profit[0]->komponen_profit;?></b></p>

@@ -1,11 +1,7 @@
 <!-- Content -->
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_jbrand', false);
-    sessionStorage.setItem('is_jbrand_seg', false);
-    sessionStorage.setItem('is_jbrand_seg_1', false);
-    sessionStorage.setItem('is_jbrand_seg_2', false);
-    sessionStorage.setItem('is_jbrand_seg_3', false);
+    sessionStorage.setItem('is_aov',true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -22,28 +18,28 @@
                     <div class="row ms-2 me-2">
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
-                                <button  id="btn-historiw" class="badge btn bg-chart-active-2" onclick="show_pendikan()"
-                                    type="button"><i class='bx bxs-graduation me-1'></i>Jenis Pendidikan</button>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                            <div class="d-md-block">
-                                    <button  id="btn-historiw-jbrand" class="badge btn btn-history-null "
-                                    onclick="show_kecamatan()" type="button"><i
-                                        class='bx bxs-school me-1'></i>Kecamatan</button>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                            <div class="d-md-block">
-                                    <button  id="btn-historiw-jbrand-1" class="badge btn btn-history-null "
-                                    onclick="show_pekerjaan()" type="button"><i class='bx bx-briefcase-alt-2'></i> Jenis
+                                    <button  id="btn-historiw" class="badge btn bg-chart-active-2"
+                                    onclick="show_this_field('pekerjaan-field',this.id)" type="button"><i class='bx bx-briefcase-alt-2'></i> Jenis
                                     Pekerjaan</button>
                                                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
+                                <button  id="btn-historiw-jbrand" class="badge btn btn-history-null " onclick="show_this_field('pendidikan-field',this.id)"
+                                    type="button"><i class='bx bxs-graduation me-1'></i>Jenis Pendidikan</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <div class="d-md-block">
+                                    <button  id="btn-historiw-jbrand-1" class="badge btn btn-history-null "
+                                    onclick="show_this_field('kecamatan-field',this.id)" type="button"><i
+                                        class='bx bxs-school me-1'></i>Kecamatan</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <div class="d-md-block">
                                     <button  id="btn-historiw-jbrand-2" class="badge btn btn-history-null "
-                                    onclick="show_gaji()" type="button"><i class='bx bx-money-withdraw'></i>
+                                    onclick="show_this_field('gaji-field',this.id)" type="button"><i class='bx bx-money-withdraw'></i>
                                     Gaji</button>
  
                             </div>
@@ -51,14 +47,14 @@
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
                             <button  id="btn-historiw-jbrand-3" class="badge btn btn-history-null "
-                                    onclick="show_umur()" type="button"><i class='bx bxs-face'></i>
+                            onclick="show_this_field('umur-field',this.id)" type="button"><i class='bx bxs-face'></i>
                                     Umur</button>
                             </div>
                         </div>
                         
                     </div>
                 </div>
-                <div id="pendidikan-field">
+                <div id="pendidikan-field" class="d-none">
                     <div class="row mt-4 mb-4 ms-2 me-2">
                         <div class="col">
                             <div class="d-grid gap-2 d-md-block">
@@ -69,16 +65,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="row  ms-2 me-2 mt-3">
-                        <div class="col">
-                            <div class="d-grid gap-2 d-md-block">
-                                <h5 class="text-dark fs-5 text-start">
-                                    <b>Top 5</b> Jenis Pendidikan Cabang
-                                    <?= $current_cabang->nama_cabang;?>
-                                </h5>
-                            </div>
-                        </div>
-                    </div> -->
                     <div id="chart_mtd">
                         <div class="row mb-4">
                             <div class="col-xl-3 col-lg-3 col-md-3 col-6 first_chart_pd ">
@@ -343,7 +329,7 @@
                     </div>
                 </div>
 
-                <div id="pekerjaan-field" class="d-none">
+                <div id="pekerjaan-field">
                     <div class="row mt-4 mb-4 ms-2 me-2">
                         <div class="col">
                             <div class="d-grid gap-2 d-md-block">
@@ -806,365 +792,31 @@
     const btn_histori_jbrand_1 = document.querySelector('#btn-historiw-jbrand-1')
     const btn_histori_jbrand_2 = document.querySelector('#btn-historiw-jbrand-2')
     const btn_histori_jbrand_3 = document.querySelector('#btn-historiw-jbrand-3')
-
-    // row
+    const btns_db = [btn_histori,btn_histori_jbrand,btn_histori_jbrand_1,btn_histori_jbrand_2,btn_histori_jbrand_3]
+    //fields
     const pendidikan_field = document.querySelector('#pendidikan-field')
     const kecamatan_field = document.querySelector('#kecamatan-field')
     const pekerjaan_field = document.querySelector('#pekerjaan-field')
     const gaji_field = document.querySelector('#gaji-field')
     const umur_field = document.querySelector('#umur-field')
-
-    //1 kecamatan
-    //btn session
-    // merubah warna kecamatan
-    if ((sessionStorage.getItem("is_jbrand_seg") == 'true')) {
-        if (btn_histori_jbrand.classList.contains('btn-history-null')) {
-            btn_histori_jbrand.classList.remove('btn-history-null');
+    const fields_db = [pendidikan_field,kecamatan_field,pekerjaan_field,gaji_field,umur_field]
+    function show_this_field(field_name,btn_name){
+        document.querySelector('#'+field_name).classList.remove('d-none');
+        fields_db.forEach((field,idx)=>{
+            if (field!=document.querySelector('#'+field_name)&&!field.classList.contains('d-none')) {
+                field.classList.add('d-none');
+            }
+        })
+        btns_db.forEach((btn,idx)=>{
+            if (btn!=document.querySelector('#'+btn_name)&&btn.classList.contains('bg-chart-active-2')) {
+                btn.classList.remove('bg-chart-active-2');
+                btn.classList.add('btn-history-null');
+            }
+        })
+        if (!document.querySelector('#'+btn_name).classList.contains('bg-chart-active-2')) {
+            document.querySelector('#'+btn_name).classList.remove('btn-history-null');
+            document.querySelector('#'+btn_name).classList.add('bg-chart-active-2');
         }
-        if (!btn_histori_jbrand.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand.classList.add('bg-chart-active-2');
-        }
-        btn_histori.classList.remove('bg-chart-active-2');
-        btn_histori.classList.add('btn-history-null');
-        btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand_1.classList.add('btn-history-null');
-    }
-    //chart field session
-    if (sessionStorage.getItem("is_jbrand_seg") == 'true') {
-        kecamatan_field.classList.remove('d-none'); // block = menampilkan
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none'); // hilangkan warna pendidikan
-        }
-    } else {
-        pendidikan_field.classList.remove('d-none'); // jika tidak tampilkan pendidikan dan hilangkan kecamatan, pekerjaan
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none');
-        }
-
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none');
-        }
-    }
-
-    // 2 jenis pekerjaan
-    //btn session
-    if ((sessionStorage.getItem("is_jbrand_seg_1") == 'true')) {
-        if (btn_histori_jbrand_1.classList.contains('btn-history-null')) {
-            btn_histori_jbrand_1.classList.remove('btn-history-null');
-        }
-        if (!btn_histori_jbrand_1.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_1.classList.add('bg-chart-active-2');
-        }
-        btn_histori.classList.remove('bg-chart-active-2');
-        btn_histori.classList.add('btn-history-null');
-        btn_histori_jbrand.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand.classList.add('btn-history-null');
-    }
-    //chart field session
-    if (sessionStorage.getItem("is_jbrand_seg_1") == 'true') {
-        pekerjaan_field.classList.remove('d-none'); // tampilkan pekerjaan 
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none'); // hilangkan warna pendidikan
-        }
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none'); // hilangkan warna pendidikan
-        }
-    } else {
-        pendidikan_field.classList.remove('d-none');
-        kecamatan_field.classList.add('d-none'); // jika tidak maka tampilkan pendidikan atau kecamatan
-
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none');
-        }
-    }
-
-    // 3 Gaji
-    //btn session
-    if ((sessionStorage.getItem("is_jbrand_seg_2") == 'true')) {
-        if (btn_histori_jbrand_2.classList.contains('btn-history-null')) {
-            btn_histori_jbrand_2.classList.remove('btn-history-null');
-        }
-        if (!btn_histori_jbrand_2.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_2.classList.add('bg-chart-active-2');
-        }
-        btn_histori.classList.remove('bg-chart-active-2');
-        btn_histori.classList.add('btn-history-null');
-        btn_histori_jbrand.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand.classList.add('btn-history-null');
-        btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand_1.classList.add('btn-history-null');
-    }
-    //chart field session
-    if (sessionStorage.getItem("is_jbrand_seg_2") == 'true') {
-        gaji_field.classList.remove('d-none'); // tampilkan gaji 
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none'); // hilangkan warna pendidikan
-        }
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none'); // hilangkan warna kecamatan
-        }
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none'); // hilangkan warna pekerjaan
-        }
-    } else {
-        pendidikan_field.classList.remove('d-none');
-        kecamatan_field.classList.add('d-none'); // jika tidak maka tampilkan pendidikan, kecamatan, pekerjaan
-        pekerjaan_field.classList.add('d-none');
-
-        if (!gaji_field.classList.contains('d-none')) {
-            gaji_field.classList.add('d-none');
-        }
-    }
-
-    // 4 Umur
-    //btn session
-    if ((sessionStorage.getItem("is_jbrand_seg_3") == 'true')) {
-        if (btn_histori_jbrand_3.classList.contains('btn-history-null')) {
-            btn_histori_jbrand_3.classList.remove('btn-history-null');
-        }
-        if (!btn_histori_jbrand_3.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_3.classList.add('bg-chart-active-2');
-        }
-        btn_histori.classList.remove('bg-chart-active-2');
-        btn_histori.classList.add('btn-history-null');
-        btn_histori_jbrand.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand.classList.add('btn-history-null');
-        btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand_1.classList.add('btn-history-null');
-        btn_histori_jbrand_2.classList.remove('bg-chart-active-2');
-        btn_histori_jbrand_2.classList.add('btn-history-null');
-    }
-    //chart field session
-    if (sessionStorage.getItem("is_jbrand_seg_3") == 'true') {
-        umur_field.classList.remove('d-none'); // tampilkan umur 
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none'); // hilangkan warna pendidikan
-        }
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none'); // hilangkan warna kecamatan
-        }
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none'); // hilangkan warna pekerjaan
-        }
-        if (!gaji_field.classList.contains('d-none')) {
-            gaji_field.classList.add('d-none'); // hilangkan warna gaji
-        }
-    } else {
-        pendidikan_field.classList.remove('d-none');
-        kecamatan_field.classList.add('d-none'); // jika tidak maka tampilkan pendidikan, kecamatan, pekerjaan, gaji
-        pekerjaan_field.classList.add('d-none');
-        gaji_field.classList.add('d-none');
-
-        if (!umur_field.classList.contains('d-none')) {
-            umur_field.classList.add('d-none');
-        }
-    }
-
-    // show btn
-    function show_pendikan() {
-        sessionStorage.setItem('is_jbrand_seg', false);
-        sessionStorage.setItem('is_jbrand_seg_1', false);
-        sessionStorage.setItem('is_jbrand_seg_2', false);
-        sessionStorage.setItem('is_jbrand_seg_3', false);
-        pendidikan_field.classList.remove('d-none');
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none');
-        }
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none');
-        }
-        if (!gaji_field.classList.contains('d-none')) {
-            gaji_field.classList.add('d-none');
-        }
-        if (!umur_field.classList.contains('d-none')) {
-            umur_field.classList.add('d-none');
-        }
-        //btn
-        if (btn_histori_jbrand.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_1.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_1.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_2.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_2.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_2.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_3.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_3.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_3.classList.add('btn-history-null');
-        }
-        if (!btn_histori.classList.contains('bg-chart-active-2')) {
-            btn_histori.classList.remove('btn-history-null');
-            btn_histori.classList.add('bg-chart-active-2');
-        }
-        show_mtd_chart()
-    }
-    function show_kecamatan() {
-        sessionStorage.setItem('is_jbrand_seg', true);
-        sessionStorage.setItem('is_jbrand_seg_1', false);
-        sessionStorage.setItem('is_jbrand_seg_2', false);
-        sessionStorage.setItem('is_jbrand_seg_3', false);
-        kecamatan_field.classList.remove('d-none');
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none');
-        }
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none');
-        }
-        if (!gaji_field.classList.contains('d-none')) {
-            gaji_field.classList.add('d-none');
-        }
-        if (!umur_field.classList.contains('d-none')) {
-            umur_field.classList.add('d-none');
-        }
-        //btn
-        if (btn_histori.classList.contains('bg-chart-active-2')) {
-            btn_histori.classList.remove('bg-chart-active-2');
-            btn_histori.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_1.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_1.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_2.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_2.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_2.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_3.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_3.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_3.classList.add('btn-history-null');
-        }
-        if (!btn_histori_jbrand.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand.classList.remove('btn-history-null');
-            btn_histori_jbrand.classList.add('bg-chart-active-2');
-        }
-        show_mtd_chart()
-    }
-    function show_pekerjaan() {
-        sessionStorage.setItem('is_jbrand_seg', false);
-        sessionStorage.setItem('is_jbrand_seg_1', true);
-        sessionStorage.setItem('is_jbrand_seg_2', false);
-        sessionStorage.setItem('is_jbrand_seg_3', false);
-        pekerjaan_field.classList.remove('d-none');
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none');
-        }
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none');
-        }
-        if (!gaji_field.classList.contains('d-none')) {
-            gaji_field.classList.add('d-none');
-        }
-        if (!umur_field.classList.contains('d-none')) {
-            umur_field.classList.add('d-none');
-        }
-        //btn
-        if (btn_histori.classList.contains('bg-chart-active-2')) {
-            btn_histori.classList.remove('bg-chart-active-2');
-            btn_histori.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_2.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_2.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_2.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_3.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_3.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_3.classList.add('btn-history-null');
-        }
-        if (!btn_histori_jbrand_1.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_1.classList.remove('btn-history-null');
-            btn_histori_jbrand_1.classList.add('bg-chart-active-2');
-        }
-        show_mtd_chart()
-    }
-    function show_gaji() {
-        sessionStorage.setItem('is_jbrand_seg', false);
-        sessionStorage.setItem('is_jbrand_seg_1', false);
-        sessionStorage.setItem('is_jbrand_seg_2', true);
-        sessionStorage.setItem('is_jbrand_seg_3', false);
-        gaji_field.classList.remove('d-none');
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none');
-        }
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none');
-        }
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none');
-        }
-        if (!umur_field.classList.contains('d-none')) {
-            umur_field.classList.add('d-none');
-        }
-        //btn
-        if (btn_histori.classList.contains('bg-chart-active-2')) {
-            btn_histori.classList.remove('bg-chart-active-2');
-            btn_histori.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_1.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_1.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_3.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_3.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_3.classList.add('btn-history-null');
-        }
-        if (!btn_histori_jbrand_2.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_2.classList.remove('btn-history-null');
-            btn_histori_jbrand_2.classList.add('bg-chart-active-2');
-        }
-        show_mtd_chart()
-    }
-    function show_umur() {
-        sessionStorage.setItem('is_jbrand_seg', false);
-        sessionStorage.setItem('is_jbrand_seg_1', false);
-        sessionStorage.setItem('is_jbrand_seg_2', false);
-        sessionStorage.setItem('is_jbrand_seg_3', true);
-        umur_field.classList.remove('d-none');
-        if (!pendidikan_field.classList.contains('d-none')) {
-            pendidikan_field.classList.add('d-none');
-        }
-        if (!kecamatan_field.classList.contains('d-none')) {
-            kecamatan_field.classList.add('d-none');
-        }
-        if (!pekerjaan_field.classList.contains('d-none')) {
-            pekerjaan_field.classList.add('d-none');
-        }
-        if (!gaji_field.classList.contains('d-none')) {
-            gaji_field.classList.add('d-none');
-        }
-        //btn
-        if (btn_histori.classList.contains('bg-chart-active-2')) {
-            btn_histori.classList.remove('bg-chart-active-2');
-            btn_histori.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_1.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_1.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_1.classList.add('btn-history-null');
-        }
-        if (btn_histori_jbrand_2.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_2.classList.remove('bg-chart-active-2');
-            btn_histori_jbrand_2.classList.add('btn-history-null');
-        }
-        if (!btn_histori_jbrand_3.classList.contains('bg-chart-active-2')) {
-            btn_histori_jbrand_3.classList.remove('btn-history-null');
-            btn_histori_jbrand_3.classList.add('bg-chart-active-2');
-        }
-        show_mtd_chart()
     }
     let setSubFilter = function(dataFilter) {
         let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "dealer"]

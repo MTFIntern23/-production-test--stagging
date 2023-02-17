@@ -28,13 +28,17 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link 
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
+        <link
+    rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"/>
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css"
-        integrity="sha512-cn16Qw8mzTBKpu08X0fwhTSv02kK/FojjNLz0bwp2xJ4H+yalwzXKFw/5cLzuBZCxGWIA+95X4skzvo8STNtSg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link
+    rel="preload"
+    href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"/>
     <!-- Core CSS -->
     <link rel="preload" href="<?= base_url('assets'); ?>/css/core.css" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -43,17 +47,26 @@
     <link rel="preload" href="<?= base_url('assets'); ?>/css/demo.css" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
     <!-- Vendors CSS -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/css/perfect-scrollbar.css"
-        integrity="sha512-2xznCEl5y5T5huJ2hCmwhvVtIGVF1j/aNUEJwi/BzpWPKEzsZPGpwnP1JrIMmjPpQaVicWOYVu8QvAIg9hwv9w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+    rel="preload"
+    href="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/css/perfect-scrollbar.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.css"
         integrity="sha512-Ax++m07N1ygXmTSeRlQZnB5leVSw9eDeHQZ2ltn7oln1U3d+6d+/u1JEZ/zY/tLtmmEL741jEnDUlmWttBPLOA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link
+    rel="preload"
+    href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"/>
+    <link
+    rel="preload"
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"/>
     <!-- Helpers -->
-    <script src="<?= base_url('assets'); ?>/js/helpers.js">
+    <script  src="<?= base_url('assets'); ?>/js/helpers.js">
     </script>
     <script src="<?= base_url('assets'); ?>/js/config.js">
     </script>
@@ -74,6 +87,32 @@
                 }
             }
         };
+        //countdown
+        var interval = 7200000;
+        function reset()
+        {
+            localStorage.endTime = +new Date + interval;
+        }
+        if(!localStorage.endTime){reset()};
+        setInterval(function()
+        {
+            var remaining = localStorage.endTime - new Date;
+            if( remaining >= 0 )
+            {
+                var milliseconds = Math.floor((remaining % 1000) / 100),
+                    seconds = Math.floor((remaining / 1000) % 60),
+                    minutes = Math.floor((remaining / (1000 * 60)) % 60),
+                    hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+                $('#timer').text( hours + ":" + minutes + ":" + seconds);
+                if(hours<=0&&minutes<=0&&seconds<=0){window.location.href = '<?= site_url('auth/logout')?>'}
+            } else{
+                reset();
+            }
+        }, 100);
+        //global func
         function nFormatter(num, digits = 1) {
             const lookup = [
                 {value: 1, symbol: " "},
@@ -285,10 +324,20 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="navbar-nav align-items-center timer-fields">
+                            <div class="nav-item d-flex justify-content-end align-items-center">
+                            <button class="btn btn-danger btn-timer" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Disabled popover" data-aos="fade-left"
+                                                       >
+                                                <i class="bx bx-time"></i>
+                                                <span id="timer"></span>
+                                            </button>
+                            </div>
+                        </div>
                         <!-- /Search -->
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
+
                                 <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
                                     <div class="row">
                                         <div class="col pt-lg-3 pt-md-3">
@@ -353,3 +402,15 @@
                 <!-- / Navbar -->
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
+                <script>
+                    var btn_time = document.querySelector('.btn-timer')
+                    if(sessionStorage.getItem('is_aov')=='true'){
+                        if(btn_time.hasAttribute('data-bs-toggle'))btn_time.removeAttribute('data-bs-toggle')
+                        if(btn_time.hasAttribute('data-bs-trigger'))btn_time.removeAttribute('data-bs-trigger')
+                        if(btn_time.hasAttribute('data-bs-content'))btn_time.removeAttribute('data-bs-content')
+                        if(btn_time.hasAttribute('data-bs-aos'))btn_time.removeAttribute('data-bs-aos')
+                        if(btn_time.hasAttribute('data-aos'))btn_time.removeAttribute('data-aos')
+                        if(btn_time.classList.contains('aos-init'))btn_time.classList.remove('aos-init')
+                        if(btn_time.classList.contains('aos-animate'))btn_time.classList.remove('aos-animate')
+                    }
+                </script>

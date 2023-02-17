@@ -3,6 +3,7 @@
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand', false);
     sessionStorage.setItem('is_kecamatan', false);
+    sessionStorage.setItem('is_aov',true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>

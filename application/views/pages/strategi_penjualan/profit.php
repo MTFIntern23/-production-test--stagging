@@ -1,12 +1,14 @@
 <!-- Content -->
+<?php $CI =& get_instance(); ?>
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand', false);
     sessionStorage.setItem('is_kecamatan', false);
+    sessionStorage.setItem('is_aov',true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
-        Profit Cabang</h5>
+    <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light"><span class="bx bx-home-circle"></span> /</span>
+        Profitabilitas Cabang</h5>
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
@@ -59,6 +61,7 @@
                                     <th>Komponen Profit</th>
                                     <th>Profit <span class="show_prev_month"></span> (M)</th>
                                     <th>Profit <span class="show_month"></span> (M)</th>
+                                    <th>Action</th>
                                     <!-- <th>Est Profit V2 <span class="show_month"></span> (M)</th>
                                     <th>Simulasi Profit V2 <span class="show_month"></span> (M)</th> -->
                                 </tr>
@@ -80,6 +83,11 @@
                                     <td class="get_val">
                                         <?= htmlentities($row->profit);?>
                                     </td>
+                                    <td><button onclick="window.location.href='<?= site_url('performa_profit_detail/'.$CI->security_idx->encrypt_url($row->id_komponen))?>';sessionStorage.setItem('is_mtd', true);"
+                                                type="button"
+                                                class="btn_session badge btn btn-primary me-2"><i
+                                                    class='bx bx-detail me-1'></i>
+                                                Detail</button></td>
                                     <!-- <td class="get_val">
                                             <?= htmlentities($row->profit_v2);?>
                                         </td>

@@ -76,6 +76,11 @@
         };
         window.requestAnimationFrame(step);
     }
+    // window.onbeforeunload = (e)=>{
+    //     e.preventDefault();
+    //     window.location.href = '<?= site_url('auth/logout')?>'
+    //     return '';
+    // }
     const percentage_anim = document.querySelectorAll('#number-animate');
     const norm_anim = document.querySelectorAll('#number-animate-norm');
     percentage_anim.forEach((number, idx) => {

@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://mtf33.tedxundip.org/epd_monitoring';
+$config['base_url'] = 'https://mtf33.tedxundip.org/';
 
 /*
 |--------------------------------------------------------------------------
@@ -387,7 +387,8 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_samesite'] = 'Lax';
-$config['sess_expiration'] = 86400;
+$config['sess_expiration'] = 7200;
+$config['sess_expire_on_close'] = TRUE;
 $config['sess_save_path'] = null;
 $config['sess_match_ip'] = false;
 $config['sess_time_to_update'] = 300;
