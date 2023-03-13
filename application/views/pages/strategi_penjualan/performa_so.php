@@ -1,5 +1,9 @@
 <!-- Content -->
 <?php $CI =& get_instance(); ?>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
     sessionStorage.setItem('is_jbrand', false);
@@ -17,8 +21,8 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
-                <div class="row mb-4 ms-2 me-2">
-                    <div class="col">
+                <div class="row mb-0 ms-2 me-2">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="d-grid gap-2 d-md-block">
                             <button id="btn-chart-mtd" class="badge btn bg-chart-active" onclick="show_mtd_chart()"
                                 type="button"><i class='bx bxs-color me-1'></i>Lending MTD</button>
@@ -26,22 +30,13 @@
                                 type="button"><i class='bx bxs-color me-1'></i>Lending YTD</button>
                         </div>
                     </div>
-                    <div class="col mt-2 mt-xl-0 mt-lg-0 mt-md-0">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <div class="btn-group">
-                                <button type="button" class="badge btn btn-info dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class='bx bxs-calendar me-1'></i>Performa <span class="month-so-selected">Februari</span>
-                                </button>
-                                <ul class="dropdown-menu month-so">
-                                    <?php
-                                        $months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-                                    ?>
-                                    <?php 
-                                        for($idx = 0; $idx < date("m"); $idx++) { ?>
-                                            <li><a class="dropdown-item" href="#"> <?= $months[$idx] ?></a></li>
-                                    <?php } ?>
-                                </ul>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mt-2 mt-xl-0 mt-lg-0 mt-md-0">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end me-2" >
+                            <div class="input-group detopiku mb-3" >
+                                <input type="text" class="form-control docs-date" data-toggle="datepicker" name="date" placeholder="Pilih Tanggal" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off >
+                                <span class="btn btn-danger" disabled="">
+                                    <i class="bx bxs-calendar" aria-hidden="true"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -106,46 +101,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                $no=1; 
-                                foreach ($performa_month as $row) { ?>
-                                <tr>
-                                    <td>
-                                        <?= $no++;?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->nama_so);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->nama_spv);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->mtd_pencapaian);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->target);?>
-                                    </td>
-                                    <td class="get_val">
-                                        <?= htmlentities($row->mtd_lending);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->mtd_persentasi);?>
-                                    </td>
-                                    <td>
-                                                <button onclick="window.location.href='<?= site_url('performa_so_detail/'.$CI->security_idx->encrypt_url($row->id_so))?>';sessionStorage.setItem('is_mtd', true);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button>
-                                    </td>
-                                </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
                     <!-- /datatables -->
                 </div>
-
                 <div id="chart_ytd" class="d-none">
                     <div class="row">
                         <div class="col">
@@ -171,38 +131,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                $no=1; 
-                                foreach ($performa_year as $row) { ?>
-                                <tr>
-                                    <td>
-                                        <?= $no++;?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->nama_so);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->nama_spv);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->ytd_pencapaian);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->ytd_target);?>
-                                    </td>
-                                    <td class="get_val">
-                                        <?= htmlentities($row->ytd_lending);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->ytd_persentasi);?>
-                                    </td>
-                                    <td><button onclick="window.location.href='<?= site_url('performa_so_detail/'.$CI->security_idx->encrypt_url($row->id_so))?>';sessionStorage.setItem('is_mtd', false);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
-                                </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -218,6 +146,44 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    $('[data-toggle="datepicker"]').datepicker({
+        autoHide:true,
+        autoPick:true,
+    });
+    <?php
+        $items_gp = array();
+        $ids_gp = array();
+        $ids_asset = array();
+        $ids_ro = array();
+        $items_profesi = array();
+        $ids_profesi = array();
+        $items_dealer = array();
+        $ids_dealer = array();
+        $items_pareto = array();
+        $ids_pareto = array();
+        foreach($subfilter_gp as $row) {
+            $items_gp[]=htmlentities($row -> gp);
+            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+        }
+        foreach($subfilter_jenis_assets as $row) {
+            $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
+        }
+        foreach($subfilter_jenis_ro as $row) {
+            $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
+        }
+        foreach($subfilter_profesi as $row) {
+            $items_profesi[]=htmlentities($row -> profesi_cust);
+            $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
+        }
+        foreach($subfilter_dealer as $row) {
+            $items_dealer[]=htmlentities($row -> nama_dealer);
+            $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
+        }
+        foreach($subfilter_pareto as $row) {
+            $items_pareto[]=htmlentities($row -> nama_dealer);
+            $ids_pareto[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
+        }
+    ?>
     let num_abv = document.querySelectorAll('.get_val');
     num_abv.forEach((val) => {
         val.innerHTML = bFormatter(parseFloat(val.innerHTML));
@@ -226,27 +192,32 @@
         let filters = ["group_product", "jenis_asset", "jenis_customer", "jenis_pekerjaan", "dealer","pareto"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
-                "Reguler Fleet"
-            ],
-            'sub2': ["New", "Second"],
+            'sub1': <?php echo json_encode($items_gp) ?>,
+            'sub2': ["Second","New"],
             'sub3': ["NONRO", "RO"],
-            'sub4': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"],
-            'sub5': ["PT Cipta Karya", "Tunas", "Agung Auto", "PT Ida", "PT Sukacita", "Benny Automotives",
-                "Kelapa Hijau", "PT Prakarsa", "Taskia Auto"
-            ],
-            'sub6': ["PT Cipta Karya","PT Prakarsa","PT Ida","Benny Automotives"]
+            'sub4': <?php echo json_encode($items_profesi) ?>,
+            'sub5': <?php echo json_encode($items_dealer) ?>,
+            'sub6': <?php echo json_encode($items_pareto) ?>
+        }
+        let valuesSubFilters = {
+            'sub0': ["null"],
+            'sub1': <?php echo json_encode($ids_gp) ?>,
+            'sub2': <?php echo json_encode($ids_asset) ?>,
+            'sub3': <?php echo json_encode($ids_ro) ?>,
+            'sub4': <?php echo json_encode($ids_profesi) ?>,
+            'sub5': <?php echo json_encode($ids_dealer) ?>,
+            'sub6': <?php echo json_encode($ids_pareto) ?>
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
@@ -259,135 +230,19 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
-    <?php
-        //mtd init
-        $items_mtd = array();
-        $target_mtd = array();
-        $pencapaian_mtd = array();
-        $pencapaian_last_mtd = array();
-        //ytd init
-        $items_ytd = array();
-        $target_ytd = array();
-        $target_last_ytd = array();
-        $pencapaian_ytd = array();
-        $pencapaian_last_ytd = array();
-        foreach($performa_month as $row) {
-            $items_mtd[] = htmlentities($row -> nama_so);
-            $target_mtd[] = htmlentities($row -> target);
-            $pencapaian_mtd[] = htmlentities($row -> mtd_pencapaian);
-        }
-        foreach($performa_last_month as $row) {
-            $pencapaian_last_mtd[] = htmlentities($row -> mtd_pencapaian);
-        }
-        foreach($performa_year as $row) {
-            $items_ytd[] = htmlentities($row -> nama_so);
-            $target_ytd[] = htmlentities($row -> ytd_target);
-            $pencapaian_ytd[] = htmlentities($row -> ytd_pencapaian);
-        }
-        foreach($performa_last_year as $row) {
-            $pencapaian_last_ytd[] = htmlentities($row -> ytd_pencapaian);
-            $target_last_ytd[] = htmlentities($row -> ytd_target);
-        }
-    ?>
-    //mtd
-    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
-    var target_mtd = <?php echo json_encode($target_mtd) ?>;
-    var pencapaian_mtd = <?php echo json_encode($pencapaian_mtd) ?>;
-    var pencapaian_last_mtd = <?php echo json_encode($pencapaian_last_mtd) ?>;
-    //ytd
-    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
-    var target_ytd = <?php echo json_encode($target_ytd) ?>;
-    var target_last_ytd = <?php echo json_encode($target_last_ytd) ?>;
-    var pencapaian_ytd = <?php echo json_encode($pencapaian_ytd) ?>;
-    var pencapaian_last_ytd = <?php echo json_encode($pencapaian_last_ytd) ?>;
     // chart performa_so mtd
     var options_performa_so_mtd = {
-        series: [{
-            name: 'Akumulasi Aktual (' + month_name((new Date().getMonth())) + ')',
-            type: 'column',
-            data: pencapaian_last_mtd
-        },{
-            name: 'Akumulasi Aktual (' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'column',
-            data: pencapaian_mtd
-        },  {
-            name: 'Target (' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'line',
-            data: target_mtd
-        }],
+        series: [],
         chart: {
             height: 350,
             type: 'line',
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false
         },
-        stroke: {
-            width: [1, 1,4]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: fields_mtd,
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Pencapaian (Unit)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
     var chart_performa_so_mtd = new ApexCharts(document.querySelector("#performa_so_mtd_chart"),
         options_performa_so_mtd);
@@ -395,92 +250,18 @@
 
     // chart performa_so ytd
     var options_performa_so_ytd = {
-        series: [{
-            name: 'Pencapaian ' + (new Date().getFullYear() - 1),
-            type: 'column',
-            data: pencapaian_last_ytd
-        },
-        {
-            name: 'Target ' + (new Date().getFullYear() - 1),
-            type: 'line',
-            data: target_last_ytd
-        },
-        {
-            name: 'Pencapaian ' + new Date().getFullYear() + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'column',
-            data: pencapaian_ytd
-        }, {
-            name: 'Target ' + new Date().getFullYear() + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'line',
-            data: target_ytd
-        }],
+        series: [],
         chart: {
             height: 350,
             type: 'line',
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
+            enabled: false
         },
-        stroke: {
-            width: [1, 4, 1, 4],
-            // width: [1,1,4],
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: fields_ytd.map(month_name),
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "(Unit)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " (Unit)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
+        
     };
     var chart_performa_so_ytd = new ApexCharts(document.querySelector("#performa_so_ytd_chart"),
         options_performa_so_ytd);
@@ -492,12 +273,247 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    var so_mtd,so_ytd
     $(document).ready(function () {
-        $('#performa_so_ytd_table').DataTable({
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/performa_so/double_chartdata',
+            data:{'params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                chart_performa_so_mtd.updateSeries([{
+                    name: 'Akumulasi Aktual (' + month_name((new Date().getMonth())) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian2
+                },{
+                    name: 'Akumulasi Aktual (' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian
+                },  {
+                    name: 'Target (' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'line',
+                    data: res.data_target
+                }])
+                chart_performa_so_mtd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1,4]
+                    },
+                    xaxis: {
+                        categories: res.data_nama_so,
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "Pencapaian (Unit)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/performa_so/double_chartdata',
+            data:{'params':'curr_year','params2':'last_year'},
+            dataType: "json",
+            success: function(res){
+                chart_performa_so_ytd.updateSeries([{
+                    name: 'Pencapaian ' + (new Date().getFullYear() - 1),
+                    type: 'column',
+                    data: res.data_pencapaian2
+                },
+                {
+                    name: 'Target ' + (new Date().getFullYear() - 1),
+                    type: 'line',
+                    data: res.data_target2
+                },
+                {
+                    name: 'Pencapaian ' + new Date().getFullYear() + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian
+                }, {
+                    name: 'Target ' + new Date().getFullYear() + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'line',
+                    data: res.data_target
+                }])
+                chart_performa_so_ytd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                    },
+                    stroke: {
+                        width: [1, 4, 1, 4],
+                        // width: [1,1,4],
+                    },
+                    xaxis: {
+                        categories: res.data_nama_so,
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "(Unit)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " (Unit)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        so_ytd=$('#performa_so_ytd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/performa_so/listdata',
+                type: "POST",
+                data:{'params':'curr_year'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [5], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ],
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });
-        $('#performa_so_mtd_table').DataTable({
+        so_mtd=$('#performa_so_mtd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/performa_so/listdata',
+                type: "POST",
+                data:{'params':'curr_month'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [5], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ],
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });

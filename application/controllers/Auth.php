@@ -75,9 +75,13 @@ class Auth extends CI_Controller
         
     }
     public function logout(){
-        $this->load->model('auth_model');
+        $this->auth_model->fflush_cache();
         $this->auth_model->logout();
         redirect('auth');
+    }
+    public function del_cache(){
+        $this->auth_model->fflush_cache();
+        redirect('dashboard');
     }
 }
 ?>

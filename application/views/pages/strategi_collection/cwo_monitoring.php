@@ -15,7 +15,6 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
-                <div id="chart_mtd" class="d-none">
                     <div class="row">
                         <div class="col">
                             <div class="ms-3 me-4 mb-4">
@@ -23,7 +22,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -42,132 +40,19 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
-    <?php
-        //mtd init
-        $items_mtd = array();
-        $persentasi_mtd = array();
-        //ytd init
-        $items_ytd = array();
-        $persentasi_ytd = array();
-        $persentasi_last_ytd = array();
-        foreach($performa_month as $row) {
-            $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
-            $persentasi_mtd[] = htmlentities($row -> persentasi);
-        }
-        foreach($performa_year as $row) {
-            $items_ytd[] = htmlentities($row -> month);
-            $persentasi_ytd[] = htmlentities($row -> ytd_persentasi);
-        }
-        foreach($performa_last_year as $row) {
-            $persentasi_last_ytd[] = htmlentities($row -> ytd_persentasi);
-        }
-    ?>
-    //mtd
-    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
-    var persentasi_mtd = <?php echo json_encode($persentasi_mtd) ?>;
-    //ytd
-    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
-    var persentasi_ytd = <?php echo json_encode($persentasi_ytd) ?>;
-    var persentasi_last_ytd = <?php echo json_encode($persentasi_last_ytd) ?>;
-    var used_persentasi_last_ytd = persentasi_last_ytd.slice(0, fields_ytd.length)
     // chart cwo_monitoring mtd
     var options_cwo_monitoring_mtd = {
-        colors: [function({ value, seriesIndex, w }) {
-            if(value < 20){
-                return '#26E7A6'
-            }else if(value == 20){
-                return '#FEB830'
-            }else if(value >20){
-                return '#FF5870'
-            }
-            
-        }],
-        series: [{
-            name: 'Persentase',
-            type: 'column',
-            data: persentasi_mtd
-        }],
+        series: [],
         chart: {
-            type: 'bar',
             height: 450,
-            toolbar: {
-                show: true
-            },
-            zoom: {
-                enabled: true
-            }
-        },
-        // forceNiceScale: true,
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
+            type: 'bar',
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " %";
-            },
+            enabled: false
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: fields_mtd,
-            labels: {
-                style: {
-                    colors: '#000000',
-                }
-            },
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "% (Persen)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        ],
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " % (Persen)"
-                }
-            }
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    enabled: false,
-                },
-            }
-        }],
     };
     var chart_cwo_monitoring_mtd = new ApexCharts(document.querySelector("#cwo_monitoring_mtd_chart"),
         options_cwo_monitoring_mtd);
@@ -179,6 +64,111 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-
+    $(document).ready(function () {
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/cwo_monitoring/double_chartdata',
+            data:{'params':'curr_month','params2':'curr_year','params3':'last_year'},
+            dataType: "json",
+            success: function(res){
+                var fields_tot = (res.data_fields2).concat(res.data_fields);
+                var persentasi_year= (res.data_persentasi2).concat(res.data_persentasi);
+                var used_persentasi_last_ytd = (res.data_persentasi3).slice(0, fields_tot.length)
+                chart_cwo_monitoring_mtd.updateOptions({
+                    colors: [function({ value, seriesIndex, w }) {
+                        if(value < 1){
+                            return '#26E7A6'
+                        }else if(value == 1){
+                            return '#FEB830'
+                        }else if(value >1){
+                            return '#FF5870'
+                        }
+                        
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " %";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1]
+                    },
+                    xaxis: {
+                        categories: fields_tot.map(month_name),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            forceNiceScale: true,
+                            min: 0,
+                            max: (get_max_interval(persentasi_year)),
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "% (Persen)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        }
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " % (Persen)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+                chart_cwo_monitoring_mtd.updateSeries([{
+                    name: 'Persentase ' + (new Date().getFullYear()-1),
+                    type: 'column',
+                    data: used_persentasi_last_ytd
+                },{
+                    name: 'Persentase ' + new Date().getFullYear(),
+                    type: 'column',
+                    data: persentasi_year
+                }])
+            }
+        });
+    });
 </script>
 <!-- / Content -->

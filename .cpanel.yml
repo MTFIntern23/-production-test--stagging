@@ -1,5 +1,0 @@
----
-deployment:
-tasks:
-  - export DEPLOYPATH=/home/tedf9482/public_html/mtf33
-  - /bin/cp -R * $DEPLOYPATH

@@ -16,7 +16,6 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b>
                 </h5>
-                <div id="chart_mtd" class="d-none">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="ms-3 me-4 mb-4">
@@ -45,40 +44,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php 
-                                $no=1; 
-                                foreach ($performa_month as $row) { ?>
-                                <tr>
-                                    <td>
-                                        <?= $no++;?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->nama_armo);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->nama_spv);?>
-                                    </td>
-                                    <td >
-                                        <?= htmlentities($row->pencapaian);?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->target);?>
-                                    </td>
-                                    <td class="get_achv">
-                                        <?= htmlentities($row->persentasi);?>
-                                    </td>
-                                    <td><button onclick="window.location.href='<?= site_url('performa_armo_detail/'.$CI->security_idx->encrypt_url($row->id_armo))?>';sessionStorage.setItem('is_mtd', true);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
-                                </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
                     <!-- /datatables -->
-                </div>
             </div>
         </div>
     </div>
@@ -89,10 +58,6 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    let ach_abv = document.querySelectorAll('.get_achv');
-    ach_abv.forEach((val) => {
-        val.innerHTML = parseFloat(val.innerHTML).toFixed(2);
-    })
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -100,44 +65,6 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
-    <?php
-        //mtd init
-        $items_mtd = array();
-        $target_mtd = array();
-        $pencapaian_mtd = array();
-        $pencapaian_last_mtd = array();
-        $outside_items_mtd = array();
-        $outside_target_mtd = array();
-        $outside_pencapaian_mtd = array();
-        $outside_pencapaian_last_mtd = array();
-        foreach($performa_month_inside as $row) {
-            $items_mtd[] = htmlentities($row -> nama_armo);
-            $target_mtd[] = htmlentities($row -> target);
-            $pencapaian_mtd[] = htmlentities($row -> pencapaian);
-        }
-        foreach($performa_last_month_inside as $row) {
-            $pencapaian_last_mtd[] = htmlentities($row -> pencapaian);
-        }
-        //outside
-        foreach($performa_month_outside as $row) {
-            $outside_items_mtd[] = htmlentities($row -> nama_armo);
-            $outside_target_mtd[] = htmlentities($row -> target);
-            $outside_pencapaian_mtd[] = htmlentities($row -> pencapaian);
-        }
-        foreach($performa_last_month_outside as $row) {
-            $outside_pencapaian_last_mtd[] = htmlentities($row -> pencapaian);
-        }
-    ?>
-    //mtd
-    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
-    var target_mtd = <?php echo json_encode($target_mtd) ?>;
-    var pencapaian_mtd = <?php echo json_encode($pencapaian_mtd) ?>;
-    var pencapaian_last_mtd = <?php echo json_encode($pencapaian_last_mtd) ?>;
-    //outside
-    var outside_fields_mtd = <?php echo json_encode($outside_items_mtd) ?>;
-    var outside_target_mtd = <?php echo json_encode($outside_target_mtd) ?>;
-    var outside_pencapaian_mtd = <?php echo json_encode($outside_pencapaian_mtd) ?>;
-    var outside_pencapaian_last_mtd = <?php echo json_encode($outside_pencapaian_last_mtd) ?>;
     // chart performa_armo mtd
     var options_performa_armo_mtd = {
         title: {
@@ -146,92 +73,23 @@
             offsetX: 0,
             offsetY: 0,
         },
-        series: [{
-            name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth())) + ')',
-            type: 'column',
-            data: pencapaian_last_mtd
-        },{
-            name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'column',
-            data: pencapaian_mtd
-        },  {
-            name: 'Target (' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'line',
-            data: target_mtd
-        }],
+        series: [],
         chart: {
-            height: 350,
             type: 'line',
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
+            height: 350,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
             }
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " Unit";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false
         },
-        stroke: {
-            width: [1, 1,4]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: fields_mtd,
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Pencapaian (Unit)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " (Unit)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
     var chart_performa_armo_mtd = new ApexCharts(document.querySelector("#performa_armo_mtd_chart"),
         options_performa_armo_mtd);
@@ -244,92 +102,23 @@
             offsetX: 0,
             offsetY: 0,
         },
-        series: [{
-            name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth())) + ')',
-            type: 'column',
-            data: outside_pencapaian_last_mtd
-        },{
-            name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'column',
-            data: outside_pencapaian_mtd
-        },  {
-            name: 'Target (' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'line',
-            data: outside_target_mtd
-        }],
+        series: [],
         chart: {
-            height: 350,
             type: 'line',
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
+            height: 350,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
             }
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " Unit";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false
         },
-        stroke: {
-            width: [1, 1,4]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: outside_fields_mtd,
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Pencapaian (Unit)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " (Unit)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
     var chart_performa_armo_mtd_2 = new ApexCharts(document.querySelector("#performa_armo_mtd_chart_2"),
     options_performa_armo_mtd_2);
@@ -341,8 +130,220 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    var armo_mtd
     $(document).ready(function () {
-        $('#performa_armo_mtd_table').DataTable({
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/performa_armo/double_chartdata',
+            data:{'params':'curr_month_inside','params2':'last_month_inside'},
+            dataType: "json",
+            success: function(res){
+                chart_performa_armo_mtd.updateSeries([{
+                    name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth())) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian2
+                },{
+                    name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian
+                },  {
+                    name: 'Target (' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'line',
+                    data: res.data_target
+                }])
+                chart_performa_armo_mtd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " Unit";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1,4]
+                    },
+                    xaxis: {
+                        categories: res.data_fields,
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "Pencapaian (Unit)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " (Unit)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/performa_armo/double_chartdata',
+            data:{'params':'curr_month_outside','params2':'last_month_outside'},
+            dataType: "json",
+            success: function(res){
+                chart_performa_armo_mtd_2.updateSeries([{
+                    name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth())) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian2
+                },{
+                    name: 'Akumulasi Pencapaian (' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'column',
+                    data: res.data_pencapaian
+                },  {
+                    name: 'Target (' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'line',
+                    data: res.data_target
+                }])
+                chart_performa_armo_mtd_2.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " Unit";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1,4]
+                    },
+                    xaxis: {
+                        categories: res.data_fields,
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "Pencapaian (Unit)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " (Unit)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        armo_mtd=$('#performa_armo_mtd_table').DataTable({
+                processing: true,
+                serverSide: true,
+                searching: true,
+                info: true,
+                paging: true,                   
+                lengthChange: true,
+                ordering: true,
+                language: {
+                    "infoFiltered": ""
+                },
+                ajax: {
+                    url: '<?php echo base_url(); ?>/strategi_collection/performa_armo/listdata',
+                    type: "POST",
+                    data:{
+                            filter:'', subFilter:''
+                    },
+                    datatype: "json"
+                },
+                columnDefs: [
+                    { 
+                        targets: [ 0 ], 
+                        orderable: false, 
+                    },{
+                        targets: [5], 
+                        render:function ( data, type, row, meta ) {return parseFloat(data).toFixed(2);} 
+                    }
+                ],
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });

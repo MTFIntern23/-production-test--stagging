@@ -1356,6 +1356,16 @@
             document.querySelector('#'+btn_name).classList.remove('btn-secondary');
             document.querySelector('#'+btn_name).classList.add('bg-chart-active');
         }
+        if(field_name=='row-db-epd-monitoring'){
+            show_content_epd()
+        }else if(field_name=='row-db-tod-monitoring'){
+            show_content_tod()
+        }else if(field_name=='row-db-npl-monitoring'){
+            show_content_npl()
+        }else if(field_name=='row-db-cwo-monitoring'){
+            show_content_cwo()
+        }
+        //!!hide others
     }
 </script>
 <!-- ==================== -->
@@ -1365,387 +1375,78 @@
 <!-- ==================== -->
 <script async>
     <?php
+        //!!
         $items_mtd = array();
-        $aktual_mtd = array();
-        $aktual_last_mtd = array();
-        $target_mtd = array();
-        $komitmen_mtd = array();
-        $items_mtd_profit = array();
-        $profit_mtd = array();
-        $profit_prev_mtd = array();
-        //epd
-        $epd_items_mtd = array();
-        $persentasi_0_mtd = array();
-        $persentasi_1_mtd = array();
-        $persentasi_0_last_mtd = array();
-        $persentasi_1_last_mtd = array();
-        foreach($graph_monitoring_0_month as $row) {
-            $epd_items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
-            $persentasi_0_mtd[] = htmlentities($row -> persentasi);
-        }
-        foreach($graph_monitoring_1_month as $row) {
-            $persentasi_1_mtd[] = htmlentities($row -> persentasi);
-        }
-        foreach($graph_monitoring_0_last_month as $row) {
-            $persentasi_0_last_mtd[] = htmlentities($row -> persentasi);
-        }
-        foreach($graph_monitoring_1_last_month as $row) {
-            $persentasi_1_last_mtd[] = htmlentities($row -> persentasi);
-        }
-        //tod
-        $tod_items_mtd = array();
-        $tod_pencapaian_mtd = array();
-        $tod_pencapaian_last_mtd = array();
-        foreach($current_month_tod as $row) {
-            $tod_items_mtd[] = htmlentities($row -> bucket_od);
-            $tod_pencapaian_mtd[] = htmlentities($row -> osp_all);
-        }
-        foreach($last_month_tod as $row) {
-            $tod_pencapaian_last_mtd[] = htmlentities($row -> osp_all);
-        }
-        //tod ends
-        //npl
-        $npl_items_mtd = array();
-        $npl_persentasi_mtd = array();
-        foreach($performa_month_npl as $row) {
-            $npl_items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
-            $npl_persentasi_mtd[] = htmlentities($row -> persentasi);
-        }
-        //npl ends
-        //cwo
-        $cwo_items_mtd = array();
-        $cwo_persentasi_mtd = array();
-        foreach($performa_month_cwo as $row) {
-            $cwo_items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
-            $cwo_persentasi_mtd[] = htmlentities($row -> persentasi);
-        }
-        //cwo ends
+        //!!
         foreach($performa_month as $row) {
             $items_mtd[] = DateTime:: createFromFormat('Y-m-d h:i:s', htmlentities($row -> periode)) -> format('d M');
-            $aktual_mtd[] = htmlentities($row -> aktual);
-            $target_mtd[] = htmlentities($row -> target);
-            $komitmen_mtd[] = htmlentities($row -> komitment);
-        }
-        foreach($performa_last_month as $row) {
-            $aktual_last_mtd[] = htmlentities($row -> aktual);
-        }
-        foreach($current_month_profit as $key=>$row) {
-            $items_mtd_profit[] = htmlentities($row -> komponen_profit);
-            $profit_mtd[] = htmlentities($row -> profit);
-            $profit_prev_mtd[] = htmlentities($last_month_profit[$key]->profit);
         }
     ?>
-    //mtd grovv
+    //!!
     var fields_mtd = <?php echo json_encode($items_mtd) ?>;
-    var fields_mtd_profit = <?php echo json_encode($items_mtd_profit) ?>;
-    var aktual_mtd = <?php echo json_encode($aktual_mtd) ?>;
-    var aktual_last_mtd = <?php echo json_encode($aktual_last_mtd) ?>;
-    var used_aktual_last_mtd = aktual_last_mtd.slice(0, fields_mtd.length)
-    var komitmen_mtd = <?php echo json_encode($komitmen_mtd) ?>;
-    var target_mtd = <?php echo json_encode($target_mtd) ?>;
-    var profit_mtd = <?php echo json_encode($profit_mtd) ?>;
-    var profit_prev_mtd = <?php echo json_encode($profit_prev_mtd) ?>;
-    //epd
-    var epd_fields_mtd = <?php echo json_encode($epd_items_mtd) ?>;
-    var persentasi_0_mtd = <?php echo json_encode($persentasi_0_mtd) ?>;
-    var persentasi_1_mtd = <?php echo json_encode($persentasi_1_mtd) ?>;
-    var persentasi_0_last_mtd = <?php echo json_encode($persentasi_0_last_mtd) ?>;
-    var persentasi_1_last_mtd = <?php echo json_encode($persentasi_1_last_mtd) ?>;
-    var val_0_last = persentasi_0_last_mtd[persentasi_0_last_mtd.length-1]
-    var val_1_last = persentasi_1_last_mtd[persentasi_1_last_mtd.length-1]
     //tod
-    var tod_fields_mtd = <?php echo json_encode($tod_items_mtd) ?>;
-    var tod_pencapaian_mtd = <?php echo json_encode($tod_pencapaian_mtd) ?>;
-    var tod_pencapaian_last_mtd = <?php echo json_encode($tod_pencapaian_last_mtd) ?>;
     var used_status_tod = ['Current','1-30','31-60','61-90','91-120','121-150','151-180']
-    //npl
-    var npl_fields_mtd = <?php echo json_encode($npl_items_mtd) ?>;
-    var npl_persentasi_mtd = <?php echo json_encode($npl_persentasi_mtd) ?>;
-    //cwo
-    var cwo_fields_mtd = <?php echo json_encode($cwo_items_mtd) ?>;
-    var cwo_persentasi_mtd = <?php echo json_encode($cwo_persentasi_mtd) ?>;
     //chart dashboard
     initialize_=0;
-    var sum_aktual = (aktual_mtd.map(sum_to_prev)).map(bFormatter)
-    initialize_=0;
-    var sum_aktual_last = (used_aktual_last_mtd.map(sum_to_prev)).map(bFormatter)
-    initialize_=0;
-    var now_month = month_name(new Date().getMonth()+1) + ' '+ (new Date().getFullYear());
-    var prev_month;
-    if(new Date().getMonth()==0){
-            prev_month=month_name((12)) + ' '+ (new Date().getFullYear()-1);
-    }else{
-            prev_month=month_name(new Date().getMonth()) + ' '+ (new Date().getFullYear());
-    }
     var options_dashboard = {
-        series: [{
-            name: 'Akumulasi Aktual ' + prev_month,
-            type: 'column',
-            data: sum_aktual_last
-        },{
-            name: 'Akumulasi Aktual '+now_month,
-            type: 'column',
-            data: sum_aktual
-        }, {
-            name: 'Target',
-            type: 'line',
-            data: target_mtd.map(bFormatter)
-        }, {
-            name: 'Komitmen',
-            type: 'line',
-            data: komitmen_mtd.map(bFormatter)
-        }],
+        series: [],
         chart: {
             height: 350,
             type: 'line',
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 3,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnSeries: [1,2,3]
+            enabled: false
         },
-        stroke: {
-            width: [1, 4, 4]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: fields_mtd,
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "M (Milyar)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
-
     var chart = new ApexCharts(document.querySelector("#dashboard_chart"), options_dashboard);
     chart.render();
 
     //chart epd dashboard
     var options_dashboard_epd = {
-        colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
-        series: [{
-            name: 'EPD 8-30 (' + new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
-            type: 'column',
-            data: [persentasi_0_mtd[fields_mtd.length-1]]
-        },{
-            name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
-            type: 'column',
-            data: [persentasi_0_last_mtd.map(e=>e=val_0_last).slice(0,epd_fields_mtd.length)]
-        }],
+        colors:['#26A0FC','#1ADF8D'],
+        series: [],
         chart: {
-            height: 350,
             type: 'bar',
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 2,
-                dataLabels: {
-                    position: 'top',
-                },
+            height: 350,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
             }
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " %";
-            },
-            enabledOnSeries: [0,1]
+            enabled: false
         },
-        stroke: {
-            width: [1,1]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [epd_fields_mtd[fields_mtd.length-1]],
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "EPD (%)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " % (Persen)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
         };
 
         var chart_db_epd = new ApexCharts(document.querySelector("#dashboard_epd_monitoring_chart"), options_dashboard_epd);
         chart_db_epd.render();
     var options_dashboard_epd_2 = {
-        colors:['#26A0FC','#FEB019','#1ADF8D','#FF4862'],
-        series: [{
-            name: 'EPD >30 ('+ new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
-            type: 'column',
-            data: [persentasi_1_mtd[fields_mtd.length-1]]
-        },{
-            name: 'EPD >30 (Akhir ' + month_name((new Date().getMonth())) +')',
-            type: 'column',
-            data: [persentasi_1_last_mtd.map(e=>e=val_1_last).slice(0,epd_fields_mtd.length)]
-        }],
+        colors:['#775DD0','#FF4862'],
+        series: [],
         chart: {
-            height: 350,
             type: 'bar',
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 2,
-                dataLabels: {
-                    position: 'top',
-                },
+            height: 350,
+            toolbar: {
+                show: true
+            },
+            zoom: {
+                enabled: true
             }
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " %";
-            },
-            enabledOnSeries: [0,1]
+            enabled: false
         },
-        stroke: {
-            width: [1,1]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [epd_fields_mtd[fields_mtd.length-1]],
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "EPD (%)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " % (Persen)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
         };
 
         var chart_db_epd_2 = new ApexCharts(document.querySelector("#dashboard_epd_monitoring_chart_2"), options_dashboard_epd_2);
@@ -1753,88 +1454,17 @@
 
     //chart tod dashboard
     var options_dashboard_tod = {
-        series: [{
-            name: 'RATIO All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
-            type: 'column',
-            data: tod_pencapaian_last_mtd.map(bFormatter)
-        },{
-            name: 'RATIO All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
-            type: 'column',
-            data: tod_pencapaian_mtd.map(bFormatter)
-        }],
+        series: [],
         chart: {
             height: 350,
             type: 'line',
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " %";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false
         },
-        stroke: {
-            width: [1, 1,4]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: used_status_tod,
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "RATIO ALL (%)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " % (Persen)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
         };
 
         var chart_db_tod = new ApexCharts(document.querySelector("#dashboard_tod_monitoring_chart"), options_dashboard_tod);
@@ -1842,105 +1472,17 @@
 
     //chart npl dashboard
     var options_dashboard_npl = {
-        colors: [function({ value, seriesIndex, w }) {
-            if(value < 1){
-                return '#26E7A6'
-            }else if(value == 1){
-                return '#FEB830'
-            }else if(value >1){
-                return '#FF5870'
-            }
-            
-        }],
-        series: [{
-            name: 'Persentase',
-            type: 'column',
-            data: npl_persentasi_mtd
-        }],
+        series: [],
         chart: {
-            type: 'bar',
             height: 350,
-            toolbar: {
-                show: true
-            },
-            zoom: {
-                enabled: true
-            }
-        },
-        // forceNiceScale: true,
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
+            type: 'bar',
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " %";
-            },
-            style: {
-                fontSize: '8px',
-            },
+            enabled: false
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: npl_fields_mtd,
-            labels: {
-                style: {
-                    colors: '#000000',
-                }
-            },
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "% (Persen)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        ],
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " % (Persen)"
-                }
-            }
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    enabled: false,
-                },
-            }
-        }],
         };
 
     var chart_db_npl = new ApexCharts(document.querySelector("#dashboard_npl_monitoring_chart"), options_dashboard_npl);
@@ -1948,107 +1490,18 @@
 
     //chart cwo dashboard
     var options_dashboard_cwo = {
-        colors: [function({ value, seriesIndex, w }) {
-            if(value < 20){
-                return '#26E7A6'
-            }else if(value == 20){
-                return '#FEB830'
-            }else if(value >20){
-                return '#FF5870'
-            }
-            
-        }],
-        series: [{
-            name: 'Persentase',
-            type: 'column',
-            data: cwo_persentasi_mtd
-        }],
+        series: [],
         chart: {
-            type: 'bar',
             height: 350,
-            toolbar: {
-                show: true
-            },
-            zoom: {
-                enabled: true
-            }
-        },
-        // forceNiceScale: true,
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
+            type: 'bar',
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " %";
-            },
-            style: {
-                fontSize: '8px',
-            },
+            enabled: false
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: cwo_fields_mtd,
-            labels: {
-                style: {
-                    colors: '#000000',
-                }
-            },
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "% (Persen)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            }
-        ],
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " % (Persen)"
-                }
-            }
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    enabled: false,
-                },
-            }
-        }],
         };
-
         var chart_db_cwo = new ApexCharts(document.querySelector("#dashboard_cwo_monitoring_chart"), options_dashboard_cwo);
         chart_db_cwo.render();
 </script>
@@ -2058,7 +1511,583 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+        function show_content_epd(){
+            $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/epd_monitoring/double_chartdata',
+            data:{'params':'curr_month_0','params2':'last_month_0'},
+            dataType: "json",
+            success: function(res){
+                var val_0_last = (res.data_lending2)[(res.data_lending2).length-1]
+                chart_db_epd.updateSeries([{
+                    name: 'EPD 8-30 (' + new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
+                    type: 'column',
+                    data: [(res.data_lending)[(res.data_fields).length-1]]
+                },{
+                    name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
+                    type: 'column',
+                    data: [(res.data_lending2).map(e=>e=val_0_last).slice(0,(res.data_fields).length)]
+                }])
+                chart_db_epd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 2,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " %";
+                        },
+                        enabledOnSeries: [0,1]
+                    },
+                    stroke: {
+                        width: [1,1]
+                    },
+                    xaxis: {
+                        categories: [(res.data_fields)[(res.data_fields).length-1]].map(dmyFormat),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "EPD (%)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " % (Persen)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/epd_monitoring/double_chartdata',
+            data:{'params':'curr_month_1','params2':'last_month_1'},
+            dataType: "json",
+            success: function(res){
+                var val_1_last = (res.data_lending2)[(res.data_lending2).length-1]
+                chart_db_epd_2.updateSeries([{
+                    name: 'EPD 8-30 (' + new Date().getDate() +' ' + month_name((new Date().getMonth()+1)) +')',
+                    type: 'column',
+                    data: [(res.data_lending)[(res.data_fields).length-1]]
+                },{
+                    name: 'EPD 8-30 (Akhir ' + month_name((new Date().getMonth())) +')',
+                    type: 'column',
+                    data: [(res.data_lending2).map(e=>e=val_1_last).slice(0,(res.data_fields).length)]
+                }])
+                chart_db_epd_2.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 2,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " %";
+                        },
+                        enabledOnSeries: [0,1]
+                    },
+                    stroke: {
+                        width: [1,1]
+                    },
+                    xaxis: {
+                        categories: [(res.data_fields)[(res.data_fields).length-1]].map(dmyFormat),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "EPD (%)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " % (Persen)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        }
+        function show_content_tod(){
+            $.ajax({
+                type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/tod_monitoring/double_chartdata',
+            data:{'params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                chart_db_tod.updateSeries([{
+                    name: 'RATIO All (' + month_name((new Date().getMonth())) +' '+ new Date().getFullYear()+')',
+                    type: 'column',
+                    data: (res.data_lending2).map(bFormatter)
+                },{
+                    name: 'RATIO All (' + month_name((new Date().getMonth()) + 1) +' '+ new Date().getFullYear()+')',
+                    type: 'column',
+                    data: (res.data_lending).map(bFormatter)
+                }])
+                chart_db_tod.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " %";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1,4]
+                    },
+                    xaxis: {
+                        categories: res.data_fields.map(function(val,idx){
+                            return used_status_tod[idx]
+                        }),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "RATIO ALL (%)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " % (Persen)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+            });
+        }
+    function show_content_npl(){
+            $.ajax({
+                type:"POST",
+                url: '<?php echo base_url(); ?>/strategi_collection/npl_monitoring/double_chartdata',
+                data:{'params':'curr_month','params2':'curr_year','params3':'last_year'},
+                dataType: "json",
+                success: function(res){
+                    var npl_fields_tot = (res.data_fields2).concat(res.data_fields);
+                    var npl_persentasi_year= (res.data_persentasi2).concat(res.data_persentasi);
+                    var npl_used_persentasi_last_ytd = (res.data_persentasi3).slice(0, npl_fields_tot.length)
+                    chart_db_npl.updateOptions({
+                        colors: [function({ value, seriesIndex, w }) {
+                            if(value < 1){
+                                return '#26E7A6'
+                            }else if(value == 1){
+                                return '#FEB830'
+                            }else if(value >1){
+                                return '#FF5870'
+                            }
+                            
+                        }],
+                        plotOptions: {
+                            bar: {
+                                borderRadius: 5,
+                                dataLabels: {
+                                    position: 'bottom',
+                                },
+                            }
+                        },
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function (val) {
+                                return val + " %";
+                            },
+                            // enabledOnSeries: [1,2]
+                        },
+                        stroke: {
+                            width: [1, 1]
+                        },
+                        xaxis: {
+                            categories: npl_fields_tot.map(month_name),
+                            tooltip: {
+                                enabled: false
+                            }
+                        },
+                        yaxis: [
+                            {
+                                forceNiceScale: true,
+                                min: 0,
+                                max: (get_max_interval(npl_persentasi_year)),
+                                axisTicks: {
+                                    show: true,
+                                },
+                                axisBorder: {
+                                    show: true,
+                                    color: '#008FFB'
+                                },
+                                labels: {
+                                    style: {
+                                        colors: '#008FFB',
+                                    }
+                                },
+                                title: {
+                                    text: "% (Persen)",
+                                    style: {
+                                        color: '#008FFB',
+                                    }
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            }
+                        ],
+                        tooltip: {
+                            y: {
+                                formatter: function (val) {
+                                    return val + " % (Persen)"
+                                }
+                            }
+                        },
+                        legend: {
+                            horizontalAlign: 'center',
+                        },
+                        responsive: [{
+                            breakpoint: 480,
+                            options: {
+                                dataLabels: {
+                                    formatter: function (val) {
+                                        return val;
+                                    },
+                                },
+                            }
+                        }],
+                    })
+                    chart_db_npl.updateSeries([{
+                        name: 'Persentase ' + (new Date().getFullYear()-1),
+                        type: 'column',
+                        data: npl_used_persentasi_last_ytd
+                    },{
+                        name: 'Persentase ' + new Date().getFullYear(),
+                        type: 'column',
+                        data: npl_persentasi_year
+                    }])
+                }
+            });
+        }
+    function show_content_cwo(){
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_collection/cwo_monitoring/double_chartdata',
+            data:{'params':'curr_month','params2':'curr_year','params3':'last_year'},
+            dataType: "json",
+            success: function(res){
+                var cwo_fields_tot = (res.data_fields2).concat(res.data_fields);
+                var cwo_persentasi_year= (res.data_persentasi2).concat(res.data_persentasi);
+                var cwo_used_persentasi_last_ytd = (res.data_persentasi3).slice(0, cwo_fields_tot.length)
+                chart_db_cwo.updateOptions({
+                    colors: [function({ value, seriesIndex, w }) {
+                        if(value < 1){
+                            return '#26E7A6'
+                        }else if(value == 1){
+                            return '#FEB830'
+                        }else if(value >1){
+                            return '#FF5870'
+                        }
+                        
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " %";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1]
+                    },
+                    xaxis: {
+                        categories: cwo_fields_tot.map(month_name),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            forceNiceScale: true,
+                            min: 0,
+                            max: (get_max_interval(cwo_persentasi_year)),
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "% (Persen)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        }
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " % (Persen)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+                chart_db_cwo.updateSeries([{
+                    name: 'Persentase ' + (new Date().getFullYear()-1),
+                    type: 'column',
+                    data: cwo_used_persentasi_last_ytd
+                },{
+                    name: 'Persentase ' + new Date().getFullYear(),
+                    type: 'column',
+                    data: cwo_persentasi_year
+                }])
+            }
+        });
+    }
     $(document).ready(function () {
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/lending/chartdata',
+            data:{'params':'curr_month'},
+            dataType: "json",
+            success: function(res){
+                chart.updateSeries([{
+                    name: 'Akumulasi Aktual',
+                    type: 'column',
+                    data: ((res.data_aktual).map(sum_to_prev)).map(bFormatter)
+                }, {
+                    name: 'Target',
+                    type: 'line',
+                    data: (res.data_target).map(bFormatter)
+                }, {
+                    name: 'Komitmen',
+                    type: 'line',
+                    data: (res.data_komitment).map(bFormatter)
+                }])
+                chart.updateOptions({
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                    },
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    stroke: {
+                        width: [1, 4, 4]
+                    },
+                    xaxis: {
+                        categories: res.data_fields.map(dmFormat),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "M (Milyar)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        }
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+    
         $('#so_table').DataTable({
             scrollX: true,
             "lengthMenu": [5, 25, 50, 75, 100],

@@ -95,35 +95,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $no=1; 
-                                    foreach ($current_month_dealer as $key=>$row) { ?>
-                                    <tr>
-                                        <td>
-                                            <?= $no++;?>
-                                        </td>
-                                        <td>
-                                            <?= htmlentities($row->nama_dealer);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($last_month_dealer[$key]->mtd_amt);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($row->mtd_amt);?>
-                                        </td>
-                                        <td >
-                                        <?= htmlentities($last_month_dealer[$key]->mtd_unit);?>
-                                        </td>
-                                        <td >
-                                            <?= htmlentities($row->mtd_unit);?>
-                                        </td>
-                                        <td><button onclick="window.location.href='<?= site_url('performa_dealer_detail/'.$CI->security_idx->encrypt_url($row->id_dealer))?>';sessionStorage.setItem('is_mtd', true);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
-                                    </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -154,35 +125,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $no=1; 
-                                    foreach ($current_year_dealer as $key=>$row) { ?>
-                                    <tr>
-                                        <td>
-                                            <?= $no++;?>
-                                        </td>
-                                        <td>
-                                            <?= htmlentities($row->nama_dealer);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($last_year_dealer[$key]->mtd_amt);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($row->mtd_amt);?>
-                                        </td>
-                                        <td >
-                                        <?= htmlentities($last_year_dealer[$key]->mtd_unit);?>
-                                        </td>
-                                        <td >
-                                            <?= htmlentities($row->mtd_unit);?>
-                                        </td>
-                                                <td><button onclick="window.location.href='<?= site_url('performa_dealer_detail/'.$CI->security_idx->encrypt_url($row->id_dealer))?>';sessionStorage.setItem('is_mtd', false);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
-                                    </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -198,6 +140,34 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    <?php
+        $items_gp = array();
+        $ids_gp = array();
+        $ids_asset = array();
+        $ids_ro = array();
+        $items_profesi = array();
+        $ids_profesi = array();
+        $items_so = array();
+        $ids_so = array();
+        foreach($subfilter_gp as $row) {
+            $items_gp[]=htmlentities($row -> gp);
+            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+        }
+        foreach($subfilter_jenis_assets as $row) {
+            $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
+        }
+        foreach($subfilter_jenis_ro as $row) {
+            $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
+        }
+        foreach($subfilter_profesi as $row) {
+            $items_profesi[]=htmlentities($row -> profesi_cust);
+            $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
+        }
+        foreach($subfilter_so as $row) {
+            $items_so[]=htmlentities($row -> nama_so);
+            $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
+        }
+    ?>
     let num_abv = document.querySelectorAll('.get_val');
     let months_field = document.querySelectorAll('.show_month');
     let months_prev_field = document.querySelectorAll('.show_prev_month');
@@ -222,26 +192,30 @@
         let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "jenis_pekerjaan"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': ["Captive Fleet", "Captive KKB", "Captive Multiguna", "Reguler Retail", "Reguler Multiguna",
-                "Reguler Fleet"
-            ],
-            'sub2': ["New", "Second"],
-            'sub3': ["Aji Andika", "Abyan Estu", "Ana Lestari", "Budi Yoga", "Yupi Wardana", "Oti Satria",
-                "Haydar Ekawira", "Hamid Irawan", "Rania Parama"
-            ],
+            'sub1': <?php echo json_encode($items_gp) ?>,
+            'sub2': ["Second","New"],
+            'sub3': <?php echo json_encode($items_so) ?>,
             'sub4': ["NONRO", "RO"],
-            'sub5': ["Buruh", "Guru", "Dosen", "Manager", "Teller", "Wiraswasta"]
+            'sub5': <?php echo json_encode($items_profesi) ?>,
+        }
+        let valuesSubFilters = {
+            'sub0': ["null"],
+            'sub1': <?php echo json_encode($ids_gp) ?>,
+            'sub2': <?php echo json_encode($ids_asset) ?>,
+            'sub3': <?php echo json_encode($ids_so) ?>,
+            'sub4': <?php echo json_encode($ids_ro) ?>,
+            'sub5': <?php echo json_encode($ids_profesi) ?>,
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
@@ -254,120 +228,21 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
-    <?php
-        //mtd init
-        $items_mtd = array();
-        $lending_mtd = array();
-        $lending_prev_mtd = array();
-        //ytd init
-        $items_ytd = array();
-        $lending_ytd = array();
-        $lending_prev_ytd = array();
-        foreach($current_month_dealer as $key=>$row) {
-            $items_mtd[] = htmlentities($row -> nama_dealer);
-            $lending_mtd[] = htmlentities($row -> mtd_amt);
-            $lending_prev_mtd[] = htmlentities($last_month_dealer[$key]->mtd_amt);
-        }
-        foreach($current_year_dealer as $key=>$row) {
-            $items_ytd[] = htmlentities($row -> nama_dealer);
-            $lending_ytd[] = htmlentities($row -> mtd_amt);
-            $lending_prev_ytd[] = htmlentities($last_year_dealer[$key]->mtd_amt);
-        }
-    ?>
-    //mtd
-    var fields_mtd = <?php echo json_encode($items_mtd) ?>;
-    var lending_mtd = <?php echo json_encode($lending_mtd) ?>;
-    var lending_prev_mtd = <?php echo json_encode($lending_prev_mtd) ?>;
-    var keys_mtd = Array.from(lending_mtd.keys()).sort((a, b) => lending_mtd[b] - lending_mtd[a])
-    //ytd
-    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
-    var lending_ytd = <?php echo json_encode($lending_ytd) ?>;
-    var lending_prev_ytd = <?php echo json_encode($lending_prev_ytd) ?>;
-    var keys_ytd = Array.from(lending_ytd.keys()).sort((a, b) => lending_ytd[b] - lending_ytd[a])
+    // $lending_ytd[] = htmlentities($row -> mtd_amt);
+    // var keys_ytd = Array.from(lending_ytd.keys()).sort((a, b) => lending_ytd[b] - lending_ytd[a])
     // chart performa_dealer mtd
     var options_performa_dealer_mtd = {
-        series: [{
-            name: 'Lending ' + months_prev_field[0].innerHTML,
-            type: 'column',
-            data: keys_mtd.map(i => lending_prev_mtd.map(bFormatter)[i]).slice(0,5)
-        }, {
-            name: 'Lending ' + months_field[0].innerHTML,
-            type: 'column',
-            data: keys_mtd.map(i => lending_mtd.map(bFormatter)[i]).slice(0,5)
-        }],
+        series: [],
         chart: {
             height: 350,
             type: 'line',
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false
         },
-        stroke: {
-            width: [1, 1]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories:  keys_mtd.map(i => fields_mtd[i]).slice(0,5),
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Milyar (M)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
 
     var chart_performa_dealer_mtd = new ApexCharts(document.querySelector("#performa_dealer_mtd_chart"),
@@ -376,88 +251,17 @@
 
     // chart performa_dealer ytd
     var options_performa_dealer_ytd = {
-        series: [{
-            name: 'Lending ' + years_prev_field[0].innerHTML,
-            type: 'column',
-            data: keys_ytd.map(i => lending_prev_ytd.map(bFormatter)[i]).slice(0,5)
-        }, {
-            name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
-            type: 'column',
-            data: keys_ytd.map(i => lending_ytd.map(bFormatter)[i]).slice(0,5)
-        }],
+        series: [],
         chart: {
             height: 350,
             type: 'line',
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false
         },
-        stroke: {
-            width: [1, 1]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: keys_ytd.map(i => fields_ytd[i]).slice(0,5),
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Milyar (M)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
     var chart_performa_dealer_ytd = new ApexCharts(document.querySelector("#performa_dealer_ytd_chart"),
         options_performa_dealer_ytd);
@@ -469,12 +273,247 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    var dealer_mtd,dealer_ytd
     $(document).ready(function () {
-        $('#performa_dealer_ytd_table').DataTable({
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/double_chartdata',
+            data:{'params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+                chart_performa_dealer_mtd.updateSeries([{
+                    name: 'Lending ' + months_prev_field[0].innerHTML,
+                    type: 'column',
+                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                }, {
+                    name: 'Lending ' + months_field[0].innerHTML,
+                    type: 'column',
+                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                }])
+                chart_performa_dealer_mtd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1]
+                    },
+                    xaxis: {
+                        categories:  keys_mtd.map(i => (res.data_nama_dealer)[i]).slice(0,5),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "Milyar (M)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/double_chartdata',
+            data:{'params':'curr_year','params2':'last_year'},
+            dataType: "json",
+            success: function(res){
+                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+                chart_performa_dealer_ytd.updateSeries([{
+                    name: 'Lending ' + years_prev_field[0].innerHTML,
+                    type: 'column',
+                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                }, {
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    type: 'column',
+                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                }])
+                chart_performa_dealer_ytd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [1, 1]
+                    },
+                    xaxis: {
+                        categories: keys_ytd.map(i => (res.data_nama_dealer)[i]).slice(0,5),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "Milyar (M)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
+        });
+        dealer_ytd=$('#performa_dealer_ytd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/listdata',
+                type: "POST",
+                data:{'params':'curr_year','params2':'last_year'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [2], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                },{
+                    targets: [3], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ],
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });
-        $('#performa_dealer_mtd_table').DataTable({
+        dealer_mtd=$('#performa_dealer_mtd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/listdata',
+                type: "POST",
+                data:{'params':'curr_month','params2':'last_month'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [2], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                },{
+                    targets: [3], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ],
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
         });

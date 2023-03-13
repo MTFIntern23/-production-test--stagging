@@ -1,7 +1,7 @@
 </div>
 <!-- Bootstrap core JavaScript-->
-<script src="<?= base_url('assets'); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= base_url('assets'); ?>/vendor/wow/wow.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js" integrity="sha512-i9cEfJwUwViEPFKdC1enz4ZRGBj8YQo6QByFTF92YXHi7waCqyexvRD75S5NVTsSiTv7rKWqG9Y5eFxmRsOn0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <!-- Custom scripts for all pages-->
 <script>
@@ -97,6 +97,9 @@
                         form_is_null(0);
                     }
                     $('input[name=csrf_mtf_log]').val(result.token);
+                },
+                error:(err)=>{
+                    notyf.error(`Aborted Access Token! ${err.status} ${err.statusText}`);
                 }
             })
         }
@@ -124,7 +127,9 @@
         e.preventDefault();
     });
     document.onkeydown = function (e) {
-
+        if(e.keyCode == 123) {
+            return false;
+        }
         if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
             return false;
         }

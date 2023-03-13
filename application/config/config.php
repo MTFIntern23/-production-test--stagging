@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'https://mtf33.tedxundip.org/';
+$config['base_url'] = 'http://localhost/road-to-stagging/';
 
 /*
 |--------------------------------------------------------------------------
@@ -466,7 +466,85 @@ $config['csrf_token_name'] = 'csrf_mtf_log';
 $config['csrf_cookie_name'] = 'csrf_mtf_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = true;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array(
+    //lending
+    'strategi_penjualan/lending/listdata',
+    'strategi_penjualan/lending/chartdata',
+    'strategi_penjualan/lending/double_chartdata',
+    //profit
+    'strategi_penjualan/profit/listdata',
+    'strategi_penjualan/profit/double_chartdata',
+    //profit detail
+    'strategi_penjualan/performa_profit_detail/listdata',
+    'strategi_penjualan/performa_profit_detail/double_chartdata',
+    //pfm_so
+    'strategi_penjualan/performa_so/listdata',
+    'strategi_penjualan/performa_so/double_chartdata',
+    'strategi_penjualan/performa_so_detail/listdata',
+    //--detail
+    'strategi_penjualan/performa_so_detail/chartdata',
+    'strategi_penjualan/performa_so_detail/double_chartdata',
+    //pfm_dealer
+    'strategi_penjualan/performa_dealer/listdata',
+    'strategi_penjualan/performa_dealer/double_chartdata',
+    //--detail
+    'strategi_penjualan/performa_dealer_detail/listdata',
+    'strategi_penjualan/performa_dealer_detail/chartdata',
+    'strategi_penjualan/performa_dealer_detail/double_chartdata',
+    'strategi_penjualan/performa_dealer_detail/pie_chartdata',
+    //performa_produk
+    'strategi_penjualan/performa_produk/listdata',
+    'strategi_penjualan/performa_produk/double_chartdata',
+    //--detail
+    'strategi_penjualan/performa_produk_detail/listdata',
+    'strategi_penjualan/performa_produk_detail/chartdata',
+    'strategi_penjualan/performa_produk_detail/double_chartdata',
+    'strategi_penjualan/performa_produk_detail/pie_chartdata',
+    //history_assets
+    'strategi_penjualan/history_assets/listdata',
+    'strategi_penjualan/history_assets/double_chartdata',
+    //--detail
+    'strategi_penjualan/history_assets_detail/listdata',
+    'strategi_penjualan/history_assets_detail/chartdata',
+    'strategi_penjualan/history_assets_detail/double_chartdata',
+    //--detail (jbrand)
+    'strategi_penjualan/history_assets_jbrand_detail/listdata',
+    'strategi_penjualan/history_assets_jbrand_detail/chartdata',
+    'strategi_penjualan/history_assets_jbrand_detail/double_chartdata',
+    //customer_retention
+    'strategi_penjualan/customer_retention/listdata',
+    'strategi_penjualan/customer_retention/chartdata',
+    'strategi_penjualan/customer_retention/double_chartdata',
+    'strategi_penjualan/customer_retention/pie_chartdata',
+    // segment
+    'strategi_penjualan/segment_customer/listdata',
+    'strategi_penjualan/segment_customer/double_chartdata',
+    'strategi_penjualan/segment_customer/pie_chartdata',
+    //epd_monitoring
+    'strategi_collection/epd_monitoring/chartdata',
+    'strategi_collection/epd_monitoring/listdata',
+    'strategi_collection/epd_monitoring/double_chartdata',
+    'strategi_collection/epd_monitoring/pie_chartdata',
+    //tod 
+    'strategi_collection/tod_monitoring/listdata',
+    'strategi_collection/tod_monitoring/double_chartdata',
+    'strategi_collection/tod_monitoring/pie_chartdata',
+    //tod detail
+    'strategi_collection/tod_monitoring_detail/listdata',
+    'strategi_collection/tod_monitoring_detail/chartdata',
+    'strategi_collection/tod_monitoring_detail/double_chartdata',
+    //npl
+    'strategi_collection/npl_monitoring/double_chartdata',
+    //cwo
+    'strategi_collection/cwo_monitoring/double_chartdata',
+    //armo
+    'strategi_collection/performa_armo/listdata',
+    'strategi_collection/performa_armo/double_chartdata',
+    //armo detail
+    'strategi_collection/performa_armo_detail/listdata',
+    'strategi_collection/performa_armo_detail/chartdata',
+    'strategi_collection/performa_armo_detail/double_chartdata',
+);
 
 /*
 |--------------------------------------------------------------------------

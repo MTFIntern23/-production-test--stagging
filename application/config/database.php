@@ -72,13 +72,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'tedf9482',
-	'password' => 'TEDxUndip3.0@@@',
-	'database' => 'tedf9482_db_dummy_mtf_test',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'db_dummy_mtf_test',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

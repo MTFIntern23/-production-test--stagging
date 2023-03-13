@@ -67,35 +67,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $no=1; 
-                                    foreach ($current_month_profit as $key=>$row) { ?>
-                                <tr>
-                                    <td>
-                                        <?= $no++;?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->komponen_profit);?>
-                                    </td>
-                                    <td class="get_val">
-                                        <?= htmlentities($last_month_profit[$key]->profit);?>
-                                    </td>
-                                    <td class="get_val">
-                                        <?= htmlentities($row->profit);?>
-                                    </td>
-                                    <td><button onclick="window.location.href='<?= site_url('performa_profit_detail/'.$CI->security_idx->encrypt_url($row->id_komponen))?>';sessionStorage.setItem('is_mtd', true);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
-                                    <!-- <td class="get_val">
-                                            <?= htmlentities($row->profit_v2);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($row->sim_profit);?>
-                                        </td> -->
-                                </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -140,36 +111,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $no=1; 
-                                    foreach ($current_year_profit as $key=>$row) { ?>
-                                <tr>
-                                    <td>
-                                        <?= $no++;?>
-                                    </td>
-                                    <td>
-                                        <?= htmlentities($row->komponen_profit);?>
-                                    </td>
-                                    <td class="get_val">
-                                        <?php 
-                                        echo htmlentities($last_year_profit[$key]->profit);?>
-                                    </td>
-                                    <td class="get_val">
-                                        <?= htmlentities($row->profit);?>
-                                    </td>
-                                    <td><button onclick="window.location.href='<?= site_url('performa_profit_detail/'.$CI->security_idx->encrypt_url($row->id_komponen))?>';sessionStorage.setItem('is_mtd', true);"
-                                                type="button"
-                                                class="btn_session badge btn btn-primary me-2"><i
-                                                    class='bx bx-detail me-1'></i>
-                                                Detail</button></td>
-                                    <!-- <td class="get_val">
-                                            <?= htmlentities($row->profit_v2);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($row->sim_profit);?>
-                                        </td> -->
-                                </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -219,89 +160,8 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
-    <?php
-    //mtd init
-    $nii_profit_mtd = array();
-    $feebased_profit_mtd = array();
-    $coc_profit_mtd = array();
-    $exp_profit_mtd = array();
-    $nii_profit_prev_mtd = array();
-    $feebased_profit_prev_mtd = array();
-    $coc_profit_prev_mtd = array();
-    $exp_profit_prev_mtd = array();
-    //ytd init
-    $nii_profit_ytd = array();
-    $feebased_profit_ytd = array();
-    $coc_profit_ytd = array();
-    $exp_profit_ytd = array();
-    $nii_profit_prev_ytd = array();
-    $feebased_profit_prev_ytd = array();
-    $coc_profit_prev_ytd = array();
-    $exp_profit_prev_ytd = array();
-    foreach($nii_current_month_profit as $key=> $row) {
-        $nii_profit_mtd[] = htmlentities($row -> profit);
-        $nii_profit_prev_mtd[] = htmlentities($nii_last_month_profit[$key] -> profit);
-    }
-    foreach($feebased_current_month_profit as $key=> $row) {
-        $feebased_profit_mtd[] = htmlentities($row -> profit);
-        $feebased_profit_prev_mtd[] = htmlentities($feebased_last_month_profit[$key] -> profit);
-    }
-    foreach($coc_current_month_profit as $key=> $row) {
-        $coc_profit_mtd[] = htmlentities($row -> profit);
-        $coc_profit_prev_mtd[] = htmlentities($coc_last_month_profit[$key] -> profit);
-    }
-    foreach($exp_current_month_profit as $key=> $row) {
-        $exp_profit_mtd[] = htmlentities($row -> profit);
-        $exp_profit_prev_mtd[] = htmlentities($exp_last_month_profit[$key] -> profit);
-    }
-    foreach($nii_current_year_profit as $key=> $row) {
-        $nii_profit_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($nii_last_year_profit as $key=> $row) {
-        $nii_profit_prev_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($feebased_current_year_profit as $key=> $row) {
-        $feebased_profit_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($feebased_last_year_profit as $key=> $row) {
-        $feebased_profit_prev_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($coc_current_year_profit as $key=> $row) {
-        $coc_profit_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($coc_last_year_profit as $key=> $row) {
-        $coc_profit_prev_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($exp_current_year_profit as $key=> $row) {
-        $exp_profit_ytd[] = htmlentities($row -> profit);
-    }
-    foreach($exp_last_year_profit as $key=> $row) {
-        $exp_profit_prev_ytd[] = htmlentities($row -> profit);
-    }
-    ?>
-    //mtd
-    var nii_profit_mtd = <?php echo json_encode($nii_profit_mtd) ?>;
-    var feebased_profit_mtd = <?php echo json_encode($feebased_profit_mtd) ?>;
-    var coc_profit_mtd = <?php echo json_encode($coc_profit_mtd) ?>;
-    var exp_profit_mtd = <?php echo json_encode($exp_profit_mtd) ?>;
-    var nii_profit_prev_mtd = <?php echo json_encode($nii_profit_prev_mtd) ?>;
-    var feebased_profit_prev_mtd = <?php echo json_encode($feebased_profit_prev_mtd) ?>;
-    var coc_profit_prev_mtd = <?php echo json_encode($coc_profit_prev_mtd) ?>;
-    var exp_profit_prev_mtd = <?php echo json_encode($exp_profit_prev_mtd) ?>;
-    //ytd
-    var nii_profit_ytd = <?php echo json_encode($nii_profit_ytd) ?>;
-    var feebased_profit_ytd = <?php echo json_encode($feebased_profit_ytd) ?>;
-    var coc_profit_ytd = <?php echo json_encode($coc_profit_ytd) ?>;
-    var exp_profit_ytd = <?php echo json_encode($exp_profit_ytd) ?>;
-    var nii_profit_prev_ytd = <?php echo json_encode($nii_profit_prev_ytd) ?>;
-    var feebased_profit_prev_ytd = <?php echo json_encode($feebased_profit_prev_ytd) ?>;
-    var coc_profit_prev_ytd = <?php echo json_encode($coc_profit_prev_ytd) ?>;
-    var exp_profit_prev_ytd = <?php echo json_encode($exp_profit_prev_ytd) ?>;
     // chart profit mtd
     var options_profit_mtd_nii = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value <nii_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
-        }],
         title:{
             text:"NII",
             offsetX: 20,
@@ -311,61 +171,22 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [nii_profit_prev_mtd.map(bFormatter)[0],nii_profit_mtd.map(bFormatter)[0]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_month,now_month],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_mtd_nii = new ApexCharts(document.querySelector("#profit_mtd_chart_nii"), options_profit_mtd_nii);
     chart_profit_mtd_nii.render();
 
     var options_profit_mtd_feebased = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value <feebased_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
-        }],
         title:{
             text:"Feebased",
             offsetX: 20,
@@ -375,62 +196,23 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [feebased_profit_prev_mtd.map(bFormatter)[0],feebased_profit_mtd.map(bFormatter)[0]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_month,now_month],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_mtd_feebased = new ApexCharts(document.querySelector("#profit_mtd_chart_feebased"),
         options_profit_mtd_feebased);
     chart_profit_mtd_feebased.render();
 
     var options_profit_mtd_coc = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value <coc_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
-        }],
         title:{
             text:"COC",
             offsetX: 20,
@@ -440,61 +222,22 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [coc_profit_prev_mtd.map(bFormatter)[0],coc_profit_mtd.map(bFormatter)[0]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_month,now_month],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_mtd_coc = new ApexCharts(document.querySelector("#profit_mtd_chart_coc"), options_profit_mtd_coc);
     chart_profit_mtd_coc.render();
 
     var options_profit_mtd_overheadexp = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value <exp_profit_prev_mtd.map(bFormatter)[0])?'#26E7A6':'#26A0FC'
-        }],
         title:{
             text:"EXP",
             offsetX: 20,
@@ -504,53 +247,17 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [exp_profit_prev_mtd.map(bFormatter)[0],exp_profit_mtd.map(bFormatter)[0]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_month,now_month],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_mtd_overheadexp = new ApexCharts(document.querySelector("#profit_mtd_chart_overheadexp"),
         options_profit_mtd_overheadexp);
@@ -558,9 +265,6 @@
 
     // chart profit ytd
     var options_profit_ytd_nii = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value == nii_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
-        }],
         title:{
             text:"NII",
             offsetX: 20,
@@ -570,61 +274,22 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [nii_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],nii_profit_ytd.map(bFormatter)[new Date().getMonth()]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_year,now_year],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_ytd_nii = new ApexCharts(document.querySelector("#profit_ytd_chart_nii"), options_profit_ytd_nii);
     chart_profit_ytd_nii.render();
 
     var options_profit_ytd_feebased = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value == feebased_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
-        }],
         title:{
             text:"Feebased",
             offsetX: 20,
@@ -634,64 +299,25 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [feebased_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],feebased_profit_ytd.map(bFormatter)[new Date().getMonth()]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_year,now_year],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_ytd_feebased = new ApexCharts(document.querySelector("#profit_ytd_chart_feebased"),
         options_profit_ytd_feebased);
     chart_profit_ytd_feebased.render();
 
     var options_profit_ytd_coc = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value == coc_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
-        }],
         title:{
-            text:"coc",
+            text:"COC",
             offsetX: 20,
             offsetY: 0,
             style: {
@@ -699,63 +325,24 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [coc_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],coc_profit_ytd.map(bFormatter)[new Date().getMonth()]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_year,now_year],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_ytd_coc = new ApexCharts(document.querySelector("#profit_ytd_chart_coc"), options_profit_ytd_coc);
     chart_profit_ytd_coc.render();
 
     var options_profit_ytd_overheadexp = {
-        colors: [function({ value, seriesIndex, w }) {
-            return (value == exp_profit_prev_ytd.map(bFormatter)[new Date().getMonth()])?'#26A0FC':'#26E7A6'
-        }],
         title:{
-            text:"exp",
+            text:"EXP",
             offsetX: 20,
             offsetY: 0,
             style: {
@@ -763,53 +350,17 @@
                 fontWeight:  'bold',
                 },
         },
-        series: [{
-            name: 'Profit',
-            type: 'column',
-            data: [exp_profit_prev_ytd.map(bFormatter)[new Date().getMonth()],exp_profit_ytd.map(bFormatter)[new Date().getMonth()]]
-        }],
+        series: [],
         chart: {
             type: 'bar',
             height: 350
         },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'top',
-                },
-            }
-        },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            enabledOnsSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: [prev_year,now_year],
-        },
-        yaxis: {
-            title: {
-                text: 'M (Milyar)'
-            }
-        },
-        fill: {
-            opacity: 1
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        }
     };
     var chart_profit_ytd_overheadexp = new ApexCharts(document.querySelector("#profit_ytd_chart_overheadexp"),
         options_profit_ytd_overheadexp);
@@ -821,12 +372,534 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    var profit_mtd,profit_ytd
     $(document).ready(function () {
-        $('#profit_mtd_table').DataTable({
+        setTimeout(() => {
+            $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'1','params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_mtd_nii.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[0],(res.data_profit).map(bFormatter)[0]]
+                }])
+                chart_profit_mtd_nii.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_month,now_month],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+            $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'1','params':'curr_year_val','params2':'last_year_val'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_ytd_nii.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[new Date().getMonth()],(res.data_profit).map(bFormatter)[new Date().getMonth()]]
+                }])
+                chart_profit_ytd_nii.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_year,now_year],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        
+        }, 200);
+        setTimeout(() => {
+            $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'2','params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_mtd_feebased.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[0],(res.data_profit).map(bFormatter)[0]]
+                }])
+                chart_profit_mtd_feebased.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_month,now_month],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'2','params':'curr_year_val','params2':'last_year_val'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_ytd_feebased.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[new Date().getMonth()],(res.data_profit).map(bFormatter)[new Date().getMonth()]]
+                }])
+                chart_profit_ytd_feebased.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_year,now_year],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        }, 600);
+        setTimeout(() => {
+            $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'3','params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_mtd_coc.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[0],(res.data_profit).map(bFormatter)[0]]
+                }])
+                chart_profit_mtd_coc.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_month,now_month],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'3','params':'curr_year_val','params2':'last_year_val'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_ytd_coc.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[new Date().getMonth()],(res.data_profit).map(bFormatter)[new Date().getMonth()]]
+                }])
+                chart_profit_ytd_coc.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_year,now_year],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        }, 1000);
+        setTimeout(() => {
+            $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'4','params':'curr_month','params2':'last_month'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_mtd_overheadexp.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[0],(res.data_profit).map(bFormatter)[0]]
+                }])
+                chart_profit_mtd_overheadexp.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_month,now_month],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/profit/double_chartdata',
+            data:{'id_komponen':'4','params':'curr_year_val','params2':'last_year_val'},
+            dataType: "json",
+            success: function(res){
+                chart_profit_ytd_overheadexp.updateSeries([{
+                    name: 'Profit',
+                    type: 'column',
+                    data: [(res.data_profit2).map(bFormatter)[new Date().getMonth()],(res.data_profit).map(bFormatter)[new Date().getMonth()]]
+                }])
+                chart_profit_ytd_overheadexp.updateOptions({
+                    
+                    colors: [function({ value, seriesIndex, w }) {
+                        return (value <(res.data_profit2).map(bFormatter)[0])?'#26E7A6':'#26A0FC'
+                    }],
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'top',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        enabledOnsSeries: [1,2]
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: [prev_year,now_year],
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'M (Milyar)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        }, 1400);
+        profit_mtd=$('#profit_mtd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/profit/listdata',
+                type: "POST",
+                data:{'params':'curr_month','params2':'last_month'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [2], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                },{
+                    targets: [3], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ], 
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, 'All']]
         });
-        $('#profit_ytd_table').DataTable({
+        profit_ytd=$('#profit_ytd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/profit/listdata',
+                type: "POST",
+                data:{'params':'curr_year_val_2','params2':'last_year_val_2'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [2], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                },{
+                    targets: [3], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ], 
             scrollX: true,
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, 'All']]
         });

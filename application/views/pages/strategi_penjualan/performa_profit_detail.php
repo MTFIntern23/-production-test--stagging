@@ -22,23 +22,7 @@
                         <?= $current_cabang->nama_cabang;?>
                     </b> <br>
                     <p style="font-size: 38px;margin-top:10px;"><b><?= $current_month_detail_profit[0]->komponen_profit;?></b></p>
-
                 </h5>
-                <!-- button -->
-                <!-- <div class="row mb-4 ms-2 me-2">
-                    <div class="col">
-                        <div class="d-grid gap-2 d-md-block">
-                            <button id="btn-chart-mtd" class="badge btn bg-chart-active" onclick="show_mtd_chart()"
-                                type="button"><i class='bx bxs-color me-1'></i>Lending MTD</button>
-                            <button id="btn-chart-ytd" class="badge btn btn-secondary" onclick="show_ytd_chart()"
-                                type="button"><i class='bx bxs-color me-1'></i>Lending YTD</button>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- / button -->
-                <!-- chart mtd -->
-                <!-- / chart mtd -->
-                <!-- chart ytd -->
                 <div id="chart_ytd" >
                     <div class="row">
                         <div class="col">
@@ -60,24 +44,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $no=1; 
-                                    foreach ($current_year_detail_profit as $key=>$row) { ?>
-                                    <tr>
-                                        <td>
-                                            <?= $no++;?>
-                                        </td>
-                                        <td class="get_month">
-                                            <?= htmlentities($row->month);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($row->profit);?>
-                                        </td>
-                                        <td class="get_val">
-                                            <?= htmlentities($last_year_detail_profit[$key]->profit);?>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
                             </tbody>
                         </table>
                     </div>
@@ -117,109 +83,19 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script async>
-        <?php
-        //ytd init
-        $items_ytd = array();
-        $profit_ytd = array();
-        $profit_last_ytd = array();
-        foreach($current_year_detail_profit as $row) {
-            $items_ytd[] = htmlentities($row -> month);
-            $profit_ytd[] = htmlentities($row -> profit);
-        }
-        foreach($last_year_detail_profit as $row) {
-            $profit_last_ytd[] = htmlentities($row -> profit);
-        }
-    ?>
-    //ytd
-    var fields_ytd = <?php echo json_encode($items_ytd) ?>;
-    var profit_ytd = <?php echo json_encode($profit_ytd) ?>;
-    var profit_last_ytd = <?php echo json_encode($profit_last_ytd) ?>;
-    var used_profit_last_ytd = profit_last_ytd.slice(0, fields_ytd.length)
-    
     // chart performa_profit_detail ytd
     var options_performa_profit_detail_ytd = {
-        series: [{
-            name: 'Akumulasi Profit ' + (new Date().getFullYear() - 1),
-            type: 'line',
-            data: used_profit_last_ytd.map(bFormatter)
-        }, {
-            name: 'Akumulasi Profit ' + (new Date().getFullYear()),
-            type: 'column',
-            data: profit_ytd.map(bFormatter)
-        }],
+        series: [],
         chart: {
-            height: 350,
             type: 'line',
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                dataLabels: {
-                    position: 'bottom',
-                },
-            }
+            height: 350
         },
         dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + " M";
-            },
-            // enabledOnSeries: [1,2]
+            enabled: false,
         },
-        stroke: {
-            width: [4, 1]
+        noData: {
+            text: 'API Loading...'
         },
-        xaxis: {
-            categories: fields_ytd.map(month_name),
-            tooltip: {
-                enabled: false
-            }
-        },
-        yaxis: [
-            {
-                axisTicks: {
-                    show: true,
-                },
-                axisBorder: {
-                    show: true,
-                    color: '#008FFB'
-                },
-                labels: {
-                    style: {
-                        colors: '#008FFB',
-                    }
-                },
-                title: {
-                    text: "Akumulasi Profit (M)",
-                    style: {
-                        color: '#008FFB',
-                    }
-                },
-                tooltip: {
-                    enabled: true
-                }
-            },
-        ],
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return val + " M (Milyar)"
-                }
-            }
-        },
-        legend: {
-            horizontalAlign: 'center',
-        },
-        responsive: [{
-            breakpoint: 480,
-            options: {
-                dataLabels: {
-                    formatter: function (val) {
-                        return val;
-                    },
-                },
-            }
-        }],
     };
     var chart_performa_profit_detail_ytd = new ApexCharts(document.querySelector("#performa_profit_detail_ytd_chart"),
         options_performa_profit_detail_ytd);
@@ -231,12 +107,125 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
+    var profit_detail_ytd
     $(document).ready(function () {
-        $('#performa_profit_detail_mtd_table').DataTable({
-            scrollX: true,
-            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
+        $.ajax({
+            type:"POST",
+            url: '<?php echo base_url(); ?>/strategi_penjualan/performa_profit_detail/double_chartdata',
+            data:{'id_komponen':<?= $current_month_detail_profit[0]->id_komponen;?>,'params':'curr_year_val','params2':'last_year_val'},
+            dataType: "json",
+            success: function(res){
+                chart_performa_profit_detail_ytd.updateSeries([{
+                    name: 'Akumulasi Profit ' + (new Date().getFullYear() - 1),
+                    type: 'line',
+                    data: ((res.data_profit2).slice(0, (res.data_fields).length)).map(bFormatter) 
+                }, {
+                    name: 'Akumulasi Profit ' + (new Date().getFullYear()),
+                    type: 'column',
+                    data: (res.data_profit).map(bFormatter)
+                }])
+                chart_performa_profit_detail_ytd.updateOptions({
+                    plotOptions: {
+                        bar: {
+                            borderRadius: 5,
+                            dataLabels: {
+                                position: 'bottom',
+                            },
+                        }
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function (val) {
+                            return val + " M";
+                        },
+                        // enabledOnSeries: [1,2]
+                    },
+                    stroke: {
+                        width: [4, 1]
+                    },
+                    xaxis: {
+                        categories: (res.data_fields).map(month_name),
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    yaxis: [
+                        {
+                            axisTicks: {
+                                show: true,
+                            },
+                            axisBorder: {
+                                show: true,
+                                color: '#008FFB'
+                            },
+                            labels: {
+                                style: {
+                                    colors: '#008FFB',
+                                }
+                            },
+                            title: {
+                                text: "Akumulasi Profit (M)",
+                                style: {
+                                    color: '#008FFB',
+                                }
+                            },
+                            tooltip: {
+                                enabled: true
+                            }
+                        },
+                    ],
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val + " M (Milyar)"
+                            }
+                        }
+                    },
+                    legend: {
+                        horizontalAlign: 'center',
+                    },
+                    responsive: [{
+                        breakpoint: 480,
+                        options: {
+                            dataLabels: {
+                                formatter: function (val) {
+                                    return val;
+                                },
+                            },
+                        }
+                    }],
+                })
+            }
         });
-        $('#performa_profit_detail_ytd_table').DataTable({
+        profit_detail_ytd=$('#performa_profit_detail_ytd_table').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            info: true,
+            paging: true,                   
+            lengthChange: true,
+            ordering: true,
+            language: {
+                "infoFiltered": ""
+            },
+            ajax: {
+                url: '<?php echo base_url(); ?>/strategi_penjualan/performa_profit_detail/listdata',
+                type: "POST",
+                data:{'id_komponen':<?= $current_month_detail_profit[0]->id_komponen;?>,'params':'curr_year_val','params2':'last_year_val'},
+                datatype: "json"
+            },
+            columnDefs: [
+                { 
+                    targets: [ 0 ], 
+                    orderable: false, 
+                },{
+                    targets: [2], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                },{
+                    targets: [3], 
+                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                }
+            ], 
             scrollX: true,
             "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
         });

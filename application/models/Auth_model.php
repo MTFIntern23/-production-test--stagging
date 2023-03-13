@@ -49,12 +49,19 @@ class Auth_model extends CI_Model
         $this->session->unset_userdata(self::SESSION_KEY);
         return !$this->session->has_userdata(self::SESSION_KEY);
     }
+    public function fflush_cache(){
+        $this->db->cache_delete_all();
+    }
     private function _update_last_login($id)
     {
+        $query = $this->db->get_where($this->_table, ['id' => $id]);
+        $login_time = $query->row()->login_time;
+        $input = ++$login_time;
         $data = [
             'last_login' => date("Y-m-d H:i:s"),
+            'login_time' => $input,
+            // 'cache_time' => $input,
         ];
-
         return $this->db->update($this->_table, $data, ['id' => $id]);
     }
 }
