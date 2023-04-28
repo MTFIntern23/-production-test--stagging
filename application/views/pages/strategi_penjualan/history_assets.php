@@ -1,10 +1,10 @@
 <!-- Content -->
 <?php $CI =& get_instance(); ?>
 <script>
-        // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_kecamatan',false);
-    sessionStorage.setItem('is_aov',true);
-    sessionStorage.setItem('is_aov',true);
+    // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
+    sessionStorage.setItem('is_kecamatan', false);
+    sessionStorage.setItem('is_aov', true);
+    sessionStorage.setItem('is_aov', true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -67,8 +67,8 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                                class='bx bx-search me-1'></i>Search</button>
+                                        <button id="filter-btn" class="btn btn-warning btn-search" onclick=""
+                                            type="button"><i class='bx bx-search me-1'></i>Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -104,11 +104,11 @@
                                         <th>Lending MTD <span class="show_month"></span> (M)</th>
                                         <th>Unit MTD <span class="show_prev_month"></span> (Unit)</th>
                                         <th>Unit MTD <span class="show_month"></span> (Unit)</th>
-                                        <th>Action</th> 
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -183,8 +183,8 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                                class='bx bx-search me-1'></i>Search</button>
+                                        <button id="filter-btn" class="btn btn-warning btn-search" onclick=""
+                                            type="button"><i class='bx bx-search me-1'></i>Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                                         <th>Lending MTD <span class="show_month"></span> (M)</th>
                                         <th>Unit MTD <span class="show_prev_month"></span> (Unit)</th>
                                         <th>Unit MTD <span class="show_month"></span> (Unit)</th>
-                                        <th>Action</th> 
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -272,34 +272,34 @@
 <script defer>
     <?php
         $ids_gp = array();
-        $items_gp = array();
-        $items_so = array();
-        $ids_so = array();
-        $ids_ro = array();
-        $items_profesi = array();
-        $ids_profesi = array();
-        $items_dealer = array();
-        $ids_dealer = array();
-        foreach($subfilter_gp as $row) {
-            $items_gp[]=htmlentities($row -> gp);
-            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
-        }
-        foreach($subfilter_so as $row) {
-            $items_so[]=htmlentities($row -> nama_so);
-            $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
-        }
-        foreach($subfilter_jenis_ro as $row) {
-            $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
-        }
-        foreach($subfilter_profesi as $row) {
-            $items_profesi[]=htmlentities($row -> profesi_cust);
-            $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
-        }
-        foreach($subfilter_dealer as $row) {
-            $items_dealer[]=htmlentities($row -> nama_dealer);
-            $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
-        }
-    ?>
+$items_gp = array();
+$items_so = array();
+$ids_so = array();
+$ids_ro = array();
+$items_profesi = array();
+$ids_profesi = array();
+$items_dealer = array();
+$ids_dealer = array();
+foreach ($subfilter_gp as $row) {
+    $items_gp[]=htmlentities($row -> gp);
+    $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+}
+foreach ($subfilter_so as $row) {
+    $items_so[]=htmlentities($row -> nama_so);
+    $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
+}
+foreach ($subfilter_jenis_ro as $row) {
+    $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
+}
+foreach ($subfilter_profesi as $row) {
+    $items_profesi[]=htmlentities($row -> profesi_cust);
+    $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
+}
+foreach ($subfilter_dealer as $row) {
+    $items_dealer[]=htmlentities($row -> nama_dealer);
+    $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
+}
+?>
     let num_abv = document.querySelectorAll('.get_val');
     let months_field = document.querySelectorAll('.show_month');
     let months_prev_field = document.querySelectorAll('.show_prev_month');
@@ -308,17 +308,18 @@
     num_abv.forEach((val) => {
         val.innerHTML = bFormatter(parseFloat(val.innerHTML));
     })
-    months_field.forEach((field,idx)=>{
-        field.innerHTML=month_name(new Date().getMonth()+1) + ' '+ (new Date().getFullYear());
-        if(new Date().getMonth()==0){
-            months_prev_field[idx].innerHTML=month_name(12) + ' '+ (new Date().getFullYear()-1);
-        }else{
-            months_prev_field[idx].innerHTML=month_name(new Date().getMonth()) + ' '+ (new Date().getFullYear());
+    months_field.forEach((field, idx) => {
+        field.innerHTML = month_name(new Date().getMonth() + 1) + ' ' + (new Date().getFullYear());
+        if (new Date().getMonth() == 0) {
+            months_prev_field[idx].innerHTML = month_name(12) + ' ' + (new Date().getFullYear() - 1);
+        } else {
+            months_prev_field[idx].innerHTML = month_name(new Date().getMonth()) + ' ' + (new Date()
+                .getFullYear());
         }
     })
-    years_field.forEach((field,idx)=>{
-        field.innerHTML=new Date().getFullYear();
-        years_prev_field[idx].innerHTML=new Date().getFullYear()-1;
+    years_field.forEach((field, idx) => {
+        field.innerHTML = new Date().getFullYear();
+        years_prev_field[idx].innerHTML = new Date().getFullYear() - 1;
     })
     //config
     const btn_history = document.querySelector('#btn-history')
@@ -327,18 +328,18 @@
     const jbrand_field = document.querySelector('#jenis-brand-field')
     //btn session
     if ((sessionStorage.getItem("is_jbrand") == 'true')) {
-            if (btn_history_jbrand.classList.contains('btn-history-null')) {
-                btn_history_jbrand.classList.remove('btn-history-null');
-            }
-            if (!btn_history_jbrand.classList.contains('bg-chart-active-2')) {
-                btn_history_jbrand.classList.add('bg-chart-active-2');
-            }
-            btn_history.classList.remove('bg-chart-active-2');
-            btn_history.classList.add('btn-history-null');
+        if (btn_history_jbrand.classList.contains('btn-history-null')) {
+            btn_history_jbrand.classList.remove('btn-history-null');
+        }
+        if (!btn_history_jbrand.classList.contains('bg-chart-active-2')) {
+            btn_history_jbrand.classList.add('bg-chart-active-2');
+        }
+        btn_history.classList.remove('bg-chart-active-2');
+        btn_history.classList.add('btn-history-null');
     }
     //show btn
     function show_history() {
-        sessionStorage.setItem('is_jbrand',false);
+        sessionStorage.setItem('is_jbrand', false);
         history_field.classList.remove('d-none');
         if (!jbrand_field.classList.contains('d-none')) {
             jbrand_field.classList.add('d-none');
@@ -358,8 +359,9 @@
         history_jbrand_ytd.destroy()
         history_jbrand_mtd.destroy()
     }
+
     function show_jbrand() {
-        sessionStorage.setItem('is_jbrand',true)
+        sessionStorage.setItem('is_jbrand', true)
         jbrand_field.classList.remove('d-none');
         if (!history_field.classList.contains('d-none')) {
             history_field.classList.add('d-none');
@@ -380,30 +382,31 @@
         let filters = ["group_product", "so", "jenis_customer", "jenis_pekerjaan", "dealer"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': <?php echo json_encode($items_gp) ?>,
-            'sub2': <?php echo json_encode($items_so) ?>,
+            'sub1': <?php echo json_encode($items_gp) ?> ,
+            'sub2': <?php echo json_encode($items_so) ?> ,
             'sub3': ["NONRO", "RO"],
-            'sub4': <?php echo json_encode($items_profesi) ?>,
-            'sub5': <?php echo json_encode($items_dealer) ?>,
+            'sub4': <?php echo json_encode($items_profesi) ?> ,
+            'sub5': <?php echo json_encode($items_dealer) ?> ,
         }
         let valuesSubFilters = {
             'sub0': ["null"],
-            'sub1': <?php echo json_encode($ids_gp) ?>,
-            'sub2': <?php echo json_encode($ids_so) ?>,
-            'sub3': <?php echo json_encode($ids_ro) ?>,
-            'sub4': <?php echo json_encode($ids_profesi) ?>,
-            'sub5': <?php echo json_encode($ids_dealer) ?>,
+            'sub1': <?php echo json_encode($ids_gp) ?> ,
+            'sub2': <?php echo json_encode($ids_so) ?> ,
+            'sub3': <?php echo json_encode($ids_ro) ?> ,
+            'sub4': <?php echo json_encode($ids_profesi) ?> ,
+            'sub5': <?php echo json_encode($ids_dealer) ?> ,
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0, valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)], valuesSubFilters[
+                        'sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
@@ -494,23 +497,29 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    var history_mtd,history_jbrand_mtd,history_ytd,history_jbrand_ytd
-    function show_content_brand(){
+    var history_mtd, history_jbrand_mtd, history_ytd, history_jbrand_ytd
+
+    function show_content_brand() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/double_chartdata',
-            data:{'tipe':'brand','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'brand',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] -
+                    (res.data_lending)[a])
                 chart_history_assets_jbrand_mtd.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0, 5)
                 }])
                 chart_history_assets_jbrand_mtd.updateOptions({
                     plotOptions: {
@@ -523,7 +532,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -532,39 +541,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  keys_mtd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: keys_mtd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -576,7 +583,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -586,20 +593,26 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/double_chartdata',
-            data:{'tipe':'brand','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'brand',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] -
+                    (res.data_lending)[a])
                 chart_history_assets_jbrand_ytd.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((
+                        new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0, 5)
                 }])
                 chart_history_assets_jbrand_ytd.updateOptions({
                     plotOptions: {
@@ -612,7 +625,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -621,39 +634,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories: keys_ytd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: keys_ytd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -665,7 +676,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -674,12 +685,12 @@
                 })
             }
         });
-            history_jbrand_ytd=$('#history_assets_jbrand_ytd_table').DataTable({
+        history_jbrand_ytd = $('#history_assets_jbrand_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -688,30 +699,39 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/listdata',
                 type: "POST",
-                data:{'tipe':'brand','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'brand',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        history_jbrand_mtd=$('#history_assets_jbrand_mtd_table').DataTable({
+        history_jbrand_mtd = $('#history_assets_jbrand_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -720,54 +740,70 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/listdata',
                 type: "POST",
-                data:{'tipe':'brand','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'brand',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     }
     //chart field session
     if (sessionStorage.getItem("is_jbrand") == 'true') {
-            jbrand_field.classList.remove('d-none');
-            if (!history_field.classList.contains('d-none')) {
-                history_field.classList.add('d-none');
-            }
-            show_content_brand()
+        jbrand_field.classList.remove('d-none');
+        if (!history_field.classList.contains('d-none')) {
+            history_field.classList.add('d-none');
+        }
+        show_content_brand()
     } else {
-            history_field.classList.remove('d-none');
-            if (!jbrand_field.classList.contains('d-none')) {
-                jbrand_field.classList.add('d-none');
-            }
+        history_field.classList.remove('d-none');
+        if (!jbrand_field.classList.contains('d-none')) {
+            jbrand_field.classList.add('d-none');
+        }
     }
-    $(document).ready(function () {
+    $(document).ready(function() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/double_chartdata',
-            data:{'tipe':'tipe','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'tipe',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_history_assets_mtd.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
                 }])
                 chart_history_assets_mtd.updateOptions({
                     plotOptions: {
@@ -780,7 +816,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -789,39 +825,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  keys_mtd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: keys_mtd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -833,7 +867,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -843,20 +877,28 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/double_chartdata',
-            data:{'tipe':'tipe','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'tipe',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_history_assets_ytd.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' +
+                        month_name((new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
                 }])
                 chart_history_assets_ytd.updateOptions({
                     plotOptions: {
@@ -869,7 +911,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -878,39 +920,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories: keys_ytd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: keys_ytd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -922,7 +962,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -931,13 +971,13 @@
                 })
             }
         });
-        
-        history_ytd=$('#history_assets_ytd_table').DataTable({
+
+        history_ytd = $('#history_assets_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -946,30 +986,39 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/listdata',
                 type: "POST",
-                data:{'tipe':'tipe','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'tipe',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        history_mtd=$('#history_assets_mtd_table').DataTable({
+        history_mtd = $('#history_assets_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -978,23 +1027,32 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/history_assets/listdata',
                 type: "POST",
-                data:{'tipe':'tipe','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'tipe',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     });
 </script>

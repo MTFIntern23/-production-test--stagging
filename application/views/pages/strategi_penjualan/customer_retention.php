@@ -2,7 +2,7 @@
 <?php $CI =& get_instance(); ?>
 <script>
     // sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_aov',true);
+    sessionStorage.setItem('is_aov', true);
     sessionStorage.setItem('is_jbrand', false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -51,8 +51,8 @@
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                            class='bx bx-search me-1'></i>Search</button>
+                                    <button id="filter-btn" class="btn btn-warning btn-search" onclick=""
+                                        type="button"><i class='bx bx-search me-1'></i>Search</button>
                                 </div>
                             </div>
                         </div>
@@ -148,66 +148,67 @@
 <script defer>
     <?php
         $ids_gp = array();
-        $items_gp = array();
-        $ids_asset = array();
-        $items_so = array();
-        $ids_so = array();
-        $ids_profesi = array();
-        $items_profesi = array();
-        $items_dealer = array();
-        $ids_dealer = array();
-        foreach($subfilter_gp as $row) {
-            $items_gp[]=htmlentities($row -> gp);
-            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
-        }
-        foreach($subfilter_jenis_assets as $row) {
-            $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
-        }
-        foreach($subfilter_so as $row) {
-            $items_so[]=htmlentities($row -> nama_so);
-            $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
-        }
-        foreach($subfilter_profesi as $row) {
-            $items_profesi[]=htmlentities($row -> profesi_cust);
-            $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
-        }
-        foreach($subfilter_dealer as $row) {
-            $items_dealer[]=htmlentities($row -> nama_dealer);
-            $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
-        }
-    ?>
-    function name_status(val){
-        val=='1'?val = "RO":val = "NON"
+$items_gp = array();
+$ids_asset = array();
+$items_so = array();
+$ids_so = array();
+$ids_profesi = array();
+$items_profesi = array();
+$items_dealer = array();
+$ids_dealer = array();
+foreach ($subfilter_gp as $row) {
+    $items_gp[]=htmlentities($row -> gp);
+    $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+}
+foreach ($subfilter_jenis_assets as $row) {
+    $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
+}
+foreach ($subfilter_so as $row) {
+    $items_so[]=htmlentities($row -> nama_so);
+    $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
+}
+foreach ($subfilter_profesi as $row) {
+    $items_profesi[]=htmlentities($row -> profesi_cust);
+    $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
+}
+foreach ($subfilter_dealer as $row) {
+    $items_dealer[]=htmlentities($row -> nama_dealer);
+    $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
+}
+?>
+    function name_status(val) {
+        val == '1' ? val = "RO" : val = "NON"
         return val
     }
     let setSubFilter = function(dataFilter) {
         let filters = ["group_product", "jenis_asset", "so", "jenis_pekerjaan", "dealer"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': <?php echo json_encode($items_gp) ?>,
-            'sub2': ["Second","New"],
-            'sub3': <?php echo json_encode($items_so) ?>,
-            'sub4': <?php echo json_encode($items_profesi) ?>,
-            'sub5': <?php echo json_encode($items_dealer) ?>,
+            'sub1': <?php echo json_encode($items_gp) ?> ,
+            'sub2': ["Second", "New"],
+            'sub3': <?php echo json_encode($items_so) ?> ,
+            'sub4': <?php echo json_encode($items_profesi) ?> ,
+            'sub5': <?php echo json_encode($items_dealer) ?> ,
         }
         let valuesSubFilters = {
             'sub0': ["null"],
-            'sub1': <?php echo json_encode($ids_gp) ?>,
-            'sub2': <?php echo json_encode($ids_asset) ?>,
-            'sub3': <?php echo json_encode($ids_so) ?>,
-            'sub4': <?php echo json_encode($ids_profesi) ?>,
-            'sub5': <?php echo json_encode($ids_dealer) ?>,
+            'sub1': <?php echo json_encode($ids_gp) ?> ,
+            'sub2': <?php echo json_encode($ids_asset) ?> ,
+            'sub3': <?php echo json_encode($ids_so) ?> ,
+            'sub4': <?php echo json_encode($ids_profesi) ?> ,
+            'sub5': <?php echo json_encode($ids_dealer) ?> ,
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0, valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)], valuesSubFilters[
+                        'sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
@@ -227,8 +228,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -238,8 +238,7 @@
         noData: {
             text: 'API Loading...'
         },
-        legend:
-        {
+        legend: {
             position: 'bottom'
         },
         labels: ['Total RO', 'Total non-RO'],
@@ -274,8 +273,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -285,8 +283,7 @@
         noData: {
             text: 'API Loading...'
         },
-        legend:
-        {
+        legend: {
             position: 'bottom'
         },
         labels: ['Total RO', 'Total non-RO'],
@@ -319,32 +316,39 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    var cust_retention_mtd,cust_retention_ytd
-    var mtd_ro = [0,0]
-    var ytd_ro = [0,0]
-    $(document).ready(function () {
+    var cust_retention_mtd, cust_retention_ytd
+    var mtd_ro = [0, 0]
+    var ytd_ro = [0, 0]
+    $(document).ready(function() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/customer_retention/pie_chartdata',
-            data:{'params':'curr_month','params2':'curr_year'},
+            data: {
+                'params': 'curr_month',
+                'params2': 'curr_year'
+            },
             dataType: "json",
-            success: function(res){
+            success: function(res) {
                 Object.values((res.data_fields)).forEach(val => {
-                    val=='1'?mtd_ro[0]++:mtd_ro[1]++
+                    val == '1' ? mtd_ro[0]++ : mtd_ro[1]++
                 });
                 Object.values((res.data_fields2)).forEach(val => {
-                    val=='1'?ytd_ro[0]++:ytd_ro[1]++
+                    val == '1' ? ytd_ro[0]++ : ytd_ro[1]++
                 });
                 chart_customer_retention_mtd.updateSeries(mtd_ro)
                 chart_customer_retention_ytd.updateSeries(ytd_ro)
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/customer_retention/chartdata',
-            data:{'params':'curr_month','is_ro':'1','is_ro_2':'0'},
+            data: {
+                'params': 'curr_month',
+                'is_ro': '1',
+                'is_ro_2': '0'
+            },
             dataType: "json",
-            success: function(res){
+            success: function(res) {
                 chart_customer_retention_mtd_2.updateSeries([{
                     name: 'Total Lending RO',
                     type: 'column',
@@ -365,7 +369,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         style: {
@@ -383,42 +387,40 @@
                             }
                         },
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Pencapaian (Unit)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Pencapaian (Unit)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     fill: {
                         opacity: 1
                     },
                     tooltip: {
                         x: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " (Golive)"
                             }
                         },
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -438,30 +440,37 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/customer_retention/double_chartdata',
-            data:{'params':'curr_year','params2':'last_year','is_ro':'1','is_ro_2':'0'},
+            data: {
+                'params': 'curr_year',
+                'params2': 'last_year',
+                'is_ro': '1',
+                'is_ro_2': '0'
+            },
             dataType: "json",
-            success: function(res){
+            success: function(res) {
                 chart_customer_retention_ytd_2.updateSeries([{
-                    name: 'Total Lending RO ' + new Date().getFullYear() + ')',
-                    type: 'column',
-                    data: (res.data_lending_ro1).map(bFormatter)
-                },
-                {
-                    name: 'Total Lending RO ' + (new Date().getFullYear() - 1),
-                    type: 'line',
-                    data: (res.data_lending_last_ro1.slice(0, res.data_fields.length)).map(bFormatter)
-                },
-                {
-                    name: 'Total Lending non-RO ' + new Date().getFullYear() + ')',
-                    type: 'column',
-                    data: (res.data_lending_ro0).map(bFormatter)
-                }, {
-                    name: 'Total Lending non-RO ' + (new Date().getFullYear() - 1),
-                    type: 'line',
-                    data: (res.data_lending_last_ro0).map(bFormatter)
-                }])
+                        name: 'Total Lending RO ' + new Date().getFullYear() + ')',
+                        type: 'column',
+                        data: (res.data_lending_ro1).map(bFormatter)
+                    },
+                    {
+                        name: 'Total Lending RO ' + (new Date().getFullYear() - 1),
+                        type: 'line',
+                        data: (res.data_lending_last_ro1.slice(0, res.data_fields.length))
+                            .map(bFormatter)
+                    },
+                    {
+                        name: 'Total Lending non-RO ' + new Date().getFullYear() + ')',
+                        type: 'column',
+                        data: (res.data_lending_ro0).map(bFormatter)
+                    }, {
+                        name: 'Total Lending non-RO ' + (new Date().getFullYear() - 1),
+                        type: 'line',
+                        data: (res.data_lending_last_ro0).map(bFormatter)
+                    }
+                ])
                 chart_customer_retention_ytd_2.updateOptions({
                     plotOptions: {
                         bar: {
@@ -480,34 +489,32 @@
                     xaxis: {
                         categories: (res.data_fields).map(month_name),
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "(Unit)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "(Unit)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " (Unit)"
                             }
                         }
@@ -519,7 +526,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -528,12 +535,12 @@
                 })
             }
         });
-        cust_retention_mtd=$('#customer_retention_mtd_table').DataTable({
+        cust_retention_mtd = $('#customer_retention_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -542,36 +549,47 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/customer_retention/listdata',
                 type: "POST",
-                data:{'params':'curr_month'},
+                data: {
+                    'params': 'curr_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) { return name_status(data);} 
-                },{
-                    targets: [5], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [7], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
-                },{
-                    targets: [8], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return name_status(data);
                 }
-            ],
+            }, {
+                targets: [5],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [7],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }, {
+                targets: [8],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
+            "lengthMenu": [
+                [10, 25, 50, 75, -1],
+                [10, 25, 50, 75, 'All']
+            ],
         });
-        cust_retention_ytd=$('#customer_retention_ytd_table').DataTable({
+        cust_retention_ytd = $('#customer_retention_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -580,29 +598,40 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/customer_retention/listdata',
                 type: "POST",
-                data:{'params':'curr_year'},
+                data: {
+                    'params': 'curr_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) { return name_status(data);} 
-                },{
-                    targets: [5], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [7], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
-                },{
-                    targets: [8], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return name_status(data);
                 }
-            ],
+            }, {
+                targets: [5],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [7],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }, {
+                targets: [8],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
+            "lengthMenu": [
+                [10, 25, 50, 75, -1],
+                [10, 25, 50, 75, 'All']
+            ],
         });
     });
 </script>

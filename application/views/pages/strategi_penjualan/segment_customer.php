@@ -2,7 +2,7 @@
 <?php $CI =& get_instance(); ?>
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_aov',true);
+    sessionStorage.setItem('is_aov', true);
     sessionStorage.setItem('is_jbrand', false);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
@@ -20,40 +20,44 @@
                     <div class="row ms-2 me-2">
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
-                                    <button  id="btn-historiw" class="badge btn bg-chart-active-2"
-                                    onclick="show_this_field('pekerjaan-field',this.id)" type="button"><i class='bx bx-briefcase-alt-2'></i> Jenis
+                                <button id="btn-historiw" class="badge btn bg-chart-active-2"
+                                    onclick="show_this_field('pekerjaan-field',this.id)" type="button"><i
+                                        class='bx bx-briefcase-alt-2'></i> Jenis
                                     Pekerjaan</button>
-                                                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                            <div class="d-md-block">
-                                <button  id="btn-historiw-jbrand" class="badge btn btn-history-null " onclick="show_this_field('pendidikan-field',this.id)"
-                                    type="button"><i class='bx bxs-graduation me-1'></i>Jenis Pendidikan</button>
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
-                                    <button  id="btn-historiw-jbrand-1" class="badge btn btn-history-null "
+                                <button id="btn-historiw-jbrand" class="badge btn btn-history-null "
+                                    onclick="show_this_field('pendidikan-field',this.id)" type="button"><i
+                                        class='bx bxs-graduation me-1'></i>Jenis Pendidikan</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <div class="d-md-block">
+                                <button id="btn-historiw-jbrand-1" class="badge btn btn-history-null "
                                     onclick="show_this_field('kecamatan-field',this.id)" type="button"><i
                                         class='bx bxs-school me-1'></i>Kecamatan</button>
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
-                                    <button  id="btn-historiw-jbrand-2" class="badge btn btn-history-null "
-                                    onclick="show_this_field('gaji-field',this.id)" type="button"><i class='bx bx-money-withdraw'></i>
+                                <button id="btn-historiw-jbrand-2" class="badge btn btn-history-null "
+                                    onclick="show_this_field('gaji-field',this.id)" type="button"><i
+                                        class='bx bx-money-withdraw'></i>
                                     Gaji</button>
- 
+
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-xs-12">
                             <div class="d-md-block">
-                            <button  id="btn-historiw-jbrand-3" class="badge btn btn-history-null "
-                            onclick="show_this_field('umur-field',this.id)" type="button"><i class='bx bxs-face'></i>
+                                <button id="btn-historiw-jbrand-3" class="badge btn btn-history-null "
+                                    onclick="show_this_field('umur-field',this.id)" type="button"><i
+                                        class='bx bxs-face'></i>
                                     Umur</button>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div id="pendidikan-field" class="d-none">
@@ -250,7 +254,8 @@
                         <div class="col">
                             <div class="d-grid gap-2 d-md-block">
                                 <div class="row justify-content-sm-start">
-                                    <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12" style="margin-right: -15px;">
+                                    <div class="select-filter col-xl-3 col-lg-3 col-md-5 col-sm-12"
+                                        style="margin-right: -15px;">
                                         <select class="form-select" id='filter'
                                             onchange="setSubFilter(this.options[this.selectedIndex].value)">
                                             <option selected disabled>Pilih Filter</option>
@@ -272,8 +277,8 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                                class='bx bx-search me-1'></i>Search</button>
+                                        <button id="filter-btn" class="btn btn-warning btn-search" onclick=""
+                                            type="button"><i class='bx bx-search me-1'></i>Search</button>
                                     </div>
                                 </div>
                             </div>
@@ -550,32 +555,32 @@
 <script defer>
     <?php
         $ids_gp = array();
-        $items_gp = array();
-        $ids_asset = array();
-        $items_so = array();
-        $ids_so = array();
-        $ids_ro = array();
-        $items_dealer = array();
-        $ids_dealer = array();
-        foreach($subfilter_gp as $row) {
-            $items_gp[]=htmlentities($row -> gp);
-            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
-        }
-        foreach($subfilter_jenis_assets as $row) {
-            $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
-        }
-        foreach($subfilter_so as $row) {
-            $items_so[]=htmlentities($row -> nama_so);
-            $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
-        }
-        foreach($subfilter_jenis_ro as $row) {
-            $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
-        }
-        foreach($subfilter_dealer as $row) {
-            $items_dealer[]=htmlentities($row -> nama_dealer);
-            $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
-        }
-    ?>
+$items_gp = array();
+$ids_asset = array();
+$items_so = array();
+$ids_so = array();
+$ids_ro = array();
+$items_dealer = array();
+$ids_dealer = array();
+foreach ($subfilter_gp as $row) {
+    $items_gp[]=htmlentities($row -> gp);
+    $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+}
+foreach ($subfilter_jenis_assets as $row) {
+    $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
+}
+foreach ($subfilter_so as $row) {
+    $items_so[]=htmlentities($row -> nama_so);
+    $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
+}
+foreach ($subfilter_jenis_ro as $row) {
+    $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
+}
+foreach ($subfilter_dealer as $row) {
+    $items_dealer[]=htmlentities($row -> nama_dealer);
+    $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
+}
+?>
     let num_abv = document.querySelectorAll('.get_val');
     let gaji_abv = document.querySelectorAll('.get_gaji');
     let months_field = document.querySelectorAll('.show_month');
@@ -588,17 +593,18 @@
     gaji_abv.forEach((val) => {
         val.innerHTML = mFormatter(parseFloat(val.innerHTML));
     })
-    months_field.forEach((field,idx)=>{
-        field.innerHTML=month_name(new Date().getMonth()+1) + ' '+ (new Date().getFullYear());
-        if(new Date().getMonth()==0){
-            months_prev_field[idx].innerHTML=month_name(12) + ' '+ (new Date().getFullYear()-1);
-        }else{
-            months_prev_field[idx].innerHTML=month_name(new Date().getMonth()) + ' '+ (new Date().getFullYear());
+    months_field.forEach((field, idx) => {
+        field.innerHTML = month_name(new Date().getMonth() + 1) + ' ' + (new Date().getFullYear());
+        if (new Date().getMonth() == 0) {
+            months_prev_field[idx].innerHTML = month_name(12) + ' ' + (new Date().getFullYear() - 1);
+        } else {
+            months_prev_field[idx].innerHTML = month_name(new Date().getMonth()) + ' ' + (new Date()
+                .getFullYear());
         }
     })
-    years_field.forEach((field,idx)=>{
-        field.innerHTML=new Date().getFullYear();
-        years_prev_field[idx].innerHTML=new Date().getFullYear()-1;
+    years_field.forEach((field, idx) => {
+        field.innerHTML = new Date().getFullYear();
+        years_prev_field[idx].innerHTML = new Date().getFullYear() - 1;
     })
     //button
     const btn_histori = document.querySelector('#btn-historiw')
@@ -606,39 +612,40 @@
     const btn_histori_jbrand_1 = document.querySelector('#btn-historiw-jbrand-1')
     const btn_histori_jbrand_2 = document.querySelector('#btn-historiw-jbrand-2')
     const btn_histori_jbrand_3 = document.querySelector('#btn-historiw-jbrand-3')
-    const btns_db = [btn_histori,btn_histori_jbrand,btn_histori_jbrand_1,btn_histori_jbrand_2,btn_histori_jbrand_3]
+    const btns_db = [btn_histori, btn_histori_jbrand, btn_histori_jbrand_1, btn_histori_jbrand_2, btn_histori_jbrand_3]
     //fields
     const pendidikan_field = document.querySelector('#pendidikan-field')
     const kecamatan_field = document.querySelector('#kecamatan-field')
     const pekerjaan_field = document.querySelector('#pekerjaan-field')
     const gaji_field = document.querySelector('#gaji-field')
     const umur_field = document.querySelector('#umur-field')
-    const fields_db = [pendidikan_field,kecamatan_field,pekerjaan_field,gaji_field,umur_field]
-    function show_this_field(field_name,btn_name){
-        document.querySelector('#'+field_name).classList.remove('d-none');
-        fields_db.forEach((field,idx)=>{
-            if (field!=document.querySelector('#'+field_name)&&!field.classList.contains('d-none')) {
+    const fields_db = [pendidikan_field, kecamatan_field, pekerjaan_field, gaji_field, umur_field]
+
+    function show_this_field(field_name, btn_name) {
+        document.querySelector('#' + field_name).classList.remove('d-none');
+        fields_db.forEach((field, idx) => {
+            if (field != document.querySelector('#' + field_name) && !field.classList.contains('d-none')) {
                 field.classList.add('d-none');
             }
         })
-        btns_db.forEach((btn,idx)=>{
-            if (btn!=document.querySelector('#'+btn_name)&&btn.classList.contains('bg-chart-active-2')) {
+        btns_db.forEach((btn, idx) => {
+            if (btn != document.querySelector('#' + btn_name) && btn.classList.contains('bg-chart-active-2')) {
                 btn.classList.remove('bg-chart-active-2');
                 btn.classList.add('btn-history-null');
             }
         })
-        if (!document.querySelector('#'+btn_name).classList.contains('bg-chart-active-2')) {
-            document.querySelector('#'+btn_name).classList.remove('btn-history-null');
-            document.querySelector('#'+btn_name).classList.add('bg-chart-active-2');
+        if (!document.querySelector('#' + btn_name).classList.contains('bg-chart-active-2')) {
+            document.querySelector('#' + btn_name).classList.remove('btn-history-null');
+            document.querySelector('#' + btn_name).classList.add('bg-chart-active-2');
         }
         show_mtd_chart()
-        if(field_name=='kecamatan-field'){
+        if (field_name == 'kecamatan-field') {
             show_content_kecamatan()
-        }else if(field_name=='pendidikan-field'){
+        } else if (field_name == 'pendidikan-field') {
             show_content_pendidikan()
-        }else if(field_name=='gaji-field'){
+        } else if (field_name == 'gaji-field') {
             show_content_gaji()
-        }else if(field_name=='umur-field'){
+        } else if (field_name == 'umur-field') {
             show_content_umur()
         }
         hideOthers(field_name)
@@ -647,36 +654,36 @@
         let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "dealer"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': <?php echo json_encode($items_gp) ?>,
-            'sub2': ["Second","New"],
-            'sub3': <?php echo json_encode($items_so) ?>,
+            'sub1': <?php echo json_encode($items_gp) ?> ,
+            'sub2': ["Second", "New"],
+            'sub3': <?php echo json_encode($items_so) ?> ,
             'sub4': ["NONRO", "RO"],
-            'sub5': <?php echo json_encode($items_dealer) ?>,
+            'sub5': <?php echo json_encode($items_dealer) ?> ,
         }
         let valuesSubFilters = {
             'sub0': ["null"],
-            'sub1': <?php echo json_encode($ids_gp) ?>,
-            'sub2': <?php echo json_encode($ids_asset) ?>,
-            'sub3': <?php echo json_encode($ids_so) ?>,
-            'sub4': <?php echo json_encode($ids_ro) ?>,
-            'sub5': <?php echo json_encode($ids_dealer) ?>,
+            'sub1': <?php echo json_encode($ids_gp) ?> ,
+            'sub2': <?php echo json_encode($ids_asset) ?> ,
+            'sub3': <?php echo json_encode($ids_so) ?> ,
+            'sub4': <?php echo json_encode($ids_ro) ?> ,
+            'sub5': <?php echo json_encode($ids_dealer) ?> ,
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0, valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)], valuesSubFilters[
+                        'sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
         })
     }
-
 </script>
 <!-- ==================== -->
 <!-- ==================== -->
@@ -687,12 +694,11 @@
     // chart history_assets mtd
     var options_pendidikan_mtd = {
         title: {
-            text: 'MTD ' + month_name(new Date().getMonth()+1),
+            text: 'MTD ' + month_name(new Date().getMonth() + 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -734,8 +740,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -795,8 +800,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -834,12 +838,11 @@
 
     var options_pendidikan_ytd_2 = {
         title: {
-            text: 'YTD ' + (new Date().getFullYear()-1),
+            text: 'YTD ' + (new Date().getFullYear() - 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -895,12 +898,11 @@
     // chart kecamatan mtd
     var options_kecamatan_mtd = {
         title: {
-            text: 'MTD ' + month_name(new Date().getMonth()+1),
+            text: 'MTD ' + month_name(new Date().getMonth() + 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -942,8 +944,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1003,8 +1004,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1042,12 +1042,11 @@
 
     var options_kecamatan_ytd_2 = {
         title: {
-            text: 'YTD ' + (new Date().getFullYear()-1),
+            text: 'YTD ' + (new Date().getFullYear() - 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1103,12 +1102,11 @@
     // chart pekerjaan mtd
     var options_pekerjaan_mtd = {
         title: {
-            text: 'MTD ' + month_name(new Date().getMonth()+1),
+            text: 'MTD ' + month_name(new Date().getMonth() + 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1150,8 +1148,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1212,8 +1209,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1251,12 +1247,11 @@
 
     var options_pekerjaan_ytd_2 = {
         title: {
-            text: 'YTD ' + (new Date().getFullYear()-1),
+            text: 'YTD ' + (new Date().getFullYear() - 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1312,12 +1307,11 @@
     // chart gaji mtd
     var options_gaji_mtd = {
         title: {
-            text: 'MTD ' + month_name(new Date().getMonth()+1),
+            text: 'MTD ' + month_name(new Date().getMonth() + 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1359,8 +1353,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1421,8 +1414,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1460,12 +1452,11 @@
 
     var options_gaji_ytd_2 = {
         title: {
-            text: 'YTD ' + (new Date().getFullYear()-1),
+            text: 'YTD ' + (new Date().getFullYear() - 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1521,12 +1512,11 @@
     // chart umur mtd
     var options_umur_mtd = {
         title: {
-            text: 'MTD ' + month_name(new Date().getMonth()+1),
+            text: 'MTD ' + month_name(new Date().getMonth() + 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1568,8 +1558,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1630,8 +1619,7 @@
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1669,12 +1657,11 @@
 
     var options_umur_ytd_2 = {
         title: {
-            text: 'YTD ' + (new Date().getFullYear()-1),
+            text: 'YTD ' + (new Date().getFullYear() - 1),
             align: 'center'
         },
         series: [],
-        chart:
-        {
+        chart: {
             height: 350,
             type: 'pie',
         },
@@ -1733,26 +1720,30 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    var pendidikan_mtd,kecamatan_mtd,pekerjaan_mtd,gaji_mtd,umur_mtd,pendidikan_ytd,kecamatan_ytd,pekerjaan_ytd,gaji_ytd,umur_ytd
-    function show_content_pendidikan(){
+    var pendidikan_mtd, kecamatan_mtd, pekerjaan_mtd, gaji_mtd, umur_mtd, pendidikan_ytd, kecamatan_ytd, pekerjaan_ytd,
+        gaji_ytd, umur_ytd
+
+    function show_content_pendidikan() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'pendidikan','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'pendidikan',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                chart_pendidikan_mtd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_pendidikan_mtd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_pendidikan_mtd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_pendidikan_mtd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_pendidikan_mtd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_pendidikan_mtd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -1760,23 +1751,25 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'pendidikan','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'pendidikan',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                chart_pendidikan_ytd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_pendidikan_ytd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_pendidikan_ytd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_pendidikan_ytd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_pendidikan_ytd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_pendidikan_ytd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -1784,20 +1777,27 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'pendidikan','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'pendidikan',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var pendidikan_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var pendidikan_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_pendidikan_mtd_3.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: pendidikan_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: pendidikan_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: pendidikan_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: pendidikan_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
                 }])
                 chart_pendidikan_mtd_3.updateOptions({
                     plotOptions: {
@@ -1810,7 +1810,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -1819,39 +1819,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  pendidikan_keys_mtd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: pendidikan_keys_mtd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -1863,7 +1861,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -1873,22 +1871,29 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'pendidikan','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'pendidikan',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var pendidikan_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var pendidikan_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_pendidikan_ytd_3.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: pendidikan_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: pendidikan_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((
+                        new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: pendidikan_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
-                }
-                ])
+                    data: pendidikan_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
+                }])
                 chart_pendidikan_ytd_3.updateOptions({
                     plotOptions: {
                         bar: {
@@ -1900,7 +1905,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -1909,39 +1914,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  pendidikan_keys_ytd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: pendidikan_keys_ytd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -1953,7 +1956,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -1962,12 +1965,12 @@
                 })
             }
         });
-        pendidikan_mtd=$('#pendidikan_mtd_table').DataTable({
+        pendidikan_mtd = $('#pendidikan_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -1976,31 +1979,40 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'pendidikan','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'pendidikan',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
         //ytd
-        pendidikan_ytd=$('#pendidikan_ytd_table').DataTable({
+        pendidikan_ytd = $('#pendidikan_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2009,44 +2021,56 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'pendidikan','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'pendidikan',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     }
-    function show_content_kecamatan(){
+
+    function show_content_kecamatan() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'kecamatan','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'kecamatan',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                chart_kecamatan_mtd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_kecamatan_mtd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_kecamatan_mtd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_kecamatan_mtd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_kecamatan_mtd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_kecamatan_mtd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -2054,23 +2078,25 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'kecamatan','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'kecamatan',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                chart_kecamatan_ytd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_kecamatan_ytd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_kecamatan_ytd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_kecamatan_ytd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_kecamatan_ytd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_kecamatan_ytd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -2078,20 +2104,27 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'kecamatan','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'kecamatan',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var kecamatan_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var kecamatan_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_kecamatan_mtd_3.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: kecamatan_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: kecamatan_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: kecamatan_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: kecamatan_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
                 }])
                 chart_kecamatan_mtd_3.updateOptions({
                     plotOptions: {
@@ -2104,7 +2137,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2113,39 +2146,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  kecamatan_keys_mtd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: kecamatan_keys_mtd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -2157,7 +2188,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -2167,22 +2198,29 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'kecamatan','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'kecamatan',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var kecamatan_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var kecamatan_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_kecamatan_ytd_3.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: kecamatan_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: kecamatan_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((
+                        new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: kecamatan_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
-                }
-                ])
+                    data: kecamatan_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
+                }])
                 chart_kecamatan_ytd_3.updateOptions({
                     plotOptions: {
                         bar: {
@@ -2194,7 +2232,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2203,39 +2241,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  kecamatan_keys_ytd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: kecamatan_keys_ytd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -2247,7 +2283,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -2256,12 +2292,12 @@
                 })
             }
         });
-        kecamatan_mtd=$('#kecamatan_mtd_table').DataTable({
+        kecamatan_mtd = $('#kecamatan_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2270,30 +2306,39 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'kecamatan','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'kecamatan',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        kecamatan_ytd=$('#kecamatan_ytd_table').DataTable({
+        kecamatan_ytd = $('#kecamatan_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2302,44 +2347,56 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'kecamatan','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'kecamatan',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     }
-    function show_content_gaji(){
+
+    function show_content_gaji() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'gaji','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'gaji',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                chart_gaji_mtd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_gaji_mtd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_gaji_mtd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: (res.data_tipe).map(mFormatter),
                 })
-                chart_gaji_mtd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_gaji_mtd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_gaji_mtd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: (res.data_tipe).map(mFormatter),
@@ -2347,23 +2404,25 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'gaji','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'gaji',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                chart_gaji_ytd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_gaji_ytd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_gaji_ytd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: (res.data_tipe).map(mFormatter),
                 })
-                chart_gaji_ytd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_gaji_ytd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_gaji_ytd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: (res.data_tipe).map(mFormatter),
@@ -2371,20 +2430,27 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'gaji','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'gaji',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var gaji_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var gaji_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[
+                    b] - (res.data_lending)[a])
                 chart_gaji_mtd_3.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: gaji_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: gaji_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(
+                        0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: gaji_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: gaji_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,
+                        5)
                 }])
                 chart_gaji_mtd_3.updateOptions({
                     plotOptions: {
@@ -2397,7 +2463,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2406,39 +2472,38 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  gaji_keys_mtd.map(i => (res.data_tipe).map(mFormatter)[i]).slice(0,5),
+                        categories: gaji_keys_mtd.map(i => (res.data_tipe).map(mFormatter)[i])
+                            .slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -2450,7 +2515,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -2460,22 +2525,29 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'gaji','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'gaji',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var gaji_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var gaji_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[
+                    b] - (res.data_lending)[a])
                 chart_gaji_ytd_3.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: gaji_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: gaji_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(
+                        0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((
+                        new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: gaji_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
-                }
-                ])
+                    data: gaji_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,
+                        5)
+                }])
                 chart_gaji_ytd_3.updateOptions({
                     plotOptions: {
                         bar: {
@@ -2487,7 +2559,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2496,39 +2568,38 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  gaji_keys_ytd.map(i => (res.data_tipe).map(mFormatter)[i]).slice(0,5),
+                        categories: gaji_keys_ytd.map(i => (res.data_tipe).map(mFormatter)[i])
+                            .slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -2540,7 +2611,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -2549,12 +2620,12 @@
                 })
             }
         });
-        gaji_mtd=$('#gaji_mtd_table').DataTable({
+        gaji_mtd = $('#gaji_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2563,33 +2634,44 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'gaji','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'gaji',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [1], 
-                    render:function ( data, type, row, meta ) {return  mFormatter(data);} 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [1],
+                render: function(data, type, row, meta) {
+                    return mFormatter(data);
                 }
-            ],
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        gaji_ytd=$('#gaji_ytd_table').DataTable({
+        gaji_ytd = $('#gaji_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2598,48 +2680,63 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'gaji','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'gaji',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [1], 
-                    render:function ( data, type, row, meta ) {return  mFormatter(data);} 
+            columnDefs: [{
+                    targets: [0],
+                    orderable: false,
+                }, {
+                    targets: [1],
+                    render: function(data, type, row, meta) {
+                        return mFormatter(data);
+                    }
                 },
                 {
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+                    targets: [2],
+                    render: function(data, type, row, meta) {
+                        return bFormatter(data);
+                    }
+                }, {
+                    targets: [3],
+                    render: function(data, type, row, meta) {
+                        return bFormatter(data);
+                    }
                 }
             ],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     }
-    function show_content_umur(){
+
+    function show_content_umur() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'umur','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'umur',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                chart_umur_mtd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_umur_mtd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_umur_mtd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_umur_mtd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_umur_mtd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_umur_mtd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -2647,23 +2744,25 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'umur','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'umur',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                chart_umur_ytd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_umur_ytd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_umur_ytd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_umur_ytd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_umur_ytd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_umur_ytd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -2671,20 +2770,27 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'umur','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'umur',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var umur_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var umur_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[
+                    b] - (res.data_lending)[a])
                 chart_umur_mtd_3.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: umur_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: umur_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(
+                        0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: umur_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: umur_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,
+                        5)
                 }])
                 chart_umur_mtd_3.updateOptions({
                     plotOptions: {
@@ -2697,7 +2803,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2706,39 +2812,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  umur_keys_mtd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: umur_keys_mtd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -2750,7 +2854,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -2760,22 +2864,29 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'umur','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'umur',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var umur_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var umur_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[
+                    b] - (res.data_lending)[a])
                 chart_umur_ytd_3.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: umur_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: umur_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(
+                        0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((
+                        new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: umur_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
-                }
-                ])
+                    data: umur_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,
+                        5)
+                }])
                 chart_umur_ytd_3.updateOptions({
                     plotOptions: {
                         bar: {
@@ -2787,7 +2898,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2796,39 +2907,37 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  umur_keys_ytd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: umur_keys_ytd.map(i => (res.data_tipe)[i]).slice(0, 5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -2840,7 +2949,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -2849,12 +2958,12 @@
                 })
             }
         });
-        umur_mtd=$('#umur_mtd_table').DataTable({
+        umur_mtd = $('#umur_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2863,30 +2972,39 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'umur','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'umur',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        umur_ytd=$('#umur_ytd_table').DataTable({
+        umur_ytd = $('#umur_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -2895,44 +3013,55 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'umur','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'umur',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     }
-    $(document).ready(function () {
+    $(document).ready(function() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'pekerjaan','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'pekerjaan',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                chart_pekerjaan_mtd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_pekerjaan_mtd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_pekerjaan_mtd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_pekerjaan_mtd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_pekerjaan_mtd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_pekerjaan_mtd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -2940,23 +3069,25 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/pie_chartdata',
-            data:{'tipe':'pekerjaan','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'pekerjaan',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                chart_pekerjaan_ytd.updateSeries((res.data_total).map(e=>parseInt(e)))
+            success: function(res) {
+                chart_pekerjaan_ytd.updateSeries((res.data_total).map(e => parseInt(e)))
                 chart_pekerjaan_ytd.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
                 })
-                chart_pekerjaan_ytd_2.updateSeries((res.data_total2).map(e=>parseInt(e)))
+                chart_pekerjaan_ytd_2.updateSeries((res.data_total2).map(e => parseInt(e)))
                 chart_pekerjaan_ytd_2.updateOptions({
-                    legend:
-                    {
+                    legend: {
                         position: 'bottom'
                     },
                     labels: res.data_tipe,
@@ -2964,20 +3095,27 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'pekerjaan','params':'curr_month','params2':'last_month'},
+            data: {
+                'tipe': 'pekerjaan',
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var pekerjaan_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var pekerjaan_keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_pekerjaan_mtd_3.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: pekerjaan_keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: pekerjaan_keys_mtd.map(i => (res.data_lending2).map(
+                        bFormatter)[i]).slice(0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: pekerjaan_keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: pekerjaan_keys_mtd.map(i => (res.data_lending).map(
+                        bFormatter)[i]).slice(0, 5)
                 }])
                 chart_pekerjaan_mtd_3.updateOptions({
                     plotOptions: {
@@ -2990,7 +3128,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -2999,39 +3137,38 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  pekerjaan_keys_mtd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: pekerjaan_keys_mtd.map(i => (res.data_tipe)[i]).slice(0,
+                            5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -3043,7 +3180,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -3053,22 +3190,29 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/double_chartdata',
-            data:{'tipe':'pekerjaan','params':'curr_year','params2':'last_year'},
+            data: {
+                'tipe': 'pekerjaan',
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var pekerjaan_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var pekerjaan_keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_pekerjaan_ytd_3.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: pekerjaan_keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: pekerjaan_keys_ytd.map(i => (res.data_lending2).map(
+                        bFormatter)[i]).slice(0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' +
+                        month_name((new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: pekerjaan_keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
-                }
-                ])
+                    data: pekerjaan_keys_ytd.map(i => (res.data_lending).map(
+                        bFormatter)[i]).slice(0, 5)
+                }])
                 chart_pekerjaan_ytd_3.updateOptions({
                     plotOptions: {
                         bar: {
@@ -3080,7 +3224,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         enabledOnSeries: [1]
@@ -3089,39 +3233,38 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  pekerjaan_keys_ytd.map(i => (res.data_tipe)[i]).slice(0,5),
+                        categories: pekerjaan_keys_ytd.map(i => (res.data_tipe)[i]).slice(0,
+                            5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -3133,7 +3276,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -3142,12 +3285,12 @@
                 })
             }
         });
-        pekerjaan_mtd=$('#pekerjaan_mtd_table').DataTable({
+        pekerjaan_mtd = $('#pekerjaan_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -3156,30 +3299,39 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'pekerjaan','params':'curr_month','params2':'last_month'},
+                data: {
+                    'tipe': 'pekerjaan',
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        pekerjaan_ytd=$('#pekerjaan_ytd_table').DataTable({
+        pekerjaan_ytd = $('#pekerjaan_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -3188,49 +3340,69 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/segment_customer/listdata',
                 type: "POST",
-                data:{'tipe':'pekerjaan','params':'curr_year','params2':'last_year'},
+                data: {
+                    'tipe': 'pekerjaan',
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     });
     var api_fields = {
-        'pekerjaan-field':[chart_pekerjaan_mtd,chart_pekerjaan_mtd_2,chart_pekerjaan_mtd_3,chart_pekerjaan_ytd,chart_pekerjaan_ytd_2,chart_pekerjaan_ytd_3],
-        'kecamatan-field':[chart_kecamatan_mtd,chart_kecamatan_mtd_2,chart_kecamatan_mtd_3,chart_kecamatan_ytd,chart_kecamatan_ytd_2,chart_kecamatan_ytd_3],
-        'pendidikan-field':[chart_pendidikan_mtd,chart_pendidikan_mtd_2,chart_pendidikan_mtd_3,chart_pendidikan_ytd,chart_pendidikan_ytd_2,chart_pendidikan_ytd_3],
-        'gaji-field':[chart_gaji_mtd,chart_gaji_mtd_2,chart_gaji_mtd_3,chart_gaji_ytd,chart_gaji_ytd_2,chart_gaji_ytd_3],
-        'umur-field':[chart_umur_mtd, chart_umur_mtd_2,chart_umur_mtd_3,chart_umur_ytd,chart_umur_ytd_2,chart_umur_ytd_3],
+        'pekerjaan-field': [chart_pekerjaan_mtd, chart_pekerjaan_mtd_2, chart_pekerjaan_mtd_3, chart_pekerjaan_ytd,
+            chart_pekerjaan_ytd_2, chart_pekerjaan_ytd_3
+        ],
+        'kecamatan-field': [chart_kecamatan_mtd, chart_kecamatan_mtd_2, chart_kecamatan_mtd_3, chart_kecamatan_ytd,
+            chart_kecamatan_ytd_2, chart_kecamatan_ytd_3
+        ],
+        'pendidikan-field': [chart_pendidikan_mtd, chart_pendidikan_mtd_2, chart_pendidikan_mtd_3,
+            chart_pendidikan_ytd, chart_pendidikan_ytd_2, chart_pendidikan_ytd_3
+        ],
+        'gaji-field': [chart_gaji_mtd, chart_gaji_mtd_2, chart_gaji_mtd_3, chart_gaji_ytd, chart_gaji_ytd_2,
+            chart_gaji_ytd_3
+        ],
+        'umur-field': [chart_umur_mtd, chart_umur_mtd_2, chart_umur_mtd_3, chart_umur_ytd, chart_umur_ytd_2,
+            chart_umur_ytd_3
+        ],
     }
-    var datatable_fields ={
-        'kecamatan-field':['#kecamatan_mtd_table','#kecamatan_ytd_table'],
-        'pendidikan-field':['#pendidikan_mtd_table','#pendidikan_ytd_table'],
-        'gaji-field':['#gaji_mtd_table','#gaji_ytd_table'],
-        'umur-field':['#umur_mtd_table','#umur_ytd_table'],
+    var datatable_fields = {
+        'kecamatan-field': ['#kecamatan_mtd_table', '#kecamatan_ytd_table'],
+        'pendidikan-field': ['#pendidikan_mtd_table', '#pendidikan_ytd_table'],
+        'gaji-field': ['#gaji_mtd_table', '#gaji_ytd_table'],
+        'umur-field': ['#umur_mtd_table', '#umur_ytd_table'],
     }
-    function hideOthers(apiField){
+
+    function hideOthers(apiField) {
         for (const key in api_fields) {
-            if(key!=apiField){
-                api_fields[key].forEach((val,idx)=>{
+            if (key != apiField) {
+                api_fields[key].forEach((val, idx) => {
                     val.resetSeries();
                 })
             }
         }
         for (const key in datatable_fields) {
-            if(key!=apiField){
-                datatable_fields[key].forEach((val,idx)=>{
+            if (key != apiField) {
+                datatable_fields[key].forEach((val, idx) => {
                     $(val).DataTable().destroy();
                 })
             }

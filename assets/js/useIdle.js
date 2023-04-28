@@ -10,9 +10,9 @@ var idle = new IdleJs({
 	// onHide: function () {
 	// 	console.log("onHide");
 	// },
-	onShow: function () {
-		warningModal.show()
-	},
+	// onShow: function () {
+	// 	warningModal.show()
+	// },
 	idle: initialDelay,
 	keepTracking: true,
 	startAtIdle: false,

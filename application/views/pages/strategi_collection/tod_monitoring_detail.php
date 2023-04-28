@@ -1,7 +1,7 @@
 <!-- Content -->
 <?php $CI =& get_instance(); ?>
 <script>
-    sessionStorage.setItem('is_aov',true);
+    sessionStorage.setItem('is_aov', true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Collection /</span>
@@ -20,7 +20,8 @@
                     </div>
                 </div>
                 <h5 class="card-header text-dark fs-4 text-start" style="margin-bottom: -30px;">
-                    OD <span class="get_od_status"><?= $performa_detail_month[0]->bucket_od;?></span><b>
+                    OD <span
+                        class="get_od_status"><?= $performa_detail_month[0]->bucket_od;?></span><b>
                         <?= $current_cabang->nama_cabang;?>
                     </b><br>
                     <p style="font-size: 38px;margin-top:10px;"></p>
@@ -66,8 +67,8 @@
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                            class='bx bx-search me-1'></i>Search</button>
+                                    <button id="filter-btn" class="btn btn-warning btn-search" onclick=""
+                                        type="button"><i class='bx bx-search me-1'></i>Search</button>
                                 </div>
                             </div>
                         </div>
@@ -170,53 +171,65 @@
 <!-- CONFIG Dashboard JS -->
 <!-- ==================== -->
 <!-- ==================== -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.3.5/js/dataTables.buttons.min.js" integrity="sha512-ByVolLA8VqrHkWVq/IG5unPl1eHV0DEkdvUBdTTxTNPXV7xYrqqR+EhRlf9R3qWEHiUVaqCXwcZfrlTpZKVjdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js" integrity="sha512-a9NgEEK7tsCvABL7KqtUTQjl69z7091EVPpw5KxPlZ93T141ffe1woLtbXTX+r2/8TtTvRX/v4zTL2UlMUPgwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js" integrity="sha512-P0bOMePRS378NwmPDVPU455C/TuxDS+8QwJozdc7PGgN8kLqR4ems0U/3DeJkmiE31749vYWHvBOtR+37qDCZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.3.5/js/buttons.html5.min.js" integrity="sha512-cBlHTLVISzl4A2An/1uQCqUq7MPJlCTqk/Uvwf1OU8lAB87V72oPdllhBD7hYpSDhmcOqY/PIeJ5bUN/EHcgpw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.3.5/js/buttons.print.min.js" integrity="sha512-b956UIE6Nx8REYgGGJEyAlCUPgei+JdTU41lrOIvH8LrH+REzjjQOeNhOatI2wOr1eC6+v1rhv5UqJ0GF6LMQQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.3.5/js/dataTables.buttons.min.js"
+    integrity="sha512-ByVolLA8VqrHkWVq/IG5unPl1eHV0DEkdvUBdTTxTNPXV7xYrqqR+EhRlf9R3qWEHiUVaqCXwcZfrlTpZKVjdw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+    integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"
+    integrity="sha512-a9NgEEK7tsCvABL7KqtUTQjl69z7091EVPpw5KxPlZ93T141ffe1woLtbXTX+r2/8TtTvRX/v4zTL2UlMUPgwg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.min.js"
+    integrity="sha512-P0bOMePRS378NwmPDVPU455C/TuxDS+8QwJozdc7PGgN8kLqR4ems0U/3DeJkmiE31749vYWHvBOtR+37qDCZQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.3.5/js/buttons.html5.min.js"
+    integrity="sha512-cBlHTLVISzl4A2An/1uQCqUq7MPJlCTqk/Uvwf1OU8lAB87V72oPdllhBD7hYpSDhmcOqY/PIeJ5bUN/EHcgpw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.3.5/js/buttons.print.min.js"
+    integrity="sha512-b956UIE6Nx8REYgGGJEyAlCUPgei+JdTU41lrOIvH8LrH+REzjjQOeNhOatI2wOr1eC6+v1rhv5UqJ0GF6LMQQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script defer>
     <?php
         $ids_gp = array();
-        $items_gp = array();
-        $ids_asset = array();
-        $items_so = array();
-        $ids_so = array();
-        $ids_ro = array();
-        $ids_profesi = array();
-        $items_profesi = array();
-        $items_dealer = array();
-        $ids_dealer = array();
-        $items_armo = array();
-        $ids_armo = array();
-        foreach($subfilter_gp as $row) {
-            $items_gp[]=htmlentities($row -> gp);
-            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
-        }
-        foreach($subfilter_jenis_assets as $row) {
-            $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
-        }
-        foreach($subfilter_so as $row) {
-            $items_so[]=htmlentities($row -> nama_so);
-            $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
-        }
-        foreach($subfilter_jenis_ro as $row) {
-            $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
-        }
-        foreach($subfilter_profesi as $row) {
-            $items_profesi[]=htmlentities($row -> profesi_cust);
-            $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
-        }
-        foreach($subfilter_dealer as $row) {
-            $items_dealer[]=htmlentities($row -> nama_dealer);
-            $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
-        }
-        foreach($subfilter_armo as $row) {
-            $items_armo[]=htmlentities($row -> nama_armo);
-            $ids_armo[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_armo));
-        }
-    ?>
+$items_gp = array();
+$ids_asset = array();
+$items_so = array();
+$ids_so = array();
+$ids_ro = array();
+$ids_profesi = array();
+$items_profesi = array();
+$items_dealer = array();
+$ids_dealer = array();
+$items_armo = array();
+$ids_armo = array();
+foreach ($subfilter_gp as $row) {
+    $items_gp[]=htmlentities($row -> gp);
+    $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+}
+foreach ($subfilter_jenis_assets as $row) {
+    $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
+}
+foreach ($subfilter_so as $row) {
+    $items_so[]=htmlentities($row -> nama_so);
+    $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
+}
+foreach ($subfilter_jenis_ro as $row) {
+    $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
+}
+foreach ($subfilter_profesi as $row) {
+    $items_profesi[]=htmlentities($row -> profesi_cust);
+    $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
+}
+foreach ($subfilter_dealer as $row) {
+    $items_dealer[]=htmlentities($row -> nama_dealer);
+    $ids_dealer[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_dealer));
+}
+foreach ($subfilter_armo as $row) {
+    $items_armo[]=htmlentities($row -> nama_armo);
+    $ids_armo[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_armo));
+}
+?>
     const to_tod_detail = () => {
         window.location.href =
             "<?= site_url('tod_monitoring')?>"
@@ -225,41 +238,42 @@
     num_abv.forEach((val) => {
         val.innerHTML = bFormatter(parseFloat(val.innerHTML));
     })
-    var used_status_tod = ['Current','1-30','31-60','61-90','91-120','121-150','151-180']
+    var used_status_tod = ['Current', '1-30', '31-60', '61-90', '91-120', '121-150', '151-180']
     var status_title = document.querySelector('.get_od_status')
     status_title.innerHTML = used_status_tod[parseInt(status_title.innerHTML)]
     let setSubFilter = function(dataFilter) {
         let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "jenis_pekerjaan", "dealer", "armo"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': <?php echo json_encode($items_gp) ?>,
-            'sub2': ["Second","New"],
-            'sub3': <?php echo json_encode($items_so) ?>,
+            'sub1': <?php echo json_encode($items_gp) ?> ,
+            'sub2': ["Second", "New"],
+            'sub3': <?php echo json_encode($items_so) ?> ,
             'sub4': ["NONRO", "RO"],
-            'sub5': <?php echo json_encode($items_profesi) ?>,
-            'sub6': <?php echo json_encode($items_dealer) ?>,
-            'sub7': <?php echo json_encode($items_armo) ?>,
+            'sub5': <?php echo json_encode($items_profesi) ?> ,
+            'sub6': <?php echo json_encode($items_dealer) ?> ,
+            'sub7': <?php echo json_encode($items_armo) ?> ,
         }
         let valuesSubFilters = {
             'sub0': ["null"],
-            'sub1': <?php echo json_encode($ids_gp) ?>,
-            'sub2': <?php echo json_encode($ids_asset) ?>,
-            'sub3': <?php echo json_encode($ids_so) ?>,
-            'sub4': <?php echo json_encode($ids_ro) ?>,
-            'sub5': <?php echo json_encode($ids_profesi) ?>,
-            'sub6': <?php echo json_encode($ids_dealer) ?>,
-            'sub7': <?php echo json_encode($ids_armo) ?>,
+            'sub1': <?php echo json_encode($ids_gp) ?> ,
+            'sub2': <?php echo json_encode($ids_asset) ?> ,
+            'sub3': <?php echo json_encode($ids_so) ?> ,
+            'sub4': <?php echo json_encode($ids_ro) ?> ,
+            'sub5': <?php echo json_encode($ids_profesi) ?> ,
+            'sub6': <?php echo json_encode($ids_dealer) ?> ,
+            'sub7': <?php echo json_encode($ids_armo) ?> ,
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0, valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)], valuesSubFilters[
+                        'sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
@@ -278,7 +292,7 @@
             text: 'OD <?php echo Date("F Y");?>',
             align: 'center'
         },
-        series: [1,2,3,4],
+        series: [1, 2, 3, 4],
         chart: {
             height: 350,
             type: 'pie',
@@ -286,7 +300,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: [1,2,3,4],
+        labels: [1, 2, 3, 4],
     };
     var chart_tod_monitoring_detail_mtd = new ApexCharts(document.querySelector("#tod_monitoring_detail_mtd_chart_2"),
         options_tod_monitoring_detail_mtd);
@@ -321,7 +335,7 @@
             text: 'OD <?php echo Date("F Y");?>',
             align: 'center'
         },
-        series: [1,2,3,4],
+        series: [1, 2, 3, 4],
         chart: {
             height: 350,
             type: 'pie',
@@ -329,7 +343,7 @@
         legend: {
             position: 'bottom'
         },
-        labels: [1,2,3,4],
+        labels: [1, 2, 3, 4],
     };
     var chart_tod_monitoring_detail_ytd = new ApexCharts(document.querySelector("#tod_monitoring_detail_ytd_chart_2"),
         options_tod_monitoring_detail_ytd);
@@ -364,14 +378,17 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    var tod_detail_mtd,tod_detail_ytd
+    var tod_detail_mtd, tod_detail_ytd
     $(document).ready(function() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_collection/tod_monitoring_detail/chartdata',
-            data:{'bucket_od':<?= $performa_detail_month[0]->bucket_od;?>,'params':'curr_month'},
+            data: {
+                'bucket_od': <?= $performa_detail_month[0]->bucket_od;?> ,
+                'params': 'curr_month'
+            },
             dataType: "json",
-            success: function(res){
+            success: function(res) {
                 chart_tod_monitoring_detail_mtd.updateSeries([{
                     name: 'Total OSP',
                     data: (res.data_lending).map(bFormatter)
@@ -387,7 +404,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         style: {
@@ -407,42 +424,40 @@
                             }
                         },
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "M (Milyar)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
+                        },
+                        title: {
+                            text: "M (Milyar)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
                         }
-                    ],
+                    }],
                     fill: {
                         opacity: 1
                     },
                     tooltip: {
                         x: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " (Golive)"
                             }
                         },
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -459,15 +474,20 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_collection/tod_monitoring_detail/double_chartdata',
-            data:{'bucket_od':<?= $performa_detail_month[0]->bucket_od;?>,'params':'curr_year','params2':'last_year'},
+            data: {
+                'bucket_od': <?= $performa_detail_month[0]->bucket_od;?> ,
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
+            success: function(res) {
                 chart_tod_monitoring_detail_ytd.updateSeries([{
                     name: 'Total OSP ' + (new Date().getFullYear() - 1),
                     type: 'column',
-                    data: (res.data_lending2.slice(0, res.data_fields.length)).map(bFormatter)
+                    data: (res.data_lending2.slice(0, res.data_fields.length)).map(
+                        bFormatter)
                 }, {
                     name: 'Total OSP ' + (new Date().getFullYear()),
                     type: 'column',
@@ -484,7 +504,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -498,34 +518,32 @@
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Pencapaian (Unit)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Pencapaian (Unit)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -537,7 +555,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -546,12 +564,12 @@
                 })
             }
         });
-        tod_detail_mtd=$('#tod_monitoring_detail_mtd').DataTable({
+        tod_detail_mtd = $('#tod_monitoring_detail_mtd').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -560,71 +578,87 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_collection/tod_monitoring_detail/listdata',
                 type: "POST",
-                data:{'bucket_od':<?= $performa_detail_month[0]->bucket_od;?>,'params':'curr_month'},
+                data: {
+                    'bucket_od': <?= $performa_detail_month[0]->bucket_od;?> ,
+                    'params': 'curr_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [4], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
-                },{
-                    targets: [5], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
-                },{
-                    targets: [8], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [9], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [10], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },
-            ],
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [4],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }, {
+                targets: [5],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }, {
+                targets: [8],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [9],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [10],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, ],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
-            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [{
-                    extend: 'copyHtml5',                       
-                    text: '<i class="bx bx-copy-alt me-1"></i>Copy',
-                    className: 'btn btn-sm btn-warning',                       
-                    "action": newexportaction
-                },{
-                    extend: 'excelHtml5',                       
-                    text: '<i class="bx bx-data me-1"></i>Excel',
-                    className: 'btn btn-sm btn-warning',                                        
-                    "action": newexportaction
-                },{
-                    extend: 'csvHtml5',                       
-                    text: '<i class="bx bx-bar-chart-alt me-1"></i>CSV',
-                    className: 'btn btn-sm btn-warning',                        
-                    "action": newexportaction
-                },{
-                    extend: 'pdfHtml5',                       
-                    titleAttr: '',
-                    text: '<i class="bx bxs-file-pdf me-1"></i>PDF',
-                    className: 'btn btn-sm btn-warning',                        
-                    "action": newexportaction
-                },{
-                    extend: 'print',                       
-                    text: '<i class="bx bx-printer me-1"></i>Print',
-                    className: 'btn btn-sm btn-warning',                        
-                    "action": newexportaction
-                },                   
+            "lengthMenu": [
+                [10, 25, 50, 75, -1],
+                [10, 25, 50, 75, 'All']
             ],
+            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [{
+                extend: 'copyHtml5',
+                text: '<i class="bx bx-copy-alt me-1"></i>Copy',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'excelHtml5',
+                text: '<i class="bx bx-data me-1"></i>Excel',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'csvHtml5',
+                text: '<i class="bx bx-bar-chart-alt me-1"></i>CSV',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'pdfHtml5',
+                titleAttr: '',
+                text: '<i class="bx bxs-file-pdf me-1"></i>PDF',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'print',
+                text: '<i class="bx bx-printer me-1"></i>Print',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, ],
         });
-        tod_detail_ytd=$('#tod_monitoring_detail_ytd').DataTable({
+        tod_detail_ytd = $('#tod_monitoring_detail_ytd').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -633,64 +667,80 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_collection/tod_monitoring_detail/listdata',
                 type: "POST",
-                data:{'bucket_od':<?= $performa_detail_month[0]->bucket_od;?>,'params':'curr_year'},
+                data: {
+                    'bucket_od': <?= $performa_detail_month[0]->bucket_od;?> ,
+                    'params': 'curr_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [4], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
-                },{
-                    targets: [5], 
-                    render:function ( data, type, row, meta ) {return  dmyFormat(data);} 
-                },{
-                    targets: [8], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [9], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [10], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },
-            ],
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [4],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }, {
+                targets: [5],
+                render: function(data, type, row, meta) {
+                    return dmyFormat(data);
+                }
+            }, {
+                targets: [8],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [9],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, {
+                targets: [10],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }, ],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, 75, -1],[10, 25, 50, 75, 'All']],
-            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [{
-                    extend: 'copyHtml5',                       
-                    text: '<i class="bx bx-copy-alt me-1"></i>Copy',
-                    className: 'btn btn-sm btn-warning',                       
-                    "action": newexportaction
-                },{
-                    extend: 'excelHtml5',                       
-                    text: '<i class="bx bx-data me-1"></i>Excel',
-                    className: 'btn btn-sm btn-warning',                                        
-                    "action": newexportaction
-                },{
-                    extend: 'csvHtml5',                       
-                    text: '<i class="bx bx-bar-chart-alt me-1"></i>CSV',
-                    className: 'btn btn-sm btn-warning',                        
-                    "action": newexportaction
-                },{
-                    extend: 'pdfHtml5',                       
-                    titleAttr: '',
-                    text: '<i class="bx bxs-file-pdf me-1"></i>PDF',
-                    className: 'btn btn-sm btn-warning',                        
-                    "action": newexportaction
-                },{
-                    extend: 'print',                       
-                    text: '<i class="bx bx-printer me-1"></i>Print',
-                    className: 'btn btn-sm btn-warning',                        
-                    "action": newexportaction
-                },                   
+            "lengthMenu": [
+                [10, 25, 50, 75, -1],
+                [10, 25, 50, 75, 'All']
             ],
+            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            buttons: [{
+                extend: 'copyHtml5',
+                text: '<i class="bx bx-copy-alt me-1"></i>Copy',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'excelHtml5',
+                text: '<i class="bx bx-data me-1"></i>Excel',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'csvHtml5',
+                text: '<i class="bx bx-bar-chart-alt me-1"></i>CSV',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'pdfHtml5',
+                titleAttr: '',
+                text: '<i class="bx bxs-file-pdf me-1"></i>PDF',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, {
+                extend: 'print',
+                text: '<i class="bx bx-printer me-1"></i>Print',
+                className: 'btn btn-sm btn-warning',
+                "action": newexportaction
+            }, ],
         });
         var search = document.querySelectorAll('input[type=search]');
         search.forEach((src, idx) => {

@@ -2,9 +2,9 @@
 <?php $CI =& get_instance(); ?>
 <script>
     // (performance.navigation.type == performance.navigation.TYPE_RELOAD)?sessionStorage.setItem("is_mtd", true):sessionStorage.setItem("is_mtd", true);
-    sessionStorage.setItem('is_jbrand',false);
-    sessionStorage.setItem('is_kecamatan',false);
-    sessionStorage.setItem('is_aov',true);
+    sessionStorage.setItem('is_jbrand', false);
+    sessionStorage.setItem('is_kecamatan', false);
+    sessionStorage.setItem('is_aov', true);
 </script>
 <div class="container-xxl flex-grow-1 container-p-y">
     <h5 class="fw-bold text-warning py-3 mb-4"><span class="text-muted fw-light">Strategi Penjualan /</span>
@@ -54,8 +54,8 @@
                                     </select>
                                 </div>
                                 <div class="col">
-                                    <button class="btn btn-warning btn-search" onclick="" type="button"><i
-                                            class='bx bx-search me-1'></i>Search</button>
+                                    <button id="filter-btn" class="btn btn-warning btn-search" onclick=""
+                                        type="button"><i class='bx bx-search me-1'></i>Search</button>
                                 </div>
                             </div>
                         </div>
@@ -142,32 +142,32 @@
 <script defer>
     <?php
         $items_gp = array();
-        $ids_gp = array();
-        $ids_asset = array();
-        $ids_ro = array();
-        $items_profesi = array();
-        $ids_profesi = array();
-        $items_so = array();
-        $ids_so = array();
-        foreach($subfilter_gp as $row) {
-            $items_gp[]=htmlentities($row -> gp);
-            $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
-        }
-        foreach($subfilter_jenis_assets as $row) {
-            $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
-        }
-        foreach($subfilter_jenis_ro as $row) {
-            $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
-        }
-        foreach($subfilter_profesi as $row) {
-            $items_profesi[]=htmlentities($row -> profesi_cust);
-            $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
-        }
-        foreach($subfilter_so as $row) {
-            $items_so[]=htmlentities($row -> nama_so);
-            $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
-        }
-    ?>
+$ids_gp = array();
+$ids_asset = array();
+$ids_ro = array();
+$items_profesi = array();
+$ids_profesi = array();
+$items_so = array();
+$ids_so = array();
+foreach ($subfilter_gp as $row) {
+    $items_gp[]=htmlentities($row -> gp);
+    $ids_gp[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_gp));
+}
+foreach ($subfilter_jenis_assets as $row) {
+    $ids_asset[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_aset));
+}
+foreach ($subfilter_jenis_ro as $row) {
+    $ids_ro[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> status_ro));
+}
+foreach ($subfilter_profesi as $row) {
+    $items_profesi[]=htmlentities($row -> profesi_cust);
+    $ids_profesi[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_customer));
+}
+foreach ($subfilter_so as $row) {
+    $items_so[]=htmlentities($row -> nama_so);
+    $ids_so[]=$CI->security_idx->sodiumEncrypt(htmlentities($row -> id_so));
+}
+?>
     let num_abv = document.querySelectorAll('.get_val');
     let months_field = document.querySelectorAll('.show_month');
     let months_prev_field = document.querySelectorAll('.show_prev_month');
@@ -176,46 +176,48 @@
     num_abv.forEach((val) => {
         val.innerHTML = bFormatter(parseFloat(val.innerHTML));
     })
-    months_field.forEach((field,idx)=>{
-        field.innerHTML=month_name(new Date().getMonth()+1) + ' '+ (new Date().getFullYear());
-        if(new Date().getMonth()==0){
-            months_prev_field[idx].innerHTML=month_name(12) + ' '+ (new Date().getFullYear()-1);
-        }else{
-            months_prev_field[idx].innerHTML=month_name(new Date().getMonth()) + ' '+ (new Date().getFullYear());
+    months_field.forEach((field, idx) => {
+        field.innerHTML = month_name(new Date().getMonth() + 1) + ' ' + (new Date().getFullYear());
+        if (new Date().getMonth() == 0) {
+            months_prev_field[idx].innerHTML = month_name(12) + ' ' + (new Date().getFullYear() - 1);
+        } else {
+            months_prev_field[idx].innerHTML = month_name(new Date().getMonth()) + ' ' + (new Date()
+                .getFullYear());
         }
     })
-    years_field.forEach((field,idx)=>{
-        field.innerHTML=new Date().getFullYear();
-        years_prev_field[idx].innerHTML=new Date().getFullYear()-1;
+    years_field.forEach((field, idx) => {
+        field.innerHTML = new Date().getFullYear();
+        years_prev_field[idx].innerHTML = new Date().getFullYear() - 1;
     })
     let setSubFilter = function(dataFilter) {
         let filters = ["group_product", "jenis_asset", "so", "jenis_customer", "jenis_pekerjaan"]
         let subFilters = {
             'sub0': ["Pilih Sub-Filter"],
-            'sub1': <?php echo json_encode($items_gp) ?>,
-            'sub2': ["Second","New"],
-            'sub3': <?php echo json_encode($items_so) ?>,
+            'sub1': <?php echo json_encode($items_gp) ?> ,
+            'sub2': ["Second", "New"],
+            'sub3': <?php echo json_encode($items_so) ?> ,
             'sub4': ["NONRO", "RO"],
-            'sub5': <?php echo json_encode($items_profesi) ?>,
+            'sub5': <?php echo json_encode($items_profesi) ?> ,
         }
         let valuesSubFilters = {
             'sub0': ["null"],
-            'sub1': <?php echo json_encode($ids_gp) ?>,
-            'sub2': <?php echo json_encode($ids_asset) ?>,
-            'sub3': <?php echo json_encode($ids_so) ?>,
-            'sub4': <?php echo json_encode($ids_ro) ?>,
-            'sub5': <?php echo json_encode($ids_profesi) ?>,
+            'sub1': <?php echo json_encode($ids_gp) ?> ,
+            'sub2': <?php echo json_encode($ids_asset) ?> ,
+            'sub3': <?php echo json_encode($ids_so) ?> ,
+            'sub4': <?php echo json_encode($ids_ro) ?> ,
+            'sub5': <?php echo json_encode($ids_profesi) ?> ,
         }
         if (dataFilter == "all") {
             areaSubFilter.forEach((subs) => {
-                subs.innerHTML = callSubFilter(subFilters.sub0,valuesSubFilters.sub0);
+                subs.innerHTML = callSubFilter(subFilters.sub0, valuesSubFilters.sub0);
                 subs.setAttribute("disabled", 'true');
             })
         }
         filters.forEach((filter, idx) => {
             if (dataFilter == filter) {
                 areaSubFilter.forEach((subs) => {
-                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)],valuesSubFilters['sub' + (idx + 1)]);
+                    subs.innerHTML = callSubFilter(subFilters['sub' + (idx + 1)], valuesSubFilters[
+                        'sub' + (idx + 1)]);
                     subs.removeAttribute("disabled");
                 })
             }
@@ -273,23 +275,29 @@
 <!-- ==================== -->
 <!-- ==================== -->
 <script defer>
-    var dealer_mtd,dealer_ytd
-    $(document).ready(function () {
+    var dealer_mtd, dealer_ytd
+    $(document).ready(function() {
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/double_chartdata',
-            data:{'params':'curr_month','params2':'last_month'},
+            data: {
+                'params': 'curr_month',
+                'params2': 'last_month'
+            },
             dataType: "json",
-            success: function(res){
-                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var keys_mtd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_performa_dealer_mtd.updateSeries([{
                     name: 'Lending ' + months_prev_field[0].innerHTML,
                     type: 'column',
-                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: keys_mtd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
                     name: 'Lending ' + months_field[0].innerHTML,
                     type: 'column',
-                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: keys_mtd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
                 }])
                 chart_performa_dealer_mtd.updateOptions({
                     plotOptions: {
@@ -302,7 +310,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -311,39 +319,38 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories:  keys_mtd.map(i => (res.data_nama_dealer)[i]).slice(0,5),
+                        categories: keys_mtd.map(i => (res.data_nama_dealer)[i]).slice(0,
+                            5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -355,7 +362,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -365,20 +372,27 @@
             }
         });
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/double_chartdata',
-            data:{'params':'curr_year','params2':'last_year'},
+            data: {
+                'params': 'curr_year',
+                'params2': 'last_year'
+            },
             dataType: "json",
-            success: function(res){
-                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res.data_lending)[b] - (res.data_lending)[a])
+            success: function(res) {
+                var keys_ytd = Array.from((res.data_lending).keys()).sort((a, b) => (res
+                    .data_lending)[b] - (res.data_lending)[a])
                 chart_performa_dealer_ytd.updateSeries([{
                     name: 'Lending ' + years_prev_field[0].innerHTML,
                     type: 'column',
-                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i]).slice(0,5)
+                    data: keys_ytd.map(i => (res.data_lending2).map(bFormatter)[i])
+                        .slice(0, 5)
                 }, {
-                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' + month_name((new Date().getMonth()) + 1) + ')',
+                    name: 'Lending ' + years_field[0].innerHTML + ' (s.d. ' +
+                        month_name((new Date().getMonth()) + 1) + ')',
                     type: 'column',
-                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i]).slice(0,5)
+                    data: keys_ytd.map(i => (res.data_lending).map(bFormatter)[i])
+                        .slice(0, 5)
                 }])
                 chart_performa_dealer_ytd.updateOptions({
                     plotOptions: {
@@ -391,7 +405,7 @@
                     },
                     dataLabels: {
                         enabled: true,
-                        formatter: function (val) {
+                        formatter: function(val) {
                             return val + " M";
                         },
                         // enabledOnSeries: [1,2]
@@ -400,39 +414,38 @@
                         width: [1, 1]
                     },
                     xaxis: {
-                        categories: keys_ytd.map(i => (res.data_nama_dealer)[i]).slice(0,5),
+                        categories: keys_ytd.map(i => (res.data_nama_dealer)[i]).slice(0,
+                            5),
                         tooltip: {
                             enabled: false
                         }
                     },
-                    yaxis: [
-                        {
-                            axisTicks: {
-                                show: true,
-                            },
-                            axisBorder: {
-                                show: true,
-                                color: '#008FFB'
-                            },
-                            labels: {
-                                style: {
-                                    colors: '#008FFB',
-                                }
-                            },
-                            title: {
-                                text: "Milyar (M)",
-                                style: {
-                                    color: '#008FFB',
-                                }
-                            },
-                            tooltip: {
-                                enabled: true
+                    yaxis: [{
+                        axisTicks: {
+                            show: true,
+                        },
+                        axisBorder: {
+                            show: true,
+                            color: '#008FFB'
+                        },
+                        labels: {
+                            style: {
+                                colors: '#008FFB',
                             }
                         },
-                    ],
+                        title: {
+                            text: "Milyar (M)",
+                            style: {
+                                color: '#008FFB',
+                            }
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }, ],
                     tooltip: {
                         y: {
-                            formatter: function (val) {
+                            formatter: function(val) {
                                 return val + " M (Milyar)"
                             }
                         }
@@ -444,7 +457,7 @@
                         breakpoint: 480,
                         options: {
                             dataLabels: {
-                                formatter: function (val) {
+                                formatter: function(val) {
                                     return val;
                                 },
                             },
@@ -453,12 +466,12 @@
                 })
             }
         });
-        dealer_ytd=$('#performa_dealer_ytd_table').DataTable({
+        dealer_ytd = $('#performa_dealer_ytd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -467,30 +480,38 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/listdata',
                 type: "POST",
-                data:{'params':'curr_year','params2':'last_year'},
+                data: {
+                    'params': 'curr_year',
+                    'params2': 'last_year'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
-        dealer_mtd=$('#performa_dealer_mtd_table').DataTable({
+        dealer_mtd = $('#performa_dealer_mtd_table').DataTable({
             processing: true,
             serverSide: true,
             searching: true,
             info: true,
-            paging: true,                   
+            paging: true,
             lengthChange: true,
             ordering: true,
             language: {
@@ -499,23 +520,31 @@
             ajax: {
                 url: '<?php echo base_url(); ?>/strategi_penjualan/performa_dealer/listdata',
                 type: "POST",
-                data:{'params':'curr_month','params2':'last_month'},
+                data: {
+                    'params': 'curr_month',
+                    'params2': 'last_month'
+                },
                 datatype: "json"
             },
-            columnDefs: [
-                { 
-                    targets: [ 0 ], 
-                    orderable: false, 
-                },{
-                    targets: [2], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
-                },{
-                    targets: [3], 
-                    render:function ( data, type, row, meta ) {return  bFormatter(data);} 
+            columnDefs: [{
+                targets: [0],
+                orderable: false,
+            }, {
+                targets: [2],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
                 }
-            ],
+            }, {
+                targets: [3],
+                render: function(data, type, row, meta) {
+                    return bFormatter(data);
+                }
+            }],
             scrollX: true,
-            "lengthMenu": [[10, 25, 50, -1],[10, 25, 50, 'All']]
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, 'All']
+            ]
         });
     });
 </script>
